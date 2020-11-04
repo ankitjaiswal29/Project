@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:padding="@dimen/_5sdp"
+        tools:background="@color/black">
+
+        <View
+            android:id="@+id/vFirst"
+            android:layout_width="@dimen/width_indicator"
+            android:layout_height="@dimen/height_indicator"
+            android:background="@drawable/shape_indicator_selected"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/vSecond"
+            android:layout_width="@dimen/width_indicator"
+            android:layout_height="@dimen/height_indicator"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/shape_indicator_unselected"
+            app:layout_constraintStart_toEndOf="@id/vFirst"
+            app:layout_constraintTop_toTopOf="@id/vFirst" />
+
+        <View
+            android:id="@+id/vThird"
+            android:layout_width="@dimen/width_indicator"
+            android:layout_height="@dimen/height_indicator"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/shape_indicator_unselected"
+            app:layout_constraintStart_toEndOf="@id/vSecond"
+            app:layout_constraintTop_toTopOf="@id/vSecond" />
+
+        <View
+            android:id="@+id/vFourth"
+            android:layout_width="@dimen/width_indicator"
+            android:layout_height="@dimen/height_indicator"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/shape_indicator_unselected"
+            app:layout_constraintStart_toEndOf="@id/vThird"
+            app:layout_constraintTop_toTopOf="@id/vThird" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
