@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="btnColor">#5F6771</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorDecisionBottom">#D7E9F0</color>
 </resources>

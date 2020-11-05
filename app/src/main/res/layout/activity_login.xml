@@ -29,23 +29,19 @@
 
             <EditText
                 android:id="@+id/etEmail"
+                style="@style/InputBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:autofillHints="email"
-                android:background="@drawable/shape_input"
                 android:hint="@string/hint_email"
                 android:inputType="textEmailAddress"
-                android:paddingStart="@dimen/_15sdp"
-                android:paddingTop="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_15sdp"
-                android:paddingBottom="@dimen/_10sdp"
-                android:textSize="@dimen/_16ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/etPassword"
+                style="@style/InputBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
@@ -53,25 +49,17 @@
                 android:background="@drawable/shape_input"
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
-                android:paddingStart="@dimen/_15sdp"
-                android:paddingTop="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_15sdp"
-                android:paddingBottom="@dimen/_10sdp"
-                android:textSize="@dimen/_16ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/etEmail" />
 
             <Button
                 android:id="@+id/btnLogin"
+                style="@style/Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:background="@drawable/shape_button"
                 android:text="@string/str_btn_login"
-                android:textAllCaps="false"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_16sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/etPassword" />

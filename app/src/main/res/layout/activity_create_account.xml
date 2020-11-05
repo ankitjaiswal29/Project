@@ -1,11 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/black"
         tools:context=".activities.CreateAccountActivity">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_image" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/leftGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_begin="@dimen/_10sdp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/rightGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_end="@dimen/_10sdp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <EditText
+            android:id="@+id/etUserId"
+            style="@style/InputBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autofillHints="no"
+            android:hint="@string/str_hint_userid"
+            android:inputType="text"
+            app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+            app:layout_constraintStart_toEndOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            tools:ignore="LabelFor" />
+
+        <EditText
+            android:id="@+id/etFirstName"
+            style="@style/InputBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:autofillHints="no"
+            android:hint="@string/str_hint_first_name"
+            android:inputType="text"
+            app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+            app:layout_constraintStart_toEndOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/etUserId"
+            tools:ignore="LabelFor" />
+
+        <EditText
+            android:id="@+id/etLastName"
+            style="@style/InputBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:autofillHints="no"
+            android:hint="@string/str_hint_last_name"
+            android:inputType="text"
+            app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+            app:layout_constraintStart_toEndOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/etFirstName"
+            tools:ignore="LabelFor" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            style="@style/InputBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:autofillHints="no"
+            android:hint="@string/str_hint_email"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+            app:layout_constraintStart_toEndOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/etLastName"
+            tools:ignore="LabelFor" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            style="@style/InputBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:autofillHints="no"
+            android:hint="@string/str_hint_password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+            app:layout_constraintStart_toEndOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/etEmail"
+            tools:ignore="LabelFor" />
+
+        <EditText
+            android:id="@+id/etConfirmPassword"
+            style="@style/InputBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:autofillHints="no"
+            android:hint="@string/str_hint_confirm_password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+            app:layout_constraintStart_toEndOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/etPassword"
+            tools:ignore="LabelFor" />
+
+        <EditText
+            android:id="@+id/etPhoneNumber"
+            style="@style/InputBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:autofillHints="no"
+            android:hint="@string/str_hint_phone_number"
+            android:inputType="phone"
+            app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+            app:layout_constraintStart_toEndOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/etConfirmPassword"
+            tools:ignore="LabelFor" />
+
+        <Button
+            style="@style/Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:text="@string/str_create_account"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+            app:layout_constraintStart_toEndOf="@id/leftGuideline" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

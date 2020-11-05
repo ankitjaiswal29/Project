@@ -5,4 +5,20 @@
     <string name="str_btn_login">Login</string>
     <string name="str_forgot_password">Forgot Password?</string>
     <string name="str_create_an_account">Create An Account</string>
+    <string name="str_hint_userid">UserId</string>
+    <string name="str_hint_first_name">First Name</string>
+    <string name="str_hint_last_name">Last Name</string>
+    <string name="str_hint_email">Email</string>
+    <string name="str_hint_password">Password</string>
+    <string name="str_hint_confirm_password">Confirm Password</string>
+    <string name="str_hint_phone_number">Phone Number</string>
+    <string name="str_create_account">Create Account</string>
+    <string name="str_text_reset_password">A link will be sent to your registered phone number to reset your password.</string>
+    <string name="str_reset_password">Reset Password</string>
+    <string name="str_need_more_help_desc">Need more help? Email us at customerservice@fighterdiet.com</string>
+    <string name="str_next">Next</string>
+    <string name="str_text_decision">Would you like to answer a short questionnaire for a personalized calorie budget or just go straight to the Fighterdiet recipes page?</string>
+    <string name="str_answer_yes">Yes, answer a short questionnaire to determine my personal calorie budget!</string>
+    <string name="str_decision_extra_msg">*You can always go back later and complete the questionaire.</string>
+    <string name="str_please_select_any_option">Please select any option.</string>
 </resources>

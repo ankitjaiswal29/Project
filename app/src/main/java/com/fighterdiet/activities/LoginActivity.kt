@@ -79,13 +79,13 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tv_forgot_password -> {
-
+                startActivity(ResetPasswordActivity.getStartIntent(this))
             }
             R.id.tv_create_account -> {
                 startActivity(CreateAccountActivity.getStartIntent(this))
             }
             R.id.btnLogin -> {
-
+                startActivity(IntroAndDecisionActivity.getStartIntent(this))
             }
         }
     }
