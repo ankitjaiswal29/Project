@@ -8,7 +8,21 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="btnColor">#5F6771</color>
+    <color name="btnColor">#5f6772</color>
     <color name="colorBlack">#000000</color>
     <color name="colorDecisionBottom">#D7E9F0</color>
+    <color name="backgroundColor">#232529</color>
+    <color name="answerSelectedColor">#b4d1e0</color>
 </resources>
+
+    <!--    Text color-->
+    <!--    •	#ffff-->
+    <!--    •	Ababab-->
+    <!--    •	000000-->
+    <!--    other colors-->
+    <!--    •	#5f6772 (button) Done -->
+    <!--    •	#bad0de ((Background)-->
+    <!--    •	#232529 (button border)-->
+    <!--    •	#232529 (background)-->
+    <!--    •	#b4d1e0 (button border)-->
+    <!--    •	#4394c1-->

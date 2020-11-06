@@ -29,10 +29,10 @@
                 />
 
             <ImageView
-                android:id="@+id/ivBackgroundImage"
+                android:id="@+id/ivBackgroundImage1"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/back_intro"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -77,6 +77,18 @@
                 app:layout_constraintTop_toTopOf="parent"
 
                 />
+
+            <ImageView
+                android:id="@+id/ivBackgroundImage2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/back_decision"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"

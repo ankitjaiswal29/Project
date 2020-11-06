@@ -12,6 +12,12 @@ import com.fighterdiet.databinding.FragmentWalkThroughBinding
 class WalkThroughFragment : BaseFragment() {
     private lateinit var binding: FragmentWalkThroughBinding
     private var position: Int = 0
+    private val images = arrayOf(
+        R.mipmap.walkthrough_1,
+        R.mipmap.walkthrough_2,
+        R.mipmap.walkthrough_3,
+        R.mipmap.walkthrough_4
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,16 +38,16 @@ class WalkThroughFragment : BaseFragment() {
         position = arguments?.getInt(KEY_INDEX)!!
         when (position) {
             0 -> {
-                binding.ivBackgroundImage.setImageResource(R.drawable.colorBlack)
+                binding.ivBackgroundImage.setImageResource(images[0])
             }
             1 -> {
-                binding.ivBackgroundImage.setImageResource(R.drawable.colorGray)
+                binding.ivBackgroundImage.setImageResource(images[1])
             }
             2 -> {
-                binding.ivBackgroundImage.setImageResource(R.drawable.colorBlack)
+                binding.ivBackgroundImage.setImageResource(images[2])
             }
             3 -> {
-                binding.ivBackgroundImage.setImageResource(R.drawable.colorGray)
+                binding.ivBackgroundImage.setImageResource(images[3])
             }
         }
     }
