@@ -21,4 +21,9 @@
     <string name="str_answer_yes">Yes, answer a short questionnaire to determine my personal calorie budget!</string>
     <string name="str_decision_extra_msg">*You can always go back later and complete the questionaire.</string>
     <string name="str_please_select_any_option">Please select any option.</string>
+    <string name="fighter">F I G H T E R</string>
+    <string name="diet">D I E T</string>
+    <string name="eat_big_get_ripped">Eat Big, Get Ripped</string>
+    <string name="_7_day_free_trial">7 Day Free Trial!</string>
+    <string name="_14_99_month_or_79_99_year">$14.99/month or $79.99/year</string>
 </resources>
