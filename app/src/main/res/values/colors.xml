@@ -11,6 +11,11 @@
     <color name="btnColor">#5f6772</color>
     <color name="colorBlack">#000000</color>
     <color name="colorDecisionBottom">#D7E9F0</color>
+
+
+    <color name="texttrial">#4394C1</color>
+    <color name="off_box">#B8CDDF</color>
+
     <color name="backgroundColor">#232529</color>
     <color name="answerSelectedColor">#b4d1e0</color>
 </resources>
