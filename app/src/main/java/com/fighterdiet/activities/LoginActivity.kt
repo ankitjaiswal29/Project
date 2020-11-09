@@ -9,6 +9,8 @@ import com.fighterdiet.R
 import com.fighterdiet.adapters.ViewPagerAdapter
 import com.fighterdiet.databinding.ActivityLoginBinding
 import com.fighterdiet.fragments.WalkThroughFragment
+import com.fighterdiet.utils.ProgressDialog
+import com.fighterdiet.utils.Utils
 
 class LoginActivity : BaseActivity(), View.OnClickListener {
     private lateinit var binding: ActivityLoginBinding
@@ -85,7 +87,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 startActivity(CreateAccountActivity.getStartIntent(this))
             }
             R.id.btnLogin -> {
-                startActivity(IntroAndDecisionActivity.getStartIntent(this))
+                ProgressDialog.openSettings(this)
+//                startActivity(IntroAndDecisionActivity.getStartIntent(this))
             }
         }
     }

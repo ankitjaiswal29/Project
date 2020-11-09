@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
 import com.fighterdiet.adapters.QuizAnswerAdapter
@@ -34,7 +35,8 @@ class QuizActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun setAdapter() {
-        binding.rvAnswer.layoutManager = LinearLayoutManager(this)
+//        binding.rvAnswer.layoutManager = LinearLayoutManager(this)
+        binding.rvAnswer.layoutManager = GridLayoutManager(this,3)
         binding.rvAnswer.adapter = QuizAnswerAdapter(this)
     }
 

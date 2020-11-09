@@ -23,7 +23,7 @@ class QuizAnswerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerVie
 
 
     override fun getItemViewType(position: Int): Int {
-        return 1
+        return 3
     }
 
     override fun getItemCount(): Int {
