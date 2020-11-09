@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/_20sdp"
         android:paddingBottom="@dimen/_10sdp"
-        tools:background="@color/black">
+        android:background="@color/black">
 
         <ImageView
             android:id="@+id/ivTopImage"

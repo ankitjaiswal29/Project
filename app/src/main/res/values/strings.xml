@@ -26,4 +26,6 @@
     <string name="eat_big_get_ripped">Eat Big, Get Ripped</string>
     <string name="_7_day_free_trial">7 Day Free Trial!</string>
     <string name="_14_99_month_or_79_99_year">$14.99/month or $79.99/year</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

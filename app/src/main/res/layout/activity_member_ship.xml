@@ -49,7 +49,6 @@
                 app:layout_constraintStart_toEndOf="@+id/fighter"
                 app:layout_constraintTop_toTopOf="@+id/fighter" />
 
-
         </LinearLayout>
 
         <TextView
