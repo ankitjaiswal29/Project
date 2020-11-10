@@ -9,12 +9,14 @@ import com.fighterdiet.R
 import com.fighterdiet.adapters.ViewPagerAdapter
 import com.fighterdiet.databinding.ActivityLoginBinding
 import com.fighterdiet.fragments.WalkThroughFragment
-import com.fighterdiet.utils.ProgressDialog
-import com.fighterdiet.utils.Utils
+import java.util.*
 
 class LoginActivity : BaseActivity(), View.OnClickListener {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var adapter: ViewPagerAdapter
+    private lateinit var timer: Timer
+    private var duration: Long = 2 * 1000 // Seconds
+    private var currentPage: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         binding.viewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 Log.e(TAG, ">>>>> Position :: $position")
+                currentPage = position
                 setupIndicator(position)
             }
         })
@@ -42,6 +45,21 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         binding.tvForgotPassword.setOnClickListener(this)
         binding.tvCreateAccount.setOnClickListener(this)
         binding.btnLogin.setOnClickListener(this)
+
+        timer = Timer()
+        timer.schedule(object : TimerTask() {
+            override fun run() {
+                runOnUiThread(object : Runnable {
+                    override fun run() {
+                        if (currentPage == 3)
+                            currentPage = -1
+                        binding.viewpager.setCurrentItem(currentPage + 1, true)
+
+                    }
+
+                })
+            }
+        }, duration, duration)
     }
 
     fun setupIndicator(position: Int) {
@@ -87,9 +105,18 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 startActivity(CreateAccountActivity.getStartIntent(this))
             }
             R.id.btnLogin -> {
-                ProgressDialog.openSettings(this)
-//                startActivity(IntroAndDecisionActivity.getStartIntent(this))
+                startActivity(IntroAndDecisionActivity.getStartIntent(this))
             }
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        try {
+            if (isFinishing)
+                timer.cancel()
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
         }
     }
 }
