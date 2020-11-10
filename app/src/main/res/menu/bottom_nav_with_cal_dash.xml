@@ -24,12 +24,25 @@
         />
 
     <item
+        android:icon="@mipmap/icn_shopping"
+        android:title="Shoping"
+        android:id="@+id/shop_nav"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:icon="@mipmap/icn_cb"
+        android:title="CB"
+        android:id="@+id/cb_nav"
+        app:showAsAction="always"
+        />
+
+    <item
         android:icon="@mipmap/icn_settings"
         android:title="Setting"
         android:id="@+id/set_nav"
         app:showAsAction="always"
         />
-
 
 
 </menu>

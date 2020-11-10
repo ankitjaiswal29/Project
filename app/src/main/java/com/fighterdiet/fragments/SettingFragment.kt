@@ -1,5 +1,6 @@
 package com.fighterdiet.fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,6 +21,15 @@ class SettingFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_setting, container, false)
+    }
+
+    companion object {
+
+        fun getInstance(context: Context): Fragment {
+            val bundle = Bundle()
+            val fragment = SettingFragment()
+            return fragment
+        }
     }
 
 }

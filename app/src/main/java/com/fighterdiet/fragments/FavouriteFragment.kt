@@ -1,5 +1,6 @@
 package com.fighterdiet.fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,5 +21,13 @@ class FavouriteFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_favourite, container, false)
     }
 
+    companion object {
+
+        fun getInstance(context: Context): Fragment {
+            val bundle = Bundle()
+            val fragment = FavouriteFragment()
+            return fragment
+        }
+    }
 
 }

@@ -32,7 +32,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:itemIconTint="@drawable/bottom_navigation_color_select"
             app:itemTextColor="@drawable/bottom_navigation_color_select"
-            app:labelVisibilityMode="labeled"
+            app:labelVisibilityMode="unlabeled"
             app:menu="@menu/bottom_nav_item"
             />
 
