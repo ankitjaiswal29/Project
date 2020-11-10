@@ -32,4 +32,7 @@
     <string name="str_what_weight">What is your weight?</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="str_fighterdiet_by">Fighterdiet by</string>
+    <string name="str_pauline_nordin">PAULINE NORDIN</string>
+    <string name="str_about_pauline_mission">My mission is to show the world you CAN EAT BIG TO GET RIPPED and fall in love with Fighterdiet for life. When you love what you eat it\'s much easier to reach a healthy body weight and maintain it for life. I want everyone to reach Fighterdiet Nirvana where starving for lean abs does not exist.</string>
 </resources>
