@@ -14,7 +14,7 @@
             android:id="@+id/toolbar"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            layout="@layout/toolbar_image"/>
+            layout="@layout/toolbar_black_background"/>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager_dash"

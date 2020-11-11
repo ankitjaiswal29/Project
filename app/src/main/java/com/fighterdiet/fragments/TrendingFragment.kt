@@ -9,15 +9,14 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
-import com.fighterdiet.adapters.FavouriteFragmentRecyAdapter
 import com.fighterdiet.adapters.HomeFragmentRecyclerAdapter
 import com.fighterdiet.adapters.TrendingFragmentRecyAdapter
-import com.fighterdiet.databinding.FragmentFavouriteBinding
+import com.fighterdiet.databinding.FragmentTrendingBinding
 import com.fighterdiet.utils.Utils
 
-class FavouriteFragment : Fragment() {
-    lateinit var binding: FragmentFavouriteBinding
-    private lateinit var favouriteAdapter : FavouriteFragmentRecyAdapter
+class TrendingFragment : Fragment() {
+    lateinit var binding:FragmentTrendingBinding
+    private lateinit var trendingAdapter : TrendingFragmentRecyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +27,17 @@ class FavouriteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favourite,container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_trending,container, false)
         return binding.root
+    }
+
+    companion object {
+
+        fun getInstance(context: Context): Fragment {
+            val bundle = Bundle()
+            val fragment = TrendingFragment()
+            return fragment
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,25 +46,17 @@ class FavouriteFragment : Fragment() {
     }
 
     private fun initialise() {
-        setUpFavouriteRecyclerView()
+        setUptrendingRecyclerView()
     }
 
-    private fun setUpFavouriteRecyclerView() {
-        binding.rvFavouriteRecycler.layoutManager = LinearLayoutManager(activity)
-        favouriteAdapter = FavouriteFragmentRecyAdapter(activity){
+    private fun setUptrendingRecyclerView() {
+
+        binding.rvTrendingRecycler.layoutManager = LinearLayoutManager(activity)
+        trendingAdapter = TrendingFragmentRecyAdapter(activity){
                 position,view ->
-            Utils.showSnackBar(binding.rvFavouriteRecycler,"mes")
+            Utils.showSnackBar(binding.rvTrendingRecycler,"mes")
         }
-        binding.rvFavouriteRecycler.adapter = favouriteAdapter
-    }
-
-    companion object {
-
-        fun getInstance(context: Context): Fragment {
-            val bundle = Bundle()
-            val fragment = FavouriteFragment()
-            return fragment
-        }
+        binding.rvTrendingRecycler.adapter = trendingAdapter
     }
 
 }

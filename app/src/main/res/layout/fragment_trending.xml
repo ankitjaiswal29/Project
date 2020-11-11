@@ -7,12 +7,12 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.FavouriteFragment">
+        tools:context=".fragments.TrendingFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/rv_favourite_recycler"
+            android:id="@+id/rv_trending_recycler"
             tools:listitem="@layout/item_home_fragment_recycler_design"
             tools:itemCount="3"
             />

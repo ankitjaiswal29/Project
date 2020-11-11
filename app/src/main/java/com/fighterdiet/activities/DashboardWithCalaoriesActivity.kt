@@ -8,7 +8,8 @@ import com.fighterdiet.adapters.ViewPagerWithCalDashboardAdapter
 import com.fighterdiet.databinding.ActivityDashboardWithCalaoriesBinding
 import com.fighterdiet.fragments.FavouriteFragment
 import com.fighterdiet.fragments.HomeFragment
-import com.fighterdiet.fragments.HotFragment
+import com.fighterdiet.fragments.TrendingFragment
+import com.fighterdiet.fragments.WeeklyGroceryFragment
 import com.google.android.material.tabs.TabLayout
 
 
@@ -35,9 +36,9 @@ class DashboardWithCalaoriesActivity : BaseActivity() {
     private fun initialise() {
 
         var home: HomeFragment = HomeFragment()
-        var trending: HotFragment = HotFragment()
+        var trending: TrendingFragment = TrendingFragment()
         var favourite: FavouriteFragment = FavouriteFragment()
-        var shop: FavouriteFragment = FavouriteFragment()
+        var shop: WeeklyGroceryFragment = WeeklyGroceryFragment()
         var cb: FavouriteFragment = FavouriteFragment()
         var setting: FavouriteFragment = FavouriteFragment()
 

@@ -7,7 +7,7 @@ import com.fighterdiet.R
 import com.fighterdiet.databinding.ActivityDashboardBinding
 import com.fighterdiet.fragments.FavouriteFragment
 import com.fighterdiet.fragments.HomeFragment
-import com.fighterdiet.fragments.HotFragment
+import com.fighterdiet.fragments.TrendingFragment
 import com.fighterdiet.fragments.SettingFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -37,7 +37,7 @@ class DashboardActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
             }
 
             R.id.hot_nav ->{
-                val fragment = HotFragment()
+                val fragment = TrendingFragment()
                 addFragment(fragment)
                 return true
             }

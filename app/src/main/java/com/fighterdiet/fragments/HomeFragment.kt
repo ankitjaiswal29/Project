@@ -4,18 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
-import com.fighterdiet.adapters.HomeFragmentRecyclerAdaptor
+import com.fighterdiet.adapters.HomeFragmentRecyclerAdapter
 import com.fighterdiet.databinding.FragmentHomeBinding
 import com.fighterdiet.utils.Utils
 
 class HomeFragment : Fragment() {
     lateinit var binding:FragmentHomeBinding
-    private lateinit var homeAdaptor : HomeFragmentRecyclerAdaptor
+    private lateinit var homeAdapter : HomeFragmentRecyclerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -78,10 +77,10 @@ class HomeFragment : Fragment() {
 //        binding.couponRecycler.adapter = couponAdapter
 
         binding.rvHomeRecycler.layoutManager = LinearLayoutManager(activity)
-        homeAdaptor = HomeFragmentRecyclerAdaptor(activity){
+        homeAdapter = HomeFragmentRecyclerAdapter(activity){
             position,view ->
             Utils.showSnackBar(binding.rvHomeRecycler,"mes")
         }
-        binding.rvHomeRecycler.adapter = homeAdaptor
+        binding.rvHomeRecycler.adapter = homeAdapter
     }
 }

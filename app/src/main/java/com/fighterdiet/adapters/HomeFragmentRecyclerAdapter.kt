@@ -10,10 +10,10 @@ import com.fighterdiet.R
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
 import com.fighterdiet.interfaces.RecyclerViewItemClickListener
 
-class HomeFragmentRecyclerAdaptor(
+class HomeFragmentRecyclerAdapter(
     private var context: FragmentActivity?,
     private var itemClickListener: RecyclerViewItemClickListener?
-):RecyclerView.Adapter<HomeFragmentRecyclerAdaptor.MyViewHolder>() {
+):RecyclerView.Adapter<HomeFragmentRecyclerAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val binding :ItemHomeFragmentRecyclerDesignBinding? = DataBindingUtil.bind(itemView)

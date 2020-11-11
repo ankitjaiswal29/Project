@@ -1,6 +1,5 @@
 package com.fighterdiet.fragments
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,7 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.fighterdiet.R
 
-class HotFragment : Fragment() {
+
+class WeeklyGroceryFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,16 +19,7 @@ class HotFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_hot, container, false)
-    }
-
-    companion object {
-
-        fun getInstance(context: Context): Fragment {
-            val bundle = Bundle()
-            val fragment = HotFragment()
-            return fragment
-        }
+        return inflater.inflate(R.layout.fragment_weekly_grocery, container, false)
     }
 
 }
