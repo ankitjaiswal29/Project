@@ -12,9 +12,10 @@ import com.fighterdiet.adapters.HomeFragmentRecyclerAdapter
 import com.fighterdiet.databinding.FragmentHomeBinding
 import com.fighterdiet.utils.Utils
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
     lateinit var binding:FragmentHomeBinding
     private lateinit var homeAdapter : HomeFragmentRecyclerAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }

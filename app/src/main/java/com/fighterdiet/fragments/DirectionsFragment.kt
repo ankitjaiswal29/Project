@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.fighterdiet.R
 
 
-class DirectionsFragment : Fragment() {
+class DirectionsFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }

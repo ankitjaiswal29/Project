@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/fighter"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_30ssp"
+                android:textSize="@dimen/_25ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +44,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:text="@string/diet"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_30ssp"
+                android:textSize="@dimen/_25ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/fighter"
                 app:layout_constraintTop_toTopOf="@+id/fighter" />
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:text="@string/eat_big_get_ripped"
             android:textColor="@color/white"
-            android:textSize="@dimen/_20ssp"
+            android:textSize="@dimen/_16ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ll_fighter_diet" />
@@ -65,13 +65,24 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/bg_round_corner_top_let_right"
             android:theme="@style/AppTheme.Membership"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_big_eat">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@mipmap/bg_membership"
+                android:scaleType="centerCrop"
+                />
 
             <TextView
                 android:id="@+id/tv_free_trial"
@@ -80,6 +91,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:textColor="@color/texttrial"
                 android:textSize="@dimen/_35sdp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

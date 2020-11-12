@@ -18,6 +18,10 @@
 
     <color name="backgroundColor">#232529</color>
     <color name="answerSelectedColor">#b4d1e0</color>
+    <color name="checkbox_background">#EBEBEB</color>
+    <color name="green">#36BA4C</color>
+    <color name="darkGrey">#CCCCCC</color>
+
 </resources>
 
     <!--    Text color-->

@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.fighterdiet.R
 import com.fighterdiet.databinding.FragmentInfoBinding
 
-class InfoFragment : Fragment() {
+class InfoFragment : BaseFragment() {
     lateinit var binding:FragmentInfoBinding
 
 

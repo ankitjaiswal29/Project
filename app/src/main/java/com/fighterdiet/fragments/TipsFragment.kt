@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.fighterdiet.R
 import com.fighterdiet.databinding.FragmentTipsBinding
 
-class TipsFragment : Fragment() {
+class TipsFragment : BaseFragment() {
     lateinit var binding: FragmentTipsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -14,7 +14,7 @@ import com.fighterdiet.adapters.TrendingFragmentRecyAdapter
 import com.fighterdiet.databinding.FragmentTrendingBinding
 import com.fighterdiet.utils.Utils
 
-class TrendingFragment : Fragment() {
+class TrendingFragment : BaseFragment() {
     lateinit var binding:FragmentTrendingBinding
     private lateinit var trendingAdapter : TrendingFragmentRecyAdapter
 

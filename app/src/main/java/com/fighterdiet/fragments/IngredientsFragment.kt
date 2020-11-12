@@ -14,7 +14,7 @@ import com.fighterdiet.databinding.FragmentHomeBinding
 import com.fighterdiet.databinding.FragmentIngredientsBinding
 import com.fighterdiet.utils.Utils
 
-class IngredientsFragment : Fragment() {
+class IngredientsFragment : BaseFragment() {
     lateinit var binding: FragmentIngredientsBinding
     private lateinit var ingredientAdapter : IngredientsFillingRecyAdapter
 

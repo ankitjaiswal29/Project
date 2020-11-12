@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.fighterdiet.R
 
-class SettingFragment : Fragment() {
+class SettingFragment : BaseFragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -44,4 +44,17 @@
     <string name="for_the_filling">For the Filling</string>
     <string name="egg_plants_cut_into_1_8_slices">Egg plants cut into 1/8* slices</string>
     <string name="_5_g">5 g</string>
+    <string name="weekly_grocery_list">Weekly Grocery List</string>
+    <string name="edit_meal_plan">Edit meal plan</string>
+    <string name="diary">Diary</string>
+    <string name="meat">Meat</string>
+    <string name="dry_food">Dry Food</string>
+    <string name="produce">Produce</string>
+    <string name="spices_baking">Spices/Baking</string>
+    <string name="bread">Bread</string>
+    <string name="condiments">Condiments</string>
+    <string name="canned_goods">Canned Goods</string>
+    <string name="frozen_foods">Frozen Foods</string>
+    <string name="this_is_your_personal_suggested_calorie_budget_amp_protein_range_for_a_healthy_body"><![CDATA[This is your personal suggested calorie budget & protein range for a healthy body]]></string>
+    <string name="go_back_edit_answers"><![CDATA[Go Back & Edit Answers]]></string>
 </resources>

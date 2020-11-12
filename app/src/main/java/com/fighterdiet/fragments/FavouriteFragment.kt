@@ -15,7 +15,7 @@ import com.fighterdiet.adapters.TrendingFragmentRecyAdapter
 import com.fighterdiet.databinding.FragmentFavouriteBinding
 import com.fighterdiet.utils.Utils
 
-class FavouriteFragment : Fragment() {
+class FavouriteFragment : BaseFragment() {
     lateinit var binding: FragmentFavouriteBinding
     private lateinit var favouriteAdapter : FavouriteFragmentRecyAdapter
 
