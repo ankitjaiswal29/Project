@@ -13,6 +13,7 @@ import com.fighterdiet.adapters.QuizAnswerAdapter
 import com.fighterdiet.databinding.ActivityQuizBinding
 import com.fighterdiet.model.Question
 import com.fighterdiet.utils.ProgressDialog
+import com.fighterdiet.utils.Utils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import org.json.JSONException
@@ -70,6 +71,7 @@ class QuizActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnNext -> {
+                Utils.hideKeyboard(this)
                 if (position < (qusArrayList.size - 1)) {
                     position++;
                     setCurrentQuestion()
@@ -81,6 +83,7 @@ class QuizActivity : BaseActivity(), View.OnClickListener {
             }
 
             R.id.ivPrevious -> {
+                Utils.hideKeyboard(this)
                 position--
                 setCurrentQuestion()
             }

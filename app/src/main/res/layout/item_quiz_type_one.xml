@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginBottom="@dimen/_5sdp"
-        android:background="@drawable/shape_answer_selected"
+        android:background="@drawable/shape_answer_unselected"
         android:fontFamily="@font/inter_regular"
         android:paddingStart="@dimen/_20sdp"
         android:paddingTop="@dimen/_5sdp"

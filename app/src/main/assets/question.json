@@ -1,126 +1,274 @@
 [
   {
+    "id": 1,
+    "isMultipleSelection": false,
     "question": "Why are you here?",
     "type": 1,
     "answers": [
-      "To make healthy eating habits simple and enjoyable for the whole family.",
-      "Lose unnecessary fat, get lean, and build muscles.",
-      "Feel better by improving my food habits and gain more energy.",
-      "Lost more than 40lbs to achieve a healthy bodyweight for life.",
-      "I love eating (A LOT!) but I want to lose weight, and not my sanity.",
-      "I want to eat big AND love my diet by adopting a healthy fitness routine for life while eating big meals.",
-      "I want to eat big and get ripped."
+      {
+        "answerText": "To make healthy eating habits simple and enjoyable for the whole family."
+      },
+      {
+        "answerText": "Lose unnecessary fat, get lean, and build muscles."
+      },
+      {
+        "answerText": "Feel better by improving my food habits and gain more energy."
+      },
+      {
+        "answerText": "Lost more than 40lbs to achieve a healthy bodyweight for life."
+      },
+      {
+        "answerText": "I love eating (A LOT!) but I want to lose weight, and not my sanity."
+      },
+      {
+        "answerText": "I want to eat big AND love my diet by adopting a healthy fitness routine for life while eating big meals."
+      },
+      {
+        "answerText": "I want to eat big and get ripped."
+      }
     ]
   },
   {
+    "id": 2,
+    "isMultipleSelection": false,
     "question": "When are you the most hungry?",
     "type": 1,
     "answers": [
-      "In the morning.",
-      "At night.",
-      "Noon time.",
-      "In the afternoon.",
-      "I'm always hungry (lets go through hydration, we need guidelines with my collagen trick to curb appetite)."
+      {
+        "answerText": "In the morning."
+      },
+      {
+        "answerText": "At night."
+      },
+      {
+        "answerText": "Noon time."
+      },
+      {
+        "answerText": "In the afternoon."
+      },
+      {
+        "answerText": "I'm always hungry (lets go through hydration, we need guidelines with my collagen trick to curb appetite)."
+      }
     ]
   },
   {
+    "id": 3,
+    "isMultipleSelection": false,
     "question": "What is your height?",
     "type": 2,
     "answers": [
-      ""
+      {
+        "answerText": ""
+      }
     ]
   },
   {
+    "id": 4,
+    "isMultipleSelection": false,
     "question": "What's your preferred meal frequency?",
     "type": 1,
     "answers": [
-      "3 square meals & 3 snacks.",
-      "3 square meals & 2 snacks.",
-      "Breakfast, protein shake, dinner.",
-      "OMAD (not recommended).",
-      "Breakfast, dinner & dessert (most popular).",
-      "Liquid breakfast, lunch, dinner & dessert (popular)",
-      "Dessert for breakfast, lunch & dinner (most popular).",
-      "3 square meals & 1 shake.",
-      "Lunch, dinner & dessert."
+      {
+        "answerText": "3 square meals & 3 snacks."
+      },
+      {
+        "answerText": "3 square meals & 2 snacks."
+      },
+      {
+        "answerText": "Breakfast, protein shake, dinner."
+      },
+      {
+        "answerText": "OMAD (not recommended)."
+      },
+      {
+        "answerText": "Breakfast, dinner & dessert (most popular)."
+      },
+      {
+        "answerText": "Liquid breakfast, lunch, dinner & dessert (popular)"
+      },
+      {
+        "answerText": "Dessert for breakfast, lunch & dinner (most popular)."
+      },
+      {
+        "answerText": "3 square meals & 1 shake."
+      },
+      {
+        "answerText": "Lunch, dinner & dessert."
+      }
     ]
   },
   {
+    "id": 5,
+    "isMultipleSelection": false,
     "question": "What's your appetite like?",
     "type": 1,
     "answers": [
-      "I struggle with portion control and have trouble stopping myself when I feel full.",
-      "I have a small appetite and only like/can tolerate smaller meals.",
-      "Very small volume due to surgery (i.e weight loss surgery, gastric bypass surgery etc...); many small meals."
+      {
+        "answerText": "I struggle with portion control and have trouble stopping myself when I feel full."
+      },
+      {
+        "answerText": "I have a small appetite and only like/can tolerate smaller meals."
+      },
+      {
+        "answerText": "Very small volume due to surgery (i.e weight loss surgery, gastric bypass surgery etc...); many small meals."
+      }
     ]
   },
   {
+    "id": 6,
+    "isMultipleSelection": false,
     "question": "Do you enjoy cooking or prefer mimimalistic prep?",
     "type": 1,
     "answers": [
-      "I like to cook and have time for simple meal prep.",
-      "I meal prep on weekends for the whole week.",
-      "Minimal cooking only."
+      {
+        "answerText": "I like to cook and have time for simple meal prep."
+      },
+      {
+        "answerText": "I meal prep on weekends for the whole week."
+      },
+      {
+        "answerText": "Minimal cooking only."
+      }
     ]
   },
   {
+    "id": 7,
+    "isMultipleSelection": false,
     "question": "Do you enjoy cooking or prefer mimimalistic prep?",
     "type": 1,
     "answers": [
-      "I like to cook and have time for simple meal prep.",
-      "I meal prep on weekends for the whole week.",
-      "Minimal cooking only."
+      {
+        "answerText": "I like to cook and have time for simple meal prep."
+      },
+      {
+        "answerText": "I meal prep on weekends for the whole week."
+      },
+      {
+        "answerText": "Minimal cooking only."
+      }
     ]
   },
   {
+    "id": 8,
+    "isMultipleSelection": true,
     "question": "What foods do you love?",
     "type": 3,
     "answers": [
-      "Peanut Butter",
-      "Chocolate",
-      "Fruit",
-      "Pizza",
-      "Ice Cream",
-      "Cookies",
-      "Sandwich",
-      "Spaghetti",
-      "Sushi",
-      "Mexican Food",
-      "Fries",
-      "Humburgers"
+      {
+        "answerText": "Peanut Butter"
+      },
+      {
+        "answerText": "Chocolate"
+      },
+      {
+        "answerText": "Fruit"
+      },
+      {
+        "answerText": "Pizza"
+      },
+      {
+        "answerText": "Ice Cream"
+      },
+      {
+        "answerText": "Cookies"
+      },
+      {
+        "answerText": "Sandwich"
+      },
+      {
+        "answerText": "Spaghetti"
+      },
+      {
+        "answerText": "Sushi"
+      },
+      {
+        "answerText": "Mexican Food"
+      },
+      {
+        "answerText": "Fries"
+      },
+      {
+        "answerText": "Humburgers"
+      }
     ]
   },
   {
+    "id": 9,
+    "isMultipleSelection": true,
     "question": "Do you have any food intolerances, medical restrictions, or allergies?",
     "type": 3,
     "answers": [
-      "Milk/Dairy",
-      "Soy",
-      "Seafood",
-      "Shellfish",
-      "Eggs",
-      "Peanuts",
-      "Wheat",
-      "Tree nuts",
-      "Gluten",
-      "Pescatarian",
-      "Vegan",
-      "Vegetarian"
+      {
+        "answerText": "Milk/Dairy"
+      },
+      {
+        "answerText": "Soy"
+      },
+      {
+        "answerText": "Seafood"
+      },
+      {
+        "answerText": "Shellfish"
+      },
+      {
+        "answerText": "Eggs"
+      },
+      {
+        "answerText": "Peanuts"
+      },
+      {
+        "answerText": "Wheat"
+      },
+      {
+        "answerText": "Tree nuts"
+      },
+      {
+        "answerText": "Gluten"
+      },
+      {
+        "answerText": "Pescatarian"
+      },
+      {
+        "answerText": "Vegan"
+      },
+      {
+        "answerText": "Vegetarian"
+      }
     ]
   },
   {
+    "id": 10,
+    "isMultipleSelection": false,
     "question": "What do you struggle with regarding eating healthy?",
     "type": 1,
     "answers": [
-      "Being a very picky eater.",
-      "I stress eat and turn to food for emotional support",
-      "I love to eat like a pig but not look like one, like the founder of FD, Pauline Nordin.",
-      "I can't control myself around tasty delicious junk food or high caloric meals such as fast food",
-      "When I am stressed or sad i turn to sweets and i want to stop that.",
-      "I am constanlty in a rush and due to work I am on my feet 12-14 hours a day and have to eat almost all my meals in one or two sittings. I feel guilty that I have to finish my meals late at night.",
-      "I have a very stressful life and I snack too much without even realizing it.",
-      "I like no-cook, meals because I have no oven;I only have a stove top and/or a microwave oven.",
-      "I am a vegan and struggle with making meals I actually enjoy eating."
+      {
+        "answerText": "Being a very picky eater."
+      },
+      {
+        "answerText": "I stress eat and turn to food for emotional support"
+      },
+      {
+        "answerText": "I love to eat like a pig but not look like one, like the founder of FD, Pauline Nordin."
+      },
+      {
+        "answerText": "I can't control myself around tasty delicious junk food or high caloric meals such as fast food"
+      },
+      {
+        "answerText": "When I am stressed or sad i turn to sweets and i want to stop that."
+      },
+      {
+        "answerText": "I am constanlty in a rush and due to work I am on my feet 12-14 hours a day and have to eat almost all my meals in one or two sittings. I feel guilty that I have to finish my meals late at night."
+      },
+      {
+        "answerText": "I have a very stressful life and I snack too much without even realizing it."
+      },
+      {
+        "answerText": "I like no-cook, meals because I have no oven;I only have a stove top and/or a microwave oven."
+      },
+      {
+        "answerText": "I am a vegan and struggle with making meals I actually enjoy eating."
+      }
     ]
   }
 ]

@@ -14,6 +14,8 @@ import com.fighterdiet.model.Question
 
 class QuizAnswerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var question: Question
+    private var selectedOption = -1
+    private var selectedOptions = arrayListOf<Int>()
 
     private var imageList2 = arrayListOf<Int>(
         R.mipmap.icn_milk_dairy, R.mipmap.icn_soy, R.mipmap.icn_seafood,
@@ -29,11 +31,18 @@ class QuizAnswerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerVie
         R.mipmap.icn_burrito, R.mipmap.icn_french_fries, R.mipmap.icn_hamburger
     )
 
-    inner class QuizTypeOne(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class QuizTypeOne(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
         var binding: ItemQuizTypeOneBinding? = null
 
         init {
             binding = DataBindingUtil.bind(itemView)
+            binding?.tvAnswer?.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            selectedOption = adapterPosition
+            notifyDataSetChanged()
         }
     }
 
@@ -46,11 +55,19 @@ class QuizAnswerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerVie
 
     }
 
-    inner class QuizTypeThree(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class QuizTypeThree(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
         var binding: ItemQuizTypeThreeBinding? = null
 
         init {
             binding = DataBindingUtil.bind(itemView)
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            question.answers.get(adapterPosition).isSelected =
+                !question.answers.get(adapterPosition).isSelected
+            notifyDataSetChanged()
         }
     }
 
@@ -64,6 +81,8 @@ class QuizAnswerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerVie
     }
 
     fun setQuestion(question: Question) {
+        selectedOption = -1
+        selectedOptions.clear()
         this.question = question
     }
 
@@ -93,7 +112,12 @@ class QuizAnswerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerVie
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is QuizTypeOne) {
-            holder.binding?.tvAnswer?.setText(question.answers.get(position))
+            if (position == selectedOption) {
+                holder.binding?.tvAnswer?.setBackgroundResource(R.drawable.shape_answer_selected)
+            } else {
+                holder.binding?.tvAnswer?.setBackgroundResource(R.drawable.shape_answer_unselected)
+            }
+            holder.binding?.tvAnswer?.setText(question.answers.get(position).answerText)
         } else if (holder is QuizTypeTwo) {
 
         } else if (holder is QuizTypeThree) {
@@ -102,7 +126,12 @@ class QuizAnswerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerVie
             } else {
                 holder.binding?.ivImage?.setImageResource(imageList2[position])
             }
-            holder.binding?.tvDesc?.setText(question.answers.get(position))
+            holder.binding?.tvDesc?.setText(question.answers.get(position).answerText)
+            if (question.answers.get(position).isSelected) {
+                holder.binding?.groupSelector?.visibility=View.VISIBLE
+            } else {
+                holder.binding?.groupSelector?.visibility=View.GONE
+            }
         }
     }
 }
