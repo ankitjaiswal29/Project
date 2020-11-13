@@ -59,4 +59,21 @@
     <string name="go_back_edit_answers"><![CDATA[Go Back & Edit Answers]]></string>
     <string name="helpful_links">Helpful Links:</string>
     <string name="str_submit">Submit</string>
+    <string name="frequently_asked_questions">Frequently Asked Questions</string>
+    <string name="search">Search</string>
+    <string name="calories_budgets_are_your_tool_to_help_you">Calories budgets are your tool to help you</string>
+    <string name="faq_one">What is a Fighter Calorie Budget?</string>
+    <string name="faq_two">Why we use a protein range and how to use this function?</string>
+    <string name="faq_three">How to work your weekly calorie budget?</string>
+    <string name="faq_four">How do I adjust my calorie budget?</string>
+    <string name="faq_five">Why do we put carbs and fat into chucks of energy variables?</string>
+    <string name="faq_six">Athletic people and BMI.</string>
+    <string name="faq_seven">Why don\'t we count macros?</string>
+    <string name="faq_eight">Why do macros not matter much for fat loss?</string>
+    <string name="faq_nine">Supplement recommendations</string>
+    <string name="faq_ten">Tips and tricks for RAPID FAT LOSS!</string>
+    <string name="comments">Comments</string>
+    <string name="add_a_comment_here">Add a comment here</string>
+    <string name="submit">Submit</string>
+    <string name="i_love_this_recipe_for_my_familynof_4_nhint_sub_appricots_for_peaches_it_gives_it_a_sweeter_taste">I love this recipe for my familynof 4!\nHint: sub appricots for peaches it gives it a sweeter taste</string>
 </resources>
