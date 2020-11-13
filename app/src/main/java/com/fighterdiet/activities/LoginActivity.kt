@@ -65,24 +65,28 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     fun setupIndicator(position: Int) {
         when (position) {
             0 -> {
+                binding.tvDesc.setText("")
                 binding.layoutIndicator.vFirst.setBackgroundResource(R.drawable.shape_indicator_selected)
                 binding.layoutIndicator.vSecond.setBackgroundResource(R.drawable.shape_indicator_unselected)
                 binding.layoutIndicator.vThird.setBackgroundResource(R.drawable.shape_indicator_unselected)
                 binding.layoutIndicator.vFourth.setBackgroundResource(R.drawable.shape_indicator_unselected)
             }
             1 -> {
+                binding.tvDesc.setText(getString(R.string.str_walkthrough_text_2))
                 binding.layoutIndicator.vFirst.setBackgroundResource(R.drawable.shape_indicator_unselected)
                 binding.layoutIndicator.vSecond.setBackgroundResource(R.drawable.shape_indicator_selected)
                 binding.layoutIndicator.vThird.setBackgroundResource(R.drawable.shape_indicator_unselected)
                 binding.layoutIndicator.vFourth.setBackgroundResource(R.drawable.shape_indicator_unselected)
             }
             2 -> {
+                binding.tvDesc.setText(getString(R.string.str_walkthrough_text_3))
                 binding.layoutIndicator.vFirst.setBackgroundResource(R.drawable.shape_indicator_unselected)
                 binding.layoutIndicator.vSecond.setBackgroundResource(R.drawable.shape_indicator_unselected)
                 binding.layoutIndicator.vThird.setBackgroundResource(R.drawable.shape_indicator_selected)
                 binding.layoutIndicator.vFourth.setBackgroundResource(R.drawable.shape_indicator_unselected)
             }
             3 -> {
+                binding.tvDesc.setText(getString(R.string.str_walkthrough_text_4))
                 binding.layoutIndicator.vFirst.setBackgroundResource(R.drawable.shape_indicator_unselected)
                 binding.layoutIndicator.vSecond.setBackgroundResource(R.drawable.shape_indicator_unselected)
                 binding.layoutIndicator.vThird.setBackgroundResource(R.drawable.shape_indicator_unselected)

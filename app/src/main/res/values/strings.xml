@@ -76,4 +76,8 @@
     <string name="add_a_comment_here">Add a comment here</string>
     <string name="submit">Submit</string>
     <string name="i_love_this_recipe_for_my_familynof_4_nhint_sub_appricots_for_peaches_it_gives_it_a_sweeter_taste">I love this recipe for my familynof 4!\nHint: sub appricots for peaches it gives it a sweeter taste</string>
+    <string name="str_answer_no">No, skip the questionnaire and get access to recipes NOW!*</string>
+    <string name="str_walkthrough_text_2">Delicious recipes for a healthy body!</string>
+    <string name="str_walkthrough_text_3">Fall in love with healthy desserts!</string>
+    <string name="str_walkthrough_text_4">Love what you eat!</string>
 </resources>

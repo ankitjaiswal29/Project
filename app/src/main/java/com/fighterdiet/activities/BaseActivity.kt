@@ -21,6 +21,9 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         Utils.hideKeyboard(this)
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 
 }
