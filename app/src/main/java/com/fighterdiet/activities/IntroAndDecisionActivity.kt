@@ -7,6 +7,7 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.fighterdiet.R
 import com.fighterdiet.databinding.ActivityIntroAndDecisionBinding
+import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.Utils
 
 class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener {
@@ -54,11 +55,13 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener {
                 if (selected != -1) {
                     if (selected == 1) {
                         // Yes
+                        Constants.isQuestonnaireCompleted = true
                         startActivity(QuizActivity.getStartIntent(this))
                         finish()
 
                     } else {
                         // No
+                        Constants.isQuestonnaireCompleted = false
                         startActivity(MemberShipActivity.getStartIntent(this))
                         finish()
 
