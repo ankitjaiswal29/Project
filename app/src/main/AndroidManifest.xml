@@ -16,6 +16,10 @@
         android:theme="@style/Theme.FighterDietApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.PersonalChartActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
             android:name=".activities.FaqActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
@@ -32,20 +36,23 @@
         <activity
             android:name=".activities.DashboardWithCalaoriesActivity"
             android:screenOrientation="portrait">
-          <!--  <intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
         <activity
             android:name=".activities.PicOneDayMealsActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activities.PicDaySevenMealsActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activities.DashboardActivity"
             android:screenOrientation="portrait" />
