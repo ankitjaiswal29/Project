@@ -34,7 +34,7 @@ class ProfileAfterQuestionsActivity : AppCompatActivity(), View.OnClickListener 
         view.let {
             when(view?.id){
 
-                R.id.tv_next ->{
+                R.id.tvNext ->{
                     startActivity(PicOneDayMealsActivity.getStartIntent(this))
                 }
 

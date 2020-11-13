@@ -45,6 +45,10 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun moveToNextFlow() {
-        startActivity(DashboardWithCalaoriesActivity.getStartIntent(this))
+        if (Constants.isQuestonnaireCompleted) {
+            startActivity(ProfileAfterQuestionsActivity.getStartIntent(this))
+        } else {
+            startActivity(DashboardWithCalaoriesActivity.getStartIntent(this))
+        }
     }
 }

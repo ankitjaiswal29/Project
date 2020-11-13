@@ -344,7 +344,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/iv_video_image"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:text="@string/str_next"
-                    android:id="@+id/tv_next"
+                    android:id="@+id/tvNext"
                     android:textColor="@color/white"
                     android:textStyle="italic"
                     android:background="@drawable/bg_round_corner_white_stroke"

@@ -43,7 +43,7 @@ class DashboardWithCalaoriesActivity : BaseActivity() {
         const val TAG = "DashboardWithCalaoriesActivity"
 
         fun getStartIntent(context: Context): Intent {
-            return Intent(context, ResetPasswordActivity::class.java)
+            return Intent(context, DashboardWithCalaoriesActivity::class.java)
         }
     }
 

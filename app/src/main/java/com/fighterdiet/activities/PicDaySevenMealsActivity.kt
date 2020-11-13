@@ -2,8 +2,9 @@ package com.fighterdiet.activities
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
@@ -13,17 +14,22 @@ import com.fighterdiet.models.home_frag.HomeModel
 import com.fighterdiet.utils.Utils
 
 class PicDaySevenMealsActivity : AppCompatActivity() {
-    lateinit var binding:ActivityPicDaySevenMealsBinding
-    private lateinit var homeAdapter : HomeFragmentRecyclerAdapter
-    var homeList:ArrayList<HomeModel> = ArrayList()
+    lateinit var binding: ActivityPicDaySevenMealsBinding
+    private lateinit var homeAdapter: HomeFragmentRecyclerAdapter
+    var homeList: ArrayList<HomeModel> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_pic_day_seven_meals)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_pic_day_seven_meals)
         initialise()
     }
 
     private fun initialise() {
+        binding.tvNext.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                startActivity(DashboardWithCalaoriesActivity.getStartIntent(this@PicDaySevenMealsActivity))
+            }
+        })
         setUpHomeList()
         setUpHomeRecyclerView()
     }
@@ -37,9 +43,8 @@ class PicDaySevenMealsActivity : AppCompatActivity() {
     private fun setUpHomeRecyclerView() {
 
         binding.rvPicSeven.layoutManager = LinearLayoutManager(this)
-        homeAdapter = HomeFragmentRecyclerAdapter(this,homeList){
-                position,view ->
-            Utils.showSnackBar(binding.rvPicSeven,"mes")
+        homeAdapter = HomeFragmentRecyclerAdapter(this, homeList) { position, view ->
+            Utils.showSnackBar(binding.rvPicSeven, "mes")
         }
         binding.rvPicSeven.adapter = homeAdapter
     }
