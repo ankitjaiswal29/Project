@@ -48,7 +48,7 @@ class PicDaySevenMealsActivity : AppCompatActivity() {
         const val TAG = "PicDaySevenMealsActivity"
 
         fun getStartIntent(context: Context): Intent {
-            return Intent(context, ResetPasswordActivity::class.java)
+            return Intent(context, PicDaySevenMealsActivity::class.java)
         }
     }
 }

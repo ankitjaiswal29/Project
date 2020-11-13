@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
@@ -12,7 +13,7 @@ import com.fighterdiet.databinding.ActivityPicOneDayMealsBinding
 import com.fighterdiet.models.home_frag.HomeModel
 import com.fighterdiet.utils.Utils
 
-class PicOneDayMealsActivity : BaseActivity() {
+class PicOneDayMealsActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding:ActivityPicOneDayMealsBinding
     private lateinit var homeAdapter : HomeFragmentRecyclerAdapter
     var homeList:ArrayList<HomeModel> = ArrayList()
@@ -26,6 +27,7 @@ class PicOneDayMealsActivity : BaseActivity() {
     private fun initialise() {
         setUpHomeList()
         setUpHomeRecyclerView()
+        binding.tvNext.setOnClickListener(this)
     }
 
     private fun setUpHomeList() {
@@ -48,7 +50,19 @@ class PicOneDayMealsActivity : BaseActivity() {
         const val TAG = "PicOneDayMealsActivity"
 
         fun getStartIntent(context: Context): Intent {
-            return Intent(context, ResetPasswordActivity::class.java)
+            return Intent(context, PicOneDayMealsActivity::class.java)
+        }
+    }
+
+    override fun onClick(view: View?) {
+        view.let {
+            when(view?.id){
+
+                R.id.tv_next ->{
+                    startActivity(PicDaySevenMealsActivity.getStartIntent(this))
+                }
+
+            }
         }
     }
 }

@@ -26,7 +26,7 @@ class ProfileAfterQuestionsActivity : AppCompatActivity(), View.OnClickListener 
         const val TAG = "ProfileAfterQuestionsActivity"
 
         fun getStartIntent(context: Context): Intent {
-            return Intent(context, ResetPasswordActivity::class.java)
+            return Intent(context, ProfileAfterQuestionsActivity::class.java)
         }
     }
 
@@ -35,7 +35,7 @@ class ProfileAfterQuestionsActivity : AppCompatActivity(), View.OnClickListener 
             when(view?.id){
 
                 R.id.tv_next ->{
-
+                    startActivity(PicOneDayMealsActivity.getStartIntent(this))
                 }
 
             }
