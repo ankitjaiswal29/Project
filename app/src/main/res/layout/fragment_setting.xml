@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/black"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,19 +18,17 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/iv_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/iv_back"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:src="@mipmap/icn_back_blue"
                 android:padding="@dimen/_10sdp"
-                />
+                android:src="@mipmap/icn_back_blue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -40,221 +37,211 @@
                     tools:context=".fragments.SettingFragment">
 
                     <TextView
+                        android:id="@+id/tv_help_ful"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:id="@+id/tv_help_ful"
+                        android:layout_marginStart="@dimen/_10sdp"
                         android:fontFamily="@font/inter_medium"
                         android:text="@string/helpful_links"
-                        android:layout_marginStart="@dimen/_10sdp"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14ssp"
-                        />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Log out"
-                        android:textSize="@dimen/_12ssp"
-                        android:padding="@dimen/_10sdp"
-                        android:fontFamily="@font/inter_regular"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_help_ful"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:paddingStart="@dimen/_30sdp"
                         android:id="@+id/tv_log_out"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_regular"
+                        android:padding="@dimen/_10sdp"
+                        android:paddingStart="@dimen/_30sdp"
+                        android:text="Log out"
                         android:textColor="@color/black"
-                        app:drawableEndCompat="@drawable/ic_forword" />
+                        android:textSize="@dimen/_12ssp"
+                        app:drawableEndCompat="@drawable/ic_forword"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_help_ful" />
 
                     <View
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:background="@color/darkGrey"
                         android:id="@+id/v_log"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_log_out"
-                        app:layout_constraintStart_toStartOf="@+id/tv_log_out"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="@color/darkGrey"
                         app:layout_constraintEnd_toEndOf="@+id/tv_log_out"
-                        />
+                        app:layout_constraintStart_toStartOf="@+id/tv_log_out"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_log_out" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Edit Questionnaire"
-                        android:textSize="@dimen/_12ssp"
-                        android:padding="@dimen/_10sdp"
-                        android:fontFamily="@font/inter_regular"
-                        app:layout_constraintTop_toBottomOf="@+id/v_log"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:paddingStart="@dimen/_30sdp"
                         android:id="@+id/tv_edit_question"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_regular"
+                        android:padding="@dimen/_10sdp"
+                        android:paddingStart="@dimen/_30sdp"
+                        android:text="Edit Questionnaire"
                         android:textColor="@color/black"
-                        app:drawableEndCompat="@drawable/ic_forword" />
+                        android:textSize="@dimen/_12ssp"
+                        app:drawableEndCompat="@drawable/ic_forword"
+                        app:layout_constraintTop_toBottomOf="@+id/v_log" />
 
                     <View
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:background="@color/darkGrey"
                         android:id="@+id/v_edit"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_edit_question"
-                        app:layout_constraintStart_toStartOf="@+id/tv_edit_question"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="@color/darkGrey"
                         app:layout_constraintEnd_toEndOf="@+id/tv_edit_question"
-                        />
+                        app:layout_constraintStart_toStartOf="@+id/tv_edit_question"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_edit_question" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="FAQ"
-                        android:textSize="@dimen/_12ssp"
-                        android:padding="@dimen/_10sdp"
-                        android:fontFamily="@font/inter_regular"
-                        app:layout_constraintTop_toBottomOf="@+id/v_edit"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:paddingStart="@dimen/_30sdp"
                         android:id="@+id/tv_faq"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_regular"
+                        android:padding="@dimen/_10sdp"
+                        android:paddingStart="@dimen/_30sdp"
+                        android:text="FAQ"
                         android:textColor="@color/black"
-                        app:drawableEndCompat="@drawable/ic_forword" />
+                        android:textSize="@dimen/_12ssp"
+                        app:drawableEndCompat="@drawable/ic_forword"
+                        app:layout_constraintTop_toBottomOf="@+id/v_edit" />
 
                     <View
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
                         android:id="@+id/v_faq"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
                         android:background="@color/darkGrey"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_faq"
-                        app:layout_constraintStart_toStartOf="@+id/tv_faq"
                         app:layout_constraintEnd_toEndOf="@+id/tv_faq"
-                        />
+                        app:layout_constraintStart_toStartOf="@+id/tv_faq"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_faq" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Clear Cache"
-                        android:textSize="@dimen/_12ssp"
-                        android:padding="@dimen/_10sdp"
-                        android:fontFamily="@font/inter_regular"
-                        app:layout_constraintTop_toBottomOf="@+id/v_faq"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:paddingStart="@dimen/_30sdp"
                         android:id="@+id/tv_clear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_regular"
+                        android:padding="@dimen/_10sdp"
+                        android:paddingStart="@dimen/_30sdp"
+                        android:text="Clear Cache"
                         android:textColor="@color/black"
-                        app:drawableEndCompat="@drawable/ic_forword" />
+                        android:textSize="@dimen/_12ssp"
+                        app:drawableEndCompat="@drawable/ic_forword"
+                        app:layout_constraintTop_toBottomOf="@+id/v_faq" />
 
                     <View
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
                         android:id="@+id/v_clear"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
                         android:background="@color/darkGrey"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_clear"
-                        app:layout_constraintStart_toStartOf="@+id/tv_clear"
                         app:layout_constraintEnd_toEndOf="@+id/tv_clear"
-                        />
+                        app:layout_constraintStart_toStartOf="@+id/tv_clear"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_clear" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Email Us"
-                        android:textSize="@dimen/_12ssp"
-                        android:padding="@dimen/_10sdp"
-                        android:fontFamily="@font/inter_regular"
-                        app:layout_constraintTop_toBottomOf="@+id/v_clear"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:paddingStart="@dimen/_30sdp"
                         android:id="@+id/tv_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_regular"
+                        android:padding="@dimen/_10sdp"
+                        android:paddingStart="@dimen/_30sdp"
+                        android:text="Email Us"
                         android:textColor="@color/black"
-                        app:drawableEndCompat="@drawable/ic_forword" />
+                        android:textSize="@dimen/_12ssp"
+                        app:drawableEndCompat="@drawable/ic_forword"
+                        app:layout_constraintTop_toBottomOf="@+id/v_clear" />
 
                     <View
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
                         android:id="@+id/v_email"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
                         android:background="@color/darkGrey"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_email"
-                        app:layout_constraintStart_toStartOf="@+id/tv_email"
                         app:layout_constraintEnd_toEndOf="@+id/tv_email"
-                        />
+                        app:layout_constraintStart_toStartOf="@+id/tv_email"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_email" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/v_email"
-                        app:layout_constraintStart_toStartOf="parent"
                         android:id="@+id/tv_legal"
-                        android:fontFamily="@font/inter_medium"
-                        android:layout_marginTop="@dimen/_30sdp"
-                        android:text="Legal:"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="Legal:"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14ssp"
-                        />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/v_email" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Terms of Service"
-                        android:textSize="@dimen/_12ssp"
-                        android:padding="@dimen/_10sdp"
-                        android:fontFamily="@font/inter_regular"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_legal"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:paddingStart="@dimen/_30sdp"
                         android:id="@+id/tv_terms"
-                        android:textColor="@color/black"
-                        app:drawableEndCompat="@drawable/ic_forword" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:id="@+id/v_terms"
-                        android:background="@color/darkGrey"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_terms"
-                        app:layout_constraintStart_toStartOf="@+id/tv_terms"
-                        app:layout_constraintEnd_toEndOf="@+id/tv_terms"
-                        />
-
-                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Privacy Policy"
-                        android:textSize="@dimen/_12ssp"
-                        android:padding="@dimen/_10sdp"
-                        android:fontFamily="@font/inter_regular"
-                        app:layout_constraintTop_toBottomOf="@+id/v_terms"
                         android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_regular"
+                        android:padding="@dimen/_10sdp"
                         android:paddingStart="@dimen/_30sdp"
-                        android:id="@+id/tv_privacy"
+                        android:text="Terms of Service"
                         android:textColor="@color/black"
-                        app:drawableEndCompat="@drawable/ic_forword" />
+                        android:textSize="@dimen/_12ssp"
+                        app:drawableEndCompat="@drawable/ic_forword"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_legal" />
 
                     <View
+                        android:id="@+id/v_terms"
                         android:layout_width="0dp"
                         android:layout_height="1dp"
-                        android:id="@+id/v_privacy"
                         android:background="@color/darkGrey"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_privacy"
-                        app:layout_constraintStart_toStartOf="@+id/tv_privacy"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_terms"
+                        app:layout_constraintStart_toStartOf="@+id/tv_terms"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_terms" />
+
+                    <TextView
+                        android:id="@+id/tv_privacy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_regular"
+                        android:padding="@dimen/_10sdp"
+                        android:paddingStart="@dimen/_30sdp"
+                        android:text="Privacy Policy"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp"
+                        app:drawableEndCompat="@drawable/ic_forword"
+                        app:layout_constraintTop_toBottomOf="@+id/v_terms" />
+
+                    <View
+                        android:id="@+id/v_privacy"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="@color/darkGrey"
                         app:layout_constraintEnd_toEndOf="@+id/tv_privacy"
-                        />
+                        app:layout_constraintStart_toStartOf="@+id/tv_privacy"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_privacy" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/v_privacy"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:text="Fighterdiet Inc."
-                        android:fontFamily="@font/inter_bold"
-                        android:textColor="@color/black"
                         android:layout_marginTop="@dimen/_20sdp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="Fighterdiet Inc."
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_14ssp"
-                        />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/v_privacy" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -263,11 +250,7 @@
         </LinearLayout>
 
 
-
-
-
     </LinearLayout>
-
 
 
 </layout>

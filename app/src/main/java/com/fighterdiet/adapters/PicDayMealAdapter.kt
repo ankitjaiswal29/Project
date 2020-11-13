@@ -46,7 +46,7 @@ class PicDayMealAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.binding?.imvItemHome?.setImageResource(homeList[position].image)
-
+        
         if (homeList[position].isselected){
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                 holder.binding?.imvItemHome?.foreground = ContextCompat.getDrawable(context!!, R.drawable.bg_image_selected)
