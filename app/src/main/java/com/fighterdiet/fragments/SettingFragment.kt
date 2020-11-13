@@ -1,20 +1,19 @@
 package com.fighterdiet.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.fighterdiet.R
 import com.fighterdiet.activities.LoginActivity
-import com.fighterdiet.activities.ResetPasswordActivity
 import com.fighterdiet.databinding.FragmentSettingBinding
-import com.fighterdiet.utils.ActivityController
 
 class SettingFragment : BaseFragment(), View.OnClickListener {
-    lateinit var binding:FragmentSettingBinding
+    lateinit var binding: FragmentSettingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +24,7 @@ class SettingFragment : BaseFragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting,container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false)
         return binding.root
     }
 
@@ -56,28 +55,12 @@ class SettingFragment : BaseFragment(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         view?.let {
-            when(view.id){
-                R.id.tv_log_out ->{
-                    ActivityController.startActivity(this,LoginActivity::class.java,null,false,false)
+            when (view.id) {
+                R.id.tv_log_out -> {
+                    val loginIntent = Intent(activity, LoginActivity::class.java)
+                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(loginIntent)
                 }
-//                R.id.tv_edit_question ->{
-//                    ActivityController.startActivity(this,LoginActivity::class.java,null,false,false)
-//                }
-//                R.id.tv_faq ->{
-//                    ActivityController.startActivity(this,LoginActivity::class.java,null,false,false)
-//                }
-//                R.id.tv_clear ->{
-//                    ActivityController.startActivity(this,LoginActivity::class.java,null,false,false)
-//                }
-//                R.id.tv_email ->{
-//                    ActivityController.startActivity(this,LoginActivity::class.java,null,false,false)
-//                }
-//                R.id.tv_terms ->{
-//                    ActivityController.startActivity(this,LoginActivity::class.java,null,false,false)
-//                }
-//                R.id.tv_privacy ->{
-//                    ActivityController.startActivity(this,LoginActivity::class.java,null,false,false)
-//                }
             }
         }
     }

@@ -36,7 +36,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         binding.viewpager.offscreenPageLimit = 4
         binding.viewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                Log.e(TAG, ">>>>> Position :: $position")
+//                Log.e(TAG, ">>>>> Position :: $position")
                 currentPage = position
                 setupIndicator(position)
             }

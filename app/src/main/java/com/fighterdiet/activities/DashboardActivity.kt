@@ -3,6 +3,7 @@ package com.fighterdiet.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fighterdiet.R
@@ -13,7 +14,6 @@ import com.fighterdiet.fragments.*
 import com.fighterdiet.utils.Constants
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
 
 
 class DashboardActivity : BaseActivity() {
@@ -86,6 +86,7 @@ class DashboardActivity : BaseActivity() {
         binding.viewPagerDash.adapter = pagerAdapter
 
         TabLayoutMediator(binding.tabs, binding.viewPagerDash) { tab, position ->
+            Log.e(">>>>>","position"+position)
             tab.text = tab6Titles[position]
             binding.viewPagerDash.setCurrentItem(tab.position, true)
 
@@ -97,15 +98,6 @@ class DashboardActivity : BaseActivity() {
 
         }.attach()
 
-        binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                //   binding.viewPagerDash.currentItem = tab.position
-
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {}
-            override fun onTabReselected(tab: TabLayout.Tab) {}
-        })
     }
 
     private fun initialise4Tab() {
@@ -141,7 +133,7 @@ class DashboardActivity : BaseActivity() {
         binding.viewPagerDash.adapter = pagerAdapter
 
         TabLayoutMediator(binding.tabs, binding.viewPagerDash,
-            TabConfigurationStrategy { tab, position ->
+            { tab, position ->
                 binding.viewPagerDash.setCurrentItem(tab.position, true)
                 tab.text = tab4Titles[position]
                 if (tab.isSelected) {
@@ -151,7 +143,6 @@ class DashboardActivity : BaseActivity() {
                 }
 
             }).attach()
-
 
         binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
