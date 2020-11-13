@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fighterdiet.R
@@ -85,8 +86,8 @@ class DashboardActivity : BaseActivity() {
 
         binding.viewPagerDash.adapter = pagerAdapter
 
-        TabLayoutMediator(binding.tabs, binding.viewPagerDash) { tab, position ->
-            Log.e(">>>>>","position"+position)
+        TabLayoutMediator(binding.tabs, binding.viewPagerDash, true) { tab, position ->
+            Log.e(">>>>>", "position" + position)
             tab.text = tab6Titles[position]
             binding.viewPagerDash.setCurrentItem(tab.position, true)
 
@@ -97,6 +98,41 @@ class DashboardActivity : BaseActivity() {
             }
 
         }.attach()
+
+    }
+
+    private fun update4Tab(position:Int){
+        when(position)
+        {
+            0->{
+                binding.tabs.getTabAt(0)?.icon=ContextCompat.getDrawable(this,tabIcons4Selected[0])
+                binding.tabs.getTabAt(1)?.icon=ContextCompat.getDrawable(this,tabIcons4[1])
+                binding.tabs.getTabAt(2)?.icon=ContextCompat.getDrawable(this,tabIcons4[2])
+                binding.tabs.getTabAt(3)?.icon=ContextCompat.getDrawable(this,tabIcons4[3])
+            }
+            1->{
+                binding.tabs.getTabAt(0)?.icon=ContextCompat.getDrawable(this,tabIcons4[0])
+                binding.tabs.getTabAt(1)?.icon=ContextCompat.getDrawable(this,tabIcons4Selected[1])
+                binding.tabs.getTabAt(2)?.icon=ContextCompat.getDrawable(this,tabIcons4[2])
+                binding.tabs.getTabAt(3)?.icon=ContextCompat.getDrawable(this,tabIcons4[3])
+            }
+            2->{
+                binding.tabs.getTabAt(0)?.icon=ContextCompat.getDrawable(this,tabIcons4[0])
+                binding.tabs.getTabAt(1)?.icon=ContextCompat.getDrawable(this,tabIcons4[1])
+                binding.tabs.getTabAt(2)?.icon=ContextCompat.getDrawable(this,tabIcons4Selected[2])
+                binding.tabs.getTabAt(3)?.icon=ContextCompat.getDrawable(this,tabIcons4[3])
+            }
+            3->{
+                binding.tabs.getTabAt(0)?.icon=ContextCompat.getDrawable(this,tabIcons4[0])
+                binding.tabs.getTabAt(1)?.icon=ContextCompat.getDrawable(this,tabIcons4[1])
+                binding.tabs.getTabAt(2)?.icon=ContextCompat.getDrawable(this,tabIcons4[2])
+                binding.tabs.getTabAt(3)?.icon=ContextCompat.getDrawable(this,tabIcons4Selected[3])
+            }
+        }
+
+    }
+
+    private fun update6Tab(){
 
     }
 
@@ -132,22 +168,22 @@ class DashboardActivity : BaseActivity() {
 
         binding.viewPagerDash.adapter = pagerAdapter
 
-        TabLayoutMediator(binding.tabs, binding.viewPagerDash,
+        TabLayoutMediator(
+            binding.tabs, binding.viewPagerDash, true,
             { tab, position ->
-                binding.viewPagerDash.setCurrentItem(tab.position, true)
                 tab.text = tab4Titles[position]
                 if (tab.isSelected) {
-                    tab.icon = getDrawable(tabIcons4Selected[position])
+                    tab.icon = ContextCompat.getDrawable(this, tabIcons4Selected[position])
                 } else {
-                    tab.icon = getDrawable(tabIcons4[position])
+                    tab.icon = ContextCompat.getDrawable(this, tabIcons4[position])
                 }
 
             }).attach()
 
         binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                // binding.viewPagerDash.currentItem = tab.position
-
+                Log.e(">>>>>", ">>>>>" + tab.position)
+//                update4Tab(tab.position)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {}

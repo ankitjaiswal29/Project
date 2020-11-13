@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Body by Pauline</string>
+    <string name="app_name">Fighter Diet</string>
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="str_btn_login">Login</string>

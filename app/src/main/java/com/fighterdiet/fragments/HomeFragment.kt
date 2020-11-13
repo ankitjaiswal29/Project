@@ -10,7 +10,6 @@ import com.fighterdiet.R
 import com.fighterdiet.adapters.HomeFragmentRecyclerAdapter
 import com.fighterdiet.databinding.FragmentHomeBinding
 import com.fighterdiet.models.home_frag.HomeModel
-import com.fighterdiet.utils.Utils
 
 class HomeFragment : BaseFragment() {
     lateinit var binding: FragmentHomeBinding
@@ -40,16 +39,16 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun setUpHomeList() {
-        homeList.add(HomeModel(R.mipmap.food_1,false,false))
-        homeList.add(HomeModel(R.mipmap.food_2,false,false))
-        homeList.add(HomeModel(R.mipmap.food_3,false,false))
+        homeList.add(HomeModel(R.mipmap.food_1, false, false))
+        homeList.add(HomeModel(R.mipmap.food_2, false, false))
+        homeList.add(HomeModel(R.mipmap.food_3, false, false))
     }
 
     private fun setUpHomeRecyclerView() {
 
         binding.rvHomeRecycler.layoutManager = LinearLayoutManager(activity)
         homeAdapter = HomeFragmentRecyclerAdapter(activity, homeList) { position, view ->
-            Utils.showSnackBar(binding.rvHomeRecycler, "mes")
+
         }
         binding.rvHomeRecycler.adapter = homeAdapter
     }
