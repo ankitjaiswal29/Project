@@ -12,14 +12,18 @@ import com.fighterdiet.fragments.PersonalChartFragment
 class PersonalChartActivity : BaseActivity() {
 
     private lateinit var binding: ActivityPersonalChartBinding
+    lateinit var from :String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_personal_chart)
+        var bundle:Bundle = intent.extras!!
+        var personalChartFragment:PersonalChartFragment = PersonalChartFragment()
+        personalChartFragment.arguments = bundle
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.frame_layout, PersonalChartFragment()).commit()
+            .replace(R.id.frame_layout, personalChartFragment).commit()
     }
 
     companion object {

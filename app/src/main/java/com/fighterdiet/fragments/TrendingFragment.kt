@@ -53,9 +53,9 @@ class TrendingFragment : BaseFragment() {
     }
 
     private fun setUpHomeList() {
-        homeList.add(HomeModel(R.mipmap.food_3))
-        homeList.add(HomeModel(R.mipmap.food_1))
-        homeList.add(HomeModel(R.mipmap.food_2))
+        homeList.add(HomeModel(R.mipmap.food_3,false,false))
+        homeList.add(HomeModel(R.mipmap.food_1,false,false))
+        homeList.add(HomeModel(R.mipmap.food_2,false,false))
     }
 
     private fun setUptrendingRecyclerView() {

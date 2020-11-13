@@ -2,30 +2,31 @@ package com.fighterdiet.activities
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fighterdiet.R
 import com.fighterdiet.adapters.ViewPagerRecipeInfoAdapter
-import com.fighterdiet.adapters.ViewPagerWithCalDashboardAdapter
 import com.fighterdiet.databinding.ActivityRecipeInfoBinding
 import com.fighterdiet.fragments.*
 import com.google.android.material.tabs.TabLayout
 
 class RecipeInfoActivity : AppCompatActivity(), View.OnClickListener {
-    lateinit var binding :ActivityRecipeInfoBinding
+    lateinit var binding: ActivityRecipeInfoBinding
     private val fragments = ArrayList<Fragment>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_recipe_info)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_recipe_info)
         initialise()
     }
 
     private fun initialise() {
         binding.infoTool.ivCb.setOnClickListener(this)
+        binding.infoTool.back.setOnClickListener(this)
+        binding.ivComment.setOnClickListener(this)
 
         val info: InfoFragment = InfoFragment()
         val ingredientsFragment: IngredientsFragment = IngredientsFragment()
@@ -88,10 +89,23 @@ class RecipeInfoActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
-        when(view?.id){
-            R.id.iv_cb ->{
-                startActivity(PersonalChartActivity.getStartIntent(this))
+        when (view?.id) {
+            R.id.iv_cb -> {
+                startActivity(PersonalChartActivity.getStartIntent(this).putExtra("from","Activity"))
             }
+
+            R.id.iv_back -> {
+                onBackPressed()
+            }
+
+            R.id.iv_comment -> {
+                val commentFragment = CommentFragment.newInstance()
+                commentFragment.show(
+                    supportFragmentManager,
+                    CommentFragment::class.simpleName
+                )
+            }
+
         }
     }
 }

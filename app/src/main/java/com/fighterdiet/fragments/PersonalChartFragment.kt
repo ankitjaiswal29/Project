@@ -12,7 +12,7 @@ import com.fighterdiet.activities.FaqActivity
 import com.fighterdiet.databinding.FragmentPersonalChartBinding
 
 
-class PersonalChartFragment : Fragment() {
+class PersonalChartFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentPersonalChartBinding
     private lateinit var mContext: Context
@@ -36,17 +36,31 @@ class PersonalChartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var bundle:Bundle? = arguments
+        if (bundle!=null){
+            var from:String = bundle.getString("from")!!
+            if (from.equals("Activity")){
+                binding.ivBack.setOnClickListener(this)
+            }
+        }
+
         binding.ivQuestion.setOnClickListener {
-
             startActivity(FaqActivity.getStartIntent(activity!!))
+        }
+    }
 
-//            val commentFragment = CommentFragment.newInstance()
-//            commentFragment.show(
-//                childFragmentManager,
-//                CommentFragment::class.simpleName
-//            )
+    override fun onClick(view: View?) {
+        when(view?.id){
+
+            R.id.iv_back ->{
+                activity?.onBackPressed()
+            }
+
 
         }
+
+
     }
 
 }

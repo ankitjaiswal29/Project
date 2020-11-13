@@ -37,6 +37,11 @@ class FavouriteFragmentRecyAdapter(
         position: Int
     ) {
         holder.binding?.imvItemHome?.setImageResource(homeList[position].image)
+        if (homeList.get(position).isDescOpened) {
+            holder.binding?.rlCaloriesDesc?.visibility = View.VISIBLE
+        } else {
+            holder.binding?.rlCaloriesDesc?.visibility = View.GONE
+        }
     }
 
     override fun getItemCount(): Int {

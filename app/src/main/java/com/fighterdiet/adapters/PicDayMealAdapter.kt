@@ -13,11 +13,11 @@ import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
 import com.fighterdiet.interfaces.RecyclerViewItemClickListener
 import com.fighterdiet.models.home_frag.HomeModel
 
-class HomeFragmentRecyclerAdapter(
+class PicDayMealAdapter(
     var context: FragmentActivity?,
     private var homeList: ArrayList<HomeModel>,
     private var itemClickListener: RecyclerViewItemClickListener?
-) : RecyclerView.Adapter<HomeFragmentRecyclerAdapter.MyViewHolder>() {
+) : RecyclerView.Adapter<PicDayMealAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
@@ -25,19 +25,15 @@ class HomeFragmentRecyclerAdapter(
 
         init {
             itemView.setOnClickListener(this)
-            binding?.rlCalories?.setOnClickListener(this)
         }
 
         override fun onClick(view: View?) {
-            when (view!!.id) {
-                R.id.rlCalories -> {
-                    homeList.get(adapterPosition).isDescOpened = true
-                    notifyDataSetChanged()
-                }
-                else -> {
-                    context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
-                }
+
+            if (itemClickListener!= null){
+                itemClickListener!!.onItemClick(adapterPosition,view)
             }
+
+//            context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
         }
     }
 
@@ -50,10 +46,15 @@ class HomeFragmentRecyclerAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.binding?.imvItemHome?.setImageResource(homeList[position].image)
-        if (homeList.get(position).isDescOpened) {
-            holder.binding?.rlCaloriesDesc?.visibility = View.VISIBLE
-        } else {
-            holder.binding?.rlCaloriesDesc?.visibility = View.GONE
+
+        if (homeList[position].isselected){
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                holder.binding?.imvItemHome?.foreground = ContextCompat.getDrawable(context!!, R.drawable.bg_image_selected)
+            }
+        }else{
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                holder.binding?.imvItemHome?.foreground = null
+            }
         }
     }
 
