@@ -6,43 +6,46 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_10sdp">
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:id="@+id/cl_main"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
         <ImageView
-            android:id="@+id/imv_item_home"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
-            android:scaleType="centerCrop"
+            android:id="@+id/imv_item_home"
             android:src="@mipmap/walkthrough_3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
         <RelativeLayout
-            android:id="@+id/rl_calories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/rl_calories"
+            android:background="@drawable/bg_rectangle_white_border"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/bg_rectangle_white_border"
+            app:layout_constraintTop_toTopOf="@+id/imv_item_home"
             app:layout_constraintStart_toStartOf="@+id/imv_item_home"
-            app:layout_constraintTop_toTopOf="@+id/imv_item_home">
+            >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:background="@drawable/colorGray"
-                android:fontFamily="@font/inter_regular"
                 android:paddingTop="@dimen/_10sdp"
+                android:textStyle="italic"
+                android:fontFamily="@font/inter_regular"
                 android:paddingBottom="@dimen/_10sdp"
-                android:text="chocolate cake with white \n chocolate filling \n \n Calories 500 \n Protein 50g"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:background="@drawable/colorGray"
                 android:textSize="@dimen/_8ssp"
-                android:textStyle="italic" />
+                android:text="chocolate cake with white \n chocolate filling \n \n Calories 500 \n Protein 50g"
+                />
 
         </RelativeLayout>
 
