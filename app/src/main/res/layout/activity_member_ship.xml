@@ -9,15 +9,6 @@
         android:background="@color/black"
         tools:context=".activities.MemberShipActivity">
 
-      <!--  <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
-            />-->
-
         <LinearLayout
             android:id="@+id/ll_fighter_diet"
             android:layout_width="wrap_content"
@@ -31,8 +22,8 @@
                 android:id="@+id/tv_fighter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fighter"
                 android:fontFamily="@font/inter_regular"
+                android:text="@string/fighter"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_25ssp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -43,8 +34,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:text="@string/diet"
                 android:fontFamily="@font/inter_regular"
+                android:text="@string/diet"
                 android:textColor="@color/darkGrey"
                 android:textSize="@dimen/_25ssp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -57,11 +48,11 @@
             android:id="@+id/tv_big_eat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
             android:text="@string/eat_big_get_ripped"
             android:textColor="@color/white"
-            android:textStyle="italic"
-            android:fontFamily="@font/inter_regular"
             android:textSize="@dimen/_16ssp"
+            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ll_fighter_diet" />
@@ -79,26 +70,28 @@
 
             <TextView
                 android:id="@+id/tv_free_trial"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:textColor="@color/texttrial"
-                android:textSize="@dimen/_30sdp"
-                android:textStyle="italic"
                 android:fontFamily="@font/inter_bold"
+                android:text="@string/_7_day_free_trial"
+                android:textAlignment="center"
+                android:textColor="@color/texttrial"
+                android:textSize="@dimen/_28ssp"
+                android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="@string/_7_day_free_trial" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/inter_regular"
                 android:text="@string/_14_99_month_or_79_99_year"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp"
                 android:textStyle="italic"
-                android:fontFamily="@font/inter_regular"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_free_trial" />
@@ -127,59 +120,59 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         android:id="@+id/tv_best_of"
-                        android:textStyle="italic"
-                        android:fontFamily="@font/inter_medium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_semibold"
                         android:text="BEST OFFER!"
+                        android:textAlignment="center"
                         android:textColor="@color/texttrial"
-                        android:textSize="@dimen/_30ssp" />
+                        android:textSize="@dimen/_28ssp"
+                        android:textStyle="italic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:id="@+id/tv_sign_up_or_dis"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tv_sign_up_or_dis"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textStyle="italic"
                         android:fontFamily="@font/inter_regular"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_best_of"
                         android:text="Sign up for %75.99/year"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="italic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_best_of" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_sign_up_or_dis"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:textStyle="italic"
                         android:fontFamily="@font/inter_regular"
                         android:text="Join now &amp; save more"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_10ssp" />
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="italic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_sign_up_or_dis" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
+                <Button
+                    android:id="@+id/btnMembershipMonth"
+                    style="@style/Button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/btnMembershipMonth"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/bg_round_corner_white_stroke"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/inter_semibold"
                     android:gravity="center"
-                    android:fontFamily="@font/inter_regular"
-                    android:textStyle="italic"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingBottom="@dimen/_5sdp"
                     android:text="Sign up for $14.99/month"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12ssp"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="italic"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

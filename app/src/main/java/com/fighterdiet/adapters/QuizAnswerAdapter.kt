@@ -128,9 +128,9 @@ class QuizAnswerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerVie
             }
             holder.binding?.tvDesc?.setText(question.answers.get(position).answerText)
             if (question.answers.get(position).isSelected) {
-                holder.binding?.groupSelector?.visibility=View.VISIBLE
+                holder.binding?.groupSelector?.visibility = View.VISIBLE
             } else {
-                holder.binding?.groupSelector?.visibility=View.GONE
+                holder.binding?.groupSelector?.visibility = View.GONE
             }
         }
     }
