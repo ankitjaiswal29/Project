@@ -1,4 +1,6 @@
 package com.fighterdiet.activities
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
@@ -16,6 +18,14 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener {
 
     private fun initialize() {
         binding.tvSignMonth.setOnClickListener(this)
+    }
+
+    companion object {
+        const val TAG = "MemberShipActivity"
+
+        fun getStartIntent(context: Context): Intent {
+            return Intent(context, ResetPasswordActivity::class.java)
+        }
     }
 
     override fun onClick(view: View?) {

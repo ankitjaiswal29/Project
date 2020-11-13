@@ -1,4 +1,6 @@
 package com.fighterdiet.activities
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
@@ -25,6 +27,14 @@ class DashboardActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         binding.bottmNav.setOnNavigationItemSelectedListener(this)
         var frag  = HomeFragment()
         addFragment(frag)
+    }
+
+    companion object {
+        const val TAG = "DashboardWithCalaoriesActivity"
+
+        fun getStartIntent(context: Context): Intent {
+            return Intent(context, DashboardActivity::class.java)
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

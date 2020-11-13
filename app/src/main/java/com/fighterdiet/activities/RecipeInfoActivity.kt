@@ -1,5 +1,7 @@
 package com.fighterdiet.activities
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -75,4 +77,11 @@ class RecipeInfoActivity : AppCompatActivity() {
     }
 
 
+    companion object {
+        const val TAG = "RecipeInfoActivity"
+
+        fun getStartIntent(context: Context): Intent {
+            return Intent(context, ResetPasswordActivity::class.java)
+        }
+    }
 }

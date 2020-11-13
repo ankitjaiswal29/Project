@@ -1,5 +1,7 @@
 package com.fighterdiet.activities
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -30,6 +32,15 @@ class DashboardWithCalaoriesActivity : BaseActivity() {
         initialise()
     }
 
+
+    companion object {
+        const val TAG = "DashboardWithCalaoriesActivity"
+
+        fun getStartIntent(context: Context): Intent {
+            return Intent(context, ResetPasswordActivity::class.java)
+        }
+    }
+
     private fun initialise() {
 
         val home: HomeFragment = HomeFragment()
@@ -38,7 +49,6 @@ class DashboardWithCalaoriesActivity : BaseActivity() {
         val shop: WeeklyGroceryFragment = WeeklyGroceryFragment()
         val cb: FavouriteFragment = FavouriteFragment()
         val setting: SettingFragment = SettingFragment()
-
 
         fragments.add(home)
         fragments.add(trending)
