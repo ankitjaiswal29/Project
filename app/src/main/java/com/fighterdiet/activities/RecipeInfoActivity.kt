@@ -94,7 +94,7 @@ class RecipeInfoActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(PersonalChartActivity.getStartIntent(this).putExtra("from","Activity"))
             }
 
-            R.id.iv_back -> {
+            R.id.back -> {
                 onBackPressed()
             }
 

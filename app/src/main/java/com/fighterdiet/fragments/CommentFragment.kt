@@ -25,7 +25,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
  * Use the [CommentFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class CommentFragment : BottomSheetDialogFragment() {
+class CommentFragment : BottomSheetDialogFragment(), View.OnClickListener {
 
     private lateinit var mContext: Context
     private lateinit var binding: FragmentCommentBinding
@@ -65,6 +65,7 @@ class CommentFragment : BottomSheetDialogFragment() {
         val content = SpannableString(getString(R.string.comments))
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
         binding.tvTitle.text = content
+        binding.ivBack.setOnClickListener(this)
         setupRecyclerView()
 
     }
@@ -101,5 +102,9 @@ class CommentFragment : BottomSheetDialogFragment() {
             Utils.showSnackBar(binding.rvComment, "mes")
         }
         binding.rvComment.adapter = commentAdapter
+    }
+
+    override fun onClick(view: View?) {
+        dismiss()
     }
 }

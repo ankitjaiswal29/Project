@@ -9,11 +9,14 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fighterdiet.R
+import com.fighterdiet.activities.FaqActivity
 import com.fighterdiet.activities.LoginActivity
+import com.fighterdiet.activities.QuizActivity
+import com.fighterdiet.activities.ResetPasswordActivity
 import com.fighterdiet.databinding.FragmentSettingBinding
 
 class SettingFragment : BaseFragment(), View.OnClickListener {
-    lateinit var binding: FragmentSettingBinding
+    lateinit var binding:FragmentSettingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +27,7 @@ class SettingFragment : BaseFragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting,container, false)
         return binding.root
     }
 
@@ -60,6 +63,16 @@ class SettingFragment : BaseFragment(), View.OnClickListener {
                     val loginIntent = Intent(activity, LoginActivity::class.java)
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(loginIntent)
+                }
+                R.id.tv_edit_question ->{
+                    val quiz = Intent(activity, QuizActivity::class.java)
+                    quiz.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(quiz)
+                }
+                R.id.tv_faq ->{
+                    val faq = Intent(activity, FaqActivity::class.java)
+                    faq.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(faq)
                 }
             }
         }
