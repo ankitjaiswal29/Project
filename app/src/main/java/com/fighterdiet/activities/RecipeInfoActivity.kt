@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fighterdiet.R
@@ -13,7 +14,7 @@ import com.fighterdiet.databinding.ActivityRecipeInfoBinding
 import com.fighterdiet.fragments.*
 import com.google.android.material.tabs.TabLayout
 
-class RecipeInfoActivity : AppCompatActivity() {
+class RecipeInfoActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var binding :ActivityRecipeInfoBinding
     private val fragments = ArrayList<Fragment>()
 
@@ -24,6 +25,7 @@ class RecipeInfoActivity : AppCompatActivity() {
     }
 
     private fun initialise() {
+        binding.infoTool.ivCb.setOnClickListener(this)
 
         val info: InfoFragment = InfoFragment()
         val ingredientsFragment: IngredientsFragment = IngredientsFragment()
@@ -81,7 +83,11 @@ class RecipeInfoActivity : AppCompatActivity() {
         const val TAG = "RecipeInfoActivity"
 
         fun getStartIntent(context: Context): Intent {
-            return Intent(context, ResetPasswordActivity::class.java)
+            return Intent(context, RecipeInfoActivity::class.java)
         }
+    }
+
+    override fun onClick(view: View?) {
+
     }
 }

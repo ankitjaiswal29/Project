@@ -19,6 +19,7 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintStart_toStartOf="parent"
             android:hint="Pic Day 7 Meals"
+            android:fontFamily="@font/inter_bold"
             android:textSize="@dimen/_20ssp"
             android:textColorHint="@color/texttrial"
             android:drawableStart="@mipmap/icn_search"

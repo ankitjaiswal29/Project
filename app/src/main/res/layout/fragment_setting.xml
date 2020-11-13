@@ -46,6 +46,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         android:id="@+id/tv_help_ful"
+                        android:fontFamily="@font/inter_medium"
                         android:text="@string/helpful_links"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:textColor="@color/black"
@@ -56,9 +57,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Log out"
-                        android:drawableEnd="@drawable/ic_forword"
                         android:textSize="@dimen/_12ssp"
                         android:padding="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_regular"
                         app:layout_constraintTop_toBottomOf="@+id/tv_help_ful"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
@@ -66,7 +67,7 @@
                         android:id="@+id/tv_log_out"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:textColor="@color/black"
-                        />
+                        app:drawableEndCompat="@drawable/ic_forword" />
 
                     <View
                         android:layout_width="0dp"
@@ -82,16 +83,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Edit Questionnaire"
-                        android:drawableEnd="@drawable/ic_forword"
                         android:textSize="@dimen/_12ssp"
                         android:padding="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_regular"
                         app:layout_constraintTop_toBottomOf="@+id/v_log"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:paddingStart="@dimen/_30sdp"
                         android:id="@+id/tv_edit_question"
                         android:textColor="@color/black"
-                        />
+                        app:drawableEndCompat="@drawable/ic_forword" />
 
                     <View
                         android:layout_width="0dp"
@@ -107,16 +108,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="FAQ"
-                        android:drawableEnd="@drawable/ic_forword"
                         android:textSize="@dimen/_12ssp"
                         android:padding="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_regular"
                         app:layout_constraintTop_toBottomOf="@+id/v_edit"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:paddingStart="@dimen/_30sdp"
                         android:id="@+id/tv_faq"
                         android:textColor="@color/black"
-                        />
+                        app:drawableEndCompat="@drawable/ic_forword" />
 
                     <View
                         android:layout_width="0dp"
@@ -132,16 +133,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Clear Cache"
-                        android:drawableEnd="@drawable/ic_forword"
                         android:textSize="@dimen/_12ssp"
                         android:padding="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_regular"
                         app:layout_constraintTop_toBottomOf="@+id/v_faq"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:paddingStart="@dimen/_30sdp"
                         android:id="@+id/tv_clear"
                         android:textColor="@color/black"
-                        />
+                        app:drawableEndCompat="@drawable/ic_forword" />
 
                     <View
                         android:layout_width="0dp"
@@ -157,16 +158,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Email Us"
-                        android:drawableEnd="@drawable/ic_forword"
                         android:textSize="@dimen/_12ssp"
                         android:padding="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_regular"
                         app:layout_constraintTop_toBottomOf="@+id/v_clear"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:paddingStart="@dimen/_30sdp"
                         android:id="@+id/tv_email"
                         android:textColor="@color/black"
-                        />
+                        app:drawableEndCompat="@drawable/ic_forword" />
 
                     <View
                         android:layout_width="0dp"
@@ -184,6 +185,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/v_email"
                         app:layout_constraintStart_toStartOf="parent"
                         android:id="@+id/tv_legal"
+                        android:fontFamily="@font/inter_medium"
                         android:layout_marginTop="@dimen/_30sdp"
                         android:text="Legal:"
                         android:layout_marginStart="@dimen/_10sdp"
@@ -195,9 +197,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Terms of Service"
-                        android:drawableEnd="@drawable/ic_forword"
                         android:textSize="@dimen/_12ssp"
                         android:padding="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_regular"
                         android:layout_marginTop="@dimen/_20sdp"
                         app:layout_constraintTop_toBottomOf="@+id/tv_legal"
                         android:layout_marginStart="@dimen/_10sdp"
@@ -205,7 +207,7 @@
                         android:paddingStart="@dimen/_30sdp"
                         android:id="@+id/tv_terms"
                         android:textColor="@color/black"
-                        />
+                        app:drawableEndCompat="@drawable/ic_forword" />
 
                     <View
                         android:layout_width="0dp"
@@ -221,16 +223,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Privacy Policy"
-                        android:drawableEnd="@drawable/ic_forword"
                         android:textSize="@dimen/_12ssp"
                         android:padding="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_regular"
                         app:layout_constraintTop_toBottomOf="@+id/v_terms"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:paddingStart="@dimen/_30sdp"
                         android:id="@+id/tv_privacy"
                         android:textColor="@color/black"
-                        />
+                        app:drawableEndCompat="@drawable/ic_forword" />
 
                     <View
                         android:layout_width="0dp"
@@ -249,6 +251,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:text="Fighterdiet Inc."
+                        android:fontFamily="@font/inter_bold"
                         android:textColor="@color/black"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:textSize="@dimen/_14ssp"
