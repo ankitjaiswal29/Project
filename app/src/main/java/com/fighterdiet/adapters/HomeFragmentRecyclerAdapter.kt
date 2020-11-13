@@ -7,28 +7,27 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.R
+import com.fighterdiet.activities.RecipeInfoActivity
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
 import com.fighterdiet.interfaces.RecyclerViewItemClickListener
 import com.fighterdiet.models.home_frag.HomeModel
 
 class HomeFragmentRecyclerAdapter(
-    private var context: FragmentActivity?,
-    private var homeList:ArrayList<HomeModel>,
+    var context: FragmentActivity?,
+    private var homeList: ArrayList<HomeModel>,
     private var itemClickListener: RecyclerViewItemClickListener?
-):RecyclerView.Adapter<HomeFragmentRecyclerAdapter.MyViewHolder>() {
+) : RecyclerView.Adapter<HomeFragmentRecyclerAdapter.MyViewHolder>() {
 
-    class MyViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        val binding :ItemHomeFragmentRecyclerDesignBinding? = DataBindingUtil.bind(itemView)
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
+        val binding: ItemHomeFragmentRecyclerDesignBinding? = DataBindingUtil.bind(itemView)
+
         init {
-            binding?.rlCalories?.setOnClickListener(this)
+            itemView.setOnClickListener(this)
         }
 
         override fun onClick(view: View?) {
-            when(view?.id){
-                R.id.rl_calories ->{
-
-                }
-            }
+            context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
         }
     }
 

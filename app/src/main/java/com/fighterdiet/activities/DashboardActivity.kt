@@ -1,33 +1,43 @@
 package com.fighterdiet.activities
+
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fighterdiet.R
-import com.fighterdiet.databinding.ActivityDashboardBinding
-import com.fighterdiet.fragments.FavouriteFragment
-import com.fighterdiet.fragments.HomeFragment
-import com.fighterdiet.fragments.TrendingFragment
-import com.fighterdiet.fragments.SettingFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.fighterdiet.adapters.MyFragmentStateAdapter
+import com.fighterdiet.adapters.ViewPagerWithCalDashboardAdapter
+import com.fighterdiet.databinding.ActivityDashboardWithCalaoriesBinding
+import com.fighterdiet.fragments.*
+import com.fighterdiet.utils.Constants
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
 
-class DashboardActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private lateinit var binding:ActivityDashboardBinding
+class DashboardActivity : BaseActivity() {
+    private lateinit var binding: ActivityDashboardWithCalaoriesBinding
+    private lateinit var adapter: ViewPagerWithCalDashboardAdapter
+    private val fragments = ArrayList<Fragment>()
+    lateinit var tab6Titles: Array<String>
+    lateinit var tab4Titles: Array<String>
+    lateinit var tabIcons4Selected: Array<Int>
+    lateinit var tabIcons4: Array<Int>
+    lateinit var tabIcons6Selected: Array<Int>
+    lateinit var tabIcons6: Array<Int>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_dashboard)
-        initialize()
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard_with_calaories)
+
+        if (Constants.isQuestonnaireCompleted) {
+            initialise6Tab()
+        } else {
+            initialise4Tab()
+        }
     }
 
-    private fun initialize() {
-        binding.bottmNav.setOnNavigationItemSelectedListener(this)
-        var frag  = HomeFragment()
-        addFragment(frag)
-    }
 
     companion object {
         const val TAG = "DashboardWithCalaoriesActivity"
@@ -37,42 +47,122 @@ class DashboardActivity : BaseActivity(), BottomNavigationView.OnNavigationItemS
         }
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+    private fun initialise6Tab() {
+        tab6Titles = arrayOf(
+            "", "", "", "", "", ""
+        )
+        tabIcons6Selected = arrayOf(
+            R.mipmap.icn_search,
+            R.mipmap.icn_trending,
+            R.mipmap.icn_favourite,
+            R.mipmap.icn_shopping,
+            R.mipmap.icn_cb,
+            R.mipmap.icn_settings,
+        )
+        tabIcons6 = arrayOf(
+            R.mipmap.icn_search,
+            R.mipmap.icn_fire_trending,
+            R.mipmap.icn_favourite_dark,
+            R.mipmap.icn_shopping,
+            R.mipmap.icn_cb,
+            R.mipmap.icn_settings,
+        )
 
-            R.id.search_nav ->{
-                val fragment = HomeFragment()
-                addFragment(fragment)
-                return true
-            }
-
-            R.id.hot_nav ->{
-                val fragment = TrendingFragment()
-                addFragment(fragment)
-                return true
-            }
-
-            R.id.fav_nav ->{
-                val fragment = FavouriteFragment()
-                addFragment(fragment)
-                return true
-            }
-
-            R.id.set_nav ->{
-                val fragment = SettingFragment()
-                addFragment(fragment)
-                return true
-            }
-        }
-        return false
+        setupTabLayoutFor6()
     }
 
-    private fun addFragment(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
-            .replace(R.id.dash_container, fragment, fragment.javaClass.getSimpleName())
-            .commit()
+    private fun setupTabLayoutFor6() {
+        val pagerAdapter =
+            MyFragmentStateAdapter(
+                supportFragmentManager, lifecycle
+            )
+        pagerAdapter.addFragment(HomeFragment(), "")
+        pagerAdapter.addFragment(TrendingFragment(), "")
+        pagerAdapter.addFragment(FavouriteFragment(), "")
+        pagerAdapter.addFragment(WeeklyGroceryFragment(), "")
+        pagerAdapter.addFragment(PersonalChartFragment(), "")
+        pagerAdapter.addFragment(SettingFragment(), "")
+
+        binding.viewPagerDash.adapter = pagerAdapter
+
+        TabLayoutMediator(binding.tabs, binding.viewPagerDash) { tab, position ->
+            tab.text = tab6Titles[position]
+            binding.viewPagerDash.setCurrentItem(tab.position, true)
+
+            if (tab.isSelected) {
+                tab.icon = getDrawable(tabIcons6Selected[position])
+            } else {
+                tab.icon = getDrawable(tabIcons6[position])
+            }
+
+        }.attach()
+
+        binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                //   binding.viewPagerDash.currentItem = tab.position
+
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
+    }
+
+    private fun initialise4Tab() {
+        tab4Titles = arrayOf(
+            "", "", "", ""
+        )
+        tabIcons4Selected = arrayOf(
+            R.mipmap.icn_search,
+            R.mipmap.icn_trending,
+            R.mipmap.icn_favourite,
+            R.mipmap.icn_settings,
+        )
+        tabIcons4 = arrayOf(
+            R.mipmap.icn_search,
+            R.mipmap.icn_fire_trending,
+            R.mipmap.icn_favourite_dark,
+            R.mipmap.icn_settings,
+        )
+
+        setupTabLayoutFor4()
+    }
+
+    private fun setupTabLayoutFor4() {
+        val pagerAdapter =
+            MyFragmentStateAdapter(
+                supportFragmentManager, lifecycle
+            )
+        pagerAdapter.addFragment(HomeFragment(), "")
+        pagerAdapter.addFragment(TrendingFragment(), "")
+        pagerAdapter.addFragment(FavouriteFragment(), "")
+        pagerAdapter.addFragment(SettingFragment(), "")
+
+        binding.viewPagerDash.adapter = pagerAdapter
+
+        TabLayoutMediator(binding.tabs, binding.viewPagerDash,
+            TabConfigurationStrategy { tab, position ->
+                binding.viewPagerDash.setCurrentItem(tab.position, true)
+                tab.text = tab4Titles[position]
+                if (tab.isSelected) {
+                    tab.icon = getDrawable(tabIcons4Selected[position])
+                } else {
+                    tab.icon = getDrawable(tabIcons4[position])
+                }
+
+            }).attach()
+
+
+        binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                // binding.viewPagerDash.currentItem = tab.position
+
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
     }
 
 }
+

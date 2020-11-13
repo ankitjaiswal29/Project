@@ -48,7 +48,7 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener {
         if (Constants.isQuestonnaireCompleted) {
             startActivity(ProfileAfterQuestionsActivity.getStartIntent(this))
         } else {
-            startActivity(DashboardWithCalaoriesActivity.getStartIntent(this))
+            startActivity(DashboardActivity.getStartIntent(this))
         }
     }
 }

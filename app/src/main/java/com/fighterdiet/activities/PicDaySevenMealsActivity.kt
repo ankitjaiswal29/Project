@@ -27,7 +27,7 @@ class PicDaySevenMealsActivity : AppCompatActivity() {
     private fun initialise() {
         binding.tvNext.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                startActivity(DashboardWithCalaoriesActivity.getStartIntent(this@PicDaySevenMealsActivity))
+                startActivity(DashboardActivity.getStartIntent(this@PicDaySevenMealsActivity))
             }
         })
         setUpHomeList()

@@ -34,7 +34,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name=".activities.DashboardWithCalaoriesActivity"
+            android:name=".activities.DashboardActivity"
             android:screenOrientation="portrait">
 
             <!--
