@@ -70,9 +70,13 @@ class QuizActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnNext -> {
-                if (position < qusArrayList.size) {
+                if (position < (qusArrayList.size - 1)) {
                     position++;
                     setCurrentQuestion()
+                } else {
+                    // Submit Quiz
+                    finish()
+                    startActivity(MemberShipActivity.getStartIntent(this))
                 }
             }
 
@@ -110,7 +114,6 @@ class QuizActivity : BaseActivity(), View.OnClickListener {
             // Last
             binding.ivPrevious.visibility = View.VISIBLE
             binding.btnNext.visibility = View.VISIBLE
-            binding.btnNext.setText(getString(R.string.str_submit))
         } else {
             binding.ivPrevious.visibility = View.VISIBLE
             binding.btnNext.visibility = View.VISIBLE

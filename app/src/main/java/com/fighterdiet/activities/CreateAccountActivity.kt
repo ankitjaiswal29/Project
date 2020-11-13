@@ -3,6 +3,7 @@ package com.fighterdiet.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.fighterdiet.R
@@ -17,7 +18,10 @@ class CreateAccountActivity : AppCompatActivity() {
     }
 
     private fun initialise() {
-
+        binding.btnCreateAccount.setOnClickListener(View.OnClickListener {
+            finish()
+            startActivity(IntroAndDecisionActivity.getStartIntent(this))
+        })
     }
 
     companion object {

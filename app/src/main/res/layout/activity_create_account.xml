@@ -19,7 +19,7 @@
             android:layout_height="0dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintGuide_begin="@dimen/_10sdp"
+            app:layout_constraintGuide_begin="@dimen/start_screen_margin"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -28,7 +28,7 @@
             android:layout_height="0dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintGuide_end="@dimen/_10sdp"
+            app:layout_constraintGuide_end="@dimen/end_screen_margin"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -131,10 +131,13 @@
             tools:ignore="LabelFor" />
 
         <Button
+            android:id="@+id/btnCreateAccount"
             style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_30sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
             android:text="@string/str_create_account"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/rightGuideline"

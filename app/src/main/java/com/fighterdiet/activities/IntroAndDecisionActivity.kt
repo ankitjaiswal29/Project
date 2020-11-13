@@ -52,7 +52,17 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.tvDecisionNext -> {
                 if (selected != -1) {
-                    startActivity(QuizActivity.getStartIntent(this))
+                    if (selected == 1) {
+                        // Yes
+                        startActivity(QuizActivity.getStartIntent(this))
+                        finish()
+
+                    } else {
+                        // No
+                        startActivity(MemberShipActivity.getStartIntent(this))
+                        finish()
+
+                    }
                 } else {
                     Utils.showSnackBar(v, getString(R.string.str_please_select_any_option))
                 }
