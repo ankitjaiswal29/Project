@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activities.PicOneDayMealsActivity">
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbar_image"/>
+            layout="@layout/toolbar_black_background"/>
 
         <EditText
             android:id="@+id/et_search"
@@ -18,10 +18,12 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintStart_toStartOf="parent"
-            android:hint="Pic Day 7 Meals"
+            android:hint="Pic Day 1 Meals"
+            android:fontFamily="@font/inter_bold"
             android:textSize="@dimen/_20ssp"
             android:textColorHint="@color/texttrial"
-            android:drawableStart="@android:drawable/ic_menu_search"
+            android:drawableStart="@mipmap/icn_search"
+            android:drawablePadding="@dimen/_5sdp"
             android:background="@null"
             android:singleLine="true"
             android:imeOptions="actionSearch"
@@ -32,6 +34,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/tv_cal_daily"
+            android:textColor="@color/black"
+            android:textStyle="italic"
+            android:fontFamily="@font/inter_regular"
             app:layout_constraintTop_toTopOf="@+id/et_search"
             app:layout_constraintStart_toEndOf="@+id/et_search"
             app:layout_constraintBottom_toTopOf="@+id/tv_cal_weekly"
@@ -43,7 +48,10 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:id="@+id/tv_cal_weekly"
+            android:textStyle="italic"
+            android:fontFamily="@font/inter_regular"
             app:layout_constraintTop_toBottomOf="@+id/tv_cal_daily"
             app:layout_constraintStart_toEndOf="@+id/et_search"
             app:layout_constraintBottom_toBottomOf="@+id/et_search"
@@ -53,14 +61,15 @@
             />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_one_day"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/et_search"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="@layout/item_home_fragment_recycler_design"
+            app:layout_constraintTop_toBottomOf="@+id/et_search"
+            app:layout_constraintVertical_bias="0.0"
             tools:itemCount="3"
-            />
+            tools:listitem="@layout/item_home_fragment_recycler_design" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -68,11 +77,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_3sdp"
+            android:paddingTop="@dimen/_3sdp"
             android:paddingStart="@dimen/_40sdp"
             android:paddingEnd="@dimen/_40sdp"
-            android:textSize="@dimen/_16ssp"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="italic"
+            android:fontFamily="@font/inter_regular"
             android:textColor="@color/white"
             android:background="@drawable/bg_round_corner_white_stroke"
             android:text="Next"

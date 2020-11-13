@@ -10,7 +10,7 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbar_image"/>
+            layout="@layout/toolbar_black_background"/>
 
         <EditText
             android:id="@+id/et_search"
@@ -19,9 +19,11 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintStart_toStartOf="parent"
             android:hint="Pic Day 7 Meals"
+            android:fontFamily="@font/inter_bold"
             android:textSize="@dimen/_20ssp"
             android:textColorHint="@color/texttrial"
-            android:drawableStart="@android:drawable/ic_menu_search"
+            android:drawableStart="@mipmap/icn_search"
+            android:drawablePadding="@dimen/_5sdp"
             android:background="@null"
             android:singleLine="true"
             android:imeOptions="actionSearch"
@@ -32,29 +34,36 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/tv_cal_daily"
+            android:textStyle="italic"
+            android:textColor="@color/black"
+            android:fontFamily="@font/inter_regular"
             app:layout_constraintTop_toTopOf="@+id/et_search"
             app:layout_constraintStart_toEndOf="@+id/et_search"
             app:layout_constraintBottom_toTopOf="@+id/tv_cal_weekly"
             app:layout_constraintEnd_toEndOf="parent"
             android:gravity="end"
-            tools:text="300 / 1300 Daily"
+            tools:text="1300 / 1300 Daily"
             />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/tv_cal_weekly"
+            android:textStyle="italic"
+            android:textColor="@color/black"
+            android:fontFamily="@font/inter_regular"
             app:layout_constraintTop_toBottomOf="@+id/tv_cal_daily"
             app:layout_constraintStart_toEndOf="@+id/et_search"
             app:layout_constraintBottom_toBottomOf="@+id/et_search"
             app:layout_constraintEnd_toEndOf="parent"
             android:gravity="end"
-            tools:text="300 / 9100 Weekly"
+            tools:text="1300 / 9100 Weekly"
             />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:id="@+id/rv_pic_seven"
             app:layout_constraintTop_toBottomOf="@+id/et_search"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,11 +77,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="@dimen/_10sdp"
+            android:fontFamily="@font/inter_regular"
+            android:textStyle="italic"
             android:paddingBottom="@dimen/_3sdp"
             android:paddingTop="@dimen/_3sdp"
             android:paddingStart="@dimen/_40sdp"
             android:paddingEnd="@dimen/_40sdp"
-            android:textSize="@dimen/_16ssp"
+            android:textSize="@dimen/_14ssp"
             android:textColor="@color/white"
             android:background="@drawable/bg_round_corner_white_stroke"
             android:text="Next"
