@@ -80,7 +80,7 @@ class DashboardWithCalaoriesActivity : BaseActivity() {
         pagerAdapter.addFragment(TrendingFragment(), "")
         pagerAdapter.addFragment(FavouriteFragment(), "")
         pagerAdapter.addFragment(WeeklyGroceryFragment(), "")
-        pagerAdapter.addFragment(FavouriteFragment(), "")
+        pagerAdapter.addFragment(PersonalChartFragment(), "")
         pagerAdapter.addFragment(SettingFragment(), "")
 
         binding.viewPagerDash.adapter = pagerAdapter
