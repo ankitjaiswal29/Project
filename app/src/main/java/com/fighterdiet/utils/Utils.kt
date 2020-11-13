@@ -4,6 +4,8 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
+import java.io.IOException
+import java.io.InputStream
 
 object Utils {
     fun showSnackBar(view: View, message: String) {
@@ -21,4 +23,5 @@ object Utils {
             false
         }
     }
+
 }
