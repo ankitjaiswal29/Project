@@ -70,6 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_30sdp"
                 android:src="@mipmap/ic_back_button_black"
+                android:padding="@dimen/_5sdp"
                 app:layout_constraintBottom_toBottomOf="@id/btnNext"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/btnNext"

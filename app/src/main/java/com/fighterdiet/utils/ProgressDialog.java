@@ -14,11 +14,15 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.fighterdiet.R;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 
 public class ProgressDialog {
     private static AlertDialog alertDialog;
 
-    private ProgressDialog() {}
+    private ProgressDialog() {
+    }
 
     public static void showProgressDialog(Context context) {
         try {
@@ -64,5 +68,21 @@ public class ProgressDialog {
         i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
         context.startActivity(i);
+    }
+
+    public static String loadJSONFromAsset(Activity activity) {
+        String json = null;
+        try {
+            InputStream is = activity.getAssets().open("question.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            int x = is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
     }
 }

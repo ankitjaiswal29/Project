@@ -3,6 +3,7 @@ package com.fighterdiet.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
@@ -10,9 +11,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
 import com.fighterdiet.adapters.QuizAnswerAdapter
 import com.fighterdiet.databinding.ActivityQuizBinding
+import com.fighterdiet.model.Question
+import com.fighterdiet.utils.ProgressDialog
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import org.json.JSONException
+import java.lang.reflect.Type
+
 
 class QuizActivity : BaseActivity(), View.OnClickListener {
     private lateinit var binding: ActivityQuizBinding
+    private lateinit var qusArrayList: ArrayList<Question>
+    private lateinit var adapter: QuizAnswerAdapter
+    private var position: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +35,7 @@ class QuizActivity : BaseActivity(), View.OnClickListener {
         binding.btnNext.setOnClickListener(this)
         binding.ivPrevious.setOnClickListener(this)
         setAdapter()
+        getQuizData()
     }
 
     companion object {
@@ -34,22 +46,76 @@ class QuizActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
+    private fun getQuizData() {
+        val strQuizData = ProgressDialog.loadJSONFromAsset(this)
+        Log.e(TAG, ">>>>> Data :: $strQuizData")
+        try {
+            val gson = Gson()
+            val listType: Type = object : TypeToken<ArrayList<Question>>() {}.type
+            qusArrayList = gson.fromJson(strQuizData, listType)
+            position++;
+            setCurrentQuestion()
+
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+    }
+
+
     private fun setAdapter() {
-//        binding.rvAnswer.layoutManager = LinearLayoutManager(this)
-        binding.rvAnswer.layoutManager = GridLayoutManager(this,3)
-        binding.rvAnswer.adapter = QuizAnswerAdapter(this)
+        adapter = QuizAnswerAdapter(this);
+        binding.rvAnswer.adapter = adapter
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btnNext -> {
-
+                if (position < qusArrayList.size) {
+                    position++;
+                    setCurrentQuestion()
+                }
             }
 
-            R.id.ivPrevious ->{
-
+            R.id.ivPrevious -> {
+                position--
+                setCurrentQuestion()
             }
 
         }
     }
+
+    private fun setCurrentQuestion() {
+        val question: Question = qusArrayList.get(position)
+        setQuestion(question)
+        updateUI()
+        if (question.type == 1 || question.type == 2) {
+            binding.rvAnswer.layoutManager = LinearLayoutManager(this)
+        } else {
+            binding.rvAnswer.layoutManager = GridLayoutManager(this, 3)
+        }
+        adapter.setQuestion(question)
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun setQuestion(question: Question) {
+        binding.tvQuestion.setText(question.question)
+    }
+
+    private fun updateUI() {
+        if (position == 0) {
+            // First
+            binding.ivPrevious.visibility = View.GONE
+            binding.btnNext.visibility = View.VISIBLE
+        } else if (position == (qusArrayList.size - 1)) {
+            // Last
+            binding.ivPrevious.visibility = View.VISIBLE
+            binding.btnNext.visibility = View.VISIBLE
+            binding.btnNext.setText(getString(R.string.str_submit))
+        } else {
+            binding.ivPrevious.visibility = View.VISIBLE
+            binding.btnNext.visibility = View.VISIBLE
+        }
+    }
+
+
 }

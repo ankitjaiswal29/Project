@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.R
+import com.fighterdiet.model.Question
 
 class QuizAnswerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private lateinit var question: Question
 
     inner class QuizTypeOne(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -23,11 +25,15 @@ class QuizAnswerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerVie
 
 
     override fun getItemViewType(position: Int): Int {
-        return 3
+        return question.type
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return question.answers.size
+    }
+
+    fun setQuestion(question: Question) {
+        this.question = question
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
