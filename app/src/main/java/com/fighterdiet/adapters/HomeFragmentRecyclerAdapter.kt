@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.R
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
 import com.fighterdiet.interfaces.RecyclerViewItemClickListener
+import com.fighterdiet.models.home_frag.HomeModel
 
 class HomeFragmentRecyclerAdapter(
     private var context: FragmentActivity?,
+    private var homeList:ArrayList<HomeModel>,
     private var itemClickListener: RecyclerViewItemClickListener?
 ):RecyclerView.Adapter<HomeFragmentRecyclerAdapter.MyViewHolder>() {
 
@@ -38,10 +40,11 @@ class HomeFragmentRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        holder.binding?.imvItemHome?.setImageResource(homeList[position].image)
     }
 
     override fun getItemCount(): Int {
-        return 3
+        return homeList.size
     }
 
 }

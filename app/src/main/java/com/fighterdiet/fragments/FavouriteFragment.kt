@@ -13,11 +13,13 @@ import com.fighterdiet.adapters.FavouriteFragmentRecyAdapter
 import com.fighterdiet.adapters.HomeFragmentRecyclerAdapter
 import com.fighterdiet.adapters.TrendingFragmentRecyAdapter
 import com.fighterdiet.databinding.FragmentFavouriteBinding
+import com.fighterdiet.models.home_frag.HomeModel
 import com.fighterdiet.utils.Utils
 
 class FavouriteFragment : BaseFragment() {
     lateinit var binding: FragmentFavouriteBinding
     private lateinit var favouriteAdapter : FavouriteFragmentRecyAdapter
+    var homeList:ArrayList<HomeModel> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,16 +40,23 @@ class FavouriteFragment : BaseFragment() {
     }
 
     private fun initialise() {
+        setUpHomeList()
         setUpFavouriteRecyclerView()
     }
 
     private fun setUpFavouriteRecyclerView() {
         binding.rvFavouriteRecycler.layoutManager = LinearLayoutManager(activity)
-        favouriteAdapter = FavouriteFragmentRecyAdapter(activity){
+        favouriteAdapter = FavouriteFragmentRecyAdapter(activity,homeList){
                 position,view ->
             Utils.showSnackBar(binding.rvFavouriteRecycler,"mes")
         }
         binding.rvFavouriteRecycler.adapter = favouriteAdapter
+    }
+
+    private fun setUpHomeList() {
+        homeList.add(HomeModel(R.mipmap.food_2))
+        homeList.add(HomeModel(R.mipmap.food_3))
+        homeList.add(HomeModel(R.mipmap.food_1))
     }
 
     companion object {

@@ -12,11 +12,13 @@ import com.fighterdiet.R
 import com.fighterdiet.adapters.HomeFragmentRecyclerAdapter
 import com.fighterdiet.adapters.TrendingFragmentRecyAdapter
 import com.fighterdiet.databinding.FragmentTrendingBinding
+import com.fighterdiet.models.home_frag.HomeModel
 import com.fighterdiet.utils.Utils
 
 class TrendingFragment : BaseFragment() {
     lateinit var binding:FragmentTrendingBinding
     private lateinit var trendingAdapter : TrendingFragmentRecyAdapter
+    var homeList:ArrayList<HomeModel> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,13 +48,20 @@ class TrendingFragment : BaseFragment() {
     }
 
     private fun initialise() {
+        setUpHomeList()
         setUptrendingRecyclerView()
+    }
+
+    private fun setUpHomeList() {
+        homeList.add(HomeModel(R.mipmap.food_3))
+        homeList.add(HomeModel(R.mipmap.food_1))
+        homeList.add(HomeModel(R.mipmap.food_2))
     }
 
     private fun setUptrendingRecyclerView() {
 
         binding.rvTrendingRecycler.layoutManager = LinearLayoutManager(activity)
-        trendingAdapter = TrendingFragmentRecyAdapter(activity){
+        trendingAdapter = TrendingFragmentRecyAdapter(activity,homeList){
                 position,view ->
             Utils.showSnackBar(binding.rvTrendingRecycler,"mes")
         }

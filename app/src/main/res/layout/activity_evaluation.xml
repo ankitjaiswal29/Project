@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        tools:context=".activities.EvaluationActivity">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_black_background"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hi,"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18ssp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gajendra!"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18ssp"
+                />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_close"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/close_24"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/iv_close"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/tv_done_here"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/white"
+            android:text="You are almost done with this week!"
+            />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_done_here"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@mipmap/bg_evaluation"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="Select a new meal plan for next week."
+                android:textColor="@color/black"
+                android:padding="@dimen/_10sdp"
+                android:id="@+id/tv_new_meal"
+                android:background="@drawable/bg_text_evaluation"
+                android:textSize="@dimen/_12ssp"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/tv_new_meal"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Keep the same meal plan for next week"
+                android:textColor="@color/black"
+                android:padding="@dimen/_10sdp"
+                android:id="@+id/tv_same_meal"
+                android:background="@drawable/bg_text_evaluation"
+                android:textSize="@dimen/_12ssp"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/tv_same_meal"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Change answers to meal plan questionnaire."
+                android:textColor="@color/black"
+                android:padding="@dimen/_10sdp"
+                android:id="@+id/tv_change_answer"
+                android:background="@drawable/bg_text_evaluation"
+                android:textSize="@dimen/_12ssp"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/tv_change_answer"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Try our most popular recipes this week!"
+                android:textColor="@color/black"
+                android:padding="@dimen/_10sdp"
+                android:id="@+id/tv_most_popular"
+                android:background="@drawable/bg_text_evaluation"
+                android:textSize="@dimen/_12ssp"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/tv_most_popular"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Submit your recipe(s) to Fighterdiet!"
+                android:textColor="@color/black"
+                android:padding="@dimen/_10sdp"
+                android:id="@+id/tv_your_recipe"
+                android:background="@drawable/bg_text_evaluation"
+                android:textSize="@dimen/_12ssp"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="@dimen/_10sdp"
+                android:text="@string/str_next"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/white"
+                android:paddingStart="@dimen/_30sdp"
+                android:paddingEnd="@dimen/_30sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:background="@drawable/bg_round_corner_white_stroke"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
