@@ -9,6 +9,7 @@ import com.fighterdiet.R
 import com.fighterdiet.adapters.ViewPagerWithCalDashboardAdapter
 import com.fighterdiet.databinding.ActivityDashboardWithCalaoriesBinding
 import com.fighterdiet.fragments.*
+import com.fighterdiet.utils.Constants
 import com.google.android.material.tabs.TabLayout
 
 
@@ -16,7 +17,7 @@ class DashboardWithCalaoriesActivity : BaseActivity() {
     private lateinit var binding: ActivityDashboardWithCalaoriesBinding
     private lateinit var adapter: ViewPagerWithCalDashboardAdapter
     private val fragments = ArrayList<Fragment>()
-    private val tabIcons = intArrayOf(
+    private val tabIconsFor6 = intArrayOf(
         R.mipmap.icn_search,
         R.mipmap.icn_trending,
         R.mipmap.icn_favourite,
@@ -24,12 +25,23 @@ class DashboardWithCalaoriesActivity : BaseActivity() {
         R.mipmap.icn_cb,
         R.mipmap.icn_settings,
     )
+    private val tabIconsFor4 = intArrayOf(
+        R.mipmap.icn_search,
+        R.mipmap.icn_trending,
+        R.mipmap.icn_favourite,
+        R.mipmap.icn_settings,
+    )
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard_with_calaories)
-        initialise()
+
+        if (Constants.isQuestonnaireCompleted) {
+            initialise6Tab()
+        } else {
+            initialise4Tab()
+        }
     }
 
 
@@ -37,25 +49,17 @@ class DashboardWithCalaoriesActivity : BaseActivity() {
         const val TAG = "DashboardWithCalaoriesActivity"
 
         fun getStartIntent(context: Context): Intent {
-            return Intent(context, ResetPasswordActivity::class.java)
+            return Intent(context, DashboardWithCalaoriesActivity::class.java)
         }
     }
 
-    private fun initialise() {
-
-        val home: HomeFragment = HomeFragment()
-        val trending: TrendingFragment = TrendingFragment()
-        val favourite: FavouriteFragment = FavouriteFragment()
-        val shop: WeeklyGroceryFragment = WeeklyGroceryFragment()
-        val cb: FavouriteFragment = FavouriteFragment()
-        val setting: SettingFragment = SettingFragment()
-
-        fragments.add(home)
-        fragments.add(trending)
-        fragments.add(favourite)
-        fragments.add(shop)
-        fragments.add(cb)
-        fragments.add(setting)
+    private fun initialise6Tab() {
+        fragments.add(HomeFragment())
+        fragments.add(TrendingFragment())
+        fragments.add(FavouriteFragment())
+        fragments.add(WeeklyGroceryFragment())
+        fragments.add(FavouriteFragment())
+        fragments.add(SettingFragment())
 
         binding.tabs.addTab(binding.tabs.newTab().setText(""))
         binding.tabs.addTab(binding.tabs.newTab().setText(""))
@@ -66,26 +70,49 @@ class DashboardWithCalaoriesActivity : BaseActivity() {
         binding.tabs.tabGravity = TabLayout.GRAVITY_FILL
 
         setupTabs()
-        setupTabIcons()
+        setupTabIconsFor6()
     }
 
-    private fun setupTabIcons() {
-        binding.tabs.getTabAt(0)?.setIcon(tabIcons .get(0))
-        binding.tabs.getTabAt(1)?.setIcon(tabIcons .get(1))
-        binding.tabs.getTabAt(2)?.setIcon(tabIcons .get(2))
-        binding.tabs.getTabAt(3)?.setIcon(tabIcons .get(3))
-        binding.tabs.getTabAt(4)?.setIcon(tabIcons .get(4))
-        binding.tabs.getTabAt(5)?.setIcon(tabIcons .get(5))
+    private fun initialise4Tab() {
+        fragments.add(HomeFragment())
+        fragments.add(TrendingFragment())
+        fragments.add(FavouriteFragment())
+        fragments.add(SettingFragment())
+
+        binding.tabs.addTab(binding.tabs.newTab().setText(""))
+        binding.tabs.addTab(binding.tabs.newTab().setText(""))
+        binding.tabs.addTab(binding.tabs.newTab().setText(""))
+        binding.tabs.addTab(binding.tabs.newTab().setText(""))
+        binding.tabs.tabGravity = TabLayout.GRAVITY_FILL
+
+        setupTabs()
+        setupTabIconsFor4()
+    }
+
+    private fun setupTabIconsFor6() {
+        binding.tabs.getTabAt(0)?.setIcon(tabIconsFor6.get(0))
+        binding.tabs.getTabAt(1)?.setIcon(tabIconsFor6.get(1))
+        binding.tabs.getTabAt(2)?.setIcon(tabIconsFor6.get(2))
+        binding.tabs.getTabAt(3)?.setIcon(tabIconsFor6.get(3))
+        binding.tabs.getTabAt(4)?.setIcon(tabIconsFor6.get(4))
+        binding.tabs.getTabAt(5)?.setIcon(tabIconsFor6.get(5))
+    }
+
+    private fun setupTabIconsFor4() {
+        binding.tabs.getTabAt(0)?.setIcon(tabIconsFor4.get(0))
+        binding.tabs.getTabAt(1)?.setIcon(tabIconsFor4.get(1))
+        binding.tabs.getTabAt(2)?.setIcon(tabIconsFor4.get(2))
+        binding.tabs.getTabAt(3)?.setIcon(tabIconsFor4.get(3))
     }
 
     private fun setupTabs() {
         val adapter = ViewPagerWithCalDashboardAdapter(
             fragments,
             supportFragmentManager,
-            binding.tabs!!.tabCount
+            binding.tabs.tabCount
         )
-        binding.viewPagerDash!!.adapter = adapter
-        binding.viewPagerDash!!.setOffscreenPageLimit(3)
+        binding.viewPagerDash.adapter = adapter
+        // binding.viewPagerDash.setOffscreenPageLimit(3)
 
         binding.viewPagerDash.addOnPageChangeListener(
             TabLayout.TabLayoutOnPageChangeListener(
@@ -93,10 +120,10 @@ class DashboardWithCalaoriesActivity : BaseActivity() {
             )
         )
 
-        binding.tabs!!.addOnTabSelectedListener(object :
+        binding.tabs.addOnTabSelectedListener(object :
             TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                binding.viewPagerDash!!.currentItem = tab.position
+                binding.viewPagerDash.currentItem = tab.position
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
