@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fighterdiet.R
+import com.fighterdiet.activities.FaqActivity
 import com.fighterdiet.databinding.FragmentPersonalChartBinding
 
 
@@ -35,13 +36,16 @@ class PersonalChartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.ivQuestion.setOnClickListener {
-            val commentFragment = CommentFragment.newInstance()
-            commentFragment.show(
-                childFragmentManager,
-                CommentFragment::class.simpleName
-            )
+
+            startActivity(FaqActivity.getStartIntent(activity!!))
+
+//            val commentFragment = CommentFragment.newInstance()
+//            commentFragment.show(
+//                childFragmentManager,
+//                CommentFragment::class.simpleName
+//            )
+
         }
     }
 

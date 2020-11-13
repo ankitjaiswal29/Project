@@ -88,6 +88,10 @@ class RecipeInfoActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
-
+        when(view?.id){
+            R.id.iv_cb ->{
+                startActivity(PersonalChartActivity.getStartIntent(this))
+            }
+        }
     }
 }

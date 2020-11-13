@@ -1,5 +1,7 @@
 package com.fighterdiet.activities
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -18,5 +20,13 @@ class PersonalChartActivity : BaseActivity() {
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.frame_layout, PersonalChartFragment()).commit()
+    }
+
+    companion object {
+        const val TAG = "PersonalChartActivity"
+
+        fun getStartIntent(context: Context): Intent {
+            return Intent(context, PersonalChartActivity::class.java)
+        }
     }
 }
