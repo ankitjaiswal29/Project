@@ -16,7 +16,7 @@
             app:layout_constraintStart_toStartOf="parent"
             layout="@layout/toolbar_black_background"/>
 
-        <androidx.viewpager.widget.ViewPager
+        <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager_dash"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -34,6 +34,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:tabGravity="fill"
+            app:tabIndicator="@null"
             app:tabMode="fixed" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

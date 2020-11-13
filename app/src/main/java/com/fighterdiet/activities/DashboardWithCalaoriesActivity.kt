@@ -6,32 +6,26 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fighterdiet.R
+import com.fighterdiet.adapters.MyFragmentStateAdapter
 import com.fighterdiet.adapters.ViewPagerWithCalDashboardAdapter
 import com.fighterdiet.databinding.ActivityDashboardWithCalaoriesBinding
 import com.fighterdiet.fragments.*
 import com.fighterdiet.utils.Constants
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
 
 
 class DashboardWithCalaoriesActivity : BaseActivity() {
     private lateinit var binding: ActivityDashboardWithCalaoriesBinding
     private lateinit var adapter: ViewPagerWithCalDashboardAdapter
     private val fragments = ArrayList<Fragment>()
-    private val tabIconsFor6 = intArrayOf(
-        R.mipmap.icn_search,
-        R.mipmap.icn_trending,
-        R.mipmap.icn_favourite,
-        R.mipmap.icn_shopping,
-        R.mipmap.icn_cb,
-        R.mipmap.icn_settings,
-    )
-    private val tabIconsFor4 = intArrayOf(
-        R.mipmap.icn_search,
-        R.mipmap.icn_trending,
-        R.mipmap.icn_favourite,
-        R.mipmap.icn_settings,
-    )
-
+    lateinit var tab6Titles: Array<String>
+    lateinit var tab4Titles: Array<String>
+    lateinit var tabIcons4Selected: Array<Int>
+    lateinit var tabIcons4: Array<Int>
+    lateinit var tabIcons6Selected: Array<Int>
+    lateinit var tabIcons6: Array<Int>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,90 +43,126 @@ class DashboardWithCalaoriesActivity : BaseActivity() {
         const val TAG = "DashboardWithCalaoriesActivity"
 
         fun getStartIntent(context: Context): Intent {
-            return Intent(context, DashboardWithCalaoriesActivity::class.java)
+            return Intent(context, ResetPasswordActivity::class.java)
         }
     }
 
     private fun initialise6Tab() {
-        fragments.add(HomeFragment())
-        fragments.add(TrendingFragment())
-        fragments.add(FavouriteFragment())
-        fragments.add(WeeklyGroceryFragment())
-        fragments.add(FavouriteFragment())
-        fragments.add(SettingFragment())
+        tab6Titles = arrayOf(
+            "", "", "", "", "", ""
+        )
+        tabIcons6Selected = arrayOf(
+            R.mipmap.icn_search,
+            R.mipmap.icn_trending,
+            R.mipmap.icn_favourite,
+            R.mipmap.icn_shopping,
+            R.mipmap.icn_cb,
+            R.mipmap.icn_settings,
+        )
+        tabIcons6 = arrayOf(
+            R.mipmap.icn_search,
+            R.mipmap.icn_fire_trending,
+            R.mipmap.icn_favourite_dark,
+            R.mipmap.icn_shopping,
+            R.mipmap.icn_cb,
+            R.mipmap.icn_settings,
+        )
 
-        binding.tabs.addTab(binding.tabs.newTab().setText(""))
-        binding.tabs.addTab(binding.tabs.newTab().setText(""))
-        binding.tabs.addTab(binding.tabs.newTab().setText(""))
-        binding.tabs.addTab(binding.tabs.newTab().setText(""))
-        binding.tabs.addTab(binding.tabs.newTab().setText(""))
-        binding.tabs.addTab(binding.tabs.newTab().setText(""))
-        binding.tabs.tabGravity = TabLayout.GRAVITY_FILL
+        setupTabLayoutFor6()
+    }
 
-        setupTabs()
-        setupTabIconsFor6()
+    private fun setupTabLayoutFor6() {
+        val pagerAdapter =
+            MyFragmentStateAdapter(
+                supportFragmentManager, lifecycle
+            )
+        pagerAdapter.addFragment(HomeFragment(), "")
+        pagerAdapter.addFragment(TrendingFragment(), "")
+        pagerAdapter.addFragment(FavouriteFragment(), "")
+        pagerAdapter.addFragment(WeeklyGroceryFragment(), "")
+        pagerAdapter.addFragment(FavouriteFragment(), "")
+        pagerAdapter.addFragment(SettingFragment(), "")
+
+        binding.viewPagerDash.adapter = pagerAdapter
+
+        TabLayoutMediator(binding.tabs, binding.viewPagerDash) { tab, position ->
+            tab.text = tab6Titles[position]
+            binding.viewPagerDash.setCurrentItem(tab.position, true)
+
+            if (tab.isSelected) {
+                tab.icon = getDrawable(tabIcons6Selected[position])
+            } else {
+                tab.icon = getDrawable(tabIcons6[position])
+            }
+
+        }.attach()
+
+        binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                //   binding.viewPagerDash.currentItem = tab.position
+
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
     }
 
     private fun initialise4Tab() {
-        fragments.add(HomeFragment())
-        fragments.add(TrendingFragment())
-        fragments.add(FavouriteFragment())
-        fragments.add(SettingFragment())
-
-        binding.tabs.addTab(binding.tabs.newTab().setText(""))
-        binding.tabs.addTab(binding.tabs.newTab().setText(""))
-        binding.tabs.addTab(binding.tabs.newTab().setText(""))
-        binding.tabs.addTab(binding.tabs.newTab().setText(""))
-        binding.tabs.tabGravity = TabLayout.GRAVITY_FILL
-
-        setupTabs()
-        setupTabIconsFor4()
-    }
-
-    private fun setupTabIconsFor6() {
-        binding.tabs.getTabAt(0)?.setIcon(tabIconsFor6.get(0))
-        binding.tabs.getTabAt(1)?.setIcon(tabIconsFor6.get(1))
-        binding.tabs.getTabAt(2)?.setIcon(tabIconsFor6.get(2))
-        binding.tabs.getTabAt(3)?.setIcon(tabIconsFor6.get(3))
-        binding.tabs.getTabAt(4)?.setIcon(tabIconsFor6.get(4))
-        binding.tabs.getTabAt(5)?.setIcon(tabIconsFor6.get(5))
-    }
-
-    private fun setupTabIconsFor4() {
-        binding.tabs.getTabAt(0)?.setIcon(tabIconsFor4.get(0))
-        binding.tabs.getTabAt(1)?.setIcon(tabIconsFor4.get(1))
-        binding.tabs.getTabAt(2)?.setIcon(tabIconsFor4.get(2))
-        binding.tabs.getTabAt(3)?.setIcon(tabIconsFor4.get(3))
-    }
-
-    private fun setupTabs() {
-        val adapter = ViewPagerWithCalDashboardAdapter(
-            fragments,
-            supportFragmentManager,
-            binding.tabs.tabCount
+        tab4Titles = arrayOf(
+            "", "", "", ""
         )
-        binding.viewPagerDash.adapter = adapter
-        // binding.viewPagerDash.setOffscreenPageLimit(3)
+        tabIcons4Selected = arrayOf(
+            R.mipmap.icn_search,
+            R.mipmap.icn_trending,
+            R.mipmap.icn_favourite,
+            R.mipmap.icn_settings,
+        )
+        tabIcons4 = arrayOf(
+            R.mipmap.icn_search,
+            R.mipmap.icn_fire_trending,
+            R.mipmap.icn_favourite_dark,
+            R.mipmap.icn_settings,
+        )
 
-        binding.viewPagerDash.addOnPageChangeListener(
-            TabLayout.TabLayoutOnPageChangeListener(
-                binding.tabs
+        setupTabLayoutFor4()
+    }
+
+    private fun setupTabLayoutFor4() {
+        val pagerAdapter =
+            MyFragmentStateAdapter(
+                supportFragmentManager, lifecycle
             )
-        )
+        pagerAdapter.addFragment(HomeFragment(), "")
+        pagerAdapter.addFragment(TrendingFragment(), "")
+        pagerAdapter.addFragment(FavouriteFragment(), "")
+        pagerAdapter.addFragment(SettingFragment(), "")
 
-        binding.tabs.addOnTabSelectedListener(object :
-            TabLayout.OnTabSelectedListener {
+        binding.viewPagerDash.adapter = pagerAdapter
+
+        TabLayoutMediator(binding.tabs, binding.viewPagerDash,
+            TabConfigurationStrategy { tab, position ->
+                binding.viewPagerDash.setCurrentItem(tab.position, true)
+                tab.text = tab4Titles[position]
+                if (tab.isSelected) {
+                    tab.icon = getDrawable(tabIcons4Selected[position])
+                } else {
+                    tab.icon = getDrawable(tabIcons4[position])
+                }
+
+            }).attach()
+
+
+        binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                binding.viewPagerDash.currentItem = tab.position
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
+                // binding.viewPagerDash.currentItem = tab.position
 
             }
 
-            override fun onTabReselected(tab: TabLayout.Tab) {
-
-            }
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
         })
     }
+
 }
+
