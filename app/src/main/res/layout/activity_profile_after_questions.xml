@@ -1,361 +1,330 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@color/black"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:orientation="vertical">
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbar_black_background"/>
+            layout="@layout/toolbar_black_background" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:fillViewport="true"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
                 android:background="@drawable/bg_round_corner_top_let_right"
+                android:paddingBottom="10dp"
                 tools:context=".activities.ProfileAfterQuestionsActivity">
 
                 <LinearLayout
+                    android:id="@+id/ll_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/ll_name"
-                    android:orientation="horizontal"
                     android:layout_marginTop="@dimen/_5sdp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
-                    >
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_medium"
                         android:text="Hi,"
-                        android:fontFamily="@font/inter_medium"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_20ssp"
-                        />
+                        android:textSize="@dimen/_20ssp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_20ssp"
-                        android:fontFamily="@font/inter_medium"
-                        android:textColor="@color/black"
                         android:layout_marginStart="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_medium"
                         android:text="Gajendra!"
-                        />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_20ssp" />
 
 
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_personal_budget_det"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:id="@+id/tv_personal_budget_det"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/inter_regular"
-                    app:layout_constraintTop_toBottomOf="@+id/ll_name"
-                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="@dimen/_20sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:textSize="@dimen/_12ssp"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center"
                     android:text="@string/this_is_your_personal_suggested_calorie_budget_amp_protein_range_for_a_healthy_body"
-                    />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_name" />
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_calories_graph"
                     android:layout_width="@dimen/_150sdp"
                     android:layout_height="@dimen/_150sdp"
-                    android:id="@+id/cl_calories_graph"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_personal_budget_det"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/bg_calorie_budget_graph">
+                    android:background="@drawable/bg_calorie_budget_graph"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_personal_budget_det">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:gravity="center"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        >
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/texttrial"
-                            android:textSize="@dimen/_25ssp"
-                            android:fontFamily="@font/inter_bold"
                             android:id="@+id/tv_cal_daily"
-                            android:text="1,300"
-                            />
-
-                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Daily Calories Budget"
-                            android:textStyle="italic"
-                            android:fontFamily="@font/inter_regular"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_8ssp"
-                            />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/texttrial"
-                            android:textSize="@dimen/_25ssp"
                             android:fontFamily="@font/inter_bold"
-                            android:id="@+id/tv_cal_weekly"
-                            android:text="9,100"
-                            />
+                            android:text="1,300"
+                            android:textColor="@color/texttrial"
+                            android:textSize="@dimen/_25ssp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Weekly Calorie Budget"
-                            android:textStyle="italic"
                             android:fontFamily="@font/inter_regular"
-                            android:textSize="@dimen/_8ssp"
+                            android:text="Daily Calories Budget"
                             android:textColor="@color/black"
-                            />
+                            android:textSize="@dimen/_8ssp"
+                            android:textStyle="italic" />
 
+                        <TextView
+                            android:id="@+id/tv_cal_weekly"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="9,100"
+                            android:textColor="@color/texttrial"
+                            android:textSize="@dimen/_25ssp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_regular"
+                            android:text="Weekly Calorie Budget"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_8ssp"
+                            android:textStyle="italic" />
 
                     </LinearLayout>
-
-
-
-
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View
+                    android:id="@+id/v_gram_cal"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_18sdp"
-                    android:id="@+id/v_gram_cal"
-                    app:layout_constraintTop_toBottomOf="@+id/cl_calories_graph"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginStart="@dimen/_45sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_45sdp"
                     android:background="@drawable/bg_profile_background_gram"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/v_gram_cal"
-                    app:layout_constraintStart_toStartOf="@+id/v_gram_cal"
-                    android:text="120g"
-                    android:fontFamily="@font/inter_bold"
-                    android:id="@+id/tv_start_cal"
-                    android:textColor="@color/texttrial"
-                    android:textSize="@dimen/_12ssp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/v_gram_cal"
-                    app:layout_constraintEnd_toEndOf="@+id/v_gram_cal"
-                    android:text="240g"
-                    android:fontFamily="@font/inter_bold"
-                    android:id="@+id/tv_end_cal"
-                    android:textColor="@color/texttrial"
-                    android:textSize="@dimen/_12ssp"
-                    />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_end_cal"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:textSize="@dimen/_10ssp"
-                    android:textColor="@color/black"
-                    android:textStyle="italic"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cl_calories_graph" />
+
+                <TextView
+                    android:id="@+id/tv_start_cal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="120g"
+                    android:textColor="@color/texttrial"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintStart_toStartOf="@+id/v_gram_cal"
+                    app:layout_constraintTop_toBottomOf="@+id/v_gram_cal" />
+
+                <TextView
+                    android:id="@+id/tv_end_cal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="240g"
+                    android:textColor="@color/texttrial"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintEnd_toEndOf="@+id/v_gram_cal"
+                    app:layout_constraintTop_toBottomOf="@+id/v_gram_cal" />
+
+
+                <TextView
+                    android:id="@+id/tv_daily_range"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_regular"
                     android:text="Daily Protein Range"
-                    android:id="@+id/tv_daily_range"
-                    />
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="italic"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_end_cal" />
 
                 <TextView
+                    android:id="@+id/tv_why_did"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_daily_range"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Why did I get this Calorie budget?"
                     android:background="@color/off_box"
                     android:fontFamily="@font/inter_regular"
-                    android:id="@+id/tv_why_did"
+                    android:paddingStart="@dimen/_30sdp"
+                    android:text="Why did I get this Calorie budget?"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14ssp"
-                    android:paddingStart="@dimen/_30sdp"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_daily_range" />
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/tv_5ft"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_why_did"
-                    android:text="5ft 2 inc"
-                    android:fontFamily="@font/inter_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@color/checkbox_background"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp"
-                    android:paddingStart="@dimen/_30sdp"
-                    />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv_lbs"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_5ft"
-                    android:text="130 lbs"
                     android:fontFamily="@font/inter_regular"
-                    android:background="@color/darkGrey"
+                    android:paddingStart="@dimen/_30sdp"
+                    android:text="5ft 2 inc"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp"
-                    android:paddingStart="@dimen/_30sdp"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_why_did" />
 
                 <TextView
+                    android:id="@+id/tv_lbs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/darkGrey"
+                    android:fontFamily="@font/inter_regular"
+                    android:paddingStart="@dimen/_30sdp"
+                    android:text="130 lbs"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_5ft" />
+
+                <TextView
                     android:id="@+id/tv_burn"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_lbs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/checkbox_background"
+                    android:fontFamily="@font/inter_regular"
+                    android:paddingStart="@dimen/_30sdp"
                     android:text="Burn Fat"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp"
-                    android:fontFamily="@font/inter_regular"
-                    android:background="@color/checkbox_background"
-                    android:paddingStart="@dimen/_30sdp"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_lbs" />
 
                 <TextView
+                    android:id="@+id/tv_big_meal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_big_meal"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_burn"
+                    android:background="@color/darkGrey"
+                    android:fontFamily="@font/inter_regular"
+                    android:paddingStart="@dimen/_30sdp"
+                    android:paddingEnd="@dimen/_10sdp"
                     android:text="Big Meals 3 times a day with snacks in between"
                     android:textColor="@color/black"
-                    android:paddingEnd="@dimen/_10sdp"
-                    android:fontFamily="@font/inter_regular"
-                    android:background="@color/darkGrey"
                     android:textSize="@dimen/_12ssp"
-                    android:paddingStart="@dimen/_30sdp"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_burn" />
 
                 <TextView
+                    android:id="@+id/tv_most_hungry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_most_hungry"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_big_meal"
+                    android:background="@color/checkbox_background"
+                    android:fontFamily="@font/inter_regular"
+                    android:paddingStart="@dimen/_30sdp"
                     android:text="Most Hungry late at night"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp"
-                    android:fontFamily="@font/inter_regular"
-                    android:background="@color/checkbox_background"
-                    android:paddingStart="@dimen/_30sdp"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_big_meal" />
 
 
                 <TextView
+                    android:id="@+id/tv_go_back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_go_back"
                     android:layout_marginTop="@dimen/_5sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_most_hungry"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:fontFamily="@font/inter_medium"
-                    android:textStyle="italic"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:textColor="@color/black"
+                    android:fontFamily="@font/inter_medium"
                     android:text="@string/go_back_edit_answers"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_10ssp"
-                    />
+                    android:textStyle="italic"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_most_hungry" />
 
                 <View
+                    android:id="@+id/v_go_back"
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:background="@color/black"
-                    android:id="@+id/v_go_back"
-                    app:layout_constraintStart_toStartOf="@+id/tv_go_back"
                     app:layout_constraintEnd_toEndOf="@+id/tv_go_back"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_go_back"
-                    />
+                    app:layout_constraintStart_toStartOf="@+id/tv_go_back"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_go_back" />
 
                 <TextView
+                    android:id="@+id/tv_how_work"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/tv_how_work"
-                    app:layout_constraintTop_toBottomOf="@+id/v_go_back"
-                    android:text="How does it work?"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/off_box"
                     android:fontFamily="@font/inter_regular"
+                    android:paddingStart="@dimen/_30sdp"
+                    android:text="How does it work?"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14ssp"
-                    android:background="@color/off_box"
-                    android:paddingStart="@dimen/_30sdp"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/v_go_back" />
 
                 <ImageView
+                    android:id="@+id/iv_video_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/iv_video_image"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_how_work"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:src="@mipmap/bg_video"
                     android:scaleType="centerCrop"
-                    />
+                    android:src="@mipmap/bg_video"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_how_work" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="@+id/iv_video_image"
-                    app:layout_constraintStart_toStartOf="@+id/iv_video_image"
-                    app:layout_constraintEnd_toEndOf="@+id/iv_video_image"
-                    app:layout_constraintBottom_toBottomOf="@+id/iv_video_image"
                     android:src="@mipmap/icn_play"
-                    />
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_video_image"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_video_image"
+                    app:layout_constraintStart_toStartOf="@+id/iv_video_image"
+                    app:layout_constraintTop_toTopOf="@+id/iv_video_image" />
 
                 <TextView
+                    android:id="@+id/tvNext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_video_image"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:text="@string/str_next"
-                    android:id="@+id/tvNext"
-                    android:textColor="@color/white"
-                    android:textStyle="italic"
-                    android:background="@drawable/bg_round_corner_white_stroke"
                     android:layout_margin="@dimen/_10sdp"
-                    android:textSize="@dimen/_12ssp"
+                    android:background="@drawable/bg_round_corner_white_stroke"
                     android:fontFamily="@font/inter_regular"
-                    android:paddingBottom="@dimen/_5ssp"
+                    android:paddingStart="@dimen/_50ssp"
                     android:paddingTop="@dimen/_5ssp"
                     android:paddingEnd="@dimen/_50ssp"
-                    android:paddingStart="@dimen/_50ssp"
-                    />
+                    android:paddingBottom="@dimen/_5ssp"
+                    android:text="@string/str_next"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="italic"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_video_image" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -363,9 +332,7 @@
         </androidx.core.widget.NestedScrollView>
 
 
-
     </LinearLayout>
-
 
 
 </layout>

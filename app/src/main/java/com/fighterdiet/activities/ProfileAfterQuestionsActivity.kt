@@ -33,7 +33,6 @@ class ProfileAfterQuestionsActivity : AppCompatActivity(), View.OnClickListener 
     override fun onClick(view: View?) {
         view.let {
             when(view?.id){
-
                 R.id.tvNext ->{
                     startActivity(PicOneDayMealsActivity.getStartIntent(this))
                 }

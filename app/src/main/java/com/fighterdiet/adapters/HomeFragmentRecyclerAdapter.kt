@@ -24,10 +24,19 @@ class HomeFragmentRecyclerAdapter(
 
         init {
             itemView.setOnClickListener(this)
+            binding?.rlCalories?.setOnClickListener(this)
         }
 
         override fun onClick(view: View?) {
-            context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
+            when (view!!.id) {
+                R.id.rlCalories -> {
+                    homeList.get(adapterPosition).isDescOpened = true
+                    notifyDataSetChanged()
+                }
+                else -> {
+                    context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
+                }
+            }
         }
     }
 
@@ -40,6 +49,11 @@ class HomeFragmentRecyclerAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.binding?.imvItemHome?.setImageResource(homeList[position].image)
+        if (homeList.get(position).isDescOpened) {
+            holder.binding?.rlCaloriesDesc?.visibility = View.VISIBLE
+        } else {
+            holder.binding?.rlCaloriesDesc?.visibility = View.GONE
+        }
     }
 
     override fun getItemCount(): Int {

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
 import com.fighterdiet.adapters.HomeFragmentRecyclerAdapter
@@ -14,9 +13,9 @@ import com.fighterdiet.models.home_frag.HomeModel
 import com.fighterdiet.utils.Utils
 
 class HomeFragment : BaseFragment() {
-    lateinit var binding:FragmentHomeBinding
-    private lateinit var homeAdapter : HomeFragmentRecyclerAdapter
-    var homeList:ArrayList<HomeModel> = ArrayList()
+    lateinit var binding: FragmentHomeBinding
+    private lateinit var homeAdapter: HomeFragmentRecyclerAdapter
+    var homeList: ArrayList<HomeModel> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +25,7 @@ class HomeFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         return binding.root
     }
 
@@ -49,9 +48,8 @@ class HomeFragment : BaseFragment() {
     private fun setUpHomeRecyclerView() {
 
         binding.rvHomeRecycler.layoutManager = LinearLayoutManager(activity)
-        homeAdapter = HomeFragmentRecyclerAdapter(activity,homeList){
-            position,view ->
-            Utils.showSnackBar(binding.rvHomeRecycler,"mes")
+        homeAdapter = HomeFragmentRecyclerAdapter(activity, homeList) { position, view ->
+            Utils.showSnackBar(binding.rvHomeRecycler, "mes")
         }
         binding.rvHomeRecycler.adapter = homeAdapter
     }

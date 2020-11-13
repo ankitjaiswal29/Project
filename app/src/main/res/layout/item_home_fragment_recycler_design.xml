@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,18 +13,18 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/walkthrough_3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            tools:src="@mipmap/walkthrough_3" />
 
         <RelativeLayout
-            android:id="@+id/rl_calories"
+            android:id="@+id/rlCalories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:background="@drawable/bg_rectangle_white_border"
             app:layout_constraintStart_toStartOf="@+id/imv_item_home"
             app:layout_constraintTop_toTopOf="@+id/imv_item_home">
@@ -32,20 +32,46 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:alpha="0.6"
                 android:background="@drawable/colorGray"
                 android:fontFamily="@font/inter_regular"
-                android:paddingTop="@dimen/_10sdp"
-                android:paddingBottom="@dimen/_10sdp"
-                android:text="chocolate cake with white \n chocolate filling \n \n Calories 500 \n Protein 50g"
+                android:padding="@dimen/_2sdp"
+                android:text="chocolate cake with white\n chocolate filling \n \n Calories 500 \n Protein 50g"
+                android:textColor="@color/colorBlack"
                 android:textSize="@dimen/_8ssp"
                 android:textStyle="italic" />
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/rlCaloriesDesc"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_50sdp"
+            android:background="@drawable/bg_rectangle_white_border"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@color/colorWhite"
+                android:fontFamily="@font/inter_regular"
+                android:padding="@dimen/_5sdp"
+                android:text="Chocolate cake with white\nchocolate filling\n\nCalories 500 \nProtein 50g"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="italic" />
+
+        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
