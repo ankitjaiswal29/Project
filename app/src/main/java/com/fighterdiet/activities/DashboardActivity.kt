@@ -150,7 +150,7 @@ class DashboardActivity : BaseActivity() {
             R.mipmap.icn_search,
             R.mipmap.icn_fire_trending,
             R.mipmap.icn_favourite_dark,
-            R.mipmap.icn_settings,
+            R.mipmap.settings_icon_grey,
         )
 
         setupTabLayoutFor4()

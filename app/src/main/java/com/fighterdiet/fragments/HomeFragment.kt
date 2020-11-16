@@ -3,6 +3,8 @@ package com.fighterdiet.fragments
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +12,7 @@ import com.fighterdiet.R
 import com.fighterdiet.adapters.HomeFragmentRecyclerAdapter
 import com.fighterdiet.databinding.FragmentHomeBinding
 import com.fighterdiet.models.home_frag.HomeModel
+import com.fighterdiet.utils.Constants
 
 class HomeFragment : BaseFragment() {
     lateinit var binding: FragmentHomeBinding
@@ -34,6 +37,11 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun initialize() {
+        if (Constants.isQuestonnaireCompleted) {
+            binding.daysLay.visibility = VISIBLE
+        } else {
+            binding.daysLay.visibility = GONE
+        }
         setUpHomeList()
         setUpHomeRecyclerView()
     }

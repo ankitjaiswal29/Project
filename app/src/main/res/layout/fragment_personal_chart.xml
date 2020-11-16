@@ -47,12 +47,12 @@
 
                 <ImageView
                     android:id="@+id/iv_question"
-                    android:layout_width="@dimen/_24sdp"
-                    android:layout_height="@dimen/_24sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:src="@mipmap/icn_question" />
+                    android:src="@mipmap/help_icon_grey" />
             </RelativeLayout>
 
             <ScrollView
