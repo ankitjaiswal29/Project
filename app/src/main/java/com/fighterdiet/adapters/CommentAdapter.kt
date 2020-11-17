@@ -1,10 +1,19 @@
 package com.fighterdiet.adapters
 
+import android.R.attr.button
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupWindow
+import android.widget.Toast
+import androidx.appcompat.widget.PopupMenu
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -20,9 +29,48 @@ class CommentAdapter(
     private var itemClickListener: RecyclerViewItemClickListener?
 ) : RecyclerView.Adapter<CommentAdapter.MyViewHolder>() {
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val binding: ItemCommentsBinding? = DataBindingUtil.bind(itemView)
+        init {
+            binding?.ivMore?.setOnClickListener(this)
+        }
 
+        override fun onClick(viewType: View?) {
+
+            when(viewType?.id){
+
+                R.id.iv_more ->{
+                    showPopUpCommunities(viewType)
+                }
+
+            }
+
+        }
+
+        private fun showPopUpCommunities(viewType: View) {
+            var mPopupWindowFilter: PopupWindow? = null
+            val customView: View = LayoutInflater.from(viewType.context).inflate(
+                R.layout.item_delete_spam,
+                null
+            )
+
+            mPopupWindowFilter = PopupWindow(
+                customView,
+                ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                ConstraintLayout.LayoutParams.WRAP_CONTENT
+            )
+
+            mPopupWindowFilter.setOutsideTouchable(true)
+            // constraintRoot.setBackgroundResource(R.color.color_gray)
+//            // constraintRoot.background.alpha = 129
+//            mPopupWindowFilter!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
+
+            if (Build.VERSION.SDK_INT >= 21) {
+                mPopupWindowFilter.elevation = 5.0f
+            }
+
+            mPopupWindowFilter.showAsDropDown(viewType)
+        }
     }
 
     override fun onCreateViewHolder(
@@ -50,4 +98,5 @@ class CommentAdapter(
     override fun getItemCount(): Int {
         return commentList.size
     }
+
 }

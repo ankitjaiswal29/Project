@@ -25,6 +25,7 @@ class PicDayMealAdapter(
 
         init {
             itemView.setOnClickListener(this)
+            binding?.rlCalories?.setOnClickListener(this)
         }
 
         override fun onClick(view: View?) {
@@ -33,6 +34,14 @@ class PicDayMealAdapter(
                 itemClickListener!!.onItemClick(adapterPosition,view)
             }
 
+            when(view?.id){
+                R.id.rlCalories -> {
+                    homeList.get(adapterPosition).isDescOpened = true
+                    notifyDataSetChanged()
+                }
+
+
+            }
 //            context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
         }
     }
@@ -46,6 +55,11 @@ class PicDayMealAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.binding?.imvItemHome?.setImageResource(homeList[position].image)
+        if (homeList.get(position).isDescOpened) {
+            holder.binding?.rlCaloriesDesc?.visibility = View.VISIBLE
+        } else {
+            holder.binding?.rlCaloriesDesc?.visibility = View.GONE
+        }
         
         if (homeList[position].isselected){
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {

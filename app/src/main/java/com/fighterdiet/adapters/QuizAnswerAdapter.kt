@@ -27,7 +27,7 @@ class QuizAnswerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerVie
     private var imageList1 = arrayListOf<Int>(
         R.mipmap.icn_peanut_butter, R.mipmap.icn_chocoate, R.mipmap.icn_fruits,
         R.mipmap.icn_pizza, R.mipmap.icn_ice_cream, R.mipmap.icn_cookies,
-        R.mipmap.icn_gluten, R.mipmap.icn_spaghetti, R.mipmap.icn_sushi,
+        R.mipmap.icn_sandwich, R.mipmap.icn_spaghetti, R.mipmap.icn_sushi,
         R.mipmap.icn_burrito, R.mipmap.icn_french_fries, R.mipmap.icn_hamburger
     )
 

@@ -52,15 +52,9 @@ class PersonalChartFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         when(view?.id){
-
             R.id.iv_back ->{
                 activity?.onBackPressed()
             }
-
-
         }
-
-
     }
-
 }
