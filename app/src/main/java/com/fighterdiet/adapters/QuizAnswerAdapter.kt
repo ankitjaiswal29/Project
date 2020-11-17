@@ -121,7 +121,7 @@ class QuizAnswerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerVie
         } else if (holder is QuizTypeTwo) {
 
         } else if (holder is QuizTypeThree) {
-            if (position == 7) {
+            if (question.id == 8) {
                 holder.binding?.ivImage?.setImageResource(imageList1[position])
             } else {
                 holder.binding?.ivImage?.setImageResource(imageList2[position])
