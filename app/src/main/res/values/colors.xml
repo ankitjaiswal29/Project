@@ -25,6 +25,14 @@
     <color name="checkbox_background">#EBEBEB</color>
     <color name="green">#36BA4C</color>
     <color name="darkGrey">#CCCCCC</color>
+    <color name="add_remove">#BAD0DE</color>
+    <color name="greencolor">#82CA9C</color>
+    <color name="orange">#F7941D</color>
+    <color name="purple">#BD8DBF</color>
+    <color name="red">#9E003A</color>
+    <color name="skyblue">#b4d1e0</color>
+    <color name="lightgreencolor">#D9EDE0</color>
+
 
 </resources>
 

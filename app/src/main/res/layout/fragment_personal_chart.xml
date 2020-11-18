@@ -81,57 +81,483 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
 
-                    <ImageView
-                        android:id="@+id/img1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/img_chart_1"
-                        app:layout_constraintEnd_toEndOf="parent"
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:indeterminate="false"
+                        android:layout_centerHorizontal="true"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_personal_budget_det"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_personal_budget_det" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:progressDrawable="@drawable/circular_progress_bar"
+                        android:background="@drawable/circle_shape"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:max="100"
+                        android:progress="0" />
 
-                    <ImageView
-                        android:id="@+id/img2"
-                        android:layout_width="match_parent"
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/img_chart_2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/img1" />
+                        app:layout_constraintTop_toTopOf="@+id/progressBar"
+                        app:layout_constraintStart_toStartOf="@+id/progressBar"
+                        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                        app:layout_constraintEnd_toEndOf="@+id/progressBar">
 
-                    <ImageView
-                        android:id="@+id/img3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/img_chart_3"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/img2" />
+                        <LinearLayout
+                            android:id="@+id/ll_cal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/img4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1,234"
+                                android:fontFamily="@font/inter_bold"
+                                android:textColor="@color/texttrial"
+                                android:textSize="@dimen/_20ssp"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="/"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/inter_bold"
+                                android:textSize="@dimen/_20ssp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1,500"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/inter_bold"
+                                android:textSize="@dimen/_20ssp"
+                                />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Daily Calories Budget"
+                            android:fontFamily="@font/inter_regular"
+                            android:textStyle="italic"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_8ssp"
+                            android:layout_below="@+id/ll_cal"
+                            android:layout_centerInParent="true"
+                            />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:id="@+id/v_gram_cal"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_18sdp"
                         android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
                         android:layout_marginEnd="@dimen/_20sdp"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/img_chart_4"
+                        android:background="@drawable/bg_profile_background_gram"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/img3" />
+                        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+
+                    <TextView
+                        android:id="@+id/tv_start_cal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="120g"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:textColor="@color/texttrial"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintStart_toStartOf="@+id/v_gram_cal"
+                        app:layout_constraintTop_toBottomOf="@+id/v_gram_cal" />
+
+                    <TextView
+                        android:id="@+id/tv_end_cal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="240g"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:textColor="@color/texttrial"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintEnd_toEndOf="@+id/v_gram_cal"
+                        app:layout_constraintTop_toBottomOf="@+id/v_gram_cal" />
+
+                    <TextView
+                        android:id="@+id/tv_daily_range"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_regular"
+                        android:text="Daily Protein Range"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp"
+                        android:textStyle="italic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_end_cal" />
+
+                    <TextView
+                        android:id="@+id/tv_weekly_cal_bud"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_daily_range"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:text="Weekly Calorie Budget"
+                        android:textSize="@dimen/_18ssp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/inter_bold"
+                        android:textStyle="italic"
+                        android:textColor="@color/black"
+                        />
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/barChart"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_140sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_weekly_cal_bud"
+                        app:layout_constraintStart_toStartOf="parent"
+                        />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="@color/black"
+                        android:layout_marginBottom="@dimen/_20sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/barChart"
+                        app:layout_constraintStart_toStartOf="@+id/barChart"
+                        app:layout_constraintEnd_toEndOf="@+id/barChart"
+                        />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:background="@color/black"
+                        app:layout_constraintTop_toTopOf="@+id/barChart"
+                        app:layout_constraintBottom_toBottomOf="@+id/barChart"
+                        app:layout_constraintStart_toStartOf="@+id/barChart"
+                        />
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_color_Dec"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="@dimen/_20sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/barChart"
+                        app:layout_constraintStart_toStartOf="@+id/barChart">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_margin="@dimen/_3sdp"
+                            android:weightSum="1">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight=".5"
+                                android:orientation="horizontal"
+                                android:layout_height="wrap_content">
+
+                                <View
+                                    android:id="@+id/v_blue"
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    android:background="@color/texttrial"
+                                    app:layout_constraintTop_toBottomOf="@+id/barChart"
+                                    app:layout_constraintStart_toStartOf="@+id/barChart"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintStart_toEndOf="@+id/v_blue"
+                                    app:layout_constraintTop_toTopOf="@+id/v_blue"
+                                    app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                                    android:text="3,000 Calories on Monday"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight=".5"
+                                android:layout_height="wrap_content">
+
+                                <View
+                                    android:id="@+id/v_green"
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    android:background="@color/teal_200"
+                                    app:layout_constraintTop_toBottomOf="@+id/barChart"
+                                    app:layout_constraintStart_toStartOf="@+id/barChart"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintStart_toEndOf="@+id/v_blue"
+                                    app:layout_constraintTop_toTopOf="@+id/v_blue"
+                                    app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                                    android:text="2,000 Calories on Firday"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_margin="@dimen/_3sdp"
+                            android:weightSum="1">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight=".5"
+                                android:orientation="horizontal"
+                                android:layout_height="wrap_content">
+
+                                <View
+                                    android:id="@+id/v_orange"
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    android:background="@color/orange"
+                                    app:layout_constraintTop_toBottomOf="@+id/barChart"
+                                    app:layout_constraintStart_toStartOf="@+id/barChart"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintStart_toEndOf="@+id/v_blue"
+                                    app:layout_constraintTop_toTopOf="@+id/v_blue"
+                                    app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                                    android:text="1,300 Calories on Tuesday"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight=".5"
+                                android:layout_height="wrap_content">
+
+                                <View
+                                    android:id="@+id/v_pink"
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    android:background="@color/purple"
+                                    app:layout_constraintTop_toBottomOf="@+id/barChart"
+                                    app:layout_constraintStart_toStartOf="@+id/barChart"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintStart_toEndOf="@+id/v_blue"
+                                    app:layout_constraintTop_toTopOf="@+id/v_blue"
+                                    app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                                    android:text="0 Calories on Saturday"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_margin="@dimen/_3sdp"
+                            android:weightSum="1">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight=".5"
+                                android:orientation="horizontal"
+                                android:layout_height="wrap_content">
+
+                                <View
+                                    android:id="@+id/v_sky"
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    android:background="@color/skyblue"
+                                    app:layout_constraintTop_toBottomOf="@+id/barChart"
+                                    app:layout_constraintStart_toStartOf="@+id/barChart"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintStart_toEndOf="@+id/v_blue"
+                                    app:layout_constraintTop_toTopOf="@+id/v_blue"
+                                    app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                                    android:text="1,500 Calories on Wednesday"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight=".5"
+                                android:layout_height="wrap_content">
+
+                                <View
+                                    android:id="@+id/v_red"
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    android:background="@color/red"
+                                    app:layout_constraintTop_toBottomOf="@+id/barChart"
+                                    app:layout_constraintStart_toStartOf="@+id/barChart"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintStart_toEndOf="@+id/v_blue"
+                                    app:layout_constraintTop_toTopOf="@+id/v_blue"
+                                    app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                                    android:text="0 Calories on Sunday"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_8ssp"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/cl_add_remove"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/bg_add_remove"
+                        android:layout_margin="@dimen/_20sdp"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/ll_color_Dec">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_2sdp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/inter_medium"
+                            android:textStyle="italic"
+                            android:textSize="@dimen/_11ssp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:text="Maually Add/Remove Calories"
+                            />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_marginBottom="@dimen/_8sdp"
+                            android:layout_height="@dimen/_35sdp">
+
+                            <EditText
+                                android:id="@+id/et_cal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/shape_input"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:layout_marginEnd="@dimen/_5sdp"
+                                android:hint="110"
+                                android:paddingStart="@dimen/_5sdp"
+                                android:fontFamily="@font/inter_regular"
+                                android:textStyle="italic"
+                                android:textColorHint="@color/black"
+                                android:textSize="@dimen/_22ssp"
+                                />
+
+                            <TextView
+                                android:id="@+id/tv_add_cal"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:text="Add Calories"
+                                android:textStyle="italic"
+                                android:fontFamily="@font/inter_medium"
+                                android:gravity="end"
+                                android:textSize="@dimen/_9ssp"
+                                android:paddingStart="@dimen/_15sdp"
+                                android:paddingTop="@dimen/_2sdp"
+                                android:paddingBottom="@dimen/_2sdp"
+                                android:paddingEnd="@dimen/_5sdp"
+                                android:background="@drawable/bg_round_corner_blue_background"
+                                app:layout_constraintTop_toTopOf="@+id/et_cal"
+                                app:layout_constraintEnd_toEndOf="@+id/tv_remove_cal"
+                                app:layout_constraintStart_toStartOf="@+id/tv_remove_cal"
+                                />
+
+                            <TextView
+                                android:id="@+id/tv_remove_cal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_round_corner_blue_background"
+                                android:text="Remove Calories"
+                                android:fontFamily="@font/inter_medium"
+                                android:textStyle="italic"
+                                android:textSize="@dimen/_9ssp"
+                                android:gravity="end"
+                                android:layout_marginEnd="@dimen/_3sdp"
+                                android:paddingStart="@dimen/_15sdp"
+                                android:paddingTop="@dimen/_2sdp"
+                                android:paddingBottom="@dimen/_2sdp"
+                                android:paddingEnd="@dimen/_5sdp"
+                                android:textColor="@color/white"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_add_cal"
+                                app:layout_constraintEnd_toEndOf="@+id/et_cal"
+
+                                />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/lineChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_180sdp"
+                        android:layout_margin="@dimen/_20sdp"
+                        app:layout_constraintTop_toBottomOf="@+id/cl_add_remove"
+                        app:layout_constraintStart_toStartOf="parent"
+                        />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

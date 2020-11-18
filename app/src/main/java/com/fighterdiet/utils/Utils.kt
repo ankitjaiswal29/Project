@@ -7,6 +7,8 @@ import android.net.ConnectivityManager
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import com.fighterdiet.utils.Constants.HUNDRED
+import com.fighterdiet.utils.Constants.ZERO
 import com.google.android.material.snackbar.Snackbar
 
 object Utils {
@@ -23,6 +25,20 @@ object Utils {
         } catch (e: Exception) {
             e.printStackTrace()
             false
+        }
+    }
+
+    fun getPercentage(selection: Int, total: Int): Int {
+        var percentage: Int = HUNDRED
+        return if (selection > ZERO) {
+            percentage = try {
+                selection * HUNDRED / total
+            } catch (e: java.lang.Exception) {
+                return percentage
+            }
+            percentage
+        } else {
+            ZERO
         }
     }
 
