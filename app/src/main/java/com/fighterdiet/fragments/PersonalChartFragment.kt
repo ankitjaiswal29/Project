@@ -110,7 +110,7 @@ class PersonalChartFragment : Fragment(), View.OnClickListener {
 //        binding.lineChart.setDrawGridBackground(false)
 //
 //        binding.lineChart.getDescription().setEnabled(false)
-//        binding.lineChart.getLegend().setEnabled(false)
+        binding.lineChart.getLegend().setEnabled(false)
 
         binding.lineChart.getXAxis().setDrawGridLines(false);
 //        binding.lineChart.getXAxis().setDrawLabels(false);
@@ -154,12 +154,6 @@ class PersonalChartFragment : Fragment(), View.OnClickListener {
         binding.barChart.setExtraOffsets(0f, 0f, 0f, 5f)
         binding.barChart.invalidate()
 
-//        binding.barChart.getXAxis().setDrawAxisLine(false)
-//        binding.barChart.getXAxis().setDrawGridLines(false)
-//        binding.barChart.getAxisLeft().setDrawGridLines(false);
-//        binding.barChart.getAxisRight().setDrawGridLines(false);
-//        binding.barChart.setDrawBarShadow(false)
-//        binding.barChart.getXAxis().setEnabled(false)
 
         binding.barChart.setTouchEnabled(true);
         binding.barChart.setClickable(false);

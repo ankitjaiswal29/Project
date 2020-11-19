@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintStart_toStartOf="parent"
-            android:hint="Pic Day 1 Meals"
+            android:hint="Pick Day 1 Meals"
             android:fontFamily="@font/inter_bold"
             android:textSize="@dimen/_20ssp"
             android:textColorHint="@color/texttrial"

@@ -65,7 +65,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     fun setupIndicator(position: Int) {
         when (position) {
             0 -> {
-                binding.tvDesc.setText("")
+                binding.tvDesc.setText(getString(R.string.str_walkthrough_text_1))
                 binding.layoutIndicator.vFirst.setBackgroundResource(R.drawable.shape_indicator_selected)
                 binding.layoutIndicator.vSecond.setBackgroundResource(R.drawable.shape_indicator_unselected)
                 binding.layoutIndicator.vThird.setBackgroundResource(R.drawable.shape_indicator_unselected)

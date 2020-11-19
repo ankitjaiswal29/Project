@@ -2,12 +2,15 @@ package com.fighterdiet.activities
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.fighterdiet.R
 import com.fighterdiet.databinding.ActivityProfileAfterQuestionsBinding
+import com.fighterdiet.utils.Constants
+import com.fighterdiet.utils.Utils
 
 class ProfileAfterQuestionsActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var binding:ActivityProfileAfterQuestionsBinding
@@ -20,6 +23,17 @@ class ProfileAfterQuestionsActivity : AppCompatActivity(), View.OnClickListener 
 
     private fun initialise() {
         binding.tvNext.setOnClickListener(this)
+
+        var goalPercentage: Int = Utils.getPercentage(80, 100)
+
+        if (goalPercentage > Constants.HUNDRED) {
+            goalPercentage = Constants.HUNDRED
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            binding.progressBar.setProgress(goalPercentage, true)
+        } else {
+            binding.progressBar.progress = goalPercentage
+        }
     }
 
     companion object {

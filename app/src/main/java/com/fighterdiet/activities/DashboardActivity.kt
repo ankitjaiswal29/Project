@@ -53,20 +53,20 @@ class DashboardActivity : BaseActivity() {
             "", "", "", "", "", ""
         )
         tabIcons6Selected = arrayOf(
-            R.mipmap.icn_search,
-            R.mipmap.icn_trending,
-            R.mipmap.icn_favourite,
-            R.mipmap.icn_shopping,
-            R.mipmap.icn_cb,
-            R.mipmap.icn_settings,
+            R.drawable.tb_search_icon_blue,
+            R.drawable.tb_trending_blue_icon,
+            R.drawable.tb_favorite_icon_blue,
+           R.drawable.tb_grocery_icon_blue,
+            R.drawable.tb_calorie_budget_icon_blue,
+            R.drawable.tb_settings_icon_blue,
         )
         tabIcons6 = arrayOf(
-            R.mipmap.icn_search,
-            R.mipmap.icn_fire_trending,
-            R.mipmap.icn_favourite_dark,
-            R.mipmap.icn_shopping,
-            R.mipmap.icn_cb,
-            R.mipmap.icn_settings,
+            R.drawable.tb_search_icon_blue,
+            R.drawable.tb_trending_blue_icon,
+            R.drawable.tb_favorite_icon_blue,
+            R.drawable.tb_grocery_icon_blue,
+            R.drawable.tb_calorie_budget_icon_blue,
+            R.drawable.tb_settings_icon_blue,
         )
 
         setupTabLayoutFor6()
@@ -141,16 +141,16 @@ class DashboardActivity : BaseActivity() {
             "", "", "", ""
         )
         tabIcons4Selected = arrayOf(
-            R.mipmap.icn_search,
-            R.mipmap.icn_trending,
-            R.mipmap.icn_favourite,
-            R.mipmap.icn_settings,
+            R.drawable.tb_search_icon_blue,
+            R.drawable.tb_trending_blue_icon,
+            R.drawable.tb_favorite_icon_blue,
+            R.drawable.tb_settings_icon_blue,
         )
         tabIcons4 = arrayOf(
-            R.mipmap.icn_search,
-            R.mipmap.icn_fire_trending,
-            R.mipmap.icn_favourite_dark,
-            R.mipmap.settings_icon_grey,
+            R.drawable.tb_search_icon_blue,
+            R.drawable.tb_trending_blue_icon,
+            R.drawable.tb_favorite_icon_blue,
+            R.drawable.tb_settings_icon_blue,
         )
 
         setupTabLayoutFor4()
