@@ -11,9 +11,12 @@
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpager"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +28,8 @@
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:fontFamily="@font/inter_semibold"
-            android:textAlignment="center"
+            android:gravity="center"
+            android:lines="2"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/_22ssp"
             android:textStyle="italic"
@@ -35,12 +39,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Delicious recipes for a healthy body!" />
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

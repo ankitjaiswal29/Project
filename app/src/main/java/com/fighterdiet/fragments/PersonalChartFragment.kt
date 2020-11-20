@@ -15,8 +15,13 @@ import com.fighterdiet.activities.FaqActivity
 import com.fighterdiet.databinding.FragmentPersonalChartBinding
 import com.fighterdiet.utils.Constants.HUNDRED
 import com.fighterdiet.utils.Utils
+import com.github.mikephil.charting.components.AxisBase
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.formatter.IAxisValueFormatter
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.StackedValueFormatter
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 
 
@@ -90,6 +95,8 @@ class PersonalChartFragment : Fragment(), View.OnClickListener {
         lineValue.add(Entry(6f, 15f))
 
         var lineDataSet = LineDataSet(lineValue, "")
+        lineDataSet.setDrawCircles(false)
+        lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         var dataSet = ArrayList<ILineDataSet>()
         dataSet.add(lineDataSet)
 
@@ -103,13 +110,11 @@ class PersonalChartFragment : Fragment(), View.OnClickListener {
         binding.lineChart.data = data
         binding.lineChart.invalidate()
 
+        var xAxis:XAxis = binding.lineChart.xAxis
+        binding.lineChart.xAxis.valueFormatter = MyAxisValiueFormatter()
+
         binding.lineChart.setDoubleTapToZoomEnabled(false)
         binding.lineChart.setDoubleTapToZoomEnabled(false)
-//
-//        binding.lineChart.setDrawBorders(false)
-//        binding.lineChart.setDrawGridBackground(false)
-//
-//        binding.lineChart.getDescription().setEnabled(false)
         binding.lineChart.getLegend().setEnabled(false)
 
         binding.lineChart.getXAxis().setDrawGridLines(false);
@@ -130,9 +135,10 @@ class PersonalChartFragment : Fragment(), View.OnClickListener {
         barvalues.add(BarEntry(4f, 4f))
         barvalues.add(BarEntry(5f, 6f))
         barvalues.add(BarEntry(6f, 7f))
-        barvalues.add(BarEntry(7f, 7f))
+        barvalues.add(BarEntry(7f, 1f))
 
         var barDataSet: BarDataSet = BarDataSet(barvalues, "")
+        barDataSet.setDrawValues(false)
         var barData :BarData = BarData(barDataSet)
         barData.setValueFormatter(StackedValueFormatter(false, "", 1))
         barData.setBarWidth(0.5f);
@@ -145,7 +151,6 @@ class PersonalChartFragment : Fragment(), View.OnClickListener {
             getResources().getColor(R.color.green),
             getResources().getColor(R.color.red)
         )
-        barDataSet.valueTextSize = 10f
 
         binding.barChart.setFitBars(true)
         binding.barChart.getLegend().setWordWrapEnabled(true)
@@ -153,7 +158,6 @@ class PersonalChartFragment : Fragment(), View.OnClickListener {
 
         binding.barChart.setExtraOffsets(0f, 0f, 0f, 5f)
         binding.barChart.invalidate()
-
 
         binding.barChart.setTouchEnabled(true);
         binding.barChart.setClickable(false);
@@ -179,6 +183,13 @@ class PersonalChartFragment : Fragment(), View.OnClickListener {
         binding.barChart.getAxisRight().setDrawAxisLine(false);
 
     }
+
+    private class  MyAxisValiueFormatter(): ValueFormatter() {
+        override fun getFormattedValue(value: Float, axis: AxisBase?): String {
+            return "Days "+value
+        }
+    }
+
 
     override fun onClick(view: View?) {
         when(view?.id){

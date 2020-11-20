@@ -18,6 +18,8 @@ class PicOneDayMealsActivity : BaseActivity(), View.OnClickListener, RecyclerVie
     private lateinit var homeAdapter : PicDayMealAdapter
     var homeList:ArrayList<HomeModel> = ArrayList()
     private var pos = 0
+    private var count =0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,9 +77,14 @@ class PicOneDayMealsActivity : BaseActivity(), View.OnClickListener, RecyclerVie
             when(view?.id){
 
                 R.id.tv_next -> {
-                    startActivity(PicDaySevenMealsActivity.getStartIntent(this))
+                    if (count<7){
+                        count++
+                        binding.etSearch.hint = "Pick Day "+count+" Meals"
+                        homeAdapter.notifyDataSetChanged()
+                    }else{
+                        startActivity(DashboardActivity.getStartIntent(this))
+                    }
                 }
-
             }
         }
     }

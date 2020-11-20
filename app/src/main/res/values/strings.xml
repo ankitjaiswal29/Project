@@ -41,7 +41,7 @@
     <string name="notes">Notes</string>
     <string name="add_your_note_here">Add Your Notes Here</string>
     <string name="for_the_pie">For The Pie</string>
-    <string name="for_the_filling">For the Filling</string>
+    <string name="for_the_filling">For The Filling</string>
     <string name="egg_plants_cut_into_1_8_slices">Egg plants cut into 1/8* slices</string>
     <string name="_5_g">5 g</string>
     <string name="weekly_grocery_list">Weekly Grocery List</string>
@@ -77,8 +77,8 @@
     <string name="submit">Submit</string>
     <string name="i_love_this_recipe_for_my_familynof_4_nhint_sub_appricots_for_peaches_it_gives_it_a_sweeter_taste">I love this recipe for my familynof 4!\nHint: sub appricots for peaches it gives it a sweeter taste</string>
     <string name="str_answer_no">No, skip the questionnaire and get access to recipes NOW!*</string>
-    <string name="str_walkthrough_text_2">Delicious recipes for a healthy body!</string>
-    <string name="str_walkthrough_text_3">Fall in love with healthy desserts!</string>
+    <string name="str_walkthrough_text_2">Delicious recipes for a \n healthy body!</string>
+    <string name="str_walkthrough_text_3">Fall in love with healthy \n desserts!</string>
     <string name="str_walkthrough_text_4">Love what you eat!</string>
-    <string name="str_walkthrough_text_1">Eat more, lose more body fat!</string>
+    <string name="str_walkthrough_text_1">Eat more, lose more \n body fat!</string>
 </resources>

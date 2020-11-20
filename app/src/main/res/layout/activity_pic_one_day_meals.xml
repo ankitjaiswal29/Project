@@ -20,7 +20,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:hint="Pick Day 1 Meals"
             android:fontFamily="@font/inter_bold"
-            android:textSize="@dimen/_20ssp"
+            android:textSize="@dimen/_18ssp"
             android:textColorHint="@color/texttrial"
             android:drawableStart="@mipmap/icn_search"
             android:drawablePadding="@dimen/_5sdp"
