@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/_20sdp"
         android:paddingBottom="@dimen/_10sdp"
+        app:layout_scrollFlags="scroll|enterAlways"
         tools:background="@color/black">
 
         <ImageView
@@ -23,4 +24,5 @@
             tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

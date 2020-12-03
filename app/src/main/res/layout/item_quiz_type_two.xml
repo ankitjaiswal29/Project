@@ -1,91 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <ScrollView
         android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_20sdp"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
         tools:background="@color/colorBlack">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/etFeet"
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_60sdp"
-            android:background="@drawable/shape_height"
-            android:inputType="number"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toStartOf="@id/etInch"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="Autofill,LabelFor"
-            tools:text="" />
+            <EditText
+                android:id="@+id/etFeet"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:background="@drawable/shape_height"
+                android:inputType="number"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toStartOf="@id/etInch"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="Autofill,LabelFor"
+                tools:text="" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_1sdp"
-            android:fontFamily="@font/inter_bold"
-            android:text="@string/str_ft"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/_16ssp"
-            app:layout_constraintBottom_toBottomOf="@id/etFeet"
-            app:layout_constraintStart_toEndOf="@id/etFeet" />
-
-
-        <EditText
-            android:id="@+id/etInch"
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_60sdp"
-            android:background="@drawable/shape_height"
-            android:inputType="number"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/etFeet"
-            app:layout_constraintTop_toTopOf="@id/etFeet"
-            tools:ignore="Autofill,LabelFor" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_1sdp"
-            android:fontFamily="@font/inter_bold"
-            android:text="@string/str_in"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/_16ssp"
-            app:layout_constraintBottom_toBottomOf="@id/etInch"
-            app:layout_constraintStart_toEndOf="@id/etInch" />
-
-        <TextView
-            android:id="@+id/tvWeight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_50sdp"
-            android:fontFamily="@font/inter_semibold"
-            android:text="@string/str_what_weight"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/_18ssp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etFeet"
-
-            />
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/shape_input"
-            android:inputType="number"
-            android:padding="@dimen/_10sdp"
-            android:text=""
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvWeight"
-            tools:ignore="Autofill,LabelFor" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/str_ft"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintBottom_toBottomOf="@id/etFeet"
+                app:layout_constraintStart_toEndOf="@id/etFeet" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <EditText
+                android:id="@+id/etInch"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:background="@drawable/shape_height"
+                android:inputType="number"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/etFeet"
+                app:layout_constraintTop_toTopOf="@id/etFeet"
+                tools:ignore="Autofill,LabelFor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/str_in"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintBottom_toBottomOf="@id/etInch"
+                app:layout_constraintStart_toEndOf="@id/etInch" />
+
+            <TextView
+                android:id="@+id/tvWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/str_what_weight"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_18ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etFeet"
+
+                />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/shape_input"
+                android:inputType="number"
+                android:padding="@dimen/_10sdp"
+                android:text=""
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvWeight"
+                tools:ignore="Autofill,LabelFor" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </layout>

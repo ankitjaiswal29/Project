@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fillViewport="true"
         android:background="@color/white"
-        >
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusableInTouchMode="true"
             android:focusable="true"
-            android:paddingBottom="@dimen/_10sdp"
+            android:focusableInTouchMode="true"
+            android:paddingBottom="@dimen/_30sdp"
             tools:context=".fragments.IngredientsFragment">
 
             <androidx.constraintlayout.widget.Guideline
@@ -38,108 +37,102 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tv_filling"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_filling"
                 android:fontFamily="@font/inter_bold"
-                app:layout_constraintTop_toTopOf="parent"
                 android:text="@string/for_the_filling"
-                app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-                android:textStyle="bold"
                 android:textColor="@color/texttrial"
                 android:textSize="@dimen/_20ssp"
-                />
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <View
+                android:id="@+id/v_filling"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:id="@+id/v_filling"
                 android:background="@color/texttrial"
-                app:layout_constraintStart_toStartOf="@+id/tv_filling"
-                app:layout_constraintTop_toBottomOf="@+id/tv_filling"
                 app:layout_constraintEnd_toEndOf="@+id/tv_filling"
-                />
+                app:layout_constraintStart_toStartOf="@+id/tv_filling"
+                app:layout_constraintTop_toBottomOf="@+id/tv_filling" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyvler_filling"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/recyvler_filling"
-                app:layout_constraintTop_toBottomOf="@+id/v_filling"
-                app:layout_constraintStart_toStartOf="@id/leftGuideline"
                 app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-                tools:listitem="@layout/item_filling_design"
+                app:layout_constraintStart_toStartOf="@id/leftGuideline"
+                app:layout_constraintTop_toBottomOf="@+id/v_filling"
                 tools:itemCount="5"
-                />
+                tools:listitem="@layout/item_filling_design" />
 
             <TextView
+                android:id="@+id/tv_pie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/recyvler_filling"
-                app:layout_constraintStart_toStartOf="@id/leftGuideline"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:textSize="@dimen/_20sdp"
                 android:fontFamily="@font/inter_bold"
                 android:text="@string/for_the_pie"
-                android:id="@+id/tv_pie"
-                android:textStyle="bold"
                 android:textColor="@color/texttrial"
-                />
+                android:textSize="@dimen/_20sdp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/leftGuideline"
+                app:layout_constraintTop_toBottomOf="@+id/recyvler_filling" />
 
             <View
+                android:id="@+id/v_pie"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:id="@+id/v_pie"
                 android:background="@color/texttrial"
-                app:layout_constraintStart_toStartOf="@+id/tv_pie"
-                app:layout_constraintTop_toBottomOf="@+id/tv_pie"
                 app:layout_constraintEnd_toEndOf="@+id/tv_pie"
-                />
+                app:layout_constraintStart_toStartOf="@+id/tv_pie"
+                app:layout_constraintTop_toBottomOf="@+id/tv_pie" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_pie"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/recycler_pie"
-                app:layout_constraintTop_toBottomOf="@+id/v_pie"
-                app:layout_constraintStart_toStartOf="@id/leftGuideline"
                 app:layout_constraintEnd_toEndOf="@id/rightGuideline"
-                tools:listitem="@layout/item_filling_design"
+                app:layout_constraintStart_toStartOf="@id/leftGuideline"
+                app:layout_constraintTop_toBottomOf="@+id/v_pie"
                 tools:itemCount="5"
-                />
+                tools:listitem="@layout/item_filling_design" />
 
             <TextView
+                android:id="@+id/tv_note"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="@color/texttrial"
-                android:text="@string/notes"
-                android:fontFamily="@font/inter_bold"
-                android:id="@+id/tv_note"
-                android:textSize="@dimen/_20sdp"
-                app:layout_constraintTop_toBottomOf="@+id/recycler_pie"
-                app:layout_constraintStart_toStartOf="@+id/leftGuideline"
                 android:layout_marginTop="@dimen/_10sdp"
-                />
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/notes"
+                android:textColor="@color/texttrial"
+                android:textSize="@dimen/_20sdp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_pie" />
 
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_100sdp"
-                android:background="@drawable/bg_black_border"
-                app:layout_constraintTop_toBottomOf="@+id/tv_note"
-                app:layout_constraintStart_toStartOf="@id/leftGuideline"
-                app:layout_constraintEnd_toEndOf="@id/rightGuideline"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_25sdp"
-                android:fontFamily="@font/inter_regular"
-                android:textStyle="italic"
-                android:padding="@dimen/_10sdp"
-                android:hint="@string/add_your_note_here"
-                android:cursorVisible="false"
                 android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/bg_black_border"
+                android:cursorVisible="false"
+                android:fontFamily="@font/inter_regular"
                 android:gravity="start"
-                />
+                android:hint="@string/add_your_note_here"
+                android:padding="@dimen/_10sdp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+                app:layout_constraintStart_toStartOf="@id/leftGuideline"
+                app:layout_constraintTop_toBottomOf="@+id/tv_note"
+                android:inputType="text"
+                android:importantForAutofill="no" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </layout>
