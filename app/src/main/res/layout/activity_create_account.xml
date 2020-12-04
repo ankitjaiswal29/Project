@@ -89,6 +89,44 @@
             tools:ignore="LabelFor" />
 
         <EditText
+            android:id="@+id/etPhoneNumber"
+            style="@style/InputBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:autofillHints="no"
+            android:hint="@string/str_hint_phone_number"
+            android:inputType="phone"
+            android:paddingStart="@dimen/_65sdp"
+            app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+            app:layout_constraintStart_toStartOf="@id/leftGuideline"
+            app:layout_constraintTop_toBottomOf="@id/etEmail"
+            tools:ignore="LabelFor" />
+
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/spinnerCountryCode"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/_1sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:background="@drawable/shape_input"
+            android:paddingStart="@dimen/_4sdp"
+            android:paddingTop="@dimen/_4sdp"
+            android:paddingEnd="@dimen/_4sdp"
+            app:ccpDialog_textColor="@color/texttrial"
+            app:ccp_arrowSize="@dimen/_10sdp"
+            app:ccp_defaultNameCode="IN"
+            app:ccp_showArrow="true"
+            app:ccp_showFlag="false"
+            app:ccp_showFullName="false"
+            app:ccp_showNameCode="true"
+            app:ccp_showPhoneCode="true"
+            app:ccp_textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/etPhoneNumber"
+            app:layout_constraintStart_toStartOf="@+id/leftGuideline"
+            app:layout_constraintTop_toTopOf="@+id/etPhoneNumber" />
+
+        <EditText
             android:id="@+id/etPassword"
             style="@style/InputBox"
             android:layout_width="0dp"
@@ -99,7 +137,7 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toStartOf="@id/rightGuideline"
             app:layout_constraintStart_toEndOf="@id/leftGuideline"
-            app:layout_constraintTop_toBottomOf="@id/etEmail"
+            app:layout_constraintTop_toBottomOf="@id/etPhoneNumber"
             tools:ignore="LabelFor" />
 
         <EditText
@@ -116,44 +154,6 @@
             app:layout_constraintTop_toBottomOf="@id/etPassword"
             tools:ignore="LabelFor" />
 
-        <EditText
-            android:id="@+id/etPhoneNumber"
-            style="@style/InputBox"
-            android:layout_width="0dp"
-            android:paddingStart="@dimen/_65sdp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:autofillHints="no"
-            android:hint="@string/str_hint_phone_number"
-            android:inputType="phone"
-            app:layout_constraintEnd_toStartOf="@id/rightGuideline"
-            app:layout_constraintStart_toStartOf="@id/leftGuideline"
-            app:layout_constraintTop_toBottomOf="@id/etConfirmPassword"
-            tools:ignore="LabelFor" />
-
-        <com.hbb20.CountryCodePicker
-            android:id="@+id/spinnerCountryCode"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:background="@drawable/shape_input"
-            android:layout_marginLeft="@dimen/_1sdp"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:paddingStart="@dimen/_4sdp"
-            android:paddingTop="@dimen/_4sdp"
-            android:paddingEnd="@dimen/_4sdp"
-            app:ccp_showFlag="false"
-            app:ccpDialog_textColor="@color/texttrial"
-            app:ccp_arrowSize="@dimen/_10sdp"
-            app:ccp_defaultNameCode="IN"
-            app:ccp_showArrow="true"
-            app:ccp_showFullName="false"
-            app:ccp_showNameCode="true"
-            app:ccp_showPhoneCode="true"
-            app:ccp_textSize="@dimen/_10ssp"
-            app:layout_constraintTop_toTopOf="@+id/etPhoneNumber"
-            app:layout_constraintStart_toStartOf="@+id/leftGuideline"
-            app:layout_constraintBottom_toBottomOf="@+id/etPhoneNumber"
-           />
 
         <Button
             android:id="@+id/btnCreateAccount"
