@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -55,7 +56,7 @@
                     android:src="@mipmap/help_icon_grey" />
             </RelativeLayout>
 
-            <ScrollView
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -79,30 +80,30 @@
                         android:textSize="@dimen/_12ssp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ProgressBar
                         android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="200dp"
                         android:layout_height="200dp"
-                        android:indeterminate="false"
                         android:layout_centerHorizontal="true"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_personal_budget_det"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:progressDrawable="@drawable/circular_progress_bar"
                         android:background="@drawable/circle_shape"
-                        style="?android:attr/progressBarStyleHorizontal"
+                        android:indeterminate="false"
                         android:max="100"
-                        android:progress="0" />
+                        android:progress="0"
+                        android:progressDrawable="@drawable/circular_progress_bar"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_personal_budget_det" />
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="@+id/progressBar"
-                        app:layout_constraintStart_toStartOf="@+id/progressBar"
                         app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-                        app:layout_constraintEnd_toEndOf="@+id/progressBar">
+                        app:layout_constraintEnd_toEndOf="@+id/progressBar"
+                        app:layout_constraintStart_toStartOf="@+id/progressBar"
+                        app:layout_constraintTop_toTopOf="@+id/progressBar">
 
                         <LinearLayout
                             android:id="@+id/ll_cal"
@@ -113,42 +114,39 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="1,234"
                                 android:fontFamily="@font/inter_bold"
+                                android:text="1,234"
                                 android:textColor="@color/texttrial"
-                                android:textSize="@dimen/_12ssp"
-                                />
+                                android:textSize="@dimen/_12ssp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
                                 android:text="/"
                                 android:textColor="@color/black"
-                                android:fontFamily="@font/inter_bold"
-                                android:textSize="@dimen/_12ssp"/>
+                                android:textSize="@dimen/_12ssp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
                                 android:text="1,500-2,000"
                                 android:textColor="@color/black"
-                                android:fontFamily="@font/inter_bold"
-                                android:textSize="@dimen/_12ssp"
-                                />
+                                android:textSize="@dimen/_12ssp" />
 
                         </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Daily Calories Budget"
-                            android:fontFamily="@font/inter_regular"
-                            android:textStyle="italic"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_8ssp"
                             android:layout_below="@+id/ll_cal"
                             android:layout_centerInParent="true"
-                            />
+                            android:fontFamily="@font/inter_regular"
+                            android:text="Daily Calories Budget"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_8ssp"
+                            android:textStyle="italic" />
 
                     </RelativeLayout>
 
@@ -168,9 +166,9 @@
                         android:id="@+id/tv_start_cal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
                         android:fontFamily="@font/inter_bold"
                         android:text="120g"
-                        android:layout_marginStart="@dimen/_10sdp"
                         android:textColor="@color/texttrial"
                         android:textSize="@dimen/_12ssp"
                         app:layout_constraintStart_toStartOf="@+id/v_gram_cal"
@@ -180,9 +178,9 @@
                         android:id="@+id/tv_end_cal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_10sdp"
                         android:fontFamily="@font/inter_bold"
                         android:text="240g"
-                        android:layout_marginEnd="@dimen/_10sdp"
                         android:textColor="@color/texttrial"
                         android:textSize="@dimen/_12ssp"
                         app:layout_constraintEnd_toEndOf="@+id/v_gram_cal"
@@ -205,56 +203,52 @@
                         android:id="@+id/tv_weekly_cal_bud"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_daily_range"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:text="Weekly Calorie Budget"
-                        android:textSize="@dimen/_18ssp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/inter_bold"
-                        android:textStyle="italic"
+                        android:text="Weekly Calorie Budget"
                         android:textColor="@color/black"
-                        />
-
+                        android:textSize="@dimen/_18ssp"
+                        android:textStyle="italic"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_daily_range" />
 
 
                     <LinearLayout
                         android:id="@+id/ll_cal_bud"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_weekly_cal_bud"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         android:orientation="horizontal"
-                        >
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_weekly_cal_bud">
+
                         <TextView
                             android:id="@+id/tv_consume"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/_12ssp"
-                            android:text="7,878"
                             android:fontFamily="@font/inter_bold"
-                            android:textStyle="italic"
+                            android:text="7,878"
                             android:textColor="@color/texttrial"
-                            />
+                            android:textSize="@dimen/_12ssp"
+                            android:textStyle="italic" />
+
                         <TextView
                             android:id="@+id/tv_slash"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
                             android:text="/"
-                            />
+                            android:textColor="@color/black" />
 
                         <TextView
                             android:id="@+id/tv_tot_cal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/_12ssp"
-                            android:text="10,500-14,000"
                             android:fontFamily="@font/inter_bold"
-                            android:textStyle="italic"
+                            android:text="10,500-14,000"
                             android:textColor="@color/black"
-                            />
+                            android:textSize="@dimen/_12ssp"
+                            android:textStyle="italic" />
 
 
                     </LinearLayout>
@@ -263,114 +257,106 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Total Weekly Calorie Budget"
-                        app:layout_constraintStart_toStartOf="@+id/ll_cal_bud"
-                        app:layout_constraintEnd_toEndOf="@+id/ll_cal_bud"
-                        app:layout_constraintTop_toBottomOf="@+id/ll_cal_bud"
                         android:textColor="@color/black"
-                        />
+                        app:layout_constraintEnd_toEndOf="@+id/ll_cal_bud"
+                        app:layout_constraintStart_toStartOf="@+id/ll_cal_bud"
+                        app:layout_constraintTop_toBottomOf="@+id/ll_cal_bud" />
 
                     <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/barChart"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        android:layout_marginTop="@dimen/_30sdp"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_140sdp"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_weekly_cal_bud"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
                         app:layout_constraintStart_toStartOf="parent"
-                        />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_weekly_cal_bud" />
 
                     <View
                         android:layout_width="0dp"
                         android:layout_height="1dp"
-                        android:background="@color/black"
                         android:layout_marginBottom="@dimen/_20sdp"
-                        app:layout_constraintTop_toBottomOf="@+id/barChart"
-                        app:layout_constraintStart_toStartOf="@+id/barChart"
+                        android:background="@color/black"
                         app:layout_constraintEnd_toEndOf="@+id/barChart"
-                        />
+                        app:layout_constraintStart_toStartOf="@+id/barChart"
+                        app:layout_constraintTop_toBottomOf="@+id/barChart" />
 
                     <View
                         android:layout_width="1dp"
                         android:layout_height="0dp"
                         android:background="@color/black"
-                        app:layout_constraintTop_toTopOf="@+id/barChart"
                         app:layout_constraintBottom_toBottomOf="@+id/barChart"
                         app:layout_constraintStart_toStartOf="@+id/barChart"
-                        />
+                        app:layout_constraintTop_toTopOf="@+id/barChart" />
 
 
                     <LinearLayout
                         android:id="@+id/ll_color_Dec"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:layout_margin="@dimen/_20sdp"
-                        app:layout_constraintTop_toBottomOf="@+id/barChart"
-                        app:layout_constraintStart_toStartOf="@+id/barChart">
+                        android:orientation="vertical"
+                        app:layout_constraintStart_toStartOf="@+id/barChart"
+                        app:layout_constraintTop_toBottomOf="@+id/barChart">
 
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             android:layout_margin="@dimen/_3sdp"
+                            android:orientation="horizontal"
                             android:weightSum="1">
 
                             <LinearLayout
                                 android:layout_width="0dp"
+                                android:layout_height="wrap_content"
                                 android:layout_weight=".5"
-                                android:orientation="horizontal"
-                                android:layout_height="wrap_content">
+                                android:orientation="horizontal">
 
                                 <View
                                     android:id="@+id/v_blue"
                                     android:layout_width="@dimen/_10sdp"
                                     android:layout_height="@dimen/_10sdp"
                                     android:background="@color/texttrial"
-                                    app:layout_constraintTop_toBottomOf="@+id/barChart"
                                     app:layout_constraintStart_toStartOf="@+id/barChart"
-                                    />
+                                    app:layout_constraintTop_toBottomOf="@+id/barChart" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    app:layout_constraintStart_toEndOf="@+id/v_blue"
-                                    app:layout_constraintTop_toTopOf="@+id/v_blue"
-                                    app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                                    android:layout_marginStart="@dimen/_10sdp"
                                     android:text="3,000 Calories on Monday"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/_8ssp"
-                                    android:layout_marginStart="@dimen/_10sdp"
-                                    />
+                                    app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                                    app:layout_constraintStart_toEndOf="@+id/v_blue"
+                                    app:layout_constraintTop_toTopOf="@+id/v_blue" />
 
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="0dp"
-                                android:layout_weight=".5"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".5">
 
                                 <View
                                     android:id="@+id/v_green"
                                     android:layout_width="@dimen/_10sdp"
                                     android:layout_height="@dimen/_10sdp"
                                     android:background="@color/teal_200"
-                                    app:layout_constraintTop_toBottomOf="@+id/barChart"
                                     app:layout_constraintStart_toStartOf="@+id/barChart"
-                                    />
+                                    app:layout_constraintTop_toBottomOf="@+id/barChart" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    app:layout_constraintStart_toEndOf="@+id/v_blue"
-                                    app:layout_constraintTop_toTopOf="@+id/v_blue"
-                                    app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                                    android:layout_marginStart="@dimen/_10sdp"
                                     android:text="2,000 Calories on Firday"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/_8ssp"
-                                    android:layout_marginStart="@dimen/_10sdp"
-                                    />
+                                    app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                                    app:layout_constraintStart_toEndOf="@+id/v_blue"
+                                    app:layout_constraintTop_toTopOf="@+id/v_blue" />
 
                             </LinearLayout>
 
@@ -379,64 +365,60 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             android:layout_margin="@dimen/_3sdp"
+                            android:orientation="horizontal"
                             android:weightSum="1">
 
                             <LinearLayout
                                 android:layout_width="0dp"
+                                android:layout_height="wrap_content"
                                 android:layout_weight=".5"
-                                android:orientation="horizontal"
-                                android:layout_height="wrap_content">
+                                android:orientation="horizontal">
 
                                 <View
                                     android:id="@+id/v_orange"
                                     android:layout_width="@dimen/_10sdp"
                                     android:layout_height="@dimen/_10sdp"
                                     android:background="@color/orange"
-                                    app:layout_constraintTop_toBottomOf="@+id/barChart"
                                     app:layout_constraintStart_toStartOf="@+id/barChart"
-                                    />
+                                    app:layout_constraintTop_toBottomOf="@+id/barChart" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    app:layout_constraintStart_toEndOf="@+id/v_blue"
-                                    app:layout_constraintTop_toTopOf="@+id/v_blue"
-                                    app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                                    android:layout_marginStart="@dimen/_10sdp"
                                     android:text="1,300 Calories on Tuesday"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/_8ssp"
-                                    android:layout_marginStart="@dimen/_10sdp"
-                                    />
+                                    app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                                    app:layout_constraintStart_toEndOf="@+id/v_blue"
+                                    app:layout_constraintTop_toTopOf="@+id/v_blue" />
 
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="0dp"
-                                android:layout_weight=".5"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".5">
 
                                 <View
                                     android:id="@+id/v_pink"
                                     android:layout_width="@dimen/_10sdp"
                                     android:layout_height="@dimen/_10sdp"
                                     android:background="@color/purple"
-                                    app:layout_constraintTop_toBottomOf="@+id/barChart"
                                     app:layout_constraintStart_toStartOf="@+id/barChart"
-                                    />
+                                    app:layout_constraintTop_toBottomOf="@+id/barChart" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    app:layout_constraintStart_toEndOf="@+id/v_blue"
-                                    app:layout_constraintTop_toTopOf="@+id/v_blue"
-                                    app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                                    android:layout_marginStart="@dimen/_10sdp"
                                     android:text="0 Calories on Saturday"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/_8ssp"
-                                    android:layout_marginStart="@dimen/_10sdp"
-                                    />
+                                    app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                                    app:layout_constraintStart_toEndOf="@+id/v_blue"
+                                    app:layout_constraintTop_toTopOf="@+id/v_blue" />
 
                             </LinearLayout>
 
@@ -445,64 +427,60 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             android:layout_margin="@dimen/_3sdp"
+                            android:orientation="horizontal"
                             android:weightSum="1">
 
                             <LinearLayout
                                 android:layout_width="0dp"
+                                android:layout_height="wrap_content"
                                 android:layout_weight=".5"
-                                android:orientation="horizontal"
-                                android:layout_height="wrap_content">
+                                android:orientation="horizontal">
 
                                 <View
                                     android:id="@+id/v_sky"
                                     android:layout_width="@dimen/_10sdp"
                                     android:layout_height="@dimen/_10sdp"
                                     android:background="@color/skyblue"
-                                    app:layout_constraintTop_toBottomOf="@+id/barChart"
                                     app:layout_constraintStart_toStartOf="@+id/barChart"
-                                    />
+                                    app:layout_constraintTop_toBottomOf="@+id/barChart" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    app:layout_constraintStart_toEndOf="@+id/v_blue"
-                                    app:layout_constraintTop_toTopOf="@+id/v_blue"
-                                    app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                                    android:layout_marginStart="@dimen/_10sdp"
                                     android:text="1,500 Calories on Wednesday"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/_8ssp"
-                                    android:layout_marginStart="@dimen/_10sdp"
-                                    />
+                                    app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                                    app:layout_constraintStart_toEndOf="@+id/v_blue"
+                                    app:layout_constraintTop_toTopOf="@+id/v_blue" />
 
                             </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="0dp"
-                                android:layout_weight=".5"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".5">
 
                                 <View
                                     android:id="@+id/v_red"
                                     android:layout_width="@dimen/_10sdp"
                                     android:layout_height="@dimen/_10sdp"
                                     android:background="@color/red"
-                                    app:layout_constraintTop_toBottomOf="@+id/barChart"
                                     app:layout_constraintStart_toStartOf="@+id/barChart"
-                                    />
+                                    app:layout_constraintTop_toBottomOf="@+id/barChart" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    app:layout_constraintStart_toEndOf="@+id/v_blue"
-                                    app:layout_constraintTop_toTopOf="@+id/v_blue"
-                                    app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                                    android:layout_marginStart="@dimen/_10sdp"
                                     android:text="0 Calories on Sunday"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/_8ssp"
-                                    android:layout_marginStart="@dimen/_10sdp"
-                                    />
+                                    app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                                    app:layout_constraintStart_toEndOf="@+id/v_blue"
+                                    app:layout_constraintTop_toTopOf="@+id/v_blue" />
 
                             </LinearLayout>
 
@@ -515,87 +493,84 @@
                     <LinearLayout
                         android:id="@+id/cl_add_remove"
                         android:layout_width="match_parent"
-                        android:background="@drawable/bg_add_remove"
-                        android:layout_margin="@dimen/_20sdp"
-                        android:orientation="vertical"
                         android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_20sdp"
+                        android:background="@drawable/bg_add_remove"
+                        android:orientation="vertical"
                         app:layout_constraintTop_toBottomOf="@+id/ll_color_Dec">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_2sdp"
                             android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
                             android:layout_marginEnd="@dimen/_2sdp"
-                            android:textColor="@color/black"
                             android:fontFamily="@font/inter_medium"
-                            android:textStyle="italic"
-                            android:textSize="@dimen/_11ssp"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
                             android:text="Maually Add/Remove Calories"
-                            />
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_11ssp"
+                            android:textStyle="italic"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_marginBottom="@dimen/_8sdp"
-                            android:layout_height="@dimen/_35sdp">
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_marginBottom="@dimen/_8sdp">
 
                             <EditText
                                 android:id="@+id/et_cal"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/shape_input"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
                                 android:layout_marginStart="@dimen/_5sdp"
                                 android:layout_marginEnd="@dimen/_5sdp"
+                                android:background="@drawable/shape_input"
+                                android:fontFamily="@font/inter_regular"
                                 android:hint="110"
                                 android:paddingStart="@dimen/_5sdp"
-                                android:fontFamily="@font/inter_regular"
-                                android:textStyle="italic"
                                 android:textColorHint="@color/black"
                                 android:textSize="@dimen/_22ssp"
-                                />
+                                android:textStyle="italic"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/tv_add_cal"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/white"
-                                android:text="Add Calories"
-                                android:textStyle="italic"
+                                android:background="@drawable/bg_round_corner_blue_background"
                                 android:fontFamily="@font/inter_medium"
                                 android:gravity="end"
-                                android:textSize="@dimen/_9ssp"
                                 android:paddingStart="@dimen/_15sdp"
                                 android:paddingTop="@dimen/_2sdp"
-                                android:paddingBottom="@dimen/_2sdp"
                                 android:paddingEnd="@dimen/_5sdp"
-                                android:background="@drawable/bg_round_corner_blue_background"
-                                app:layout_constraintTop_toTopOf="@+id/et_cal"
+                                android:paddingBottom="@dimen/_2sdp"
+                                android:text="Add Calories"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_9ssp"
+                                android:textStyle="italic"
                                 app:layout_constraintEnd_toEndOf="@+id/tv_remove_cal"
                                 app:layout_constraintStart_toStartOf="@+id/tv_remove_cal"
-                                />
+                                app:layout_constraintTop_toTopOf="@+id/et_cal" />
 
                             <TextView
                                 android:id="@+id/tv_remove_cal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/bg_round_corner_blue_background"
-                                android:text="Remove Calories"
-                                android:fontFamily="@font/inter_medium"
-                                android:textStyle="italic"
-                                android:textSize="@dimen/_9ssp"
-                                android:gravity="end"
                                 android:layout_marginEnd="@dimen/_3sdp"
+                                android:background="@drawable/bg_round_corner_blue_background"
+                                android:fontFamily="@font/inter_medium"
+                                android:gravity="end"
                                 android:paddingStart="@dimen/_15sdp"
                                 android:paddingTop="@dimen/_2sdp"
-                                android:paddingBottom="@dimen/_2sdp"
                                 android:paddingEnd="@dimen/_5sdp"
+                                android:paddingBottom="@dimen/_2sdp"
+                                android:text="Remove Calories"
                                 android:textColor="@color/white"
-                                app:layout_constraintTop_toBottomOf="@+id/tv_add_cal"
+                                android:textSize="@dimen/_9ssp"
+                                android:textStyle="italic"
                                 app:layout_constraintEnd_toEndOf="@+id/et_cal"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_add_cal"
 
                                 />
 
@@ -608,33 +583,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_180sdp"
                         android:layout_margin="@dimen/_20sdp"
-                        app:layout_constraintTop_toBottomOf="@+id/cl_add_remove"
                         app:layout_constraintStart_toStartOf="parent"
-                        />
+                        app:layout_constraintTop_toBottomOf="@+id/cl_add_remove" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </ScrollView>
+            </androidx.core.widget.NestedScrollView>
         </LinearLayout>
     </LinearLayout>
+
+
 </layout>
 
-
-    <!--
-    <?xml version="1.0" encoding="utf-8"?>
-        <layout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools">
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true">
-
-
-        </androidx.core.widget.NestedScrollView>
-
-
-    </layout>
-    -->
