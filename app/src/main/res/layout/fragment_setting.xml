@@ -265,8 +265,8 @@
                         android:text="Made possible by Angel De Amor."
                         android:textStyle="italic"
                         android:fontFamily="@font/inter_regular"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_12ssp"
+                        android:textColor="@color/backgroundColor"
+                        android:textSize="@dimen/_10ssp"
                         />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,7 @@ import com.fighterdiet.utils.Utils
 
 class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener {
     private lateinit var binding: ActivityIntroAndDecisionBinding
-    private var selected: Int = -1 // 0 -> Not selected 1 -> Selected
+    private var selected: Int = 1 // 0 -> Not selected 1 -> Selected
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +23,8 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener {
     private fun initialise() {
         binding.clIntroScreen.visibility = View.VISIBLE
         binding.clDecisionScreen.visibility = View.GONE
+
+        binding.tvDecisionYes.setBackgroundResource(R.drawable.shape_decision_selected)
 
         binding.tvIntroNext.setOnClickListener(this)
         binding.tvDecisionNext.setOnClickListener(this)
@@ -64,7 +66,6 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener {
                         Constants.isQuestonnaireCompleted = false
                         startActivity(MemberShipActivity.getStartIntent(this))
                         finish()
-
                     }
                 } else {
                     Utils.showSnackBar(v, getString(R.string.str_please_select_any_option))

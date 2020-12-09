@@ -40,6 +40,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:autofillHints="no"
             android:hint="@string/str_hint_userid"
+            android:drawableRight="@mipmap/ic_green_tick"
             android:inputType="text"
             app:layout_constraintEnd_toStartOf="@id/rightGuideline"
             app:layout_constraintStart_toEndOf="@id/leftGuideline"
@@ -100,7 +101,7 @@
             android:paddingStart="@dimen/_65sdp"
             app:layout_constraintEnd_toStartOf="@id/rightGuideline"
             app:layout_constraintStart_toStartOf="@id/leftGuideline"
-            app:layout_constraintTop_toBottomOf="@id/etEmail"
+            app:layout_constraintTop_toBottomOf="@id/etConfirmPassword"
             tools:ignore="LabelFor" />
 
         <com.hbb20.CountryCodePicker
@@ -137,7 +138,7 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toStartOf="@id/rightGuideline"
             app:layout_constraintStart_toEndOf="@id/leftGuideline"
-            app:layout_constraintTop_toBottomOf="@id/etPhoneNumber"
+            app:layout_constraintTop_toBottomOf="@id/etEmail"
             tools:ignore="LabelFor" />
 
         <EditText
@@ -148,6 +149,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:autofillHints="no"
             android:hint="@string/str_hint_confirm_password"
+            android:drawableRight="@mipmap/ic_green_tick"
             android:inputType="textPassword"
             app:layout_constraintEnd_toStartOf="@id/rightGuideline"
             app:layout_constraintStart_toEndOf="@id/leftGuideline"

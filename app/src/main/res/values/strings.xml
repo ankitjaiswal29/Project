@@ -81,4 +81,8 @@
     <string name="str_walkthrough_text_3">Fall in love with healthy \n desserts!</string>
     <string name="str_walkthrough_text_4">Love what you eat!</string>
     <string name="str_walkthrough_text_1">Eat more, lose more \n body fat!</string>
+    <string name="str_or">or</string>
+    <string name="str_cm">cm</string>
+    <string name="str_lbs">lbs</string>
+    <string name="str_kg">kg</string>
 </resources>

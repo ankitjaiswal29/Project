@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="str_or">or</string>
+    <string name="str_cm">cm</string>
+    <string name="str_lbs">lbs</string>
+    <string name="str_kg">kg</string>
+</resources>

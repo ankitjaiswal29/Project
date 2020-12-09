@@ -3,16 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.core.widget.NestedScrollView
-        android:paddingStart="@dimen/_20sdp"
-        android:paddingEnd="@dimen/_20sdp"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        tools:background="@color/colorBlack">
+<!--    <androidx.core.widget.NestedScrollView-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_width="match_parent"-->
+<!--        tools:background="@color/colorBlack"-->
+<!--        android:fitsSystemWindows="true"-->
+<!--        >-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            tools:background="@color/colorBlack"
+            >
 
             <EditText
                 android:id="@+id/etFeet"
@@ -20,6 +22,7 @@
                 android:layout_height="@dimen/_60sdp"
                 android:background="@drawable/shape_height"
                 android:inputType="number"
+                android:imeOptions="actionNext"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toStartOf="@id/etInch"
                 app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +36,7 @@
                 android:layout_marginStart="@dimen/_1sdp"
                 android:fontFamily="@font/inter_bold"
                 android:text="@string/str_ft"
+                android:paddingStart="@dimen/_5sdp"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/_16ssp"
                 app:layout_constraintBottom_toBottomOf="@id/etFeet"
@@ -45,6 +49,7 @@
                 android:layout_height="@dimen/_60sdp"
                 android:background="@drawable/shape_height"
                 android:inputType="number"
+                android:imeOptions="actionNext"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/etFeet"
@@ -57,41 +62,140 @@
                 android:layout_marginStart="@dimen/_1sdp"
                 android:fontFamily="@font/inter_bold"
                 android:text="@string/str_in"
+                android:paddingStart="@dimen/_5sdp"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/_16ssp"
                 app:layout_constraintBottom_toBottomOf="@id/etInch"
                 app:layout_constraintStart_toEndOf="@id/etInch" />
 
             <TextView
+                android:id="@+id/tvOr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/str_or"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintEnd_toEndOf="@+id/etInch"
+                app:layout_constraintStart_toStartOf="@id/etFeet"
+                app:layout_constraintTop_toBottomOf="@id/etFeet" />
+
+
+            <EditText
+                android:id="@+id/etCm"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:background="@drawable/shape_height"
+                android:inputType="number"
+                android:imeOptions="actionNext"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@+id/etInch"
+                app:layout_constraintStart_toStartOf="@id/etFeet"
+                app:layout_constraintTop_toBottomOf="@id/tvOr"
+                tools:ignore="Autofill,LabelFor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/str_cm"
+                android:paddingStart="@dimen/_5sdp"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintBottom_toBottomOf="@id/etCm"
+                app:layout_constraintStart_toEndOf="@id/etCm" />
+
+
+            <TextView
                 android:id="@+id/tvWeight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:fontFamily="@font/inter_semibold"
                 android:text="@string/str_what_weight"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/_18ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/etFeet"
-
-                />
+                app:layout_constraintTop_toBottomOf="@id/etCm" />
 
             <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/shape_input"
+                android:id="@+id/etlbs"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:background="@drawable/shape_height"
                 android:inputType="number"
-                android:padding="@dimen/_10sdp"
-                android:text=""
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:imeOptions="actionNext"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="@+id/tvWeight"
+                app:layout_constraintStart_toStartOf="@id/tvWeight"
                 app:layout_constraintTop_toBottomOf="@id/tvWeight"
                 tools:ignore="Autofill,LabelFor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/str_lbs"
+                android:paddingStart="@dimen/_5sdp"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintBottom_toBottomOf="@id/etlbs"
+                app:layout_constraintStart_toEndOf="@id/etlbs" />
+
+            <TextView
+                android:id="@+id/tvOrr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/str_or"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintEnd_toEndOf="@+id/etlbs"
+                app:layout_constraintStart_toStartOf="@id/etlbs"
+                app:layout_constraintTop_toBottomOf="@id/etlbs" />
+
+
+            <EditText
+                android:id="@+id/etKg"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:background="@drawable/shape_height"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:imeOptions="actionNext"
+                app:layout_constraintEnd_toEndOf="@+id/tvOrr"
+                app:layout_constraintStart_toStartOf="@id/tvOrr"
+                app:layout_constraintTop_toBottomOf="@id/tvOrr"
+                tools:ignore="Autofill,LabelFor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_1sdp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/str_kg"
+                android:paddingStart="@dimen/_5sdp"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintBottom_toBottomOf="@id/etKg"
+                app:layout_constraintStart_toEndOf="@id/etKg" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60sdp"
+                app:layout_constraintTop_toBottomOf="@+id/etKg"
+                app:layout_constraintStart_toStartOf="parent"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.core.widget.NestedScrollView>
+<!--    </androidx.core.widget.NestedScrollView>-->
 </layout>

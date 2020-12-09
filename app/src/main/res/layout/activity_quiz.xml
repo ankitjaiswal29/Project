@@ -36,6 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/start_screen_margin"
                     android:layout_marginEnd="@dimen/end_screen_margin"
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:fontFamily="@font/inter_semibold"
                     android:textAlignment="center"
                     android:textColor="@color/colorWhite"
@@ -63,7 +64,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clHeader"

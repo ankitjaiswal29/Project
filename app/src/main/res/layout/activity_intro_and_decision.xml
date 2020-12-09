@@ -166,7 +166,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@drawable/shape_decision_unselected"
+                    android:background="@drawable/shape_decision_selected"
                     android:paddingStart="@dimen/_20sdp"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingEnd="@dimen/_10sdp"

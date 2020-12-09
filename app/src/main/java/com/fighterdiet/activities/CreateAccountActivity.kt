@@ -25,7 +25,6 @@ class CreateAccountActivity : AppCompatActivity() {
     }
 
     companion object {
-
         fun getStartIntent(context: Context): Intent {
             return Intent(context, CreateAccountActivity::class.java)
         }
