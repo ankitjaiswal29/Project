@@ -9,7 +9,11 @@
         android:background="@color/black"
         tools:context=".activities.MemberShipActivity">
 
-        <LinearLayout
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_black_background" />
+
+    <!--    <LinearLayout
             android:id="@+id/ll_fighter_diet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,7 +59,7 @@
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ll_fighter_diet" />
+            app:layout_constraintTop_toBottomOf="@+id/ll_fighter_diet" />-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -66,7 +70,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_big_eat">
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
             <TextView
                 android:id="@+id/tv_free_trial"
