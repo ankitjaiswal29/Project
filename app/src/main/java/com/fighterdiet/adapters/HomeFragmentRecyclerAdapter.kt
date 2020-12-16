@@ -22,6 +22,7 @@ class HomeFragmentRecyclerAdapter(
     private var itemClickListener: RecyclerViewItemClickListener?
 ) : RecyclerView.Adapter<HomeFragmentRecyclerAdapter.MyViewHolder>() {
     var i = 0
+
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         val binding: ItemHomeFragmentRecyclerDesignBinding? = DataBindingUtil.bind(itemView)
@@ -40,31 +41,27 @@ class HomeFragmentRecyclerAdapter(
                 else -> {
                     i++
                     val handler = Handler()
-                    val run:Runnable = object :Runnable{
+                    val run: Runnable = object : Runnable {
                         override fun run() {
                             i = 0
                         }
                     }
-                    if (i == 1){
-                        if(homeList[adapterPosition].isselected){
-                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                                binding?.imvItemHome?.foreground = ContextCompat.getDrawable(context!!, R.drawable.bg_image_selected)
-                                homeList[adapterPosition].isselected = false
-//                            notifyDataSetChanged()
-                            }
-                        }else{
-                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                                homeList[adapterPosition].isselected = true
-                                binding?.imvItemHome?.foreground = null
-                            }
-                        }
-
-                        handler.postDelayed(run,400)
-                    }else if(i==2){
+                    if (i == 1) {
+                        clearSelection()
+                        homeList[adapterPosition].isselected = true
+                        notifyDataSetChanged()
+                        handler.postDelayed(run, 400)
+                    } else if (i == 2) {
                         context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
                     }
                 }
             }
+        }
+    }
+
+    fun clearSelection() {
+        for (i in 0 until homeList.size) {
+            homeList[i].isselected = false
         }
     }
 
@@ -81,6 +78,18 @@ class HomeFragmentRecyclerAdapter(
             holder.binding?.rlCaloriesDesc?.visibility = View.VISIBLE
         } else {
             holder.binding?.rlCaloriesDesc?.visibility = View.GONE
+        }
+
+        if (homeList.get(position).isselected) {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                holder.binding?.imvItemHome?.foreground = ContextCompat.getDrawable(
+                    context!!,
+                    R.drawable.bg_image_selected)
+            }
+        } else {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                holder.binding?.imvItemHome?.foreground = null
+            }
         }
     }
 

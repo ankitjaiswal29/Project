@@ -34,6 +34,7 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initialize()
+
     }
 
     private fun initialize() {
@@ -53,7 +54,6 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun setUpHomeRecyclerView() {
-
         binding.rvHomeRecycler.layoutManager = LinearLayoutManager(activity)
         homeAdapter = HomeFragmentRecyclerAdapter(activity, homeList) { position, view ->
 

@@ -224,9 +224,6 @@ class DashboardActivity : BaseActivity() {
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
-                if (tab.position == 0 || tab.position == 2 || tab.position == 3) {
-                    tab.setIcon(tabIcons4UnSelected[tab.position])
-                }
             }
 
             override fun onTabReselected(tab: TabLayout.Tab) {
