@@ -89,6 +89,7 @@
                 android:id="@+id/rv_one_day"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:itemCount="3"
                 tools:listitem="@layout/item_home_fragment_recycler_design" />
@@ -104,26 +105,29 @@
             android:background="@color/white"
             android:layout_gravity="bottom"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            >
+            app:layout_constraintStart_toStartOf="parent">
+
             <EditText
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="start"
                 android:hint="Search"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:textColorHint="@color/darkGrey"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:drawableStart="@mipmap/icn_search"
-                />
+                app:layout_constraintEnd_toStartOf="@+id/mv_filter"
+                android:drawableStart="@mipmap/icn_search" />
 
             <ImageView
                 android:id="@+id/mv_filter"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:src="@mipmap/filter"
+                android:layout_marginEnd="@dimen/_5sdp"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tv_next"
-                />
+                app:layout_constraintEnd_toStartOf="@+id/tv_next" />
 
             <TextView
                 android:id="@+id/tv_next"

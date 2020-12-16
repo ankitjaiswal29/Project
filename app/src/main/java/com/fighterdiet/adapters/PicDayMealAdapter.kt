@@ -39,7 +39,6 @@ class PicDayMealAdapter(
                         itemClickListener!!.onItemClick(adapterPosition,view)
                         doubleClickLastTime = System.currentTimeMillis()
                     }
-
             }
 
             when(view?.id){

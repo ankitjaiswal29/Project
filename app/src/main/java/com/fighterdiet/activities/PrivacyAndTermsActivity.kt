@@ -3,15 +3,20 @@ package com.fighterdiet.activities
 import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.fighterdiet.R
 import com.fighterdiet.databinding.ActivityPrivacyAndTermsBinding
 
-class PrivacyAndTermsActivity : AppCompatActivity(), View.OnClickListener {
+class PrivacyAndTermsActivity : BaseActivity(), View.OnClickListener {
     private lateinit var binding: ActivityPrivacyAndTermsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
         binding = DataBindingUtil.setContentView(this, R.layout.activity_privacy_and_terms)
         initialise()
     }

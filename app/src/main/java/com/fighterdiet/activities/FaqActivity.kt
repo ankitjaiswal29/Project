@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,12 +14,16 @@ import com.fighterdiet.databinding.ActivityFaqBinding
 import com.fighterdiet.model.FaqModel
 import java.util.*
 
-class FaqActivity : AppCompatActivity(), View.OnClickListener {
+class FaqActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityFaqBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
         binding = DataBindingUtil.setContentView(this, R.layout.activity_faq)
         initialise()
         setupRecyclerView()

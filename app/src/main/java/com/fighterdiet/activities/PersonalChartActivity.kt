@@ -3,6 +3,7 @@ package com.fighterdiet.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.fighterdiet.R
@@ -16,7 +17,10 @@ class PersonalChartActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
         binding = DataBindingUtil.setContentView(this, R.layout.activity_personal_chart)
         var bundle:Bundle = intent.extras!!
         var personalChartFragment:PersonalChartFragment = PersonalChartFragment()

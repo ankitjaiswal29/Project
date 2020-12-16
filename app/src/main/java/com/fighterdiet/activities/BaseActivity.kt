@@ -10,12 +10,13 @@ import com.fighterdiet.utils.Utils
 abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
         super.onCreate(savedInstanceState, persistentState)
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        );
+
     }
 
     override fun onBackPressed() {

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +15,7 @@ import com.fighterdiet.databinding.ActivityPicDaySevenMealsBinding
 import com.fighterdiet.models.home_frag.HomeModel
 import com.fighterdiet.utils.Utils
 
-class PicDaySevenMealsActivity : AppCompatActivity() {
+class PicDaySevenMealsActivity : BaseActivity() {
     lateinit var binding: ActivityPicDaySevenMealsBinding
     private lateinit var homeAdapter: PicDayMealAdapter
     var homeList: ArrayList<HomeModel> = ArrayList()
@@ -22,6 +23,10 @@ class PicDaySevenMealsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
         binding = DataBindingUtil.setContentView(this, R.layout.activity_pic_day_seven_meals)
         initialise()
     }

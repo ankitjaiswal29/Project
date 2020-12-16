@@ -6,17 +6,22 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import com.fighterdiet.R
 import com.fighterdiet.databinding.ActivityProfileAfterQuestionsBinding
 import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.Utils
 
-class ProfileAfterQuestionsActivity : AppCompatActivity(), View.OnClickListener {
+class ProfileAfterQuestionsActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding:ActivityProfileAfterQuestionsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
         binding = DataBindingUtil.setContentView(this,R.layout.activity_profile_after_questions)
         initialise()
     }

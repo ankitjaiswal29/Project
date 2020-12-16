@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import com.fighterdiet.R
 import com.fighterdiet.databinding.ActivityIntroAndDecisionBinding
@@ -16,6 +17,10 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
         binding = DataBindingUtil.setContentView(this, R.layout.activity_intro_and_decision)
         initialise()
     }

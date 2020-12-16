@@ -1,5 +1,6 @@
 package com.fighterdiet.adapters
 
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +13,15 @@ import com.fighterdiet.activities.RecipeInfoActivity
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
 import com.fighterdiet.interfaces.RecyclerViewItemClickListener
 import com.fighterdiet.models.home_frag.HomeModel
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragmentRecyclerAdapter(
     var context: FragmentActivity?,
     private var homeList: ArrayList<HomeModel>,
     private var itemClickListener: RecyclerViewItemClickListener?
 ) : RecyclerView.Adapter<HomeFragmentRecyclerAdapter.MyViewHolder>() {
-
+    var i = 0
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         val binding: ItemHomeFragmentRecyclerDesignBinding? = DataBindingUtil.bind(itemView)
@@ -35,7 +38,31 @@ class HomeFragmentRecyclerAdapter(
                     notifyDataSetChanged()
                 }
                 else -> {
-                    context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
+                    i++
+                    val handler = Handler()
+                    val run:Runnable = object :Runnable{
+                        override fun run() {
+                            i = 0
+                        }
+                    }
+                    if (i == 1){
+                        if(homeList[adapterPosition].isselected){
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                                binding?.imvItemHome?.foreground = ContextCompat.getDrawable(context!!, R.drawable.bg_image_selected)
+                                homeList[adapterPosition].isselected = false
+//                            notifyDataSetChanged()
+                            }
+                        }else{
+                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                                homeList[adapterPosition].isselected = true
+                                binding?.imvItemHome?.foreground = null
+                            }
+                        }
+
+                        handler.postDelayed(run,400)
+                    }else if(i==2){
+                        context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
+                    }
                 }
             }
         }

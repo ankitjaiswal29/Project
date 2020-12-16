@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FighterDietApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".fragments.DietryInfoActivity"></activity>
+        <activity android:name=".activities.ImageZoomOutActivity"></activity>
+        <activity android:name=".fragments.DietryInfoActivity" />
         <activity android:name=".activities.FilterActivity" />
         <activity
             android:name=".activities.PrivacyAndTermsActivity"
