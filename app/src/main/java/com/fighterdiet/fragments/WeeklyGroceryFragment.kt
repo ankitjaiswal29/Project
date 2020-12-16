@@ -1,5 +1,7 @@
 package com.fighterdiet.fragments
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +10,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
+import com.fighterdiet.activities.BaseActivity
 import com.fighterdiet.adapters.HomeFragmentRecyclerAdapter
 import com.fighterdiet.adapters.WeeklyGroceryListRecyAdapter
 import com.fighterdiet.databinding.FragmentWeeklyGroceryBinding
@@ -15,7 +18,7 @@ import com.fighterdiet.models.weekly_grocery_list.DairyModel
 import com.fighterdiet.utils.Utils
 
 
-class WeeklyGroceryFragment : BaseFragment() {
+class WeeklyGroceryFragment : BaseActivity() {
     lateinit var binding:FragmentWeeklyGroceryBinding
     private lateinit var dairyRecyler : WeeklyGroceryListRecyAdapter
     private lateinit var dairyList:ArrayList<DairyModel>
@@ -23,7 +26,16 @@ class WeeklyGroceryFragment : BaseFragment() {
     private lateinit var dryFoodList:ArrayList<DairyModel>
 //    private lateinit var List:ArrayList<DairyModel>
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this, R.layout.fragment_weekly_grocery)
+
+        initialise()
+
+    }
+
+    /*override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
@@ -39,7 +51,7 @@ class WeeklyGroceryFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initialise()
-    }
+    }*/
 
     private fun initialise() {
         setUpDairyList()
@@ -53,9 +65,18 @@ class WeeklyGroceryFragment : BaseFragment() {
         setUpBreadRecyclerView()
     }
 
+    companion object {
+        const val TAG = "WeeklyActivity"
+
+        fun getStartIntent(context: Context): Intent {
+            return Intent(context, WeeklyGroceryFragment::class.java)
+        }
+    }
+
+
     private fun setUpBreadRecyclerView() {
-        binding.rvBread.layoutManager = LinearLayoutManager(activity)
-        dairyRecyler = WeeklyGroceryListRecyAdapter(activity,dairyList){
+        binding.rvBread.layoutManager = LinearLayoutManager(this)
+        dairyRecyler = WeeklyGroceryListRecyAdapter(this,dairyList){
                 position,view ->
             Utils.showSnackBar(binding.rvBread,"mes")
         }
@@ -64,8 +85,8 @@ class WeeklyGroceryFragment : BaseFragment() {
     }
 
     private fun setUpSpicesRecyclerView() {
-        binding.rvSpiceBaking.layoutManager = LinearLayoutManager(activity)
-        dairyRecyler = WeeklyGroceryListRecyAdapter(activity,dairyList){
+        binding.rvSpiceBaking.layoutManager = LinearLayoutManager(this)
+        dairyRecyler = WeeklyGroceryListRecyAdapter(this,dairyList){
                 position,view ->
             Utils.showSnackBar(binding.rvSpiceBaking,"mes")
         }
@@ -75,8 +96,8 @@ class WeeklyGroceryFragment : BaseFragment() {
 
     private fun setUpProduceRecyclerView() {
 
-        binding.rvProduce.layoutManager = LinearLayoutManager(activity)
-        dairyRecyler = WeeklyGroceryListRecyAdapter(activity,dairyList){
+        binding.rvProduce.layoutManager = LinearLayoutManager(this)
+        dairyRecyler = WeeklyGroceryListRecyAdapter(this,dairyList){
                 position,view ->
             Utils.showSnackBar(binding.rvProduce,"mes")
         }
@@ -84,8 +105,8 @@ class WeeklyGroceryFragment : BaseFragment() {
     }
 
     private fun setUpDryFoodRecyclerView() {
-        binding.rvDryFood.layoutManager = LinearLayoutManager(activity)
-        dairyRecyler = WeeklyGroceryListRecyAdapter(activity,dryFoodList){
+        binding.rvDryFood.layoutManager = LinearLayoutManager(this)
+        dairyRecyler = WeeklyGroceryListRecyAdapter(this,dryFoodList){
                 position,view ->
             Utils.showSnackBar(binding.rvDryFood,"mes")
         }
@@ -95,8 +116,8 @@ class WeeklyGroceryFragment : BaseFragment() {
 
     private fun setUpMeatRecyclerView() {
 
-        binding.rvMeat.layoutManager = LinearLayoutManager(activity)
-        dairyRecyler = WeeklyGroceryListRecyAdapter(activity,meatList){
+        binding.rvMeat.layoutManager = LinearLayoutManager(this)
+        dairyRecyler = WeeklyGroceryListRecyAdapter(this,meatList){
                 position,view ->
             Utils.showSnackBar(binding.rvMeat,"mes")
         }
@@ -127,8 +148,8 @@ class WeeklyGroceryFragment : BaseFragment() {
 
     private fun setUpDairyRecyclerView() {
 
-        binding.rvDairy.layoutManager = LinearLayoutManager(activity)
-        dairyRecyler = WeeklyGroceryListRecyAdapter(activity,dairyList){
+        binding.rvDairy.layoutManager = LinearLayoutManager(this)
+        dairyRecyler = WeeklyGroceryListRecyAdapter(this,dairyList){
                 position,view ->
             Utils.showSnackBar(binding.rvDairy,"mes")
         }

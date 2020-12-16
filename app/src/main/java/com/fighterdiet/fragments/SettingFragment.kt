@@ -11,21 +11,23 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fighterdiet.R
-import com.fighterdiet.activities.FaqActivity
-import com.fighterdiet.activities.LoginActivity
-import com.fighterdiet.activities.PrivacyAndTermsActivity
-import com.fighterdiet.activities.QuizActivity
+import com.fighterdiet.activities.*
 import com.fighterdiet.databinding.FragmentSettingBinding
+import com.fighterdiet.utils.Constants
 
 
-class SettingFragment : BaseFragment(), View.OnClickListener {
-    lateinit var binding:FragmentSettingBinding
+class SettingFragment : BaseActivity(), View.OnClickListener {
+    lateinit var binding: FragmentSettingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this, R.layout.fragment_setting)
+
+        initialise()
+
     }
 
-    override fun onCreateView(
+   /* override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -37,7 +39,7 @@ class SettingFragment : BaseFragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initialise()
-    }
+    }*/
 
     private fun initialise() {
         binding.tvLogOut.setOnClickListener(this)
@@ -49,51 +51,62 @@ class SettingFragment : BaseFragment(), View.OnClickListener {
         binding.tvPrivacy.setOnClickListener(this)
     }
 
-
     companion object {
+        const val TAG = "SettingActivity"
+
+        fun getStartIntent(context: Context): Intent {
+            return Intent(context, SettingFragment::class.java)
+        }
+    }
+
+
+   /* companion object {
 
         fun getInstance(context: Context): Fragment {
             val bundle = Bundle()
             val fragment = SettingFragment()
             return fragment
         }
-    }
+    }*/
 
     override fun onClick(view: View?) {
         view?.let {
             when (view.id) {
                 R.id.tv_log_out -> {
-                    val loginIntent = Intent(activity, LoginActivity::class.java)
+                    val loginIntent = Intent(this, LoginActivity::class.java)
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(loginIntent)
                 }
                 R.id.tv_edit_question -> {
-                    val quiz = Intent(activity, QuizActivity::class.java)
+                    val quiz = Intent(this, QuizActivity::class.java)
                     quiz.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(quiz)
                 }
                 R.id.tv_faq -> {
-                    val faq = Intent(activity, FaqActivity::class.java)
+                    val faq = Intent(this, FaqActivity::class.java)
                     faq.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(faq)
                 }
                 R.id.tv_email -> {
                     try {
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "customerservice@fighterdiet.com"))
+                        val intent = Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("mailto:" + "customerservice@fighterdiet.com")
+                        )
                         startActivity(intent)
                     } catch (e: ActivityNotFoundException) {
                     }
                 }
-                R.id.tv_privacy ->{
-                    var quiz = Intent(activity, PrivacyAndTermsActivity::class.java)
-                    quiz.putExtra("URL","https://fighterdiet.com/privacy-policy/")
-                    quiz.putExtra("PRIVACY","PRIVACY POLICY")
+                R.id.tv_privacy -> {
+                    var quiz = Intent(this, PrivacyAndTermsActivity::class.java)
+                    quiz.putExtra("URL", "https://fighterdiet.com/privacy-policy/")
+                    quiz.putExtra("PRIVACY", "PRIVACY POLICY")
                     startActivity(quiz)
                 }
-                R.id.tv_terms ->{
-                    var quiz = Intent(activity, PrivacyAndTermsActivity::class.java)
-                    quiz.putExtra("URL","https://fighterdiet.com/terms-and-conditions/")
-                    quiz.putExtra("PRIVACY","TERMS AND CONDITIONS")
+                R.id.tv_terms -> {
+                    var quiz = Intent(this, PrivacyAndTermsActivity::class.java)
+                    quiz.putExtra("URL", "https://fighterdiet.com/terms-and-conditions/")
+                    quiz.putExtra("PRIVACY", "TERMS AND CONDITIONS")
                     startActivity(quiz)
                 }
             }

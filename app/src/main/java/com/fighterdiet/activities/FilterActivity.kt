@@ -1,5 +1,7 @@
 package com.fighterdiet.activities
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -23,6 +25,15 @@ class FilterActivity : BaseActivity() {
     private fun initialise() {
 
         initialiseViewPager()
+    }
+
+
+    companion object {
+        const val TAG = "filterActivity"
+
+        fun getStartIntent(context: Context): Intent {
+            return Intent(context, FilterActivity::class.java)
+        }
     }
 
     private fun initialiseViewPager() {
