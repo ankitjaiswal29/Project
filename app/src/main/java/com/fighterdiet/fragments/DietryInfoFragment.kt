@@ -6,12 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
+import com.fighterdiet.adapters.DietryInfoAdapter
+import com.fighterdiet.adapters.FavouriteFragmentRecyAdapter
 import com.fighterdiet.databinding.FragmentDietryInfoBinding
 import com.fighterdiet.databinding.FragmentFavouriteBinding
+import com.fighterdiet.model.DietryModel
+import com.fighterdiet.models.home_frag.HomeModel
+import com.fighterdiet.utils.Utils
 
 class DietryInfoFragment : Fragment() {
     lateinit var binding: FragmentDietryInfoBinding
+    private lateinit var dietryInfoAdapter : DietryInfoAdapter
+    var list:ArrayList<DietryModel> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -25,4 +33,34 @@ class DietryInfoFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initialise()
+    }
+
+    private fun initialise() {
+        setUpDietryList()
+        setUpRecyclerView()
+    }
+
+    private fun setUpRecyclerView() {
+        binding.rvDietryInfo.layoutManager = LinearLayoutManager(activity)
+        dietryInfoAdapter = DietryInfoAdapter(activity,list){
+                position,view ->
+            Utils.showSnackBar(binding.rvDietryInfo,"mes")
+        }
+        binding.rvDietryInfo.adapter = dietryInfoAdapter
+    }
+
+    private fun setUpDietryList() {
+        list.add(DietryModel("Milk/Dairy Free",false))
+        list.add(DietryModel("Soy Free",true))
+        list.add(DietryModel("Seafood Free",true))
+        list.add(DietryModel("Shellfish Free",false))
+        list.add(DietryModel("Eggs Free",false))
+        list.add(DietryModel("Peanuts Free",false))
+        list.add(DietryModel("Wheat Free",false))
+        list.add(DietryModel("tree Nuts Free",true))
+        list.add(DietryModel("Glutien Free",false))
+    }
 }

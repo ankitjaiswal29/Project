@@ -11,13 +11,13 @@
             android:id="@+id/cb_select"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:checked="true"
-            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_25sdp"
             android:button="@drawable/dietry_info_item_selector"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"

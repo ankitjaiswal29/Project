@@ -7,10 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
 import com.fighterdiet.activities.BaseActivity
+import com.fighterdiet.activities.FilterActivity
+import com.fighterdiet.activities.PicOneDayMealsActivity
 import com.fighterdiet.adapters.HomeFragmentRecyclerAdapter
 import com.fighterdiet.adapters.WeeklyGroceryListRecyAdapter
 import com.fighterdiet.databinding.FragmentWeeklyGroceryBinding
@@ -18,7 +21,7 @@ import com.fighterdiet.models.weekly_grocery_list.DairyModel
 import com.fighterdiet.utils.Utils
 
 
-class WeeklyGroceryFragment : BaseActivity() {
+class WeeklyGroceryFragment : BaseActivity(), View.OnClickListener {
     lateinit var binding:FragmentWeeklyGroceryBinding
     private lateinit var dairyRecyler : WeeklyGroceryListRecyAdapter
     private lateinit var dairyList:ArrayList<DairyModel>
@@ -29,6 +32,10 @@ class WeeklyGroceryFragment : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
         binding = DataBindingUtil.setContentView(this, R.layout.fragment_weekly_grocery)
 
         initialise()
@@ -54,6 +61,8 @@ class WeeklyGroceryFragment : BaseActivity() {
     }*/
 
     private fun initialise() {
+        binding.ivBack.setOnClickListener(this)
+        binding.tvEditPlan.setOnClickListener(this)
         setUpDairyList()
         setUpMeatList()
         setUpDryFoodList()
@@ -154,6 +163,20 @@ class WeeklyGroceryFragment : BaseActivity() {
             Utils.showSnackBar(binding.rvDairy,"mes")
         }
         binding.rvDairy.adapter = dairyRecyler
+    }
+
+    override fun onClick(view: View?) {
+        when(view?.id){
+
+            R.id.iv_back ->{
+                finish()
+            }
+
+            R.id.tv_edit_plan ->{
+                startActivity(PicOneDayMealsActivity.getStartIntent(this))
+            }
+
+        }
     }
 
 

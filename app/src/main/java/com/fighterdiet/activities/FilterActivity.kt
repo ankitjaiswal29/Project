@@ -9,21 +9,20 @@ import com.fighterdiet.R
 import com.fighterdiet.adapters.FilterPagerAdapter
 import com.fighterdiet.adapters.MyFragmentStateAdapter
 import com.fighterdiet.databinding.ActivityFilterBinding
-import com.fighterdiet.fragments.FavouriteFragment
-import com.fighterdiet.fragments.HomeFragment
-import com.fighterdiet.fragments.TrendingFragment
+import com.fighterdiet.fragments.*
+import com.google.android.material.tabs.TabLayoutMediator
 
 class FilterActivity : BaseActivity() {
     private lateinit var binding : ActivityFilterBinding
+    private lateinit var tabTitles:Array<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_filter)
-
         initialise()
     }
 
     private fun initialise() {
-
+        tabTitles = arrayOf("Dietry Info","Volume","Meals")
         initialiseViewPager()
     }
 
@@ -42,10 +41,18 @@ class FilterActivity : BaseActivity() {
                 supportFragmentManager, lifecycle
             )
 
-        pagerAdapter.addFragment(HomeFragment(), "")
-        pagerAdapter.addFragment(TrendingFragment(), "")
-        pagerAdapter.addFragment(FavouriteFragment(), "")
+        binding.tab.addTab(binding.tab.newTab().setText("Dietry Info"));
+        binding.tab.addTab(binding.tab.newTab().setText("Volume"));
+        binding.tab.addTab(binding.tab.newTab().setText("Meals"));
+
+        pagerAdapter.addFragment(DietryInfoFragment(), "Dietry Info")
+        pagerAdapter.addFragment(VolumeFragment(), "Volume")
+        pagerAdapter.addFragment(MealsFragment(), "Meals")
 
         binding.viewPager.adapter=pagerAdapter
+        TabLayoutMediator( binding.tab,   binding.viewPager) { tab, position ->
+            tab.text = tabTitles[position]
+            binding.viewPager.setCurrentItem(tab.position, true)
+        }.attach()
     }
 }
