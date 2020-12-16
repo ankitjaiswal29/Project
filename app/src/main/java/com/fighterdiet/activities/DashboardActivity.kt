@@ -7,7 +7,6 @@ import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fighterdiet.R
-import com.fighterdiet.adapters.ViewPagerWithCalDashboardAdapter
 import com.fighterdiet.databinding.ActivityDashboardWithCalaoriesBinding
 import com.fighterdiet.fragments.*
 import com.fighterdiet.utils.Constants
@@ -16,8 +15,6 @@ import com.google.android.material.tabs.TabLayout
 
 class DashboardActivity : BaseActivity() {
     private lateinit var binding: ActivityDashboardWithCalaoriesBinding
-    private lateinit var adapter: ViewPagerWithCalDashboardAdapter
-    private val fragments = ArrayList<Fragment>()
     lateinit var tab6Titles: Array<String>
     lateinit var tab4Titles: Array<String>
     lateinit var tabIcons4UnSelected: Array<Int>
@@ -91,7 +88,7 @@ class DashboardActivity : BaseActivity() {
         binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 Log.e(">>>>>", ">>>>>" + tab.position)
-                tab.setIcon(tabIcons6Selected[tab.position])
+                setIcon(tab.position)
 
                 when (tab.position) {
                     0 -> {
@@ -107,7 +104,7 @@ class DashboardActivity : BaseActivity() {
                         showFragment(FavouriteFragment())
                     }
                     4 -> {
-                        startActivity(SettingFragment.getStartIntent(this@DashboardActivity))
+                        startActivity(WeeklyGroceryFragment.getStartIntent(this@DashboardActivity))
                     }
                     5 -> {
                         showFragment(PersonalChartFragment())
@@ -120,11 +117,6 @@ class DashboardActivity : BaseActivity() {
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
                 Log.e(">>>>>", ">>>>>" + tab.position)
-                if (tab.position == 0 || tab.position == 2 || tab.position == 3 || tab.position == 5) {
-                    tab.setIcon(tabIcons6Selected[tab.position])
-                } else {
-                    tab.setIcon(tabIcons6UnSelected[tab.position])
-                }
             }
 
             override fun onTabReselected(tab: TabLayout.Tab) {
@@ -141,6 +133,39 @@ class DashboardActivity : BaseActivity() {
                 }
             }
         })
+    }
+
+    private fun setIcon(position: Int) {
+        if (position == 1 || position == 4 || position == 6) {
+            return
+        } else {
+            when (position) {
+                0 -> {
+                    binding.tabs.getTabAt(0)?.setIcon(tabIcons6Selected[0])
+                    binding.tabs.getTabAt(2)?.setIcon(tabIcons6UnSelected[2])
+                    binding.tabs.getTabAt(3)?.setIcon(tabIcons6UnSelected[3])
+                    binding.tabs.getTabAt(5)?.setIcon(tabIcons6UnSelected[5])
+                }
+                2 -> {
+                    binding.tabs.getTabAt(0)?.setIcon(tabIcons6UnSelected[0])
+                    binding.tabs.getTabAt(2)?.setIcon(tabIcons6Selected[2])
+                    binding.tabs.getTabAt(3)?.setIcon(tabIcons6UnSelected[3])
+                    binding.tabs.getTabAt(5)?.setIcon(tabIcons6UnSelected[5])
+                }
+                3 -> {
+                    binding.tabs.getTabAt(0)?.setIcon(tabIcons6UnSelected[0])
+                    binding.tabs.getTabAt(2)?.setIcon(tabIcons6UnSelected[2])
+                    binding.tabs.getTabAt(3)?.setIcon(tabIcons6Selected[3])
+                    binding.tabs.getTabAt(5)?.setIcon(tabIcons6UnSelected[5])
+                }
+                5 -> {
+                    binding.tabs.getTabAt(0)?.setIcon(tabIcons6UnSelected[0])
+                    binding.tabs.getTabAt(2)?.setIcon(tabIcons6UnSelected[2])
+                    binding.tabs.getTabAt(3)?.setIcon(tabIcons6UnSelected[3])
+                    binding.tabs.getTabAt(5)?.setIcon(tabIcons6Selected[5])
+                }
+            }
+        }
     }
 
     private fun initialise4Tab() {
@@ -177,9 +202,7 @@ class DashboardActivity : BaseActivity() {
         binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 Log.e(">>>>>", ">>>>>" + tab.position)
-                if (tab.position == 0 || tab.position == 2 || tab.position == 3) {
-                    tab.setIcon(tabIcons4Selected[tab.position])
-                }
+                setIcon4(tab.position)
 
                 when (tab.position) {
                     0 -> {
@@ -218,6 +241,30 @@ class DashboardActivity : BaseActivity() {
 
             }
         })
+    }
+
+    private fun setIcon4(position: Int) {
+        if (position == 1 || position == 4) {
+            return
+        } else {
+            when (position) {
+                0 -> {
+                    binding.tabs.getTabAt(0)?.setIcon(tabIcons4Selected[0])
+                    binding.tabs.getTabAt(2)?.setIcon(tabIcons4UnSelected[2])
+                    binding.tabs.getTabAt(3)?.setIcon(tabIcons4UnSelected[3])
+                }
+                2 -> {
+                    binding.tabs.getTabAt(0)?.setIcon(tabIcons4UnSelected[0])
+                    binding.tabs.getTabAt(2)?.setIcon(tabIcons4Selected[2])
+                    binding.tabs.getTabAt(3)?.setIcon(tabIcons4UnSelected[3])
+                }
+                3 -> {
+                    binding.tabs.getTabAt(0)?.setIcon(tabIcons4UnSelected[0])
+                    binding.tabs.getTabAt(2)?.setIcon(tabIcons4UnSelected[2])
+                    binding.tabs.getTabAt(3)?.setIcon(tabIcons4Selected[3])
+                }
+            }
+        }
     }
 
 }
