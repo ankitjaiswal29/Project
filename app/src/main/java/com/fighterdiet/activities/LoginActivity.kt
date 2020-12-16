@@ -1,7 +1,7 @@
 package com.fighterdiet.activities
 
 import android.os.Bundle
-import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
@@ -18,6 +18,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     private lateinit var timer: Timer
     private var duration: Long = 2 * 1000 // Seconds
     private var currentPage: Int = 0
+    private var isWalkthroughHold: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         binding.viewpager.offscreenPageLimit = 4
         binding.viewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-//                Log.e(TAG, ">>>>> Position :: $position")
                 currentPage = position
                 setupIndicator(position)
             }
@@ -56,6 +56,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             override fun run() {
                 runOnUiThread(object : Runnable {
                     override fun run() {
+                        if (isWalkthroughHold)
+                            return
                         if (currentPage == 3)
                             currentPage = -1
                         binding.viewpager.setCurrentItem(currentPage + 1, true)
@@ -117,6 +119,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 startActivity(IntroAndDecisionActivity.getStartIntent(this))
             }
         }
+    }
+
+    fun setHold(value: Boolean) {
+        this.isWalkthroughHold = value
     }
 
     override fun onStop() {

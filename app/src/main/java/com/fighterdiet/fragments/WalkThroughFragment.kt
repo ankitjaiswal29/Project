@@ -1,12 +1,15 @@
 package com.fighterdiet.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fighterdiet.R
+import com.fighterdiet.activities.LoginActivity
 import com.fighterdiet.databinding.FragmentWalkThroughBinding
 
 class WalkThroughFragment : BaseFragment() {
@@ -23,7 +26,7 @@ class WalkThroughFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_walk_through, container, false)
         return binding.root
@@ -49,6 +52,26 @@ class WalkThroughFragment : BaseFragment() {
             3 -> {
                 binding.ivBackgroundImage.setImageResource(images[3])
             }
+        }
+
+        binding.ivBackgroundImage.setOnTouchListener { v, event ->
+            when (event?.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    Log.e("TAG",">>>>> Mouse Down")
+                    if (activity is LoginActivity)
+                        (activity as LoginActivity).setHold(true)
+                }
+                MotionEvent.ACTION_UP -> {
+                    Log.e("TAG",">>>>> Mouse Up")
+                    if (activity is LoginActivity)
+                        (activity as LoginActivity).setHold(false)
+                }
+                MotionEvent.ACTION_MOVE -> {
+//                    Log.e("TAG",">>>>> Mouse Move")
+                }
+
+            }
+            true
         }
     }
 
