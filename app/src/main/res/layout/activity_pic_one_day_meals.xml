@@ -3,6 +3,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,102 +18,132 @@
                 android:layout_height="wrap_content"
                 android:fitsSystemWindows="true">
 
-                <include
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    android:background="@color/black">
+
+                    <TextView
+                        android:id="@+id/et_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:fontFamily="@font/inter_bold"
+                        android:hint="Pick Day 1 Meals"
+                        android:imeOptions="actionSearch"
+                        android:inputType="text"
+                        android:padding="@dimen/_4sdp"
+                        android:singleLine="true"
+                        android:textColorHint="@color/white"
+                        android:textSize="@dimen/_18ssp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_cal_daily"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_regular"
+                        android:gravity="end"
+                        android:text="300 / 1300 Daily"
+                        android:textColor="@color/black"
+                        android:textStyle="italic"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_cal_weekly"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/et_search"
+                        app:layout_constraintTop_toTopOf="@+id/et_search" />
+
+                    <TextView
+                        android:id="@+id/tv_cal_weekly"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_regular"
+                        android:gravity="end"
+                        android:text="300 / 9100 Weekly"
+                        android:textColor="@color/black"
+                        android:textStyle="italic"
+                        app:layout_constraintBottom_toBottomOf="@+id/et_search"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/et_search"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_cal_daily" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--<include
                     android:id="@+id/toolbar"
-                    layout="@layout/toolbar_black_background"/>
+                    layout="@layout/toolbar_black_background"/>-->
 
             </com.google.android.material.appbar.AppBarLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:background="@color/white"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                >
+                android:layout_height="match_parent">
 
-                <EditText
-                    android:id="@+id/et_search"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:hint="Pick Day 1 Meals"
-                    android:fontFamily="@font/inter_bold"
-                    android:textSize="@dimen/_18ssp"
-                    android:textColorHint="@color/texttrial"
-                    android:drawableStart="@mipmap/icn_search"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:background="@null"
-                    android:singleLine="true"
-                    android:imeOptions="actionSearch"
-                    android:inputType="text"
-                    android:padding="@dimen/_4sdp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tv_cal_daily"
-                    android:textColor="@color/black"
-                    android:textStyle="italic"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:fontFamily="@font/inter_regular"
-                    app:layout_constraintTop_toTopOf="@+id/et_search"
-                    app:layout_constraintStart_toEndOf="@+id/et_search"
-                    app:layout_constraintBottom_toTopOf="@+id/tv_cal_weekly"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:gravity="end"
-                    android:text="300 / 1300 Daily"
-                    />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:id="@+id/tv_cal_weekly"
-                    android:textStyle="italic"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:fontFamily="@font/inter_regular"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_cal_daily"
-                    app:layout_constraintStart_toEndOf="@+id/et_search"
-                    app:layout_constraintBottom_toBottomOf="@+id/et_search"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:gravity="end"
-                    android:text="300 / 9100 Weekly"
-                    />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_one_day"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/et_search"
-                    app:layout_constraintVertical_bias="0.0"
-                    tools:itemCount="3"
-                    tools:listitem="@layout/item_home_fragment_recycler_design" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_one_day"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_home_fragment_recycler_design" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_bottom"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_gravity="bottom"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/tv_next"
-            android:layout_margin="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_3sdp"
-            android:paddingTop="@dimen/_3sdp"
-            android:paddingStart="@dimen/_40sdp"
-            android:paddingEnd="@dimen/_40sdp"
-            android:textSize="@dimen/_14ssp"
-            android:textStyle="italic"
-            android:fontFamily="@font/inter_regular"
-            android:textColor="@color/white"
-            android:background="@drawable/bg_round_corner_white_stroke"
-            android:text="Next"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:hint="Search"
+                android:textColorHint="@color/darkGrey"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:drawableStart="@mipmap/icn_search"
+                />
+
+            <ImageView
+                android:id="@+id/mv_filter"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv_next"
+                />
+
+            <TextView
+                android:id="@+id/tv_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/bg_round_corner_white_stroke"
+                android:fontFamily="@font/inter_regular"
+                android:paddingStart="@dimen/_40sdp"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingEnd="@dimen/_40sdp"
+                android:paddingBottom="@dimen/_3sdp"
+                android:text="Next"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="italic"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

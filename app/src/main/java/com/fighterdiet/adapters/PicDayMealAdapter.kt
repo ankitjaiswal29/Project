@@ -29,9 +29,17 @@ class PicDayMealAdapter(
         }
 
         override fun onClick(view: View?) {
-
+            var doubleClickLastTime = 0L
             if (itemClickListener!= null){
-                itemClickListener!!.onItemClick(adapterPosition,view)
+
+                    if(System.currentTimeMillis() - doubleClickLastTime < 300){
+                        doubleClickLastTime = 0
+//                        doAction()
+                    }else{
+                        itemClickListener!!.onItemClick(adapterPosition,view)
+                        doubleClickLastTime = System.currentTimeMillis()
+                    }
+
             }
 
             when(view?.id){

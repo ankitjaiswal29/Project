@@ -85,4 +85,8 @@
     <string name="str_cm">cm</string>
     <string name="str_lbs">lbs</string>
     <string name="str_kg">kg</string>
+    <string name="cancel">CANCEL</string>
+    <string name="apply">APPLY</string>
+    <string name="FILTERS">filter</string>
+    <string name="filters">FILTERS</string>
 </resources>

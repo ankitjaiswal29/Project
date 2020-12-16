@@ -54,6 +54,7 @@ class DashboardActivity : BaseActivity() {
         )
         tabIcons6Selected = arrayOf(
             R.drawable.tb_search_icon_blue,
+            R.mipmap.filter,
             R.drawable.tb_trending_blue_icon,
             R.drawable.tb_favorite_icon_blue,
            R.drawable.tb_grocery_icon_blue,
@@ -62,6 +63,7 @@ class DashboardActivity : BaseActivity() {
         )
         tabIcons6 = arrayOf(
             R.drawable.tb_search_icon_blue,
+            R.mipmap.filter,
             R.drawable.tb_trending_blue_icon,
             R.drawable.tb_favorite_icon_blue,
             R.drawable.tb_grocery_icon_blue,
@@ -142,12 +144,14 @@ class DashboardActivity : BaseActivity() {
         )
         tabIcons4Selected = arrayOf(
             R.drawable.tb_search_icon_blue,
+            R.mipmap.filter,
             R.drawable.tb_trending_blue_icon,
             R.drawable.tb_favorite_icon_blue,
             R.drawable.tb_settings_icon_blue,
         )
         tabIcons4 = arrayOf(
             R.drawable.tb_search_icon_blue,
+            R.mipmap.filter,
             R.drawable.tb_trending_blue_icon,
             R.drawable.tb_favorite_icon_blue,
             R.drawable.tb_settings_icon_blue,

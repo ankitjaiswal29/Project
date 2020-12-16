@@ -23,21 +23,19 @@
             android:id="@+id/rlCalories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:background="@drawable/bg_rectangle_white_border"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             app:layout_constraintStart_toStartOf="@+id/imv_item_home"
             app:layout_constraintTop_toTopOf="@+id/imv_item_home">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
                 android:alpha="0.8"
                 android:background="@color/white"
-                android:fontFamily="@font/inter_regular"
-                android:padding="@dimen/_2sdp"
-                android:text="Chocolate Cake With White\nChocolate Filling \n \n Calories 500 \n Protein 50g"
+                android:fontFamily="@font/inter_semibold"
+                android:padding="@dimen/_5sdp"
+                android:text="Chicken Pomodoro \n with Broccoli"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/_8ssp"
                 android:textStyle="italic" />

@@ -27,6 +27,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@+id/iv_back"
@@ -36,6 +37,17 @@
                 android:textSize="@dimen/_18ssp"
                 android:textColor="@color/texttrial"
                 android:textStyle="bold"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintStart_toEndOf="@+id/tv_title"
+                app:layout_constraintTop_toTopOf="@+id/tv_title"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+                android:src="@mipmap/share_grocery_list_icon"
+                android:adjustViewBounds="true"
                 />
 
             <TextView

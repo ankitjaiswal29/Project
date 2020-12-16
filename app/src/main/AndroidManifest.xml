@@ -15,9 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FighterDietApp"
         android:usesCleartextTraffic="true">
-        
-        <activity android:name=".activities.PrivacyAndTermsActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".fragments.DietryInfoActivity"></activity>
+        <activity android:name=".activities.FilterActivity" />
+        <activity
+            android:name=".activities.PrivacyAndTermsActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.PersonalChartActivity"
             android:screenOrientation="portrait"
@@ -38,7 +40,7 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activities.DashboardActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.PicOneDayMealsActivity"
             android:screenOrientation="portrait"
@@ -46,16 +48,15 @@
         <activity
             android:name=".activities.PicDaySevenMealsActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
-<!--        <activity-->
-<!--            android:name=".activities.DashboardActivity"-->
-<!--            android:screenOrientation="portrait" />-->
+            android:windowSoftInputMode="adjustPan|stateHidden" /> <!-- <activity -->
+        <!-- android:name=".activities.DashboardActivity" -->
+        <!-- android:screenOrientation="portrait" /> -->
         <activity
             android:name=".activities.MemberShipActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.QuizActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.IntroAndDecisionActivity"
             android:screenOrientation="portrait" />

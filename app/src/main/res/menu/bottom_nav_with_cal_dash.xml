@@ -9,6 +9,7 @@
         app:showAsAction="always"
         />
 
+
     <item
         android:icon="@mipmap/icn_trending"
         android:title="Hot"
