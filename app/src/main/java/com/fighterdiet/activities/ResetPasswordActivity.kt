@@ -14,10 +14,10 @@ class ResetPasswordActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getWindow().setFlags(
+      /*  getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
-        )
+        )*/
         binding = DataBindingUtil.setContentView(this, R.layout.activity_reset_password)
         initialise()
     }

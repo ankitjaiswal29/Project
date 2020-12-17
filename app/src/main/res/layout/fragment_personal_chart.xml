@@ -230,8 +230,7 @@
                             android:fontFamily="@font/inter_bold"
                             android:text="7,878"
                             android:textColor="@color/texttrial"
-                            android:textSize="@dimen/_12ssp"
-                            android:textStyle="italic" />
+                            android:textSize="@dimen/_11ssp" />
 
                         <TextView
                             android:id="@+id/tv_slash"
@@ -247,8 +246,7 @@
                             android:fontFamily="@font/inter_bold"
                             android:text="10,500-14,000"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_12ssp"
-                            android:textStyle="italic" />
+                            android:textSize="@dimen/_12ssp" />
 
 
                     </LinearLayout>

@@ -112,6 +112,16 @@
                 app:layout_constraintStart_toStartOf="@+id/leftGuideline"
                 app:layout_constraintTop_toBottomOf="@+id/recycler_pie" />
 
+            <View
+                android:id="@+id/v_note"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/texttrial"
+                app:layout_constraintEnd_toEndOf="@+id/tv_note"
+                app:layout_constraintStart_toStartOf="@+id/tv_note"
+                app:layout_constraintTop_toBottomOf="@+id/tv_note" />
+
+
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_100sdp"

@@ -18,10 +18,10 @@ class ProfileAfterQuestionsActivity : BaseActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getWindow().setFlags(
+       /* getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,
             WindowManager.LayoutParams.FLAG_SECURE
-        )
+        )*/
         binding = DataBindingUtil.setContentView(this,R.layout.activity_profile_after_questions)
         initialise()
     }

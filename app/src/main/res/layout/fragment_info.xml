@@ -60,9 +60,8 @@
             android:id="@+id/tv_calories"
             android:background="@drawable/bg_round_corner_blue_background"
             android:textColor="@color/white"
-            android:textSize="@dimen/_8ssp"
+            android:textSize="@dimen/_10ssp"
             android:paddingStart="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"/>
 
@@ -76,7 +75,7 @@
             android:id="@+id/tv_proteins"
             android:background="@drawable/bg_round_corner_blue_background"
             android:textColor="@color/white"
-            android:textSize="@dimen/_8ssp"
+            android:textSize="@dimen/_10ssp"
             android:paddingStart="@dimen/_10sdp"
             android:paddingEnd="@dimen/_10sdp"
             android:paddingTop="@dimen/_5sdp"

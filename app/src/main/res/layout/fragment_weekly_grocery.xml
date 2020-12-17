@@ -51,7 +51,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/iv_back"
                     android:text="@string/weekly_grocery_list"
                     android:textSize="@dimen/_18ssp"
-                    android:textColor="@color/texttrial"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     />
 
@@ -73,6 +73,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_back"
                     android:text="@string/edit_meal_plan"
+                    android:textSize="@dimen/_10ssp"
                     android:id="@+id/tv_edit_plan"
                     android:layout_marginEnd="@dimen/_10sdp"
                     />
