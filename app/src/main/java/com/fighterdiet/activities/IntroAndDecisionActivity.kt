@@ -48,6 +48,7 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
+
             R.id.tv_decision_yes -> {
                 selected = 1
                 binding.tvDecisionYes.setBackgroundResource(R.drawable.shape_decision_selected)
@@ -77,9 +78,12 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener {
                 }
             }
             R.id.tvIntroNext -> {
-                binding.clIntroScreen.visibility = View.GONE
-                binding.clDecisionScreen.visibility = View.VISIBLE
+                startActivity(ProfileAfterQuestionsActivity.getStartIntent(this))
+                finish()
+//                binding.clIntroScreen.visibility = View.GONE
+//                binding.clDecisionScreen.visibility = View.VISIBLE
             }
+
         }
     }
 }

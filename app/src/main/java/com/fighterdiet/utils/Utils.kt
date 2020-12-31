@@ -7,9 +7,12 @@ import android.net.ConnectivityManager
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.annotation.StringRes
 import com.fighterdiet.utils.Constants.HUNDRED
 import com.fighterdiet.utils.Constants.ZERO
 import com.google.android.material.snackbar.Snackbar
+
 
 object Utils {
     fun showSnackBar(view: View, message: String) {
@@ -40,6 +43,14 @@ object Utils {
         } else {
             ZERO
         }
+    }
+
+    fun showToast(context: Context?, message: String?) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    fun showToast(context: Context?, message: Int) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     fun hideKeyboard(activity: Activity) {

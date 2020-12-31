@@ -16,8 +16,8 @@ import com.fighterdiet.models.home_frag.HomeModel
 
 class PicOneDayMealsActivity : BaseActivity(), View.OnClickListener, RecyclerViewItemClickListener {
     lateinit var binding:ActivityPicOneDayMealsBinding
-    private lateinit var homeAdapter : PicDayMealAdapter
-    var homeList:ArrayList<HomeModel> = ArrayList()
+    private lateinit var pickDayAdapter: PicDayMealAdapter
+    var pickList:ArrayList<HomeModel> = ArrayList()
     private var pos = 0
     private var count =0
 
@@ -39,32 +39,32 @@ class PicOneDayMealsActivity : BaseActivity(), View.OnClickListener, RecyclerVie
     }
 
     private fun setUpHomeList() {
-        homeList.add(HomeModel(R.mipmap.food_1, false,false))
-        homeList.add(HomeModel(R.mipmap.food_2,false,false))
-        homeList.add(HomeModel(R.mipmap.food_3,false,false))
+        pickList.add(HomeModel(R.mipmap.food_1, false,false))
+        pickList.add(HomeModel(R.mipmap.food_2,false,false))
+        pickList.add(HomeModel(R.mipmap.food_3,false,false))
     }
 
     private fun setUpHomeRecyclerView() {
 
         binding.rvOneDay.layoutManager = LinearLayoutManager(this)
 
-        homeAdapter = PicDayMealAdapter(
+        pickDayAdapter = PicDayMealAdapter(
             this,
-            homeList
+            pickList
         ) { position: Int, view: View? ->
 
-            val item: HomeModel = homeList.get(position)
+          /*  val item: HomeModel = pickList.get(position)
             if (!item.isselected) {
                 item.isselected = true
-                homeAdapter.notifyItemChanged(position)
-                if (homeList.get(pos) != null) {
-                    homeList.get(pos).isselected = false
-                    homeAdapter.notifyItemChanged(pos)
+                pickDayAdapter.notifyItemChanged(position)
+                if (pickList.get(pos) != null) {
+                    pickList.get(pos).isselected = false
+                    pickDayAdapter.notifyItemChanged(pos)
                 }
                 pos = position
-            }
+            }*/
         }
-        binding.rvOneDay.adapter = homeAdapter
+        binding.rvOneDay.adapter = pickDayAdapter
     }
 
 
@@ -85,7 +85,7 @@ class PicOneDayMealsActivity : BaseActivity(), View.OnClickListener, RecyclerVie
                     if (count<7){
                         count++
                         binding.etSearch.hint = "Pick Day "+count+" Meals"
-                        homeAdapter.notifyDataSetChanged()
+                        pickDayAdapter.notifyDataSetChanged()
                     }else{
                         startActivity(DashboardActivity.getStartIntent(this))
                     }

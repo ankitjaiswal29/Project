@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_10sdp">
+        android:layout_marginBottom="@dimen/_5sdp">
 
         <ImageView
             android:id="@+id/imv_item_home"
@@ -35,10 +35,9 @@
                 android:background="@color/white"
                 android:fontFamily="@font/inter_semibold"
                 android:padding="@dimen/_5sdp"
-                android:text="Chicken Pomodoro \n with Broccoli"
+                android:text="Chicken Pomodoro \nwith Broccoli"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_8ssp"
-                android:textStyle="italic" />
+                android:textSize="@dimen/_8ssp" />
 
         </RelativeLayout>
 
@@ -50,8 +49,7 @@
             android:layout_marginTop="@dimen/_50sdp"
             android:layout_marginEnd="@dimen/_30sdp"
             android:layout_marginBottom="@dimen/_50sdp"
-            android:background="@drawable/bg_rectangle_white_border"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,13 +59,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/_10sdp"
-                android:background="@color/colorWhite"
-                android:fontFamily="@font/inter_regular"
+                android:alpha="0.8"
+                android:background="@color/white"
+                android:fontFamily="@font/inter_semibold"
                 android:padding="@dimen/_5sdp"
-                android:text="Chocolate cake with white\nchocolate filling\n\nCalories 500 \nProtein 50g"
+                android:text="Chicken Pomodoro \nwith Broccoli"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="italic" />
+                android:textSize="@dimen/_14ssp" />
 
         </RelativeLayout>
 

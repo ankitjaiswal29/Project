@@ -35,7 +35,7 @@
                 android:textColor="@color/black"
                 android:text="@string/filters"
                 android:textSize="@dimen/_12ssp"
-                app:layout_constraintStart_toStartOf="@+id/tv_cancel"
+                app:layout_constraintStart_toEndOf="@+id/tv_cancel"
                 app:layout_constraintEnd_toStartOf="@+id/tv_apply"
                 app:layout_constraintTop_toTopOf="@+id/tv_cancel"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -82,12 +82,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_bottom"
             android:layout_width="match_parent"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:background="@color/texttrial"
             android:layout_height="@dimen/_40sdp">
 
             <TextView
+                android:id="@+id/tv_filter_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5 filters selected"
@@ -100,6 +102,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_clear_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CLEAR ALL"

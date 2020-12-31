@@ -50,10 +50,10 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun moveToNextFlow() {
-        if (Constants.isQuestonnaireCompleted) {
+//        if (Constants.isQuestonnaireCompleted) {
             startActivity(ProfileAfterQuestionsActivity.getStartIntent(this))
-        } else {
-            startActivity(DashboardActivity.getStartIntent(this))
-        }
+//        } else {
+//            startActivity(DashboardActivity.getStartIntent(this))
+//        }
     }
 }

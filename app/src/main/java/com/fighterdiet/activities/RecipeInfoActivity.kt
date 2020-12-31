@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -12,6 +11,7 @@ import com.fighterdiet.R
 import com.fighterdiet.adapters.ViewPagerRecipeInfoAdapter
 import com.fighterdiet.databinding.ActivityRecipeInfoBinding
 import com.fighterdiet.fragments.*
+import com.fighterdiet.utils.Utils
 import com.google.android.material.tabs.TabLayout
 
 class RecipeInfoActivity : AppCompatActivity(), View.OnClickListener {
@@ -33,6 +33,9 @@ class RecipeInfoActivity : AppCompatActivity(), View.OnClickListener {
         binding.infoTool.back.setOnClickListener(this)
         binding.ivComment.setOnClickListener(this)
         binding.ivBanner.setOnClickListener(this)
+        binding.ivFav.setOnClickListener(this)
+        binding.ivShare.setOnClickListener(this)
+
 
         val info: InfoFragment = InfoFragment()
         val ingredientsFragment: IngredientsFragment = IngredientsFragment()
@@ -114,6 +117,14 @@ class RecipeInfoActivity : AppCompatActivity(), View.OnClickListener {
 
             R.id.iv_banner ->{
                 startActivity(ImageZoomOutActivity.getStartIntent(this).putExtra("from","Activity"))
+            }
+
+            R.id.iv_fav ->{
+                Utils.showToast(this,"Will cover in functionality")
+            }
+
+            R.id.iv_share ->{
+                Utils.showToast(this,"Will cover in functionality")
             }
 
         }

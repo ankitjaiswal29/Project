@@ -36,6 +36,7 @@ class DashboardActivity : BaseActivity() {
         } else {
             initialise4Tab()
         }
+
     }
 
 
@@ -71,7 +72,6 @@ class DashboardActivity : BaseActivity() {
         )
         setupTabLayoutFor6()
     }
-
 
     private fun showFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()

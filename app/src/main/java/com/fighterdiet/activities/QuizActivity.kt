@@ -83,7 +83,7 @@ class QuizActivity : BaseActivity(), View.OnClickListener {
                 } else {
                     // Submit Quiz
                     finish()
-                    startActivity(MemberShipActivity.getStartIntent(this))
+                    startActivity(ProfileAfterQuestionsActivity.getStartIntent(this))
                 }
             }
 

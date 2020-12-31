@@ -68,7 +68,7 @@ class PicDayMealAdapter(
             holder.binding?.rlCaloriesDesc?.visibility = View.GONE
         }
         
-        if (homeList[position].isselected){
+     /*   if (homeList[position].isselected){
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                 holder.binding?.imvItemHome?.foreground = ContextCompat.getDrawable(context!!, R.drawable.bg_image_selected)
             }
@@ -76,7 +76,7 @@ class PicDayMealAdapter(
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                 holder.binding?.imvItemHome?.foreground = null
             }
-        }
+        }*/
     }
 
     override fun getItemCount(): Int {

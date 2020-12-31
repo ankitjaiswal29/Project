@@ -38,7 +38,14 @@ class HomeFragmentRecyclerAdapter(
                     homeList.get(adapterPosition).isDescOpened = true
                     notifyDataSetChanged()
                 }
-                else -> {
+
+                else ->{
+                    context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
+                }
+
+                //Note   Don't remove this code until finalize by client
+
+              /*  else -> {
                     i++
                     val handler = Handler()
                     val run: Runnable = object : Runnable {
@@ -51,10 +58,11 @@ class HomeFragmentRecyclerAdapter(
                         homeList[adapterPosition].isselected = true
                         notifyDataSetChanged()
                         handler.postDelayed(run, 400)
+                        context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
                     } else if (i == 2) {
                         context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
                     }
-                }
+                }*/
             }
         }
     }
@@ -79,18 +87,18 @@ class HomeFragmentRecyclerAdapter(
         } else {
             holder.binding?.rlCaloriesDesc?.visibility = View.GONE
         }
-
-        if (homeList.get(position).isselected) {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                holder.binding?.imvItemHome?.foreground = ContextCompat.getDrawable(
-                    context!!,
-                    R.drawable.bg_image_selected)
-            }
-        } else {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                holder.binding?.imvItemHome?.foreground = null
-            }
-        }
+//
+//        if (homeList.get(position).isselected) {
+//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+//                holder.binding?.imvItemHome?.foreground = ContextCompat.getDrawable(
+//                    context!!,
+//                    R.drawable.bg_image_selected)
+//            }
+//        } else {
+//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+//                holder.binding?.imvItemHome?.foreground = null
+//            }
+//        }
     }
 
     override fun getItemCount(): Int {

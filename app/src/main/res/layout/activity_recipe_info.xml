@@ -58,35 +58,38 @@
 
                         <ImageView
                             android:id="@+id/iv_fav"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/_24sdp"
+                            android:layout_height="@dimen/_24sdp"
                             android:layout_margin="@dimen/_20sdp"
-                            android:src="@mipmap/icn_heart_black"
+                            android:src="@mipmap/heart_holo"
                             app:layout_constraintBottom_toBottomOf="@+id/iv_banner"
                             app:layout_constraintStart_toStartOf="parent" />
 
                         <ImageView
                             android:id="@+id/iv_comment"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/_24sdp"
+                            android:layout_height="@dimen/_24sdp"
+                            android:padding="@dimen/_2sdp"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:src="@mipmap/icn_comment_black"
+                            android:src="@mipmap/chat_holo"
                             app:layout_constraintBottom_toBottomOf="@+id/iv_fav"
                             app:layout_constraintStart_toEndOf="@+id/iv_fav" />
 
                         <ImageView
                             android:id="@+id/iv_share"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/_24sdp"
+                            android:layout_height="@dimen/_24sdp"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:src="@mipmap/icn_share_black"
+                            android:padding="@dimen/_2sdp"
+                            android:src="@mipmap/share_holo"
                             app:layout_constraintBottom_toBottomOf="@+id/iv_fav"
                             app:layout_constraintStart_toEndOf="@+id/iv_comment" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/_24sdp"
+                            android:layout_height="@dimen/_24sdp"
                             android:layout_margin="@dimen/_20sdp"
+                            android:padding="@dimen/_2sdp"
                             android:visibility="gone"
                             android:src="@mipmap/icn_check"
                             app:layout_constraintBottom_toBottomOf="@+id/iv_banner"
