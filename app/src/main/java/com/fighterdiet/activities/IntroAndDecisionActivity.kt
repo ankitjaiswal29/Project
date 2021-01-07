@@ -78,7 +78,7 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener {
                 }
             }
             R.id.tvIntroNext -> {
-                startActivity(ProfileAfterQuestionsActivity.getStartIntent(this))
+                startActivity(DashboardActivity.getStartIntent(this))
                 finish()
 //                binding.clIntroScreen.visibility = View.GONE
 //                binding.clDecisionScreen.visibility = View.VISIBLE

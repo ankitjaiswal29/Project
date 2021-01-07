@@ -144,7 +144,6 @@
                 app:layout_constraintEnd_toEndOf="@id/rightGuideline"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_25sdp"
-                android:textStyle="italic"
                 android:fontFamily="@font/inter_regular"
                 android:padding="@dimen/_10sdp"
                 android:hint="@string/add_your_note_here"

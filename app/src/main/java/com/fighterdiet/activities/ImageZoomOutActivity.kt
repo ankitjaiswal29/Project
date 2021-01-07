@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import android.webkit.WebSettings
 import androidx.databinding.DataBindingUtil
 import com.fighterdiet.R
 import com.fighterdiet.databinding.ActivityImageZoomOutBinding

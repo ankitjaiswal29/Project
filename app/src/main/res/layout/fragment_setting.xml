@@ -90,30 +90,6 @@
                             app:layout_constraintTop_toBottomOf="@+id/tv_log_out" />
 
                         <TextView
-                            android:id="@+id/tv_edit_question"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:fontFamily="@font/inter_regular"
-                            android:padding="@dimen/_10sdp"
-                            android:paddingStart="@dimen/_30sdp"
-                            android:text="Edit Questionnaire"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12ssp"
-                            app:drawableEndCompat="@drawable/ic_forword"
-                            app:layout_constraintTop_toBottomOf="@+id/v_log" />
-
-                        <View
-                            android:id="@+id/v_edit"
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:background="@color/darkGrey"
-                            app:layout_constraintEnd_toEndOf="@+id/tv_edit_question"
-                            app:layout_constraintStart_toStartOf="@+id/tv_edit_question"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_edit_question" />
-
-                        <TextView
                             android:id="@+id/tv_faq"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -126,7 +102,7 @@
                             android:textColor="@color/black"
                             android:textSize="@dimen/_12ssp"
                             app:drawableEndCompat="@drawable/ic_forword"
-                            app:layout_constraintTop_toBottomOf="@+id/v_edit" />
+                            app:layout_constraintTop_toBottomOf="@+id/v_log" />
 
                         <View
                             android:id="@+id/v_faq"

@@ -29,7 +29,6 @@ class RecipeInfoActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initialise() {
-        binding.infoTool.ivCb.setOnClickListener(this)
         binding.infoTool.back.setOnClickListener(this)
         binding.ivComment.setOnClickListener(this)
         binding.ivBanner.setOnClickListener(this)
@@ -99,9 +98,6 @@ class RecipeInfoActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.iv_cb -> {
-                startActivity(PersonalChartActivity.getStartIntent(this).putExtra("from","Activity"))
-            }
 
             R.id.back -> {
                 onBackPressed()

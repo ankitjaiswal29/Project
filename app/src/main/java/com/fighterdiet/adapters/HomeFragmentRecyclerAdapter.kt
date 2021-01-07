@@ -35,7 +35,11 @@ class HomeFragmentRecyclerAdapter(
         override fun onClick(view: View?) {
             when (view!!.id) {
                 R.id.rlCalories -> {
-                    homeList.get(adapterPosition).isDescOpened = true
+                    if (homeList.get(adapterPosition).isDescOpened){
+                        homeList.get(adapterPosition).isDescOpened = false
+                    }else{
+                        homeList.get(adapterPosition).isDescOpened = true
+                    }
                     notifyDataSetChanged()
                 }
 

@@ -64,6 +64,7 @@ class DietryInfoFragment : Fragment(),
         list.add(DietryModel("Wheat Free", false))
         list.add(DietryModel("Tree Nuts Free", true))
         list.add(DietryModel("Gluten Free", false))
+        list.add(DietryModel("Grains Free", false))
     }
 
 
