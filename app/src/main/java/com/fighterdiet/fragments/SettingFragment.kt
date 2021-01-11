@@ -48,6 +48,7 @@ class SettingFragment : BaseActivity(), View.OnClickListener {
 
     private fun initialise() {
         binding.tvLogOut.setOnClickListener(this)
+        binding.tvAboutPaulin.setOnClickListener(this)
         binding.tvFaq.setOnClickListener(this)
         binding.tvClear.setOnClickListener(this)
         binding.tvEmail.setOnClickListener(this)
@@ -82,6 +83,13 @@ class SettingFragment : BaseActivity(), View.OnClickListener {
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(loginIntent)
                 }
+
+                R.id.tv_about_paulin -> {
+                    val loginIntent = Intent(this, IntroAndDecisionActivity::class.java)
+                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(loginIntent)
+                }
+
                 R.id.tv_faq -> {
                     val faq = Intent(this, FaqActivity::class.java)
                     faq.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
