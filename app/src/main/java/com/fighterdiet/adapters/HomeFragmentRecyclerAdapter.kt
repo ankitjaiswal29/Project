@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.R
+import com.fighterdiet.activities.MemberShipActivity
 import com.fighterdiet.activities.RecipeInfoActivity
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
 import com.fighterdiet.interfaces.RecyclerViewItemClickListener
@@ -44,7 +45,10 @@ class HomeFragmentRecyclerAdapter(
                 }
 
                 else ->{
-                    context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
+
+                    if (adapterPosition%2 != 0){
+                        context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
+                    }else  context?.startActivity(MemberShipActivity.getStartIntent(context!!))
                 }
 
                 //Note   Don't remove this code until finalize by client
