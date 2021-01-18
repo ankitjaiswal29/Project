@@ -37,7 +37,7 @@
                     android:id="@+id/ivBackgroundImage1"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:src="@mipmap/pauline_shoes_edited"
+                    android:src="@mipmap/paul_two"
                     android:scaleType="fitXY"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

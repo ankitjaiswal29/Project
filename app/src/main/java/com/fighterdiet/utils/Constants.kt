@@ -4,4 +4,5 @@ object Constants {
     var isQuestonnaireCompleted: Boolean = false
     var HUNDRED = 100
     var ZERO = 0
+    var ISSUBSCRIPTION = false
 }
