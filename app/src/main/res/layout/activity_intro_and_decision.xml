@@ -25,24 +25,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <!--      <include
-                          android:id="@+id/toolbar1"
-                          layout="@layout/toolbar_image"
-                          app:layout_constraintEnd_toEndOf="parent"
-                          app:layout_constraintStart_toStartOf="parent"
-                          app:layout_constraintTop_toTopOf="parent"
-                          />-->
-
                 <ImageView
                     android:id="@+id/ivBackgroundImage1"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:src="@mipmap/paul_two"
-                    android:scaleType="fitXY"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/pauline_shoes_edited"
+                    android:adjustViewBounds="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/ll_text"
                     tools:ignore="ContentDescription" />
 
                 <ImageView
@@ -55,10 +46,6 @@
                     app:layout_constraintBottom_toBottomOf="@+id/ivBackgroundImage1"
                     />
 
-                <!--            <include-->
-                <!--                android:id="@+id/toolbar"-->
-                <!--                layout="@layout/toolbar_image" />-->
-
                 <LinearLayout
                     android:id="@+id/ll_text"
                     android:layout_width="match_parent"
@@ -67,7 +54,7 @@
                     android:paddingEnd="@dimen/end_screen_margin"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:orientation="vertical"
-                    android:background="@color/checkbox_background"
+                    android:background="@drawable/bg_top_right_left_round_corner_grey_color"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
 

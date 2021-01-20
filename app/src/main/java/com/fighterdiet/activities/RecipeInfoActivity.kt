@@ -35,12 +35,10 @@ class RecipeInfoActivity : AppCompatActivity(), View.OnClickListener {
         binding.ivFav.setOnClickListener(this)
         binding.ivShare.setOnClickListener(this)
 
-
         val info: InfoFragment = InfoFragment()
         val ingredientsFragment: IngredientsFragment = IngredientsFragment()
         val directions: DirectionsFragment = DirectionsFragment()
         val tipsFragment: TipsFragment = TipsFragment()
-
 
         fragments.add(info)
         fragments.add(ingredientsFragment)
