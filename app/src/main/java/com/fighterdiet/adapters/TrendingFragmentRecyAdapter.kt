@@ -7,21 +7,22 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.R
-import com.fighterdiet.activities.MemberShipActivity
 import com.fighterdiet.activities.RecipeInfoActivity
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
 import com.fighterdiet.interfaces.RecyclerViewItemClickListener
 import com.fighterdiet.models.home_frag.HomeModel
 
-class TrendingFragmentRecyAdapter (
+class TrendingFragmentRecyAdapter(
     private var context: FragmentActivity?,
-    private var homeList:ArrayList<HomeModel>,
+    private var homeList: ArrayList<HomeModel>,
     private var itemClickListener: RecyclerViewItemClickListener?
-):RecyclerView.Adapter<TrendingFragmentRecyAdapter.MyViewHolder>() {
+) : RecyclerView.Adapter<TrendingFragmentRecyAdapter.MyViewHolder>() {
 
 
-    inner class MyViewHolder(itemView : View):RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        val binding : ItemHomeFragmentRecyclerDesignBinding? = DataBindingUtil.bind(itemView)
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
+        val binding: ItemHomeFragmentRecyclerDesignBinding? = DataBindingUtil.bind(itemView)
+
         init {
             itemView.setOnClickListener(this)
             binding?.rlCalories?.setOnClickListener(this)
@@ -31,19 +32,16 @@ class TrendingFragmentRecyAdapter (
             when (view!!.id) {
                 R.id.rlCalories -> {
 
-                    if (homeList.get(adapterPosition).isDescOpened){
+                    if (homeList.get(adapterPosition).isDescOpened) {
                         homeList.get(adapterPosition).isDescOpened = false
-                    }else{
+                    } else {
                         homeList.get(adapterPosition).isDescOpened = true
                     }
                     notifyDataSetChanged()
                 }
 
-                else ->{
-
-                    if (adapterPosition%2 != 0){
-                        context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
-                    }else  context?.startActivity(MemberShipActivity.getStartIntent(context!!))
+                else -> {
+                    context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
                 }
             }
         }

@@ -27,15 +27,15 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener {
 
     private fun initialise() {
         binding.clIntroScreen.visibility = View.VISIBLE
-        binding.clDecisionScreen.visibility = View.GONE
+    /*    binding.clDecisionScreen.visibility = View.GONE
 
         binding.tvDecisionYes.setBackgroundResource(R.drawable.shape_decision_selected)
-
+*/
         binding.tvIntroNext.setOnClickListener(this)
-        binding.tvDecisionNext.setOnClickListener(this)
+      /*  binding.tvDecisionNext.setOnClickListener(this)
 
         binding.tvDecisionYes.setOnClickListener(this)
-        binding.tvDecisionNo.setOnClickListener(this)
+        binding.tvDecisionNo.setOnClickListener(this)*/
     }
 
     companion object {
@@ -49,7 +49,7 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
 
-            R.id.tv_decision_yes -> {
+        /*    R.id.tv_decision_yes -> {
                 selected = 1
                 binding.tvDecisionYes.setBackgroundResource(R.drawable.shape_decision_selected)
                 binding.tvDecisionNo.setBackgroundResource(R.drawable.shape_decision_unselected)
@@ -76,7 +76,7 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener {
                 } else {
                     Utils.showSnackBar(v, getString(R.string.str_please_select_any_option))
                 }
-            }
+            }*/
             R.id.tvIntroNext -> {
                 startActivity(DashboardActivity.getStartIntent(this))
                 finish()
