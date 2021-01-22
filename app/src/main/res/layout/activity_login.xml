@@ -9,21 +9,36 @@
         android:background="@drawable/colorGray"
         tools:context=".activities.LoginActivity">
 
-        <androidx.core.widget.NestedScrollView
+       <!-- <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:fillViewport="true"
-            >
+            />
+-->
 
-            <androidx.viewpager2.widget.ViewPager2
+
+            <!--<LinearLayout
+                android:id="@+id/rootContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            </LinearLayout>-->
+
+
+           <!-- <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </androidx.core.widget.NestedScrollView>
+                android:layout_height="wrap_content" />-->
 
 
+        <ViewFlipper
+            android:id="@+id/viewflip"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            />
 
         <include
             android:id="@+id/toolbar"

@@ -54,7 +54,7 @@ class WalkThroughFragment : BaseFragment() {
             }
         }
 
-        binding.ivBackgroundImage.setOnTouchListener { v, event ->
+       /* binding.ivBackgroundImage.setOnTouchListener { v, event ->
             when (event?.action) {
                 MotionEvent.ACTION_DOWN -> {
                     Log.e("TAG",">>>>> Mouse Down")
@@ -72,7 +72,7 @@ class WalkThroughFragment : BaseFragment() {
 
             }
             true
-        }
+        }*/
     }
 
     companion object {
