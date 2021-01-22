@@ -1,5 +1,7 @@
 package com.fighterdiet.activities
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -166,6 +168,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     companion object {
         const val TAG = "LoginActivity"
+
+        fun getStartIntent(context: Context): Intent {
+            return Intent(context, LoginActivity::class.java)
+        }
     }
 
     override fun onClick(v: View?) {
@@ -195,4 +201,5 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             e.printStackTrace()
         }
     }*/
+
 }

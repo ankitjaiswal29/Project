@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import com.fighterdiet.R
@@ -27,6 +29,14 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener {
 
     private fun initialise() {
         binding.clIntroScreen.visibility = View.VISIBLE
+        var url: String = ""
+        var bundle = intent.extras
+        if (bundle != null) {
+            url = bundle.getString("SETTING")!!
+        }
+        if (url.equals("SETTING")){
+            binding.tvIntroNext.visibility = GONE
+        }
     /*    binding.clDecisionScreen.visibility = View.GONE
 
         binding.tvDecisionYes.setBackgroundResource(R.drawable.shape_decision_selected)

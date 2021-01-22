@@ -14,7 +14,7 @@
             android:fillViewport="true"
             android:scrollbars="none"
             android:background="@color/darkGrey"
-            app:layout_constraintBottom_toTopOf="@+id/tvIntroNext"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -33,7 +33,7 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_450sdp"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/pauline_ios"
+                    android:src="@mipmap/paul_360"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -58,7 +58,7 @@
                     android:paddingStart="@dimen/start_screen_margin"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingEnd="@dimen/end_screen_margin"
-                    android:paddingBottom="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_20sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">

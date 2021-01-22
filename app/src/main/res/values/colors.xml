@@ -20,6 +20,7 @@
 
     <color name="texttrial">#4394C1</color>
     <color name="off_box">#B8CDDF</color>
+    <color name="member">#AFD1E2</color>
 
     <color name="backgroundColor">#232529</color>
     <color name="answerSelectedColor">#b4d1e0</color>

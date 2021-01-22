@@ -9,8 +9,8 @@
 
         <CheckBox
             android:id="@+id/cb_select"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginStart="@dimen/_25sdp"
             android:button="@drawable/dietry_info_item_selector"
             app:layout_constraintStart_toStartOf="parent"

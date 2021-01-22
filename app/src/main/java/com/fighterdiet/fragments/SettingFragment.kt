@@ -86,6 +86,7 @@ class SettingFragment : BaseActivity(), View.OnClickListener {
 
                 R.id.tv_about_paulin -> {
                     val loginIntent = Intent(this, IntroAndDecisionActivity::class.java)
+                    loginIntent.putExtra("SETTING", "SETTING")
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(loginIntent)
                 }

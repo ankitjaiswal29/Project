@@ -81,7 +81,7 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
             }
 
             R.id.tv_clear_all ->{
-                binding.clBottom.visibility = GONE
+//                binding.clBottom.visibility = GONE
                 binding.tvFilterCount.text = ""
             }
 

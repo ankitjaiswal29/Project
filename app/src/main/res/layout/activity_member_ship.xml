@@ -64,7 +64,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_5sdp"
             android:background="@mipmap/bg_membership"
             android:theme="@style/AppTheme.Membership"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -90,7 +89,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:fontFamily="@font/inter_regular"
                 android:text="@string/_14_99_month_or_79_99_year"
                 android:textColor="@color/black"
@@ -118,7 +116,7 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:paddingTop="@dimen/_5sdp"
-                    android:paddingBottom="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_3sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">

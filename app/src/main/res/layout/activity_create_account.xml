@@ -134,6 +134,7 @@
                 android:paddingStart="@dimen/_4sdp"
                 android:paddingTop="@dimen/_4sdp"
                 android:paddingEnd="@dimen/_4sdp"
+                android:background="@color/darkGrey"
                 app:ccpDialog_textColor="@color/texttrial"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
@@ -143,7 +144,8 @@
                 app:ccp_showFullName="false"
                 app:ccp_showNameCode="false"
                 app:ccp_showPhoneCode="true"
-                app:ccp_textSize="@dimen/_10ssp" />
+                app:ccp_textSize="@dimen/_10ssp"
+                />
 
             <EditText
                 android:id="@+id/etPhoneNumber"
