@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:background="@color/trending_back"
-    android:layout_height="match_parent"
-    tools:context=".fragments.MealsFragment">
-
-    <androidx.recyclerview.widget.RecyclerView
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rv_meals"
-        tools:listitem="@layout/item_dietry_info"
-        />
+        android:background="@color/trending_back"
+        tools:context=".fragments.MealsFragment">
 
-</FrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_meals"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            tools:listitem="@layout/item_dietry_info" />
+
+    </FrameLayout>
 
 </layout>

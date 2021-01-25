@@ -89,5 +89,15 @@
     <string name="apply">APPLY</string>
     <string name="FILTERS">filter</string>
     <string name="filters">FILTERS</string>
+    <string name="str_log_out">Log out</string>
+    <string name="str_about_pauline_nordin">About Pauline Nordin</string>
+    <string name="str_faq">FAQ</string>
+    <string name="str_clear_cache">Clear Cache</string>
+    <string name="str_email_us">Email Us</string>
+    <string name="str_terms_of_service">Terms of Service</string>
+    <string name="str_privacy_policy">Privacy Policy</string>
+    <string name="str_legal">Legal:</string>
+    <string name="str_made_possible_by_angel">Made possible by Angel De Amor.</string>
+    <string name="str_fighterdiet_inc">Fighterdiet Inc.</string>
 
 </resources>

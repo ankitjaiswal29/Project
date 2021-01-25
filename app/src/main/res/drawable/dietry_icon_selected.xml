@@ -9,6 +9,6 @@
     <solid android:color="@color/texttrial"/>
 
     <size
-        android:width="20dp"
-        android:height="20dp"/>
+        android:width="@dimen/checkbox_width"
+        android:height="@dimen/checkbox_height" />
 </shape>

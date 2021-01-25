@@ -1,34 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/black">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_black_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true">
-            <include
-                android:id="@+id/toolbar"
-                layout="@layout/toolbar_black_background" />
-
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/black"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
                 android:background="@drawable/bg_round_corner_top_let_right"
                 android:orientation="vertical">
 
@@ -39,262 +41,228 @@
                     android:padding="@dimen/_10sdp"
                     android:src="@mipmap/icn_back_blue"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
 
-                <androidx.core.widget.NestedScrollView
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/_10sdp">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <TextView
+                        android:id="@+id/tv_help_ful"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_semibold"
+                        android:text="@string/helpful_links"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14ssp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_log_out"
+                        style="@style/SettingsRow"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/_10sdp"
-                        tools:context=".fragments.SettingFragment">
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:text="@string/str_log_out"
+                        android:textColor="@color/black"
+                        app:drawableEndCompat="@drawable/ic_forword"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_help_ful" />
 
-                        <TextView
-                            android:id="@+id/tv_help_ful"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:fontFamily="@font/inter_medium"
-                            android:text="@string/helpful_links"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_14ssp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/tv_log_out"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_20sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:fontFamily="@font/inter_regular"
-                            android:padding="@dimen/_10sdp"
-                            android:paddingStart="@dimen/_30sdp"
-                            android:text="Log out"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12ssp"
-                            app:drawableEndCompat="@drawable/ic_forword"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_help_ful" />
-
-                        <View
-                            android:id="@+id/v_log"
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:background="@color/darkGrey"
-                            app:layout_constraintEnd_toEndOf="@+id/tv_log_out"
-                            app:layout_constraintStart_toStartOf="@+id/tv_log_out"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_log_out" />
+                    <View
+                        android:id="@+id/v_log"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="@color/darkGrey"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_log_out"
+                        app:layout_constraintStart_toStartOf="@+id/tv_log_out"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_log_out" />
 
 
-                        <TextView
-                            android:id="@+id/tv_about_paulin"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:fontFamily="@font/inter_regular"
-                            android:padding="@dimen/_10sdp"
-                            android:paddingStart="@dimen/_30sdp"
-                            android:text="About Pauline Nordin"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12ssp"
-                            app:drawableEndCompat="@drawable/ic_forword"
-                            app:layout_constraintTop_toBottomOf="@+id/v_log" />
+                    <TextView
+                        android:id="@+id/tv_about_paulin"
+                        style="@style/SettingsRow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:text="@string/str_about_pauline_nordin"
+                        android:textColor="@color/black"
+                        app:drawableEndCompat="@drawable/ic_forword"
+                        app:layout_constraintTop_toBottomOf="@+id/v_log" />
 
-                        <View
-                            android:id="@+id/v_about_paulin"
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:background="@color/darkGrey"
-                            app:layout_constraintEnd_toEndOf="@+id/tv_log_out"
-                            app:layout_constraintStart_toStartOf="@+id/tv_log_out"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_about_paulin" />
+                    <View
+                        android:id="@+id/v_about_paulin"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="@color/darkGrey"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_log_out"
+                        app:layout_constraintStart_toStartOf="@+id/tv_log_out"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_about_paulin" />
 
 
-                        <TextView
-                            android:id="@+id/tv_faq"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:fontFamily="@font/inter_regular"
-                            android:padding="@dimen/_10sdp"
-                            android:paddingStart="@dimen/_30sdp"
-                            android:text="FAQ"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12ssp"
-                            app:drawableEndCompat="@drawable/ic_forword"
-                            app:layout_constraintTop_toBottomOf="@+id/v_about_paulin" />
+                    <TextView
+                        android:id="@+id/tv_faq"
+                        style="@style/SettingsRow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:text="@string/str_faq"
+                        android:textColor="@color/black"
+                        app:drawableEndCompat="@drawable/ic_forword"
+                        app:layout_constraintTop_toBottomOf="@+id/v_about_paulin" />
 
-                        <View
-                            android:id="@+id/v_faq"
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:background="@color/darkGrey"
-                            app:layout_constraintEnd_toEndOf="@+id/tv_faq"
-                            app:layout_constraintStart_toStartOf="@+id/tv_faq"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_faq" />
+                    <View
+                        android:id="@+id/v_faq"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="@color/darkGrey"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_faq"
+                        app:layout_constraintStart_toStartOf="@+id/tv_faq"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_faq" />
 
-                        <TextView
-                            android:id="@+id/tv_clear"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:fontFamily="@font/inter_regular"
-                            android:padding="@dimen/_10sdp"
-                            android:paddingStart="@dimen/_30sdp"
-                            android:text="Clear Cache"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12ssp"
-                            app:drawableEndCompat="@drawable/ic_forword"
-                            app:layout_constraintTop_toBottomOf="@+id/v_faq" />
+                    <TextView
+                        android:id="@+id/tv_clear"
+                        style="@style/SettingsRow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:text="@string/str_clear_cache"
+                        android:textColor="@color/black"
+                        app:drawableEndCompat="@drawable/ic_forword"
+                        app:layout_constraintTop_toBottomOf="@+id/v_faq" />
 
-                        <View
-                            android:id="@+id/v_clear"
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:background="@color/darkGrey"
-                            app:layout_constraintEnd_toEndOf="@+id/tv_clear"
-                            app:layout_constraintStart_toStartOf="@+id/tv_clear"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_clear" />
+                    <View
+                        android:id="@+id/v_clear"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="@color/darkGrey"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_clear"
+                        app:layout_constraintStart_toStartOf="@+id/tv_clear"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_clear" />
 
-                        <TextView
-                            android:id="@+id/tv_email"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:fontFamily="@font/inter_regular"
-                            android:padding="@dimen/_10sdp"
-                            android:paddingStart="@dimen/_30sdp"
-                            android:text="Email Us"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12ssp"
-                            app:drawableEndCompat="@drawable/ic_forword"
-                            app:layout_constraintTop_toBottomOf="@+id/v_clear" />
+                    <TextView
+                        android:id="@+id/tv_email"
+                        style="@style/SettingsRow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/str_email_us"
+                        android:textColor="@color/black"
+                        app:drawableEndCompat="@drawable/ic_forword"
+                        app:layout_constraintTop_toBottomOf="@+id/v_clear" />
 
-                        <View
-                            android:id="@+id/v_email"
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:background="@color/darkGrey"
-                            app:layout_constraintEnd_toEndOf="@+id/tv_email"
-                            app:layout_constraintStart_toStartOf="@+id/tv_email"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_email" />
+                    <View
+                        android:id="@+id/v_email"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="@color/darkGrey"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_email"
+                        app:layout_constraintStart_toStartOf="@+id/tv_email"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_email" />
 
-                        <TextView
-                            android:id="@+id/tv_legal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_30sdp"
-                            android:fontFamily="@font/inter_medium"
-                            android:text="Legal:"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_14ssp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/v_email" />
+                    <TextView
+                        android:id="@+id/tv_legal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_25sdp"
+                        android:fontFamily="@font/inter_semibold"
+                        android:text="@string/str_legal"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14ssp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/v_email" />
 
-                        <TextView
-                            android:id="@+id/tv_terms"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_20sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:fontFamily="@font/inter_regular"
-                            android:padding="@dimen/_10sdp"
-                            android:paddingStart="@dimen/_30sdp"
-                            android:text="Terms of Service"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12ssp"
-                            app:drawableEndCompat="@drawable/ic_forword"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_legal" />
+                    <TextView
+                        android:id="@+id/tv_terms"
+                        style="@style/SettingsRow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:text="@string/str_terms_of_service"
+                        android:textColor="@color/black"
+                        app:drawableEndCompat="@drawable/ic_forword"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_legal"
+                        tools:layout_editor_absoluteX="25dp" />
 
-                        <View
-                            android:id="@+id/v_terms"
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:background="@color/darkGrey"
-                            app:layout_constraintEnd_toEndOf="@+id/tv_terms"
-                            app:layout_constraintStart_toStartOf="@+id/tv_terms"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_terms" />
+                    <View
+                        android:id="@+id/v_terms"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="@color/darkGrey"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_terms"
+                        app:layout_constraintStart_toStartOf="@+id/tv_terms"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_terms" />
 
-                        <TextView
-                            android:id="@+id/tv_privacy"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:fontFamily="@font/inter_regular"
-                            android:padding="@dimen/_10sdp"
-                            android:paddingStart="@dimen/_30sdp"
-                            android:text="Privacy Policy"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_12ssp"
-                            app:drawableEndCompat="@drawable/ic_forword"
-                            app:layout_constraintTop_toBottomOf="@+id/v_terms" />
+                    <TextView
+                        android:id="@+id/tv_privacy"
+                        style="@style/SettingsRow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:text="@string/str_privacy_policy"
+                        android:textColor="@color/black"
+                        app:drawableEndCompat="@drawable/ic_forword"
+                        app:layout_constraintTop_toBottomOf="@+id/v_terms" />
 
-                        <View
-                            android:id="@+id/v_privacy"
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:background="@color/darkGrey"
-                            app:layout_constraintEnd_toEndOf="@+id/tv_privacy"
-                            app:layout_constraintStart_toStartOf="@+id/tv_privacy"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_privacy" />
+                    <View
+                        android:id="@+id/v_privacy"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="@color/darkGrey"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_privacy"
+                        app:layout_constraintStart_toStartOf="@+id/tv_privacy"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_privacy" />
 
-                        <TextView
-                            android:id="@+id/tv_fighter_inc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_20sdp"
-                            android:fontFamily="@font/inter_bold"
-                            android:text="Fighterdiet Inc."
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_14ssp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/v_privacy" />
+                    <TextView
+                        android:id="@+id/tv_fighter_inc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="@string/str_fighterdiet_inc"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14ssp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/v_privacy"
+                        tools:ignore="HardcodedText" />
 
-                        <ImageView
-                            android:id="@+id/iv_angel_amor"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@mipmap/angel_de_amor"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_fighter_inc"
-                            app:layout_constraintStart_toStartOf="@+id/tv_fighter_inc"
-                            app:layout_constraintEnd_toEndOf="@+id/tv_fighter_inc"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            />
+                    <ImageView
+                        android:id="@+id/iv_angel_amor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:src="@mipmap/angel_de_amor"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_fighter_inc"
+                        app:layout_constraintStart_toStartOf="@+id/tv_fighter_inc"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_fighter_inc"
+                        tools:ignore="ContentDescription" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@+id/iv_angel_amor"
-                            app:layout_constraintStart_toStartOf="@+id/iv_angel_amor"
-                            app:layout_constraintEnd_toEndOf="@+id/iv_angel_amor"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:text="Made possible by Angel De Amor."
-                            android:textStyle="italic"
-                            android:fontFamily="@font/inter_regular"
-                            android:textColor="@color/backgroundColor"
-                            android:textSize="@dimen/_10ssp"
-                            />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/inter_regular"
+                        android:text="@string/str_made_possible_by_angel"
+                        android:textColor="@color/backgroundColor"
+                        android:textSize="@dimen/_10ssp"
+                        android:textStyle="italic"
+                        app:layout_constraintEnd_toEndOf="@+id/iv_angel_amor"
+                        app:layout_constraintStart_toStartOf="@+id/iv_angel_amor"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_angel_amor" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.core.widget.NestedScrollView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
+        </ScrollView>
 
-
-        </LinearLayout>
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -22,7 +22,7 @@
             android:name=".activities.PrivacyAndTermsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".fragments.SettingFragment"
+            android:name=".activities.SettingsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
 

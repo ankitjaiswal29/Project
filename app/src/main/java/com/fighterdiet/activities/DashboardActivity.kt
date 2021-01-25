@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fighterdiet.R
@@ -25,10 +24,9 @@ class DashboardActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       /* getWindow().setFlags(
-            WindowManager.LayoutParams.FLAG_SECURE,
-            WindowManager.LayoutParams.FLAG_SECURE
-        )*/
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//            WindowManager.LayoutParams.FLAG_FULLSCREEN)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard_with_calaories)
 
         if (Constants.isQuestonnaireCompleted) {
@@ -115,7 +113,7 @@ class DashboardActivity : BaseActivity() {
                         showFragment(PersonalChartFragment())
                     }
                     6 -> {
-                        startActivity(SettingFragment.getStartIntent(this@DashboardActivity))
+                        startActivity(SettingsActivity.getStartIntent(this@DashboardActivity))
                     }
                 }
             }
@@ -133,7 +131,7 @@ class DashboardActivity : BaseActivity() {
                         startActivity(WeeklyGroceryFragment.getStartIntent(this@DashboardActivity))
                     }
                     6 -> {
-                        startActivity(SettingFragment.getStartIntent(this@DashboardActivity))
+                        startActivity(SettingsActivity.getStartIntent(this@DashboardActivity))
                     }
                 }
             }
@@ -223,7 +221,7 @@ class DashboardActivity : BaseActivity() {
                         showFragment(FavouriteFragment())
                     }
                     4 -> {
-                        startActivity(SettingFragment.getStartIntent(this@DashboardActivity))
+                        startActivity(SettingsActivity.getStartIntent(this@DashboardActivity))
                     }
                 }
             }
@@ -237,7 +235,7 @@ class DashboardActivity : BaseActivity() {
                         startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
                     }
                     4 -> {
-                        startActivity(SettingFragment.getStartIntent(this@DashboardActivity))
+                        startActivity(SettingsActivity.getStartIntent(this@DashboardActivity))
                     }
                 }
 
