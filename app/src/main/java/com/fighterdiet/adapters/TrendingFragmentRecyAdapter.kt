@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.R
-import com.fighterdiet.activities.RecipeInfoActivity
+import com.fighterdiet.activities.MemberShipActivity
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
 import com.fighterdiet.interfaces.RecyclerViewItemClickListener
 import com.fighterdiet.models.home_frag.HomeModel
@@ -41,7 +41,7 @@ class TrendingFragmentRecyAdapter(
                 }
 
                 else -> {
-                    context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
+                    context?.startActivity(MemberShipActivity.getStartIntent(context!!))
                 }
             }
         }
@@ -58,7 +58,7 @@ class TrendingFragmentRecyAdapter(
     }
 
     override fun onBindViewHolder(holder: TrendingFragmentRecyAdapter.MyViewHolder, position: Int) {
-        holder.binding?.imvItemHome?.setImageResource(homeList[position].image)
+        holder.binding?.ivItemHome?.setImageResource(homeList[position].image)
         if (homeList.get(position).isDescOpened) {
             holder.binding?.rlCaloriesDesc?.visibility = View.VISIBLE
         } else {

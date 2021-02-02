@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.R
+import com.fighterdiet.activities.MemberShipActivity
 import com.fighterdiet.activities.RecipeInfoActivity
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
 import com.fighterdiet.interfaces.RecyclerViewItemClickListener
@@ -40,7 +41,7 @@ class FavouriteFragmentRecyAdapter(
                 }
 
                 else -> {
-                    context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
+                    context?.startActivity(MemberShipActivity.getStartIntent(context!!))
                 }
 
 //                R.id.rlCalories -> {
@@ -68,7 +69,7 @@ class FavouriteFragmentRecyAdapter(
         holder: MyViewHolder,
         position: Int
     ) {
-        holder.binding?.imvItemHome?.setImageResource(homeList[position].image)
+        holder.binding?.ivItemHome?.setImageResource(homeList[position].image)
         if (homeList.get(position).isDescOpened) {
             holder.binding?.rlCaloriesDesc?.visibility = View.VISIBLE
         } else {

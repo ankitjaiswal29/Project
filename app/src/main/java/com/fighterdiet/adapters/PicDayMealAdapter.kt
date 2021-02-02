@@ -61,7 +61,7 @@ class PicDayMealAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.binding?.imvItemHome?.setImageResource(homeList[position].image)
+        holder.binding?.ivItemHome?.setImageResource(homeList[position].image)
         if (homeList.get(position).isDescOpened) {
             holder.binding?.rlCaloriesDesc?.visibility = View.VISIBLE
         } else {

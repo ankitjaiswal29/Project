@@ -19,14 +19,10 @@ class HomeFragment : BaseFragment() {
     private lateinit var homeAdapter: HomeFragmentRecyclerAdapter
     var homeList: ArrayList<HomeModel> = ArrayList()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         return binding.root
     }
@@ -48,9 +44,19 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun setUpHomeList() {
-        homeList.add(HomeModel(R.mipmap.banana, false, false))
         homeList.add(HomeModel(R.mipmap.easy_chicken, false, false))
         homeList.add(HomeModel(R.mipmap.rice_pudding, false, false))
+        homeList.add(HomeModel(R.mipmap.banana, false, false))
+
+        homeList.add(HomeModel(R.mipmap.easy_chicken, false, false))
+        homeList.add(HomeModel(R.mipmap.rice_pudding, false, false))
+        homeList.add(HomeModel(R.mipmap.banana, false, false))
+
+        homeList.add(HomeModel(R.mipmap.easy_chicken, false, false))
+        homeList.add(HomeModel(R.mipmap.rice_pudding, false, false))
+        homeList.add(HomeModel(R.mipmap.banana, false, false))
+
+        homeList.add(HomeModel(R.mipmap.easy_chicken, false, false))
     }
 
     private fun setUpHomeRecyclerView() {

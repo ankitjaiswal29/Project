@@ -4,21 +4,15 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import com.fighterdiet.R
 import com.fighterdiet.databinding.ActivityMemberShipBinding
-import com.fighterdiet.utils.Constants
 
 class MemberShipActivity : BaseActivity(), View.OnClickListener {
     private lateinit var binding: ActivityMemberShipBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       /* getWindow().setFlags(
-            WindowManager.LayoutParams.FLAG_SECURE,
-            WindowManager.LayoutParams.FLAG_SECURE
-        )*/
         binding = DataBindingUtil.setContentView(this, R.layout.activity_member_ship)
         initialize()
     }
@@ -40,21 +34,14 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener {
         view?.id.let {
             when (it) {
                 R.id.clMemberShipYear -> {
-                    moveToNextFlow()
+                    finish()
+                    startActivity(RecipeInfoActivity.getStartIntent(this))
                 }
                 R.id.btnMembershipMonth -> {
-                    moveToNextFlow()
+                    finish()
+                    startActivity(RecipeInfoActivity.getStartIntent(this))
                 }
             }
         }
-    }
-
-    private fun moveToNextFlow() {
-        finish()
-//        if (Constants.isQuestonnaireCompleted) {
-//            startActivity(DashboardActivity.getStartIntent(this))
-//        } else {
-//            startActivity(DashboardActivity.getStartIntent(this))
-//        }
     }
 }
