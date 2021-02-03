@@ -20,10 +20,10 @@ class RecipeInfoActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       /* getWindow().setFlags(
-            WindowManager.LayoutParams.FLAG_SECURE,
-            WindowManager.LayoutParams.FLAG_SECURE
-        )*/
+        /* getWindow().setFlags(
+             WindowManager.LayoutParams.FLAG_SECURE,
+             WindowManager.LayoutParams.FLAG_SECURE
+         )*/
         binding = DataBindingUtil.setContentView(this, R.layout.activity_recipe_info)
         initialise()
     }
@@ -35,10 +35,10 @@ class RecipeInfoActivity : AppCompatActivity(), View.OnClickListener {
         binding.ivFav.setOnClickListener(this)
         binding.ivShare.setOnClickListener(this)
 
-        val info: InfoFragment = InfoFragment()
-        val ingredientsFragment: IngredientsFragment = IngredientsFragment()
-        val directions: DirectionsFragment = DirectionsFragment()
-        val tipsFragment: TipsFragment = TipsFragment()
+        val info = InfoFragment()
+        val ingredientsFragment = IngredientsFragment()
+        val directions = DirectionsFragment()
+        val tipsFragment = TipsFragment()
 
         fragments.add(info)
         fragments.add(ingredientsFragment)
@@ -109,16 +109,18 @@ class RecipeInfoActivity : AppCompatActivity(), View.OnClickListener {
                 )
             }
 
-            R.id.iv_banner ->{
-                startActivity(ImageZoomOutActivity.getStartIntent(this).putExtra("from","Activity"))
+            R.id.iv_banner -> {
+                startActivity(
+                    ImageZoomOutActivity.getStartIntent(this).putExtra("from", "Activity")
+                )
             }
 
-            R.id.iv_fav ->{
-                Utils.showToast(this,"Will cover in functionality")
+            R.id.iv_fav -> {
+                Utils.showToast(this, "Will cover in functionality")
             }
 
-            R.id.iv_share ->{
-                Utils.showToast(this,"Will cover in functionality")
+            R.id.iv_share -> {
+                Utils.showToast(this, "Will cover in functionality")
             }
 
         }

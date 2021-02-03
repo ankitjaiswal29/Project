@@ -1,7 +1,6 @@
 package com.fighterdiet.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import com.fighterdiet.R
 import com.fighterdiet.databinding.FragmentInfoBinding
 
 class InfoFragment : BaseFragment() {
-    lateinit var binding:FragmentInfoBinding
+    lateinit var binding: FragmentInfoBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,9 +19,9 @@ class InfoFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_info,container,false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_info, container, false)
         return binding.root
     }
 

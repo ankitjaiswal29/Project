@@ -26,7 +26,7 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener {
     private fun initialise() {
         binding.clIntroScreen.visibility = View.VISIBLE
         var url: String = ""
-        var bundle = intent.extras
+        val bundle = intent.extras
         if (bundle != null) {
             url = bundle.getString("SETTING")!!
         }
