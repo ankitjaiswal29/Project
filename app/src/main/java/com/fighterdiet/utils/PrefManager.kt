@@ -1,9 +1,8 @@
-package com.example.huru.utils
+package com.fighterdiet.utils
 
 import android.content.Context
 import android.content.SharedPreferences
 import com.fighterdiet.app.MyApplication
-import com.google.gson.Gson
 
 object PrefManager {
 

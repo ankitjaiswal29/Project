@@ -1,8 +1,8 @@
-package com.example.huru.data.api
+package com.fighterdiet.data.api
 
 import android.content.Context
-import com.example.huru.utils.AuthInterceptor
 import com.fighterdiet.app.MyApplication
+import com.fighterdiet.utils.AuthInterceptor
 import com.fighterdiet.utils.Constants
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient

@@ -6,5 +6,5 @@ object Constants {
     var ZERO = 0
     var ISSUBSCRIPTION = false
 
-    const val SERVER_URL = "http://quytech.net/fighter_diet_backend/public/api"
+    const val SERVER_URL = "http://quytech.net/fighter_diet_backend/public/api/"
 }
