@@ -4,12 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.huru.data.api.RetrofitBuilder
 import com.fighterdiet.R
+import com.fighterdiet.data.api.RetrofitBuilder
 import com.fighterdiet.data.repository.RegisterRepository
 import com.fighterdiet.databinding.ActivityCreateAccountBinding
 import com.fighterdiet.utils.ProgressDialog
@@ -29,6 +28,8 @@ class CreateAccountActivity : BaseActivity() {
         )*/
         binding = DataBindingUtil.setContentView(this, R.layout.activity_create_account)
         initialise()
+        setupViewModel()
+        setupObserver()
     }
 
     override fun setupUI() {
@@ -61,12 +62,22 @@ class CreateAccountActivity : BaseActivity() {
                     val apiResponse = it.data!!
                     if (apiResponse.status) {
 
+                        if (apiResponse.status_code==200){
+                            startActivity(Intent(this,LoginActivity::class.java))
+                        }else{
+                            Utils.showSnackBar(binding.root, apiResponse.message)
+                        }
+
                     } else {
                         Utils.showSnackBar(binding.root, apiResponse.message)
                     }
 
                 }
             }
+        })
+
+        viewModel.getErrorMsg().observe(this, Observer {
+            Utils.showSnackBar(binding.root, it)
         })
 
     }
