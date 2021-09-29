@@ -29,6 +29,18 @@ class FaqActivity : BaseActivity(), View.OnClickListener {
         setupRecyclerView()
     }
 
+    override fun setupUI() {
+
+    }
+
+    override fun setupViewModel() {
+
+    }
+
+    override fun setupObserver() {
+
+    }
+
     private fun initialise() {
         binding.ivBack.setOnClickListener(this)
     }

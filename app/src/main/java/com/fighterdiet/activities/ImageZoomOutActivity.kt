@@ -30,6 +30,18 @@ class ImageZoomOutActivity : BaseActivity(), View.OnClickListener {
         binding.wvImage.loadDataWithBaseURL("file:///android_res/drawable/", "<img src='img_detail_page.png' />", "text/html", "utf-8", null)
     }
 
+    override fun setupUI() {
+
+    }
+
+    override fun setupViewModel() {
+
+    }
+
+    override fun setupObserver() {
+
+    }
+
     companion object {
         const val TAG = "ImageZoomOutActivity"
 

@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fighterdiet.R
@@ -26,12 +28,24 @@ class DashboardActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard_with_calaories)
 
+
         if (Constants.isQuestonnaireCompleted) {
             initialise6Tab()
         } else {
             initialise4Tab()
         }
 
+    }
+
+    override fun setupUI() {
+
+    }
+
+    override fun setupViewModel() {
+    }
+
+    override fun setupObserver() {
+        TODO("Not yet implemented")
     }
 
 
@@ -98,6 +112,7 @@ class DashboardActivity : BaseActivity() {
                         startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
                     }
                     2 -> {
+
                         showFragment(TrendingFragment())
                     }
                     3 -> {
@@ -206,18 +221,29 @@ class DashboardActivity : BaseActivity() {
 
                 when (tab.position) {
                     0 -> {
+                        binding.toolbar.ivTopImage.visibility = View.VISIBLE;
+                        binding.toolbar.tvTitle.visibility = View.GONE;
                         showFragment(HomeFragment())
                     }
                     1 -> {
                         startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
                     }
                     2 -> {
+                        //Toast.makeText(applicationContext,"click", Toast.LENGTH_SHORT).show()
+                        binding.toolbar.ivTopImage.visibility = View.GONE;
+                        binding.toolbar.tvTitle.visibility = View.VISIBLE;
+                        binding.toolbar.tvTitle.setText("Trending")
                         showFragment(TrendingFragment())
                     }
                     3 -> {
+                        binding.toolbar.ivTopImage.visibility = View.GONE;
+                        binding.toolbar.tvTitle.visibility = View.VISIBLE;
+                        binding.toolbar.tvTitle.setText("Favorites")
                         showFragment(FavouriteFragment())
                     }
                     4 -> {
+                        binding.toolbar.ivTopImage.visibility = View.VISIBLE;
+                        binding.toolbar.tvTitle.visibility = View.GONE;
                         startActivity(SettingsActivity.getStartIntent(this@DashboardActivity))
                     }
                 }
@@ -262,6 +288,13 @@ class DashboardActivity : BaseActivity() {
                 }
             }
         }
+    }
+
+    fun setToolBarVisibility(isToolBarVisible: Boolean) {
+       /* if (isToolBarVisible)
+            binding.toolbar.ivTopImage.visibility = View.VISIBLE;
+        else
+            binding.toolbar.ivTopImage.visibility = View.GONE;*/
     }
 
 }

@@ -26,4 +26,8 @@ abstract class BaseActivity : AppCompatActivity() {
        // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 
+    abstract fun setupUI()
+    abstract fun setupViewModel()
+    abstract fun setupObserver()
+
 }

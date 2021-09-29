@@ -26,6 +26,18 @@ class ProfileAfterQuestionsActivity : BaseActivity(), View.OnClickListener {
         initialise()
     }
 
+    override fun setupUI() {
+
+    }
+
+    override fun setupViewModel() {
+
+    }
+
+    override fun setupObserver() {
+
+    }
+
     private fun initialise() {
         binding.tvNext.setOnClickListener(this)
 

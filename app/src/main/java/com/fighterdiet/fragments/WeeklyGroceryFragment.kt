@@ -42,6 +42,18 @@ class WeeklyGroceryFragment : BaseActivity(), View.OnClickListener {
 
     }
 
+    override fun setupUI() {
+
+    }
+
+    override fun setupViewModel() {
+
+    }
+
+    override fun setupObserver() {
+
+    }
+
     /*override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }

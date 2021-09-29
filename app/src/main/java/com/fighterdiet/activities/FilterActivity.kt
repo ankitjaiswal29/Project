@@ -28,6 +28,18 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
         initialise()
     }
 
+    override fun setupUI() {
+
+    }
+
+    override fun setupViewModel() {
+
+    }
+
+    override fun setupObserver() {
+
+    }
+
     private fun initialise() {
         tabTitles = arrayOf("Dietary Info","Volume","Meals")
 

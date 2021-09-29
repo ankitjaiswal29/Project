@@ -30,6 +30,18 @@ class PersonalChartActivity : BaseActivity() {
             .replace(R.id.frame_layout, personalChartFragment).commit()
     }
 
+    override fun setupUI() {
+
+    }
+
+    override fun setupViewModel() {
+
+    }
+
+    override fun setupObserver() {
+
+    }
+
     companion object {
         const val TAG = "PersonalChartActivity"
 

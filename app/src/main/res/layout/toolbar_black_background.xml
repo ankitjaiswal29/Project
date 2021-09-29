@@ -11,6 +11,22 @@
         android:paddingBottom="@dimen/_10sdp"
         app:layout_scrollFlags="scroll|enterAlways">
 
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_medium"
+            android:text="Treading"
+            android:visibility="gone"
+            android:textColor="@color/white"
+         app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="@dimen/_20ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            />
+
         <ImageView
             android:id="@+id/ivTopImage"
             android:layout_width="wrap_content"

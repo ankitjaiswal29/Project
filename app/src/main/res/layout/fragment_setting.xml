@@ -105,6 +105,25 @@
 
 
                     <TextView
+                        android:id="@+id/tv_change_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/v_about_paulin"
+                        style="@style/SettingsRow"
+                        android:textColor="@color/black"
+                        android:text="@string/str_change_password"
+                        app:drawableEndCompat="@drawable/ic_forword"/>
+                    <View
+                        android:id="@+id/v_change_password"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="@color/darkGrey"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_change_password"
+                        app:layout_constraintStart_toStartOf="@+id/tv_change_password"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_change_password" />
+
+
+                    <TextView
                         android:id="@+id/tv_faq"
                         style="@style/SettingsRow"
                         android:layout_width="match_parent"
@@ -114,7 +133,7 @@
                         android:text="@string/str_faq"
                         android:textColor="@color/black"
                         app:drawableEndCompat="@drawable/ic_forword"
-                        app:layout_constraintTop_toBottomOf="@+id/v_about_paulin" />
+                        app:layout_constraintTop_toBottomOf="@+id/v_change_password" />
 
                     <View
                         android:id="@+id/v_faq"
@@ -165,6 +184,45 @@
                         app:layout_constraintStart_toStartOf="@+id/tv_email"
                         app:layout_constraintTop_toBottomOf="@+id/tv_email" />
 
+                   <!-- <TextView
+                        android:id="@+id/tv_change_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/v_email"
+                        style="@style/SettingsRow"
+                        android:textColor="@color/black"
+                        android:text="@string/str_change_password"
+                        app:drawableEndCompat="@drawable/ic_forword"/>
+                    <View
+                        android:id="@+id/v_change_password"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="@color/darkGrey"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_change_password"
+                        app:layout_constraintStart_toStartOf="@+id/tv_change_password"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_change_password" />
+-->
+
+                    <TextView
+                        android:id="@+id/tv_cancel_subscription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/v_email"
+                        style="@style/SettingsRow"
+                        android:textColor="@color/black"
+                        android:text="@string/str_cancel_subscription"
+                        app:drawableEndCompat="@drawable/ic_forword"/>
+                    <View
+                        android:id="@+id/v_cancel_subscription"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:background="@color/darkGrey"
+                        app:layout_constraintEnd_toEndOf="@+id/tv_cancel_subscription"
+                        app:layout_constraintStart_toStartOf="@+id/tv_cancel_subscription"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_cancel_subscription" />
+
+
+
                     <TextView
                         android:id="@+id/tv_legal"
                         android:layout_width="wrap_content"
@@ -176,7 +234,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14ssp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/v_email" />
+                        app:layout_constraintTop_toBottomOf="@+id/v_cancel_subscription" />
 
                     <TextView
                         android:id="@+id/tv_terms"

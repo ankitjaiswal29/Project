@@ -24,8 +24,7 @@ class PrivacyAndTermsActivity : BaseActivity(), View.OnClickListener {
     private fun initialise() {
         binding.toolbar.ivCb.visibility = GONE
         binding.toolbar.back.setOnClickListener(this)
-
-
+        
         var url: String = ""
         var title:String = ""
         var bundle = intent.extras
@@ -55,6 +54,18 @@ class PrivacyAndTermsActivity : BaseActivity(), View.OnClickListener {
         } else {
             super.onBackPressed()
         }
+
+    }
+
+    override fun setupUI() {
+
+    }
+
+    override fun setupViewModel() {
+
+    }
+
+    override fun setupObserver() {
 
     }
 

@@ -32,6 +32,18 @@ class PicOneDayMealsActivity : BaseActivity(), View.OnClickListener, RecyclerVie
         initialise()
     }
 
+    override fun setupUI() {
+
+    }
+
+    override fun setupViewModel() {
+
+    }
+
+    override fun setupObserver() {
+
+    }
+
     private fun initialise() {
         setUpHomeList()
         setUpHomeRecyclerView()

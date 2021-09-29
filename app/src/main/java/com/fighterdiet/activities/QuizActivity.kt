@@ -37,6 +37,18 @@ class QuizActivity : BaseActivity(), View.OnClickListener {
         initialise()
     }
 
+    override fun setupUI() {
+
+    }
+
+    override fun setupViewModel() {
+
+    }
+
+    override fun setupObserver() {
+
+    }
+
     private fun initialise() {
         binding.btnNext.setOnClickListener(this)
         binding.ivPrevious.setOnClickListener(this)

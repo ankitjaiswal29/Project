@@ -39,6 +39,18 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         initialise()
     }
 
+    override fun setupUI() {
+
+    }
+
+    override fun setupViewModel() {
+
+    }
+
+    override fun setupObserver() {
+
+    }
+
     private fun initialise() {
         viewFlipper = findViewById<ViewFlipper>(R.id.viewflip)
         for (i in 0 until imageList.size) {

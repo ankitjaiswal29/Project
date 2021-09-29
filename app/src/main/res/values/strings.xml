@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Fighter Diet</string>
-    <string name="hint_email">Email</string>
+    <string name="hint_email">Email or Username</string>
     <string name="hint_password">Password</string>
     <string name="str_btn_login">Login</string>
     <string name="str_forgot_password">Forgot Password?</string>
@@ -13,7 +13,7 @@
     <string name="str_hint_confirm_password">Confirm Password</string>
     <string name="str_hint_phone_number">Phone Number</string>
     <string name="str_create_account">Create Account</string>
-    <string name="str_text_reset_password">A link will be sent to your registered phone number to reset your password.</string>
+    <string name="str_text_reset_password">Please enter your email address below.A rest code will be sent to your email to verify your identity.</string>
     <string name="str_reset_password">Reset Password</string>
     <string name="str_need_more_help_desc">Need more help? Email us at customerservice@fighterdiet.com</string>
     <string name="str_next">Next</string>
@@ -99,5 +99,11 @@
     <string name="str_legal">Legal:</string>
     <string name="str_made_possible_by_angel">Made possible by Angel De Amor.</string>
     <string name="str_fighterdiet_inc">Fighterdiet Inc.</string>
+    <string name="str_skip">SKIP</string>
+    <string name="str_term_condition">I agree to <u>Terms &amp; Conditions</u> and <u>Privacy Policy</u></string>
+    <string name="str_already_have_an_account">Already have an account ?</string>
+    <string name="str_email_id">Email ID</string>
+    <string name="str_change_password">Change Password</string>
+    <string name="str_cancel_subscription">Cancel Subscription</string>
 
 </resources>

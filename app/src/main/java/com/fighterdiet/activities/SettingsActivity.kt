@@ -26,19 +26,31 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
 
     }
 
-   /* override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false)
-        return binding.root
+    override fun setupUI() {
+
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initialise()
-    }*/
+    override fun setupViewModel() {
+
+    }
+
+    override fun setupObserver() {
+
+    }
+
+    /* override fun onCreateView(
+         inflater: LayoutInflater, container: ViewGroup?,
+         savedInstanceState: Bundle?
+     ): View? {
+         // Inflate the layout for this fragment
+         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false)
+         return binding.root
+     }
+
+     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+         super.onViewCreated(view, savedInstanceState)
+         initialise()
+     }*/
 
     private fun initialise() {
         binding.tvLogOut.setOnClickListener(this)
@@ -49,6 +61,8 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
         binding.tvTerms.setOnClickListener(this)
         binding.tvPrivacy.setOnClickListener(this)
         binding.ivBack.setOnClickListener(this)
+        binding.tvChangePassword.setOnClickListener(this)
+        binding.tvCancelSubscription.setOnClickListener(this)
     }
 
     companion object {
@@ -99,6 +113,14 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
                         startActivity(intent)
                     } catch (e: ActivityNotFoundException) {
                     }
+                }
+                R.id.tv_change_password->{
+                    val reset=Intent(this,ResetPasswordActivity::class.java)
+                    reset.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(reset)
+                }
+                R.id.tv_cancel_subscription->{
+
                 }
                 R.id.tv_privacy -> {
                     var quiz = Intent(this, PrivacyAndTermsActivity::class.java)

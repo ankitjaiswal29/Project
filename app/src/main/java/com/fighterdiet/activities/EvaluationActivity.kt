@@ -23,6 +23,18 @@ class EvaluationActivity : BaseActivity(), View.OnClickListener {
         initialise()
     }
 
+    override fun setupUI() {
+
+    }
+
+    override fun setupViewModel() {
+
+    }
+
+    override fun setupObserver() {
+
+    }
+
     private fun initialise() {
         binding.tvNext.setOnClickListener(this)
         binding.tvNewMeal.setOnClickListener(this)

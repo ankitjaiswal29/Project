@@ -23,6 +23,18 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener {
         initialise()
     }
 
+    override fun setupUI() {
+
+    }
+
+    override fun setupViewModel() {
+
+    }
+
+    override fun setupObserver() {
+
+    }
+
     private fun initialise() {
         binding.clIntroScreen.visibility = View.VISIBLE
         var url: String = ""

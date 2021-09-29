@@ -15,8 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FighterDietApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.ImageZoomOutActivity"></activity>
-        <activity android:name=".fragments.DietryInfoActivity" />
+        <activity
+            android:name=".activities.ChangePasswordActivity"
+            android:exported="true" />
+        <activity android:name=".activities.ImageZoomOutActivity" />
+<!--        <activity android:name=".fragments.DietryInfoActivity" />-->
         <activity android:name=".activities.FilterActivity" />
         <activity
             android:name=".activities.PrivacyAndTermsActivity"
@@ -25,12 +28,10 @@
             android:name=".activities.SettingsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-
         <activity
             android:name=".fragments.WeeklyGroceryFragment"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-
         <activity
             android:name=".activities.PersonalChartActivity"
             android:screenOrientation="portrait"
@@ -51,7 +52,8 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activities.DashboardActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".activities.PicOneDayMealsActivity"
             android:screenOrientation="portrait"
@@ -73,14 +75,17 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.ResetPasswordActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".activities.CreateAccountActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activities.LoginActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

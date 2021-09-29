@@ -22,6 +22,18 @@ class ResetPasswordActivity : BaseActivity() {
         initialise()
     }
 
+    override fun setupUI() {
+
+    }
+
+    override fun setupViewModel() {
+
+    }
+
+    override fun setupObserver() {
+
+    }
+
     private fun initialise() {
         binding.btnResetPassword.setOnClickListener(View.OnClickListener {
             finish()

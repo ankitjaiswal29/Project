@@ -31,6 +31,18 @@ class PicDaySevenMealsActivity : BaseActivity() {
         initialise()
     }
 
+    override fun setupUI() {
+
+    }
+
+    override fun setupViewModel() {
+
+    }
+
+    override fun setupObserver() {
+
+    }
+
     private fun initialise() {
         binding.tvNext.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {

@@ -17,6 +17,18 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener {
         initialize()
     }
 
+    override fun setupUI() {
+
+    }
+
+    override fun setupViewModel() {
+
+    }
+
+    override fun setupObserver() {
+
+    }
+
     private fun initialize() {
         binding.clMemberShipYear.setOnClickListener(this)
         binding.btnMembershipMonth.setOnClickListener(this)

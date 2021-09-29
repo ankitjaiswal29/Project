@@ -14,7 +14,7 @@ import com.fighterdiet.fragments.*
 import com.fighterdiet.utils.Utils
 import com.google.android.material.tabs.TabLayout
 
-class RecipeInfoActivity : AppCompatActivity(), View.OnClickListener {
+class RecipeInfoActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding: ActivityRecipeInfoBinding
     private val fragments = ArrayList<Fragment>()
 
@@ -26,6 +26,18 @@ class RecipeInfoActivity : AppCompatActivity(), View.OnClickListener {
          )*/
         binding = DataBindingUtil.setContentView(this, R.layout.activity_recipe_info)
         initialise()
+    }
+
+    override fun setupUI() {
+
+    }
+
+    override fun setupViewModel() {
+        TODO("Not yet implemented")
+    }
+
+    override fun setupObserver() {
+        TODO("Not yet implemented")
     }
 
     private fun initialise() {
