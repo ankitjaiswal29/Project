@@ -9,23 +9,24 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fighterdiet.data.model.ApiResponse
 import com.fighterdiet.data.model.requestModel.RegisterRequestModel
-import com.fighterdiet.data.model.responseModel.RegisterResponseModel
+import com.fighterdiet.data.model.responseModel.RegistrationResponseModel
 import com.fighterdiet.data.repository.RegisterRepository
 import com.fighterdiet.utils.Resource
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(private val registerRepository: RegisterRepository) : ViewModel() {
 
-    var firstName: String = ""
-    var secondName: String = ""
     var user_name: String = ""
+    var first_name: String = ""
+    var last_name: String = ""
     var email: String = ""
     var password: String = ""
+   var  phone_number:String=" "
     var confirm_password: String = ""
 
 
     private val resources =
-        MutableLiveData<Resource<ApiResponse<ArrayList<RegisterResponseModel>>>>()
+        MutableLiveData<Resource<ApiResponse<RegistrationResponseModel>>>()
 
     fun getResources() = resources
     fun getErrorMsg(): LiveData<String> {
@@ -38,7 +39,8 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
 
         if (isValid()){
             val registerRequestModel = RegisterRequestModel(
-                firstName, secondName, email, user_name, password, confirm_password
+                user_name,first_name,last_name,email,password,phone_number,confirm_password
+                //firstName, secondName, email, user_name, password, confirm_password
             )
             viewModelScope.launch {
                 try {
@@ -58,11 +60,11 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
         if (TextUtils.isEmpty(user_name)){
             errorMsg.value = "Please enter user name"
             return false
-        }else if (TextUtils.isEmpty(firstName)) {
+        }else if (TextUtils.isEmpty(first_name)) {
             errorMsg.value = "Please enter first name"
             return false
-        } else if (TextUtils.isEmpty(secondName)) {
-            errorMsg.value = "Please enter second name"
+        } else if (TextUtils.isEmpty(last_name)) {
+            errorMsg.value = "Please enter last name"
             return false
         } else if (TextUtils.isEmpty(email)) {
             errorMsg.value = "Please enter email"

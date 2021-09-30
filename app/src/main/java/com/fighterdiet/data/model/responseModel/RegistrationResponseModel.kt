@@ -1,5 +1,11 @@
 package com.fighterdiet.data.model.responseModel
 
+data class RegistrationResponseModel(
+    val code: Int,
+    val `data`: Data,
+    val message: String,
+    val status: Boolean
+)
 data class Data(
     val email: String,
     val first_name: String,

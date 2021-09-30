@@ -3,7 +3,9 @@ package com.fighterdiet.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -60,10 +62,14 @@ class CreateAccountActivity : BaseActivity() {
                 Status.SUCCESS -> {
                     ProgressDialog.hideProgressDialog()
                     val apiResponse = it.data!!
+
                     if (apiResponse.status) {
 
-                        if (apiResponse.status_code==200){
-                            startActivity(Intent(this,LoginActivity::class.java))
+                        apiResponse.data?.data
+                        if (apiResponse.code==200){
+                            val loginIntent = Intent(this, LoginActivity::class.java)
+                            loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            startActivity(loginIntent)
                         }else{
                             Utils.showSnackBar(binding.root, apiResponse.message)
                         }

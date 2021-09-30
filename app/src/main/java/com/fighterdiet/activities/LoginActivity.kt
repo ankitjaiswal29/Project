@@ -11,12 +11,25 @@ import android.view.animation.Animation
 import android.widget.ImageView
 import android.widget.ViewFlipper
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.fighterdiet.R
+import com.fighterdiet.data.api.RetrofitBuilder
+import com.fighterdiet.data.repository.LoginRepository
+import com.fighterdiet.data.repository.RegisterRepository
 import com.fighterdiet.databinding.ActivityLoginBinding
+import com.fighterdiet.utils.ProgressDialog
+import com.fighterdiet.utils.Status
+import com.fighterdiet.utils.Utils
+import com.fighterdiet.viewModel.LoginViewModel
+import com.fighterdiet.viewModel.LoginViewModelProvider
+import com.fighterdiet.viewModel.RegisterViewModel
+import com.fighterdiet.viewModel.RegisterViewModelProvider
 
 
 class LoginActivity : BaseActivity(), View.OnClickListener {
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var viewModel:LoginViewModel
    // private lateinit var adapter: ViewPagerAdapter
    // private lateinit var timer: Timer
    // private var duration: Long = 2 * 1000 // Seconds
@@ -37,6 +50,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
          )*/
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         initialise()
+        setupViewModel()
+        setupObserver()
     }
 
     override fun setupUI() {
@@ -45,9 +60,55 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     override fun setupViewModel() {
 
+        viewModel = ViewModelProvider(
+            this,
+            LoginViewModelProvider(LoginRepository(RetrofitBuilder.apiService))
+        ).get(LoginViewModel::class.java)
+        binding.loginViewModel = viewModel
+
+
     }
 
     override fun setupObserver() {
+        viewModel.getResources().observe(this,{
+            when(it.status){
+                Status.LOADING->{
+                    ProgressDialog.showProgressDialog(this)
+                }
+                Status.ERROR -> {
+                    ProgressDialog.hideProgressDialog()
+                    it.message?.let {
+                        Utils.showSnackBar(binding.root, it)
+                    }
+
+                }
+                Status.SUCCESS -> {
+                    ProgressDialog.hideProgressDialog()
+                    val apiResponse = it.data!!
+
+                    if (apiResponse.status) {
+
+                        apiResponse.data?.data
+                        if (apiResponse.code==200){
+                            startActivity(IntroAndDecisionActivity.getStartIntent(this))
+                           /* val loginIntent = Intent(this, LoginActivity::class.java)
+                            loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            startActivity(loginIntent)*/
+                        }else{
+                            Utils.showSnackBar(binding.root, apiResponse.message)
+                        }
+
+                    } else {
+                        Utils.showSnackBar(binding.root, apiResponse.message)
+                    }
+
+                }
+            }
+
+        })
+        viewModel.getErrorMsg().observe(this, Observer {
+            Utils.showSnackBar(binding.root, it)
+        })
 
     }
 
@@ -194,9 +255,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             R.id.tv_create_account -> {
                 startActivity(CreateAccountActivity.getStartIntent(this))
             }
-            R.id.btnLogin -> {
+           /* R.id.btnLogin -> {
                 startActivity(IntroAndDecisionActivity.getStartIntent(this))
-            }
+            }*/
         }
     }
 
