@@ -1,12 +1,6 @@
 package com.fighterdiet.data.model.responseModel
 
 data class LoginResponseModel(
-    val code: Int,
-    val data: LoginData,
-    val message: String,
-    val status: Boolean
-)
-data class LoginData(
     val active: Int,
     val created: String,
     val email: String,

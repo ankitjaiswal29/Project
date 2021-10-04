@@ -64,15 +64,18 @@ class ResetPasswordActivity : BaseActivity() {
                     if (apiResponse.status) {
 
                         if (apiResponse.code==200){
+
+                            Utils.showSnackBar(binding.root, apiResponse.message)
+
                             val otpDialogFragement = OtpDialogFragement()
                             val userdata = Bundle()
-                            userdata.putString("otp",apiResponse.data?.data?.otp.toString())
-                            userdata.putString("userid",apiResponse.data?.data?.user_id.toString())
-                            Toast.makeText(this,it.data.data?.data?.otp.toString()+apiResponse.data?.data?.user_id.toString(), Toast.LENGTH_LONG).show()
+                            userdata.putString("otp",apiResponse.data?.otp.toString())
+                            userdata.putString("userid",apiResponse.data?.user_id.toString())
+                            Toast.makeText(this,it.data.data?.otp.toString()+apiResponse.data?.user_id.toString(), Toast.LENGTH_LONG).show()
                             otpDialogFragement.arguments=userdata
 
                             otpDialogFragement.show(supportFragmentManager, "OtpDialogFragement")
-                              print("data"+apiResponse.data?.data?.otp+apiResponse.data?.data?.user_id)
+                              print("data"+apiResponse.data?.otp+apiResponse.data?.user_id)
 
                         }else{
                             Utils.showSnackBar(binding.root, apiResponse.message)
