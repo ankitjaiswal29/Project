@@ -89,10 +89,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
                     if (apiResponse.status) {
 
-                        apiResponse.data?.data
+                        apiResponse.data
                         if (apiResponse.code==200){
                             Toast.makeText(this,
-                                apiResponse.data?.data?.first_name+apiResponse.data?.data?.first_name, Toast.LENGTH_LONG).show()
+                                apiResponse.data?.first_name+apiResponse.data?.first_name, Toast.LENGTH_LONG).show()
 
                           //  startActivity(IntroAndDecisionActivity.getStartIntent(this))
                            /* val loginIntent = Intent(this, LoginActivity::class.java)
