@@ -4,14 +4,24 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.fighterdiet.R
+import com.fighterdiet.data.api.RetrofitBuilder
+import com.fighterdiet.data.repository.ForgotPasswordRepository
 import com.fighterdiet.databinding.ActivityResetPasswordBinding
+import com.fighterdiet.fragments.OtpDialogFragement
+import com.fighterdiet.utils.ProgressDialog
+import com.fighterdiet.utils.Status
+import com.fighterdiet.utils.Utils
+import com.fighterdiet.viewModel.ForgotPasswordViewModel
+import com.fighterdiet.viewModel.ForgotPasswordViewModelProvider
 
 class ResetPasswordActivity : BaseActivity() {
     private lateinit var binding: ActivityResetPasswordBinding
-
+    private lateinit var viewModel: ForgotPasswordViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
       /*  getWindow().setFlags(
@@ -20,6 +30,8 @@ class ResetPasswordActivity : BaseActivity() {
         )*/
         binding = DataBindingUtil.setContentView(this, R.layout.activity_reset_password)
         initialise()
+        setupViewModel()
+        setupObserver()
     }
 
     override fun setupUI() {
@@ -27,10 +39,55 @@ class ResetPasswordActivity : BaseActivity() {
     }
 
     override fun setupViewModel() {
-
+        viewModel=ViewModelProvider(this,ForgotPasswordViewModelProvider(ForgotPasswordRepository(RetrofitBuilder.apiService)))
+            .get(ForgotPasswordViewModel::class.java)
+        binding.forgotpasswordViewModel=viewModel
     }
 
     override fun setupObserver() {
+        viewModel.getResources().observe(this,{
+            when(it.status){
+                Status.LOADING->{
+                    ProgressDialog.showProgressDialog(this)
+                }
+                Status.ERROR -> {
+                    ProgressDialog.hideProgressDialog()
+                    it.message?.let {
+                        Utils.showSnackBar(binding.root, it)
+                    }
+
+                }
+                Status.SUCCESS -> {
+                    ProgressDialog.hideProgressDialog()
+                    val apiResponse = it.data!!
+
+                    if (apiResponse.status) {
+
+                        if (apiResponse.code==200){
+                            val otpDialogFragement = OtpDialogFragement()
+                            val userdata = Bundle()
+                            userdata.putString("otp",apiResponse.data?.data?.otp.toString())
+                            userdata.putString("userid",apiResponse.data?.data?.user_id.toString())
+                            Toast.makeText(this,it.data.data?.data?.otp.toString()+apiResponse.data?.data?.user_id.toString(), Toast.LENGTH_LONG).show()
+                            otpDialogFragement.arguments=userdata
+
+                            otpDialogFragement.show(supportFragmentManager, "OtpDialogFragement")
+                              print("data"+apiResponse.data?.data?.otp+apiResponse.data?.data?.user_id)
+
+                        }else{
+                            Utils.showSnackBar(binding.root, apiResponse.message)
+                        }
+
+                    } else {
+                        Utils.showSnackBar(binding.root, apiResponse.message)
+                    }
+
+                }
+            }
+        })
+        viewModel.getErrorMsg().observe(this, Observer {
+            Utils.showSnackBar(binding.root, it)
+        })
 
     }
 

@@ -1,8 +1,10 @@
 package com.fighterdiet.data.api
 
 import com.fighterdiet.data.model.ApiResponse
+import com.fighterdiet.data.model.requestModel.ForgotPasswordRequestModel
 import com.fighterdiet.data.model.requestModel.LoginRequestModel
 import com.fighterdiet.data.model.requestModel.RegisterRequestModel
+import com.fighterdiet.data.model.responseModel.ForgotPasswordResponseModel
 import com.fighterdiet.data.model.responseModel.LoginResponseModel
 
 import com.fighterdiet.data.model.responseModel.RegistrationResponseModel
@@ -16,5 +18,8 @@ interface ApiService {
 
     @POST("login")
     suspend fun loginApi(@Body registerRequestModel: LoginRequestModel): ApiResponse<LoginResponseModel>
+
+    @POST("forgot-password")
+    suspend fun forgotpasswordApi(@Body forgotPasswordRequestModel: ForgotPasswordRequestModel): ApiResponse<ForgotPasswordResponseModel>
 
 }

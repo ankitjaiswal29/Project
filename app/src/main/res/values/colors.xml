@@ -37,6 +37,8 @@
     <color name="lightgreencolor">#D9EDE0</color>
     <color name="selected_background">#4394c1</color>
 
+    <color name="opt_heading">#E1DCD9</color>
+
 
 </resources>
 

@@ -67,9 +67,8 @@ class CreateAccountActivity : BaseActivity() {
 
                         apiResponse.data?.data
                         if (apiResponse.code==200){
-                            val loginIntent = Intent(this, LoginActivity::class.java)
-                            loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                            startActivity(loginIntent)
+                            startActivity(IntroAndDecisionActivity.getStartIntent(this))
+
                         }else{
                             Utils.showSnackBar(binding.root, apiResponse.message)
                         }
@@ -89,10 +88,15 @@ class CreateAccountActivity : BaseActivity() {
     }
 
     private fun initialise() {
-        binding.btnCreateAccount.setOnClickListener(View.OnClickListener {
+        binding.tvLogin.setOnClickListener(View.OnClickListener {
+            val loginIntent = Intent(this, LoginActivity::class.java)
+            loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(loginIntent)
+        })
+       /* binding.btnCreateAccount.setOnClickListener(View.OnClickListener {
             finish()
             startActivity(IntroAndDecisionActivity.getStartIntent(this))
-        })
+        })*/
     }
 
     companion object {

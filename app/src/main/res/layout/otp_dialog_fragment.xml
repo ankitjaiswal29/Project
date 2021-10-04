@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+   <!-- <data>
+
+    </data>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:paddingBottom="@dimen/_20sdp"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/tv_label"
+            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/otp_heading_shape"
+            android:gravity="center"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingTop="@dimen/_2sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_2sdp"
+            android:text="Please check your email for your reset code and enter it below"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/rightGuideline"
+            app:layout_constraintStart_toEndOf="@id/leftGuideline" />
+
+
+        <EditText
+            android:id="@+id/et_otp1"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="20dp"
+            android:maxLength="1"
+            style="@style/Otp"
+            android:layout_marginLeft="@dimen/_2sdp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:inputType="number"
+            app:layout_constraintEnd_toStartOf="@+id/et_otp2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_label"
+            app:layout_constraintStart_toEndOf="@id/leftGuideline" />
+
+        <EditText
+            android:id="@+id/et_otp2"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:ems="10"
+            android:layout_marginLeft="@dimen/_2sdp"
+            style="@style/Otp"
+            android:maxLength="1"
+            android:inputType="number"
+            app:layout_constraintEnd_toStartOf="@+id/et_otp3"
+            app:layout_constraintTop_toTopOf="@+id/et_otp1"
+            app:layout_constraintBottom_toBottomOf="@id/et_otp1"
+            app:layout_constraintStart_toEndOf="@+id/et_otp1"
+
+            />
+
+        <EditText
+            android:id="@+id/et_otp3"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:ems="10"
+            android:maxLength="1"
+            android:layout_marginLeft="@dimen/_2sdp"
+            style="@style/Otp"
+            android:inputType="number"
+            app:layout_constraintEnd_toStartOf="@+id/et_otp4"
+            app:layout_constraintTop_toTopOf="@+id/et_otp2"
+            app:layout_constraintBottom_toBottomOf="@id/et_otp2"
+            app:layout_constraintStart_toEndOf="@+id/et_otp2"
+
+            />
+
+        <EditText
+            android:id="@+id/et_otp4"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:ems="10"
+            android:maxLength="1"
+            android:layout_marginLeft="@dimen/_2sdp"
+            style="@style/Otp"
+            android:inputType="number"
+            app:layout_constraintTop_toTopOf="@+id/et_otp3"
+            app:layout_constraintBottom_toBottomOf="@id/et_otp3"
+            app:layout_constraintStart_toEndOf="@+id/et_otp3"
+            app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+
+            />
+
+        <Button
+            android:id="@+id/bt_verify"
+            android:layout_width="0dp"
+            style="@style/Button"
+            android:layout_height="wrap_content"
+            android:text="Verify Code"
+            android:paddingBottom="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:layout_constraintTop_toBottomOf="@+id/et_otp4"
+            app:layout_constraintStart_toStartOf="@id/et_otp1"
+            app:layout_constraintEnd_toEndOf="@id/et_otp4" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            style="@style/Button"
+            android:text="Resend Code"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:textSize="@dimen/_15sdp"
+            android:textColor="@color/black"
+
+            app:layout_constraintTop_toBottomOf="@+id/bt_verify"
+            app:layout_constraintStart_toStartOf="@+id/bt_verify"
+            app:layout_constraintEnd_toEndOf="@+id/bt_verify" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/leftGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_begin="@dimen/start_screen_margin"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/rightGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_end="@dimen/end_screen_margin"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.View.OnTouchListener
 import android.view.animation.Animation
 import android.widget.ImageView
+import android.widget.Toast
 import android.widget.ViewFlipper
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -90,7 +91,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
                         apiResponse.data?.data
                         if (apiResponse.code==200){
-                            startActivity(IntroAndDecisionActivity.getStartIntent(this))
+                            Toast.makeText(this,
+                                apiResponse.data?.data?.first_name+apiResponse.data?.data?.first_name, Toast.LENGTH_LONG).show()
+
+                          //  startActivity(IntroAndDecisionActivity.getStartIntent(this))
                            /* val loginIntent = Intent(this, LoginActivity::class.java)
                             loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                             startActivity(loginIntent)*/
@@ -160,6 +164,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         binding.tvForgotPassword.setOnClickListener(this)
         binding.tvCreateAccount.setOnClickListener(this)
         binding.btnLogin.setOnClickListener(this)
+        binding.tvSkip.setOnClickListener(this)
 
         /*timer = Timer()
         timer.schedule(object : TimerTask() {
@@ -254,6 +259,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.tv_create_account -> {
                 startActivity(CreateAccountActivity.getStartIntent(this))
+            }
+            R.id.tv_skip->{
+                startActivity(DashboardActivity.getStartIntent(this))
+                finish()
             }
            /* R.id.btnLogin -> {
                 startActivity(IntroAndDecisionActivity.getStartIntent(this))
