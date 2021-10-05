@@ -6,8 +6,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.fighterdiet.R
 import com.fighterdiet.activities.MemberShipActivity
+import com.fighterdiet.data.model.responseModel.RecipeListResponseModel
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
 import com.fighterdiet.interfaces.RecyclerViewItemClickListener
 import com.fighterdiet.models.home_frag.HomeModel
@@ -15,7 +17,7 @@ import java.util.*
 
 class HomeFragmentRecyclerAdapter(
     var context: FragmentActivity?,
-    private var homeList: ArrayList<HomeModel>,
+    private var homeList: ArrayList<RecipeListResponseModel.Recipies>,
     private var itemClickListener: RecyclerViewItemClickListener?
 ) : RecyclerView.Adapter<HomeFragmentRecyclerAdapter.MyViewHolder>() {
     var i = 0
@@ -32,11 +34,7 @@ class HomeFragmentRecyclerAdapter(
         override fun onClick(view: View?) {
             when (view!!.id) {
                 R.id.rlCalories -> {
-                    if (homeList.get(adapterPosition).isDescOpened) {
-                        homeList.get(adapterPosition).isDescOpened = false
-                    } else {
-                        homeList.get(adapterPosition).isDescOpened = true
-                    }
+                    homeList[adapterPosition].isDescOpened = !homeList.get(adapterPosition).isDescOpened
                     notifyDataSetChanged()
                 }
 
@@ -70,7 +68,7 @@ class HomeFragmentRecyclerAdapter(
 
     fun clearSelection() {
         for (i in 0 until homeList.size) {
-            homeList[i].isselected = false
+            homeList[i].isSelected = false
         }
     }
 
@@ -82,12 +80,20 @@ class HomeFragmentRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.binding?.ivItemHome?.setImageResource(homeList[position].image)
+        Glide.with(holder.itemView.context)
+            .load(homeList[position].recipe_image)
+            .placeholder(R.color.greencolor)
+            .into(holder.binding!!.ivItemHome)
         if (homeList.get(position).isDescOpened) {
-            holder.binding?.rlCaloriesDesc?.visibility = View.VISIBLE
+            holder.binding.rlCaloriesDesc.visibility = View.VISIBLE
         } else {
-            holder.binding?.rlCaloriesDesc?.visibility = View.GONE
+            holder.binding.rlCaloriesDesc.visibility = View.GONE
         }
+
+        homeList[position].recipe_name.let {
+            holder.binding.tvRecipeName.text = it
+        }
+
 //
 //        if (homeList.get(position).isselected) {
 //            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
