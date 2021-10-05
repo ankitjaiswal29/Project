@@ -65,7 +65,6 @@ class CreateAccountActivity : BaseActivity() {
 
                     if (apiResponse.status) {
 
-                        apiResponse.data?.data
                         if (apiResponse.code==200){
                             startActivity(IntroAndDecisionActivity.getStartIntent(this))
 

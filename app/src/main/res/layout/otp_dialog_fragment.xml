@@ -2,9 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-   <!-- <data>
+    <data>
 
-    </data>-->
+    <variable
+        name="verifyotpViewModel"
+        type="com.fighterdiet.viewModel.VerifyOtpViewModel" />
+        <variable
+            name="userId"
+            type="String" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -37,6 +43,8 @@
             android:layout_marginTop="20dp"
             android:maxLength="1"
             style="@style/Otp"
+            android:text="@={verifyotpViewModel.otp1}"
+
             android:layout_marginLeft="@dimen/_2sdp"
             app:layout_constraintHorizontal_chainStyle="packed"
             android:inputType="number"
@@ -52,6 +60,7 @@
             android:layout_marginLeft="@dimen/_2sdp"
             style="@style/Otp"
             android:maxLength="1"
+            android:text="@={verifyotpViewModel.otp2}"
             android:inputType="number"
             app:layout_constraintEnd_toStartOf="@+id/et_otp3"
             app:layout_constraintTop_toTopOf="@+id/et_otp1"
@@ -68,6 +77,7 @@
             android:maxLength="1"
             android:layout_marginLeft="@dimen/_2sdp"
             style="@style/Otp"
+            android:text="@={verifyotpViewModel.otp3}"
             android:inputType="number"
             app:layout_constraintEnd_toStartOf="@+id/et_otp4"
             app:layout_constraintTop_toTopOf="@+id/et_otp2"
@@ -84,6 +94,7 @@
             android:maxLength="1"
             android:layout_marginLeft="@dimen/_2sdp"
             style="@style/Otp"
+            android:text="@={verifyotpViewModel.otp4}"
             android:inputType="number"
             app:layout_constraintTop_toTopOf="@+id/et_otp3"
             app:layout_constraintBottom_toBottomOf="@id/et_otp3"
@@ -100,7 +111,7 @@
             android:text="Verify Code"
             android:paddingBottom="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_20sdp"
-            app:layout_constraintTop_toBottomOf="@+id/et_otp4"
+            android:onClick="@{(view) -> verifyotpViewModel.getVerifyOtpApi(view, userId)}"            app:layout_constraintTop_toBottomOf="@+id/et_otp4"
             app:layout_constraintStart_toStartOf="@id/et_otp1"
             app:layout_constraintEnd_toEndOf="@id/et_otp4" />
 

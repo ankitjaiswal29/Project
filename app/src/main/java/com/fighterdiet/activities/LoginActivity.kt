@@ -91,13 +91,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
                         apiResponse.data
                         if (apiResponse.code==200){
-                            Toast.makeText(this,
-                                apiResponse.data?.first_name+apiResponse.data?.first_name, Toast.LENGTH_LONG).show()
-
-                          //  startActivity(IntroAndDecisionActivity.getStartIntent(this))
-                           /* val loginIntent = Intent(this, LoginActivity::class.java)
-                            loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                            startActivity(loginIntent)*/
+                               startActivity(IntroAndDecisionActivity.getStartIntent(this))
                         }else{
                             Utils.showSnackBar(binding.root, apiResponse.message)
                         }
