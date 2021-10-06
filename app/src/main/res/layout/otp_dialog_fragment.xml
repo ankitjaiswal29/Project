@@ -10,6 +10,12 @@
         <variable
             name="userId"
             type="String" />
+        <variable
+            name="email"
+            type="com.fighterdiet.viewModel.ResendOtpViewModel" />
+        <variable
+            name="emailid"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -111,7 +117,8 @@
             android:text="Verify Code"
             android:paddingBottom="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_20sdp"
-            android:onClick="@{(view) -> verifyotpViewModel.getVerifyOtpApi(view, userId)}"            app:layout_constraintTop_toBottomOf="@+id/et_otp4"
+            android:onClick="@{(view) -> verifyotpViewModel.getVerifyOtpApi(view, userId)}"
+            app:layout_constraintTop_toBottomOf="@+id/et_otp4"
             app:layout_constraintStart_toStartOf="@id/et_otp1"
             app:layout_constraintEnd_toEndOf="@id/et_otp4" />
 
@@ -121,10 +128,11 @@
             android:background="@null"
             style="@style/Button"
             android:text="Resend Code"
+
             android:layout_marginTop="@dimen/_20sdp"
             android:textSize="@dimen/_15sdp"
             android:textColor="@color/black"
-
+            android:onClick="@{(view) ->email.getResendOtpApi(view,emailid)}"
             app:layout_constraintTop_toBottomOf="@+id/bt_verify"
             app:layout_constraintStart_toStartOf="@+id/bt_verify"
             app:layout_constraintEnd_toEndOf="@+id/bt_verify" />

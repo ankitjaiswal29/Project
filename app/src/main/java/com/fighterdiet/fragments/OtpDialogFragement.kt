@@ -14,6 +14,7 @@ import com.fighterdiet.activities.IntroAndDecisionActivity
 import com.fighterdiet.data.api.RetrofitBuilder
 import com.fighterdiet.data.model.requestModel.VerifyOtpRequestModel
 import com.fighterdiet.data.repository.RegisterRepository
+import com.fighterdiet.data.repository.ResendOtpRepository
 import com.fighterdiet.data.repository.VerifyOtpRepository
 import com.fighterdiet.databinding.FragmentCommentBinding
 import com.fighterdiet.databinding.OtpDialogFragmentBinding
@@ -21,13 +22,17 @@ import com.fighterdiet.utils.OtpTextWatcher
 import com.fighterdiet.utils.ProgressDialog
 import com.fighterdiet.utils.Status
 import com.fighterdiet.utils.Utils
+import com.fighterdiet.viewModel.ResendOtpViewModel
+import com.fighterdiet.viewModel.ResendOtpViewModelProvider
 import com.fighterdiet.viewModel.VerifyOtpViewModel
 import com.fighterdiet.viewModel.VerifyOtpViewModelProvider
 
 class OtpDialogFragement: DialogFragment() {
     private lateinit var binding: OtpDialogFragmentBinding
     private lateinit var viewModel: VerifyOtpViewModel
+    private lateinit var viewModel2: ResendOtpViewModel
     public  var userId : String ? =null
+    public  var email : String ? =null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,6 +43,7 @@ class OtpDialogFragement: DialogFragment() {
         val bundle = arguments
         var otp = bundle?.getString("otp","")
         userId = bundle?.getString("userid","")
+        email=bundle?.getString("email","")
 
         Toast.makeText(context,otp+userId,Toast.LENGTH_LONG).show()
 
@@ -46,17 +52,68 @@ class OtpDialogFragement: DialogFragment() {
         binding = DataBindingUtil.bind(dialogView)!!
         setupViewModel()
         setupObserver()
+        setupViewModelResendOtp()
+        setupObserverResendOtp()
         setDataBindingValue()
+
         return binding.root
         //return inflater.inflate(R.layout.otp_dialog_fragment, container, false)
     }
 
     private fun setDataBindingValue(){
         binding.userId= userId
+        binding.emailid= email
+
     }
    private fun setupViewModel() {
         viewModel=ViewModelProvider(this,VerifyOtpViewModelProvider(VerifyOtpRepository(RetrofitBuilder.apiService))).get(VerifyOtpViewModel::class.java)
         binding.verifyotpViewModel = viewModel
+    }
+
+    private fun setupViewModelResendOtp(){
+        viewModel2=ViewModelProvider(this,ResendOtpViewModelProvider(ResendOtpRepository(RetrofitBuilder.apiService))).get(ResendOtpViewModel::class.java)
+        binding.email = viewModel2
+    }
+    private fun setupObserverResendOtp(){
+        viewModel2.getResources().observe(this, {
+            when (it.status) {
+                Status.LOADING -> {
+                    ProgressDialog.showProgressDialog(context)
+                }
+                Status.ERROR -> {
+                    ProgressDialog.hideProgressDialog()
+                    it.message?.let {
+                        Utils.showSnackBar(binding.root, it)
+                    }
+                }
+                Status.SUCCESS -> {
+                    ProgressDialog.hideProgressDialog()
+                    val apiResponse = it.data!!
+
+                    if (apiResponse.status) {
+
+                        if (apiResponse.code==200){
+                            Utils.showSnackBar(binding.root, apiResponse.message)
+                            Toast.makeText(context,apiResponse.data?.otp.toString()+apiResponse.data?.user_id.toString(), Toast.LENGTH_LONG).show()
+
+                            //    startActivity(IntroAndDecisionActivity.getStartIntent(context!!.applicationContext))
+
+                        }else{
+                            Utils.showSnackBar(binding.root, apiResponse.message)
+                        }
+
+                    } else {
+                        Utils.showSnackBar(binding.root, apiResponse.message)
+                    }
+
+                }
+            }
+        })
+
+        viewModel.getErrorMsg().observe(this, Observer {
+            Utils.showSnackBar(binding.root, it)
+        })
+
     }
     private fun setupObserver() {
 

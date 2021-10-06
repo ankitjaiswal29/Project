@@ -6,16 +6,20 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.fighterdiet.R
 import com.fighterdiet.activities.MemberShipActivity
 import com.fighterdiet.activities.RecipeInfoActivity
+import com.fighterdiet.data.model.responseModel.FavouriteListResponseModel
+import com.fighterdiet.data.model.responseModel.RecipeListResponseModel
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
 import com.fighterdiet.interfaces.RecyclerViewItemClickListener
 import com.fighterdiet.models.home_frag.HomeModel
+import java.util.ArrayList
 
 class FavouriteFragmentRecyAdapter(
     private var context: FragmentActivity?,
-    private var homeList: ArrayList<HomeModel>,
+    private var favouriteList: ArrayList<FavouriteListResponseModel.Favourite>,
     private var itemClickListener: RecyclerViewItemClickListener?
 ) : RecyclerView.Adapter<FavouriteFragmentRecyAdapter.MyViewHolder>() {
 
@@ -32,10 +36,10 @@ class FavouriteFragmentRecyAdapter(
             when (view!!.id) {
                 R.id.rlCalories -> {
 
-                    if (homeList.get(adapterPosition).isDescOpened) {
-                        homeList.get(adapterPosition).isDescOpened = false
+                    if (favouriteList.get(adapterPosition).isDescOpened) {
+                        favouriteList.get(adapterPosition).isDescOpened = false
                     } else {
-                        homeList.get(adapterPosition).isDescOpened = true
+                        favouriteList.get(adapterPosition).isDescOpened = true
                     }
                     notifyDataSetChanged()
                 }
@@ -65,19 +69,29 @@ class FavouriteFragmentRecyAdapter(
         return MyViewHolder(view)
     }
 
-    override fun onBindViewHolder(
-        holder: MyViewHolder,
-        position: Int
-    ) {
-        holder.binding?.ivItemHome?.setImageResource(homeList[position].image)
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        Glide.with(holder.itemView.context)
+            .load(favouriteList[position].recipe_image)
+            .placeholder(R.color.greencolor)
+            .into(holder.binding!!.ivItemHome)
+        if (favouriteList.get(position).isDescOpened) {
+            holder.binding.rlCaloriesDesc.visibility = View.VISIBLE
+        } else {
+            holder.binding.rlCaloriesDesc.visibility = View.GONE
+        }
+
+        favouriteList[position].recipe_name.let {
+            holder.binding.tvRecipeName.text = it
+        }
+        /*holder.binding?.ivItemHome?.setImageResource(homeList[position].i)
         if (homeList.get(position).isDescOpened) {
             holder.binding?.rlCaloriesDesc?.visibility = View.VISIBLE
         } else {
             holder.binding?.rlCaloriesDesc?.visibility = View.GONE
-        }
+        }*/
     }
 
     override fun getItemCount(): Int {
-        return homeList.size
+        return favouriteList.size
     }
 }

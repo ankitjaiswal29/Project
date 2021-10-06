@@ -5,12 +5,8 @@ import com.fighterdiet.data.model.requestModel.ForgotPasswordRequestModel
 import com.fighterdiet.data.model.requestModel.LoginRequestModel
 import com.fighterdiet.data.model.requestModel.RegisterRequestModel
 import com.fighterdiet.data.model.requestModel.VerifyOtpRequestModel
-import com.fighterdiet.data.model.responseModel.ForgotPasswordResponseModel
-import com.fighterdiet.data.model.responseModel.LoginResponseModel
-import com.fighterdiet.data.model.responseModel.RecipeListResponseModel
+import com.fighterdiet.data.model.responseModel.*
 
-import com.fighterdiet.data.model.responseModel.RegistrationResponseModel
-import com.fighterdiet.data.model.responseModel.VerifyOtpResponseModel
 import retrofit2.http.*
 
 interface ApiService {
@@ -32,6 +28,16 @@ interface ApiService {
         @Query("search") search:String
     ): ApiResponse<RecipeListResponseModel>
 
+    @GET("recipe-list")
+    suspend fun getFavouriteListApi(
+        @Query("offset") offset:Int,
+        @Query("limit") limit:Int,
+        @Query("search") search:String
+    ): ApiResponse<FavouriteListResponseModel>
+
     @POST("verify-otp")
     suspend fun verifyotpApi(@Body verifyOtpRequestModel: VerifyOtpRequestModel):ApiResponse<VerifyOtpResponseModel>
+    @POST("resend-otp")
+    suspend fun resendOtpApi(@Body forgotPasswordRequestModel: ForgotPasswordRequestModel): ApiResponse<ForgotPasswordResponseModel>
+
 }

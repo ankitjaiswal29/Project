@@ -19,6 +19,7 @@ import com.fighterdiet.data.api.RetrofitBuilder
 import com.fighterdiet.data.repository.LoginRepository
 import com.fighterdiet.data.repository.RegisterRepository
 import com.fighterdiet.databinding.ActivityLoginBinding
+import com.fighterdiet.utils.PrefManager
 import com.fighterdiet.utils.ProgressDialog
 import com.fighterdiet.utils.Status
 import com.fighterdiet.utils.Utils
@@ -91,6 +92,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
                         apiResponse.data
                         if (apiResponse.code==200){
+                            PrefManager.putString(PrefManager.KEY_AUTH_TOKEN,apiResponse.data?.token.toString())
+                            System.out.println("token"+apiResponse.data?.token.toString())
                                startActivity(IntroAndDecisionActivity.getStartIntent(this))
                         }else{
                             Utils.showSnackBar(binding.root, apiResponse.message)

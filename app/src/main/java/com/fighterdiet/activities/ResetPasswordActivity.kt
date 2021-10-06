@@ -71,6 +71,7 @@ class ResetPasswordActivity : BaseActivity() {
                             val userdata = Bundle()
                             userdata.putString("otp",apiResponse.data?.otp.toString())
                             userdata.putString("userid",apiResponse.data?.user_id.toString())
+                            userdata.putString("email",apiResponse.data?.email.toString())
                             Toast.makeText(this,it.data.data?.otp.toString()+apiResponse.data?.user_id.toString(), Toast.LENGTH_LONG).show()
                             otpDialogFragement.arguments=userdata
 

@@ -19,8 +19,10 @@ class AuthInterceptor(val context: Context) : Interceptor {
         val requestBuilder = chain.request().newBuilder()
         val authToken = PrefManager.getString(PrefManager.KEY_AUTH_TOKEN)
         Log.e("AuthToken", authToken!!)
-        requestBuilder.addHeader("Authorization", authToken)
+        requestBuilder.addHeader("Authorization", "Bearer "+authToken)
         return chain.proceed(requestBuilder.build())
+
+
     }
 
     fun isConnected(): Boolean {
