@@ -1,13 +1,18 @@
 package com.fighterdiet.data.model.responseModel
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class RecipeListResponseModel(
     val active: String,
     val is_subscribed: String,
     val result: List<Recipies>,
     val totalRecord: Int
-){
+):Parcelable{
+    @Parcelize
     data class Recipies(
-        val id: Int?,
+        val id: String?,
         val recipe_name: String?,
         val recipe_image: String?,
         val calories: String?,
@@ -20,5 +25,5 @@ data class RecipeListResponseModel(
         val volume: String?,
         var isSelected: Boolean = false,
         var isDescOpened:Boolean = false
-    )
+    ): Parcelable
 }

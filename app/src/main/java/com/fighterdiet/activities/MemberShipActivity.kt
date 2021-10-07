@@ -47,11 +47,11 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener {
             when (it) {
                 R.id.clMemberShipYear -> {
                     finish()
-                    startActivity(RecipeInfoActivity.getStartIntent(this))
+//                    startActivity(RecipeInfoActivity.getStartIntent(this))
                 }
                 R.id.btnMembershipMonth -> {
                     finish()
-                    startActivity(RecipeInfoActivity.getStartIntent(this))
+//                    startActivity(RecipeInfoActivity.getStartIntent(this))
                 }
             }
         }

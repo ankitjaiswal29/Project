@@ -4,11 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
-import com.fighterdiet.adapters.HomeFragmentRecyclerAdapter
 import com.fighterdiet.adapters.PicDayMealAdapter
 import com.fighterdiet.databinding.ActivityPicOneDayMealsBinding
 import com.fighterdiet.interfaces.RecyclerViewItemClickListener

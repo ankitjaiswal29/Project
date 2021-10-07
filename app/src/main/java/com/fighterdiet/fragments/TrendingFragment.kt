@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -13,16 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
 import com.fighterdiet.adapters.TrendingFragmentRecyAdapter
 import com.fighterdiet.data.api.RetrofitBuilder
-import com.fighterdiet.data.model.responseModel.FavouriteListResponseModel
 import com.fighterdiet.data.model.responseModel.TrendingListResponseModel
-import com.fighterdiet.data.repository.FavouriteRepository
 import com.fighterdiet.data.repository.TrendingRepository
 import com.fighterdiet.databinding.FragmentTrendingBinding
-import com.fighterdiet.models.home_frag.HomeModel
 import com.fighterdiet.utils.Status
-import com.fighterdiet.utils.Utils
-import com.fighterdiet.viewModel.FavouriteViewModeProvider
-import com.fighterdiet.viewModel.FavouriteViewModel
 import com.fighterdiet.viewModel.TrendingViewModel
 import com.fighterdiet.viewModel.TrendingViewModelProvider
 

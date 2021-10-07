@@ -1,12 +1,16 @@
 package com.fighterdiet.viewModel
 
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
+import androidx.databinding.Bindable
+import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fighterdiet.data.model.ApiResponse
 import com.fighterdiet.data.model.responseModel.RecipeListResponseModel
-import com.fighterdiet.data.repository.ForgotPasswordRepository
 import com.fighterdiet.data.repository.HomeRepository
 import com.fighterdiet.utils.Resource
 import kotlinx.coroutines.Dispatchers
@@ -16,18 +20,22 @@ import retrofit2.HttpException
 
 class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
     private val errorMsg = MutableLiveData<String>()
-    val recipeListResource =
+    private val recipeListResource =
         MutableLiveData<Resource<ApiResponse<RecipeListResponseModel>>>()
 
     fun getErrorMsg(): LiveData<String> {
         return errorMsg
     }
 
-    fun getRecipeList(){
+    fun getRecipeListResource() : MutableLiveData<Resource<ApiResponse<RecipeListResponseModel>>>{
+        return recipeListResource
+    }
+
+    fun getRecipeList(searchKey: String, offset:Int, limit:Int) {
         viewModelScope.launch {
             try {
                 recipeListResource.postValue(Resource.loading(null))
-                val apiResponse = homeRepository.recipeListApi(1, 5, "")
+                val apiResponse = homeRepository.recipeListApi(offset.toInt(), limit.toInt(), searchKey)
                 withContext(Dispatchers.Main){
                     try {
                         if (apiResponse.status) {

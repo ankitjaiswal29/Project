@@ -14,6 +14,7 @@ object PrefManager {
 
     // Keys
     const val KEY_AUTH_TOKEN = "Auth_Token"
+    const val KEY_USER_ID = "User ID"
 
 
     fun getString(key: String): String? {

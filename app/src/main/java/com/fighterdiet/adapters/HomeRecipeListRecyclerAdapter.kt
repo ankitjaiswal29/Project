@@ -1,5 +1,7 @@
 package com.fighterdiet.adapters
 
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,18 +10,15 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.fighterdiet.R
-import com.fighterdiet.activities.MemberShipActivity
 import com.fighterdiet.data.model.responseModel.RecipeListResponseModel
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
-import com.fighterdiet.interfaces.RecyclerViewItemClickListener
-import com.fighterdiet.models.home_frag.HomeModel
 import java.util.*
 
-class HomeFragmentRecyclerAdapter(
+class HomeRecipeListRecyclerAdapter(
     var context: FragmentActivity?,
-    private var homeList: ArrayList<RecipeListResponseModel.Recipies>,
-    private var itemClickListener: RecyclerViewItemClickListener?
-) : RecyclerView.Adapter<HomeFragmentRecyclerAdapter.MyViewHolder>() {
+    private var recipeList: ArrayList<RecipeListResponseModel.Recipies>,
+    private var itemClickListener: (Int, RecipeListResponseModel.Recipies) -> Unit
+) : RecyclerView.Adapter<HomeRecipeListRecyclerAdapter.MyViewHolder>() {
     var i = 0
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
@@ -34,12 +33,12 @@ class HomeFragmentRecyclerAdapter(
         override fun onClick(view: View?) {
             when (view!!.id) {
                 R.id.rlCalories -> {
-                    homeList[adapterPosition].isDescOpened = !homeList.get(adapterPosition).isDescOpened
+                    recipeList[adapterPosition].isDescOpened = !recipeList.get(adapterPosition).isDescOpened
                     notifyDataSetChanged()
                 }
 
                 else -> {
-                    context?.startActivity(MemberShipActivity.getStartIntent(context!!))
+                    itemClickListener.invoke(adapterPosition, recipeList[adapterPosition])
                 }
 
                 //Note   Don't remove this code until finalize by client
@@ -67,8 +66,8 @@ class HomeFragmentRecyclerAdapter(
     }
 
     fun clearSelection() {
-        for (i in 0 until homeList.size) {
-            homeList[i].isSelected = false
+        for (i in 0 until recipeList.size) {
+            recipeList[i].isSelected = false
         }
     }
 
@@ -80,18 +79,24 @@ class HomeFragmentRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        Glide.with(holder.itemView.context)
-            .load(homeList[position].recipe_image)
-            .placeholder(R.color.greencolor)
-            .into(holder.binding!!.ivItemHome)
-        if (homeList.get(position).isDescOpened) {
-            holder.binding.rlCaloriesDesc.visibility = View.VISIBLE
-        } else {
-            holder.binding.rlCaloriesDesc.visibility = View.GONE
-        }
+        try {
+            Glide.with(holder.itemView.context)
+                .load(recipeList[position].recipe_image)
+                .placeholder(R.color.greencolor)
+                .into(holder.binding!!.ivItemHome)
+            if (recipeList.get(position).isDescOpened) {
+                holder.binding.rlCaloriesDesc.visibility = View.VISIBLE
+            } else {
+                holder.binding.rlCaloriesDesc.visibility = View.GONE
+            }
 
-        homeList[position].recipe_name.let {
-            holder.binding.tvRecipeName.text = it
+            recipeList[position].recipe_name.let {
+                holder.binding.tvRecipeName.text = it
+            }
+
+        }
+        catch (e:Exception){
+            e.printStackTrace()
         }
 
 //
@@ -109,7 +114,33 @@ class HomeFragmentRecyclerAdapter(
     }
 
     override fun getItemCount(): Int {
-        return homeList.size
+        return recipeList.size
     }
 
+    fun addData(dataViews: ArrayList<RecipeListResponseModel.Recipies>?) {
+        dataViews?.let {
+            this.recipeList.addAll(dataViews)
+            notifyDataSetChanged()
+        }
+    }
+
+    fun getItemAtPosition(position: Int): RecipeListResponseModel.Recipies {
+        return recipeList[position]
+    }
+
+    fun addLoadingView() {
+        //Add loading item
+        Handler(Looper.getMainLooper()).post {
+//            recipeList.add(null)
+            notifyItemInserted(recipeList.size - 1)
+        }
+    }
+
+    fun removeLoadingView() {
+        //Remove loading item
+        if (recipeList.size != 0) {
+            recipeList.removeAt(recipeList.size - 1)
+            notifyItemRemoved(recipeList.size)
+        }
+    }
 }

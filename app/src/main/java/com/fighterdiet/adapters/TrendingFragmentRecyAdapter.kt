@@ -11,13 +11,11 @@ import com.fighterdiet.R
 import com.fighterdiet.activities.MemberShipActivity
 import com.fighterdiet.data.model.responseModel.TrendingListResponseModel
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
-import com.fighterdiet.interfaces.RecyclerViewItemClickListener
-import com.fighterdiet.models.home_frag.HomeModel
 
 class TrendingFragmentRecyAdapter(
     private var context: FragmentActivity?,
     private var trendingList: ArrayList<TrendingListResponseModel.Result>,
-    private var itemClickListener: RecyclerViewItemClickListener?
+    private var itemClickListener: (Any, Any) -> Unit
 ) : RecyclerView.Adapter<TrendingFragmentRecyAdapter.MyViewHolder>() {
 
 

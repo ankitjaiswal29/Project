@@ -1,6 +1,5 @@
 package com.fighterdiet.adapters
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +9,12 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.R
 import com.fighterdiet.databinding.ItemGroceryListRecyBinding
-import com.fighterdiet.interfaces.RecyclerViewItemClickListener
 import com.fighterdiet.models.weekly_grocery_list.DairyModel
 
 class WeeklyGroceryListRecyAdapter(
     private var context: FragmentActivity?,
     private var dairyList:ArrayList<DairyModel>,
-    private var itemClickListener: RecyclerViewItemClickListener?
+    private var itemClickListener: (Any, Any) -> Unit
 ):RecyclerView.Adapter<WeeklyGroceryListRecyAdapter.MyViewHolder>() {
 
 
@@ -36,20 +34,12 @@ class WeeklyGroceryListRecyAdapter(
             holder.binding?.clMain?.setBackgroundColor(ContextCompat.getColor(context!!, R.color.checkbox_background))
             holder.binding?.tvQuantity?.setText(dairyList[position].item_quantity)
             holder.binding?.tvItemName?.setText(dairyList[position].item_names)
-            if (dairyList[position].selection){
-                holder.binding?.cbQuant?.isChecked=true
-            }else{
-                holder.binding?.cbQuant?.isChecked=false
-            }
+            holder.binding?.cbQuant?.isChecked = dairyList[position].selection
         }else{
             holder.binding?.clMain?.setBackgroundColor(ContextCompat.getColor(context!!, R.color.white))
             holder.binding?.tvQuantity?.setText(dairyList[position].item_quantity)
             holder.binding?.tvItemName?.setText(dairyList[position].item_names)
-            if (dairyList[position].selection){
-                holder.binding?.cbQuant?.isChecked=true
-            }else{
-                holder.binding?.cbQuant?.isChecked=false
-            }
+            holder.binding?.cbQuant?.isChecked = dairyList[position].selection
         }
     }
 
