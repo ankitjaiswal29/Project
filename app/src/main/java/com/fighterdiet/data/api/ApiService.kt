@@ -35,6 +35,16 @@ interface ApiService {
         @Query("search") search:String
     ): ApiResponse<FavouriteListResponseModel>
 
+    @GET("recipe-trending")
+    suspend fun getTrendingListApi(
+        @Query("limit") limit:Int,
+    ): ApiResponse<TrendingListResponseModel>
+
+    @GET("faqs-list")
+    suspend fun getFaqListApi(
+        @Query("limit") limit:Int, @Query("offset") offset:Int
+    ): ApiResponse<FaqListResponseModel>
+
     @POST("verify-otp")
     suspend fun verifyotpApi(@Body verifyOtpRequestModel: VerifyOtpRequestModel):ApiResponse<VerifyOtpResponseModel>
     @POST("resend-otp")

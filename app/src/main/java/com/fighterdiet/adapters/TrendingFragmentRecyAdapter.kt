@@ -6,15 +6,17 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.fighterdiet.R
 import com.fighterdiet.activities.MemberShipActivity
+import com.fighterdiet.data.model.responseModel.TrendingListResponseModel
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
 import com.fighterdiet.interfaces.RecyclerViewItemClickListener
 import com.fighterdiet.models.home_frag.HomeModel
 
 class TrendingFragmentRecyAdapter(
     private var context: FragmentActivity?,
-    private var homeList: ArrayList<HomeModel>,
+    private var trendingList: ArrayList<TrendingListResponseModel.Result>,
     private var itemClickListener: RecyclerViewItemClickListener?
 ) : RecyclerView.Adapter<TrendingFragmentRecyAdapter.MyViewHolder>() {
 
@@ -32,12 +34,12 @@ class TrendingFragmentRecyAdapter(
             when (view!!.id) {
                 R.id.rlCalories -> {
 
-                    if (homeList.get(adapterPosition).isDescOpened) {
-                        homeList.get(adapterPosition).isDescOpened = false
+                   /* if (trendingList.get(adapterPosition).isDescOpened) {
+                        trendingList.get(adapterPosition).isDescOpened = false
                     } else {
-                        homeList.get(adapterPosition).isDescOpened = true
+                        trendingList.get(adapterPosition).isDescOpened = true
                     }
-                    notifyDataSetChanged()
+                    notifyDataSetChanged()*/
                 }
 
                 else -> {
@@ -58,15 +60,19 @@ class TrendingFragmentRecyAdapter(
     }
 
     override fun onBindViewHolder(holder: TrendingFragmentRecyAdapter.MyViewHolder, position: Int) {
-        holder.binding?.ivItemHome?.setImageResource(homeList[position].image)
-        if (homeList.get(position).isDescOpened) {
+        Glide.with(holder.itemView.context)
+            .load(trendingList[position].recipe_image)
+            .placeholder(R.color.greencolor)
+            .into(holder.binding!!.ivItemHome)
+      //  holder.binding?.ivItemHome?.setImageResource(trendingList[position].recipe_image)
+       /* if (trendingList.get(position).isDescOpened) {
             holder.binding?.rlCaloriesDesc?.visibility = View.VISIBLE
         } else {
             holder.binding?.rlCaloriesDesc?.visibility = View.GONE
-        }
+        }*/
     }
 
     override fun getItemCount(): Int {
-        return homeList.size
+        return trendingList.size
     }
 }
