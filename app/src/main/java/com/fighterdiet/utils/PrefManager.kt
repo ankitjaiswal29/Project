@@ -56,10 +56,11 @@ object PrefManager {
         return sharedPreferences.getBoolean(key, false)
     }
 
-//    fun clearPref(){
-//        val editor = sharedPreferences.edit()
-//        editor.remove(IS_LOGIN)
-//        editor.apply()
-//    }
+  fun clearPref(){
+        val editor = sharedPreferences.edit()
+       // editor.remove(IS_LOGIN)
+      editor.clear()
+       editor.apply()
+    }
 
 }

@@ -2,7 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
 
+    <variable
+        name="logoutViewModel"
+        type="com.fighterdiet.viewModel.LogOutViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -68,6 +73,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:text="@string/str_log_out"
+                        android:onClick="@{logoutViewModel.getLogOutApi}"
                         android:textColor="@color/black"
                         app:drawableEndCompat="@drawable/ic_forword"
                         app:layout_constraintTop_toBottomOf="@+id/tv_help_ful" />

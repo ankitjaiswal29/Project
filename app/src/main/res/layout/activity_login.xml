@@ -5,7 +5,8 @@
 <data>
     <variable
         name="loginViewModel"
-        type="com.fighterdiet.viewModel.LoginViewModel" />
+        type="com.fighterdiet.viewModel.LoginViewModel"/>
+
 </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

@@ -28,7 +28,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
+
+                <com.potyvideo.library.AndExoPlayerView
+                    android:id="@+id/ivBackgroundImage1"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_390sdp"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/pauline_intro_2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+              <!--  <ImageView
                     android:id="@+id/ivBackgroundImage1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -37,9 +48,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="ContentDescription" />
+                    tools:ignore="ContentDescription" />-->
 
-                <ImageView
+               <!-- <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/play"
@@ -47,9 +58,9 @@
                     app:layout_constraintEnd_toEndOf="@+id/ivBackgroundImage1"
                     app:layout_constraintStart_toStartOf="@+id/ivBackgroundImage1"
                     app:layout_constraintTop_toTopOf="@+id/ivBackgroundImage1"
-                    tools:ignore="ContentDescription" />
+                    tools:ignore="ContentDescription" />-->
 
-                <View
+               <!-- <View
                     android:id="@+id/view_separator"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_10sdp"
@@ -104,7 +115,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10ssp" />
 
-                </LinearLayout>
+                </LinearLayout>-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

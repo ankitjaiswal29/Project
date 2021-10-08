@@ -1,10 +1,7 @@
 package com.fighterdiet.data.api
 
 import com.fighterdiet.data.model.ApiResponse
-import com.fighterdiet.data.model.requestModel.ForgotPasswordRequestModel
-import com.fighterdiet.data.model.requestModel.LoginRequestModel
-import com.fighterdiet.data.model.requestModel.RegisterRequestModel
-import com.fighterdiet.data.model.requestModel.VerifyOtpRequestModel
+import com.fighterdiet.data.model.requestModel.*
 import com.fighterdiet.data.model.responseModel.*
 
 import retrofit2.http.*
@@ -44,6 +41,9 @@ interface ApiService {
     suspend fun getFaqListApi(
         @Query("limit") limit:Int, @Query("offset") offset:Int
     ): ApiResponse<FaqListResponseModel>
+
+    @POST("logout")
+    suspend fun logOutApi(@Body logoutRequestModel: LogoutRequestModel):ApiResponse<Any>
 
     @POST("verify-otp")
     suspend fun verifyotpApi(@Body verifyOtpRequestModel: VerifyOtpRequestModel):ApiResponse<VerifyOtpResponseModel>

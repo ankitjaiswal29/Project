@@ -7,13 +7,26 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.fighterdiet.R
+import com.fighterdiet.data.api.RetrofitBuilder
+import com.fighterdiet.data.repository.LogOutRepository
+import com.fighterdiet.data.repository.LoginRepository
 import com.fighterdiet.databinding.FragmentSettingBinding
+import com.fighterdiet.utils.PrefManager
+import com.fighterdiet.utils.ProgressDialog
+import com.fighterdiet.utils.Status
+import com.fighterdiet.utils.Utils
+import com.fighterdiet.viewModel.LogOutViewModel
+import com.fighterdiet.viewModel.LogOutViewModelProvider
+import com.fighterdiet.viewModel.LoginViewModel
+import com.fighterdiet.viewModel.LoginViewModelProvider
 
 
 class SettingsActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding: FragmentSettingBinding
-
+    private lateinit var viewModel:LogOutViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /*getWindow().setFlags(
@@ -23,6 +36,8 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
         binding = DataBindingUtil.setContentView(this, R.layout.fragment_setting)
 
         initialise()
+        setupViewModel()
+        setupObserver()
 
     }
 
@@ -31,11 +46,51 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun setupViewModel() {
-
+        viewModel = ViewModelProvider(
+            this,
+            LogOutViewModelProvider(LogOutRepository(RetrofitBuilder.apiService))
+        ).get(LogOutViewModel::class.java)
+        binding.logoutViewModel = viewModel
     }
 
     override fun setupObserver() {
+        viewModel.getResources().observe(this,{
+            when(it.status){
+                Status.LOADING->{
+                   // ProgressDialog.showProgressDialog(this)
+                }
+                Status.ERROR -> {
+                    //ProgressDialog.hideProgressDialog()
+                    it.message?.let {
+                        Utils.showSnackBar(binding.root, it)
+                    }
 
+                }
+                Status.SUCCESS -> {
+                    ProgressDialog.hideProgressDialog()
+                    val apiResponse = it.data!!
+
+                    if (apiResponse.status) {
+                        if (apiResponse.code==200){
+                            PrefManager.clearPref()
+                            val loginIntent = Intent(this, LoginActivity::class.java)
+                            loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            startActivity(loginIntent)
+                        }else{
+                            Utils.showSnackBar(binding.root, apiResponse.message)
+                        }
+
+                    } else {
+                        Utils.showSnackBar(binding.root, apiResponse.message)
+                    }
+
+                }
+            }
+
+        })
+        viewModel.getErrorMsg().observe(this, Observer {
+            Utils.showSnackBar(binding.root, it)
+        })
     }
 
     /* override fun onCreateView(
@@ -87,9 +142,9 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
         view?.let {
             when (view.id) {
                 R.id.tv_log_out -> {
-                    val loginIntent = Intent(this, LoginActivity::class.java)
+                   /* val loginIntent = Intent(this, LoginActivity::class.java)
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                    startActivity(loginIntent)
+                    startActivity(loginIntent)*/
                 }
 
                 R.id.tv_about_paulin -> {

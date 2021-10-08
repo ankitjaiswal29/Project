@@ -16,6 +16,7 @@ import com.fighterdiet.databinding.ActivityCreateAccountBinding
 import com.fighterdiet.utils.ProgressDialog
 import com.fighterdiet.utils.Status
 import com.fighterdiet.utils.Utils
+import com.fighterdiet.utils.makeLinks
 import com.fighterdiet.viewModel.RegisterViewModel
 import com.fighterdiet.viewModel.RegisterViewModelProvider
 
@@ -92,6 +93,22 @@ class CreateAccountActivity : BaseActivity() {
             loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(loginIntent)
         })
+        binding.tvPrivacypolicyTermcondition.makeLinks(
+            Pair("Terms & Conditions",View.OnClickListener {
+
+                var quiz = Intent(this, PrivacyAndTermsActivity::class.java)
+                quiz.putExtra("URL", "https://fighterdiet.com/terms-and-conditions/")
+                quiz.putExtra("PRIVACY", "TERMS AND CONDITIONS")
+                startActivity(quiz)
+
+            }), Pair("Privacy Policy",View.OnClickListener {
+
+                var quiz = Intent(this, PrivacyAndTermsActivity::class.java)
+                quiz.putExtra("URL", "https://fighterdiet.com/privacy-policy/")
+                quiz.putExtra("PRIVACY", "PRIVACY POLICY")
+                startActivity(quiz)
+            })
+        )
        /* binding.btnCreateAccount.setOnClickListener(View.OnClickListener {
             finish()
             startActivity(IntroAndDecisionActivity.getStartIntent(this))
