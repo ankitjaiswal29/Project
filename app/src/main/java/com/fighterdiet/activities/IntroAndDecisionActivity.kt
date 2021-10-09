@@ -1,37 +1,35 @@
 package com.fighterdiet.activities
-
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.fighterdiet.R
+import com.fighterdiet.data.api.RetrofitBuilder
+import com.fighterdiet.data.repository.AboutPaulinNordinRepository
+import com.fighterdiet.data.repository.LoginRepository
 import com.fighterdiet.databinding.ActivityIntroAndDecisionBinding
-import com.google.android.exoplayer2.ExoPlaybackException
-import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.source.MediaSource
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.source.dash.DashMediaSource
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
-import java.util.*
-import javax.sql.DataSource
+import com.fighterdiet.utils.PrefManager
+import com.fighterdiet.utils.ProgressDialog
+import com.fighterdiet.utils.Status
+import com.fighterdiet.utils.Utils
+import com.fighterdiet.viewModel.AboutPaulinNordinViewModel
+import com.fighterdiet.viewModel.AboutPaulinNordinViewModelProvider
+import com.fighterdiet.viewModel.LoginViewModel
+import com.fighterdiet.viewModel.LoginViewModelProvider
+import com.potyvideo.library.globalInterfaces.AndExoPlayerListener
 
-class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener,Player.EventListener {
+class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener,AndExoPlayerListener{
     private lateinit var binding: ActivityIntroAndDecisionBinding
-    private var selected: Int = 1 // 0 -> Not selected 1 -> Selected
-
-   /* private lateinit var simpleExoplayer: SimpleExoPlayer
-    private var playbackPosition: Long = 0
+    private lateinit var viewModel:AboutPaulinNordinViewModel
     private val mp4Url = "https://html5demos.com/assets/dizzy.mp4"
-    private val dashUrl = "https://storage.googleapis.com/wvmedia/clear/vp9/tears/tears_uhd.mpd"
-    private val urlList = listOf(mp4Url to "default", dashUrl to "dash")
-
-  private val dataSourceFactory: DefaultDataSourceFactory by lazy {
-      DefaultDataSourceFactory(this,"exo")
-  }*/
+    private var flag:Boolean=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /* getWindow().setFlags(
@@ -40,18 +38,100 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener,Player.Eve
          )*/
         binding = DataBindingUtil.setContentView(this, R.layout.activity_intro_and_decision)
         initialise()
+        setupViewModel()
+        setupObserver()
+       //binding.ivBackgroundImage1.setAndExoPlayerListener(this)
     }
+
+
 
     override fun setupUI() {
 
     }
 
     override fun setupViewModel() {
-
-    }
+        viewModel = ViewModelProvider(
+            this,
+            AboutPaulinNordinViewModelProvider(AboutPaulinNordinRepository(RetrofitBuilder.apiService))
+        ).get(AboutPaulinNordinViewModel::class.java)
+       viewModel.getAboutPaulinNordinList()
+        //binding.about=viewModel
+         }
 
 
     override fun setupObserver() {
+        viewModel.getResources().observe(this,{
+            when(it.status){
+                Status.LOADING->{
+                    // ProgressDialog.showProgressDialog(this)
+                }
+                Status.ERROR -> {
+                    //ProgressDialog.hideProgressDialog()
+                    it.message?.let {
+                        Utils.showSnackBar(binding.root, it)
+                    }
+
+                }
+                Status.SUCCESS -> {
+                    ProgressDialog.hideProgressDialog()
+                    val apiResponse = it.data!!
+
+                    if (apiResponse.status) {
+                        if (apiResponse.code==200){
+                            binding.aboutResponseModel=apiResponse.data
+                           // binding.ivAbout.text=apiResponse.data?.about
+                            if(apiResponse.data?.extension.equals("mp4")){
+                                //mp4Url=apiResponse.data?.image.toString()
+                                    binding.ivBackgroundImage2.visibility=View.INVISIBLE
+                                    apiResponse.data?.about.toString();
+                                    showVideo(apiResponse.data?.image.toString())
+                            }else{
+                                binding.ivBackgroundImage1.visibility=View.INVISIBLE
+                                binding.ivPlay.visibility=View.INVISIBLE
+                                binding.ivBackgroundImage2.visibility=View.VISIBLE
+                                Glide.with(this)
+                                    .load(apiResponse.data?.image)
+                                    .into(binding.ivBackgroundImage2)
+                            }
+                        }else{
+                            Utils.showSnackBar(binding.root, apiResponse.message)
+                        }
+
+                    } else {
+                        Utils.showSnackBar(binding.root, apiResponse.message)
+                    }
+
+                }
+            }
+
+        })
+        viewModel.getErrorMsg().observe(this, Observer {
+            Utils.showSnackBar(binding.root, it)
+        })
+
+    }
+
+    private fun showVideo(mp4Url: String) {
+        binding.ivBackgroundImage1.playerView.useController=false
+        binding.ivBackgroundImage1.setShowControllers(true)
+        binding.ivBackgroundImage1.setSource(mp4Url)
+        binding.ivBackgroundImage1.setPlayWhenReady(false)
+        binding.ivBackgroundImage1.setOnClickListener {
+
+            if (flag){
+                flag=false
+                binding.ivPlay.visibility=View.VISIBLE
+                binding.ivBackgroundImage1.stopPlayer()
+
+            }else{
+
+                binding.ivPlay.visibility=View.GONE
+                binding.ivBackgroundImage1.setSource(mp4Url)
+                binding.ivBackgroundImage1.startPlayer()
+                flag=true
+            }
+
+        }
 
     }
 
@@ -70,11 +150,15 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener,Player.Eve
             binding.tvDecisionYes.setBackgroundResource(R.drawable.shape_decision_selected)
     */
         binding.tvIntroNext.setOnClickListener(this)
+
+        binding.ivBackgroundImage1.setOnClickListener(this)
+
         /*  binding.tvDecisionNext.setOnClickListener(this)
 
           binding.tvDecisionYes.setOnClickListener(this)
           binding.tvDecisionNo.setOnClickListener(this)*/
     }
+
 
     companion object {
         const val TAG = "IntroAndDecisionActivity"
@@ -122,59 +206,41 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener,Player.Eve
 //                binding.clDecisionScreen.visibility = View.VISIBLE
             }
 
-        }
-    }
-  /*  override fun onStart() {
-        super.onStart()
-        initializePlayer()
-    }
 
-    override fun onStop() {
-        super.onStop()
-        releasePlayer()
-    }
-
-    private fun initializePlayer() {
-        simpleExoplayer = SimpleExoPlayer.Builder(this).build()
-        val randomUrl = urlList.random()
-        preparePlayer(randomUrl.first, randomUrl.second)
-        binding.ivBackgroundImage1.player = simpleExoplayer
-        simpleExoplayer.seekTo(playbackPosition)
-        simpleExoplayer.playWhenReady = true
-        simpleExoplayer.addListener(this)
-
-    }
-
-    private fun buildMediaSource(uri: Uri, type: String): MediaSource {
-        return if (type == "dash") {
-            DashMediaSource.Factory(dataSourceFactory)
-                .createMediaSource(uri)
-        } else {
-            ProgressiveMediaSource.Factory(dataSourceFactory)
-                .createMediaSource(uri)
         }
     }
 
-    private fun preparePlayer(videoUrl: String, type: String) {
-        val uri = Uri.parse(videoUrl)
-        val mediaSource = buildMediaSource(uri, type)
-        simpleExoplayer.prepare(mediaSource)
+    /*override fun onExoBuffering() {
+        super.onExoBuffering()
+        Toast.makeText(this,"onExoBuffering",Toast.LENGTH_LONG).show()
     }
 
-    private fun releasePlayer() {
-        playbackPosition = simpleExoplayer.currentPosition
-        simpleExoplayer.release()
+    override fun onExoEnded() {
+        super.onExoEnded()
+        Toast.makeText(this,"onExoEnded",Toast.LENGTH_LONG).show()
     }
 
-     fun onPlayerError(error: ExoPlaybackException) {
-        // handle error
-    }*/
+    override fun onExoIdle() {
+        super.onExoIdle()
+        Toast.makeText(this,"onExoIdle",Toast.LENGTH_LONG).show()
+    }
 
-    /*override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
-        if (playbackState == Player.STATE_BUFFERING)
-           // progressBar.visibility = View.VISIBLE
-        else if (playbackState == Player.STATE_READY || playbackState == Player.STATE_ENDED)
-            //progressBar.visibility = View.INVISIBLE
+    override fun onExoPlayerFinished() {
+        super.onExoPlayerFinished()
+        Toast.makeText(this,"onExoPlayerFinished",Toast.LENGTH_LONG).show()
+
+    }
+
+    override fun onExoPlayerStart() {
+        super.onExoPlayerStart()
+        Toast.makeText(this,"onExoPlayerStart",Toast.LENGTH_LONG).show()
+
+    }
+
+    override fun onExoReady() {
+        super.onExoReady()
+        Toast.makeText(this,"onExoReady",Toast.LENGTH_LONG).show()
+
     }*/
 
 

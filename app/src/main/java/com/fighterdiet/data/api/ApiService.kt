@@ -45,6 +45,9 @@ interface ApiService {
     @POST("logout")
     suspend fun logOutApi(@Body logoutRequestModel: LogoutRequestModel):ApiResponse<Any>
 
+    @GET("about_us")
+    suspend fun getaboutApi():ApiResponse<AboutPaulinNordinResponseModel>
+
     @POST("verify-otp")
     suspend fun verifyotpApi(@Body verifyOtpRequestModel: VerifyOtpRequestModel):ApiResponse<VerifyOtpResponseModel>
     @POST("resend-otp")

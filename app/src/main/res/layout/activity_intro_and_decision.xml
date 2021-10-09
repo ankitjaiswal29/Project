@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="aboutResponseModel"
+            type="com.fighterdiet.data.model.responseModel.AboutPaulinNordinResponseModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,6 +40,20 @@
                     android:layout_height="@dimen/_390sdp"
                     android:adjustViewBounds="true"
                     android:src="@mipmap/pauline_intro_2"
+                   app:andexo_show_full_screen="false"
+                    app:andexo_show_controller="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    tools:ignore="ContentDescription" />
+                <ImageView
+                    android:id="@+id/ivBackgroundImage2"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_390sdp"
+                    android:adjustViewBounds="true"
+                    android:visibility="gone"
+                    android:src="@mipmap/pauline_intro_2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -50,7 +69,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription" />-->
 
-               <!-- <ImageView
+                <ImageView
+                    android:id="@+id/iv_play"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/play"
@@ -58,9 +78,9 @@
                     app:layout_constraintEnd_toEndOf="@+id/ivBackgroundImage1"
                     app:layout_constraintStart_toStartOf="@+id/ivBackgroundImage1"
                     app:layout_constraintTop_toTopOf="@+id/ivBackgroundImage1"
-                    tools:ignore="ContentDescription" />-->
+                    tools:ignore="ContentDescription" />
 
-               <!-- <View
+                <View
                     android:id="@+id/view_separator"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_10sdp"
@@ -106,16 +126,17 @@
                         android:background="@color/black" />
 
                     <TextView
+                        android:id="@+id/iv_about"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/inter_medium"
-                        android:text="@string/str_about_pauline_mission"
+                        android:text="@={aboutResponseModel.about}"
                         android:textAlignment="textStart"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10ssp" />
 
-                </LinearLayout>-->
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
