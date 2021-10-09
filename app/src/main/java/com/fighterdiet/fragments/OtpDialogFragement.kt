@@ -67,12 +67,12 @@ class OtpDialogFragement: DialogFragment() {
     }
    private fun setupViewModel() {
         viewModel=ViewModelProvider(this,VerifyOtpViewModelProvider(VerifyOtpRepository(RetrofitBuilder.apiService))).get(VerifyOtpViewModel::class.java)
-        binding.verifyotpViewModel = viewModel
+        binding.verifyOtpViewModel = viewModel
     }
 
     private fun setupViewModelResendOtp(){
         viewModel2=ViewModelProvider(this,ResendOtpViewModelProvider(ResendOtpRepository(RetrofitBuilder.apiService))).get(ResendOtpViewModel::class.java)
-        binding.email = viewModel2
+        binding.resendViewModel = viewModel2
     }
     private fun setupObserverResendOtp(){
         viewModel2.getResources().observe(this, {
@@ -135,7 +135,7 @@ class OtpDialogFragement: DialogFragment() {
                     if (apiResponse.status) {
 
                         if (apiResponse.code==200){
-                           startActivity(IntroAndDecisionActivity.getStartIntent(context!!.applicationContext))
+                           startActivity(IntroAndDecisionActivity.getStartIntent(requireContext()))
 
                         }else{
                             Utils.showSnackBar(binding.root, apiResponse.message)

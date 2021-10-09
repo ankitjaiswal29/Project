@@ -3,20 +3,17 @@ package com.fighterdiet.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.R
-import com.fighterdiet.activities.RecipeInfoActivity
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
-import com.fighterdiet.interfaces.RecyclerViewItemClickListener
 import com.fighterdiet.models.home_frag.HomeModel
 
 class PicDayMealAdapter(
     var context: FragmentActivity?,
     private var homeList: ArrayList<HomeModel>,
-    private var itemClickListener: RecyclerViewItemClickListener?
+    private var itemClickListener: (Int, View?) -> Unit
 ) : RecyclerView.Adapter<PicDayMealAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
@@ -36,7 +33,7 @@ class PicDayMealAdapter(
                         doubleClickLastTime = 0
 //                        doAction()
                     }else{
-                        itemClickListener!!.onItemClick(adapterPosition,view)
+//                        itemClickListener!!.onItemClick(adapterPosition,view)
                         doubleClickLastTime = System.currentTimeMillis()
                     }
             }

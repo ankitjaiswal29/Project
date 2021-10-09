@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="homeViewModel"
+            type="com.fighterdiet.viewModel.HomeViewModel" />
+    </data>
+
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -30,18 +38,86 @@
             app:layout_constraintBottom_toTopOf="@+id/tabs"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_gravity="bottom"
-            android:background="@color/white"
             app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:tabGravity="fill"
-            app:tabIndicator="@null"
-            app:tabMode="fixed" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!--<include
+                android:id="@+id/search_dash_layout"
+                layout="@layout/layout_search_recipe"/>-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_search_recipe"
+                android:layout_width="match_parent"
+                android:focusable="true"
+                android:clickable="true"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:background="@color/white"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:alpha="0.9">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_search"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:src="@drawable/tb_search_icon_blue"
+                    android:layout_width="@dimen/_16sdp"
+                    android:layout_height="0dp"/>
+
+                <EditText
+                    android:id="@+id/et_search_recipe"
+                    android:backgroundTint="@android:color/transparent"
+                    app:layout_constraintTop_toTopOf="@id/iv_search"
+                    app:layout_constraintStart_toEndOf="@id/iv_search"
+                    app:layout_constraintEnd_toStartOf="@id/iv_close_search"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_width="0dp"
+                    android:inputType="text"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="Search recipe" />
+
+                <ImageView
+                    android:id="@+id/iv_close_search"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:src="@drawable/ic_round_clear_24"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="0dp"/>
+
+                <View
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@color/selected_background"
+                    android:layout_marginBottom="@dimen/_2sdp"
+                    android:layout_marginStart="@dimen/_7sdp"
+                    android:layout_marginEnd="@dimen/_7sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabGravity="fill"
+                app:tabIndicator="@null"
+                app:tabMode="fixed" />
+
+        </LinearLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

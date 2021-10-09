@@ -13,17 +13,11 @@ import com.fighterdiet.R
 import com.fighterdiet.adapters.FavouriteFragmentRecyAdapter
 import com.fighterdiet.data.api.RetrofitBuilder
 import com.fighterdiet.data.model.responseModel.FavouriteListResponseModel
-import com.fighterdiet.data.model.responseModel.RecipeListResponseModel
 import com.fighterdiet.data.repository.FavouriteRepository
-import com.fighterdiet.data.repository.HomeRepository
-import com.fighterdiet.data.repository.HomeViewModelProvider
 import com.fighterdiet.databinding.FragmentFavouriteBinding
-import com.fighterdiet.models.home_frag.HomeModel
 import com.fighterdiet.utils.Status
-import com.fighterdiet.utils.Utils
 import com.fighterdiet.viewModel.FavouriteViewModeProvider
 import com.fighterdiet.viewModel.FavouriteViewModel
-import com.fighterdiet.viewModel.HomeViewModel
 
 class FavouriteFragment : BaseFragment() {
     private lateinit var viewModel: FavouriteViewModel

@@ -1,35 +1,29 @@
 package com.fighterdiet.adapters
 
-import android.R.attr.button
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
-import android.widget.Toast
-import androidx.appcompat.widget.PopupMenu
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.R
+import com.fighterdiet.data.model.responseModel.CommentListResponseModel
 import com.fighterdiet.databinding.ItemCommentsBinding
+import com.fighterdiet.interfaces.RecyclerItemClickListener
 import com.fighterdiet.interfaces.RecyclerViewItemClickListener
-import com.fighterdiet.model.CommentModel
+import kotlinx.android.synthetic.main.item_delete_spam.view.*
 
 
 class CommentAdapter(
-    private var context: FragmentActivity?,
-    private var commentList: ArrayList<CommentModel>,
-    private var itemClickListener: RecyclerViewItemClickListener?
+    private var commentList: List<CommentListResponseModel.CommentRecipe>,
+    private var itemClickListener: RecyclerItemClickListener
 ) : RecyclerView.Adapter<CommentAdapter.MyViewHolder>() {
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val binding: ItemCommentsBinding? = DataBindingUtil.bind(itemView)
         init {
             binding?.ivMore?.setOnClickListener(this)
@@ -60,7 +54,7 @@ class CommentAdapter(
                 ConstraintLayout.LayoutParams.WRAP_CONTENT
             )
 
-            mPopupWindowFilter.setOutsideTouchable(true)
+            mPopupWindowFilter.isOutsideTouchable = true
             // constraintRoot.setBackgroundResource(R.color.color_gray)
 //            // constraintRoot.background.alpha = 129
 //            mPopupWindowFilter!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
@@ -70,6 +64,11 @@ class CommentAdapter(
             }
 
             mPopupWindowFilter.showAsDropDown(viewType)
+
+            customView.tv_delete.setOnClickListener {
+                mPopupWindowFilter.dismiss()
+                itemClickListener.onItemClick(adapterPosition, commentList[adapterPosition])
+            }
         }
     }
 
@@ -78,7 +77,7 @@ class CommentAdapter(
         viewType: Int
     ): MyViewHolder {
         val view =
-            LayoutInflater.from(context)
+            LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_comments, parent, false)
         return MyViewHolder(view)
     }
@@ -87,11 +86,11 @@ class CommentAdapter(
         holder: MyViewHolder,
         position: Int
     ) {
-        val content = SpannableString(commentList[position].personName)
+        val content = SpannableString(commentList[position].user_name)
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
         holder.binding?.userName?.text = content
-        holder.binding?.commentTime?.text = commentList[position].time
-        holder.binding?.comment?.text = commentList[position].comment
+        holder.binding?.commentTime?.text = commentList[position].updated_at
+        holder.binding?.comment?.text = commentList[position].comments
         // holder.binding?.imvItemHome?.setImageResource(commentList[position].image)
     }
 

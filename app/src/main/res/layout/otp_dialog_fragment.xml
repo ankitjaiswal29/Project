@@ -3,16 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="verifyOtpViewModel"
+            type="com.fighterdiet.viewModel.VerifyOtpViewModel" />
 
-    <variable
-        name="verifyotpViewModel"
-        type="com.fighterdiet.viewModel.VerifyOtpViewModel" />
         <variable
             name="userId"
             type="String" />
+
         <variable
-            name="email"
+            name="resendViewModel"
             type="com.fighterdiet.viewModel.ResendOtpViewModel" />
+
         <variable
             name="emailid"
             type="String" />
@@ -49,7 +51,7 @@
             android:layout_marginTop="20dp"
             android:maxLength="1"
             style="@style/Otp"
-            android:text="@={verifyotpViewModel.otp1}"
+            android:text="@={verifyOtpViewModel.otp1}"
 
             android:layout_marginLeft="@dimen/_2sdp"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -66,7 +68,7 @@
             android:layout_marginLeft="@dimen/_2sdp"
             style="@style/Otp"
             android:maxLength="1"
-            android:text="@={verifyotpViewModel.otp2}"
+            android:text="@={verifyOtpViewModel.otp2}"
             android:inputType="number"
             app:layout_constraintEnd_toStartOf="@+id/et_otp3"
             app:layout_constraintTop_toTopOf="@+id/et_otp1"
@@ -83,7 +85,7 @@
             android:maxLength="1"
             android:layout_marginLeft="@dimen/_2sdp"
             style="@style/Otp"
-            android:text="@={verifyotpViewModel.otp3}"
+            android:text="@={verifyOtpViewModel.otp3}"
             android:inputType="number"
             app:layout_constraintEnd_toStartOf="@+id/et_otp4"
             app:layout_constraintTop_toTopOf="@+id/et_otp2"
@@ -100,7 +102,7 @@
             android:maxLength="1"
             android:layout_marginLeft="@dimen/_2sdp"
             style="@style/Otp"
-            android:text="@={verifyotpViewModel.otp4}"
+            android:text="@={verifyOtpViewModel.otp4}"
             android:inputType="number"
             app:layout_constraintTop_toTopOf="@+id/et_otp3"
             app:layout_constraintBottom_toBottomOf="@id/et_otp3"
@@ -117,7 +119,7 @@
             android:text="Verify Code"
             android:paddingBottom="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_20sdp"
-            android:onClick="@{(view) -> verifyotpViewModel.getVerifyOtpApi(view, userId)}"
+            android:onClick="@{(view) -> verifyOtpViewModel.getVerifyOtpApi(view, userId)}"
             app:layout_constraintTop_toBottomOf="@+id/et_otp4"
             app:layout_constraintStart_toStartOf="@id/et_otp1"
             app:layout_constraintEnd_toEndOf="@id/et_otp4" />
@@ -128,11 +130,10 @@
             android:background="@null"
             style="@style/Button"
             android:text="Resend Code"
-
             android:layout_marginTop="@dimen/_20sdp"
             android:textSize="@dimen/_15sdp"
             android:textColor="@color/black"
-            android:onClick="@{(view) ->email.getResendOtpApi(view,emailid)}"
+            android:onClick="@{(view) -> resendViewModel.getResendOtpApi(view,emailid)}"
             app:layout_constraintTop_toBottomOf="@+id/bt_verify"
             app:layout_constraintStart_toStartOf="@+id/bt_verify"
             app:layout_constraintEnd_toEndOf="@+id/bt_verify" />

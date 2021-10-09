@@ -5,15 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
-import com.fighterdiet.adapters.HomeFragmentRecyclerAdapter
 import com.fighterdiet.adapters.PicDayMealAdapter
 import com.fighterdiet.databinding.ActivityPicDaySevenMealsBinding
 import com.fighterdiet.models.home_frag.HomeModel
-import com.fighterdiet.utils.Utils
 
 class PicDaySevenMealsActivity : BaseActivity() {
     lateinit var binding: ActivityPicDaySevenMealsBinding
@@ -67,16 +64,16 @@ class PicDaySevenMealsActivity : BaseActivity() {
             homeList
         ) { position: Int, view: View? ->
 
-            val item: HomeModel = homeList.get(position)
-            if (!item.isselected) {
-                item.isselected = true
-                homeAdapter.notifyItemChanged(position)
-                if (homeList.get(pos) != null) {
-                    homeList.get(pos).isselected = false
-                    homeAdapter.notifyItemChanged(pos)
-                }
-                pos = position
-            }
+//            val item: HomeModel = homeList.get(position)
+//            if (!item.isselected) {
+//                item.isselected = true
+//                homeAdapter.notifyItemChanged(position)
+//                if (homeList.get(pos) != null) {
+//                    homeList.get(pos).isselected = false
+//                    homeAdapter.notifyItemChanged(pos)
+//                }
+//                pos = position
+//            }
         }
         binding.rvPicSeven.adapter = homeAdapter
     }

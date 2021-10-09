@@ -2,7 +2,6 @@ package com.fighterdiet.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Html
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
@@ -10,29 +9,36 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
 import com.fighterdiet.adapters.CommentAdapter
+import com.fighterdiet.data.api.RetrofitBuilder
+import com.fighterdiet.data.model.requestModel.AddCommentRequestModel
+import com.fighterdiet.data.model.requestModel.CommentListRequestModel
+import com.fighterdiet.data.model.responseModel.CommentListResponseModel
+import com.fighterdiet.data.repository.CommentFragmentRepository
+import com.fighterdiet.data.repository.CommentFragmentViewModelProvider
 import com.fighterdiet.databinding.FragmentCommentBinding
-import com.fighterdiet.model.CommentModel
-import com.fighterdiet.utils.Utils
+import com.fighterdiet.interfaces.RecyclerItemClickListener
+import com.fighterdiet.utils.PrefManager
+import com.fighterdiet.utils.Status
+import com.fighterdiet.viewModel.CommentFragmentViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.android.synthetic.main.fragment_comment.*
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CommentFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class CommentFragment : BottomSheetDialogFragment(), View.OnClickListener {
+class CommentFragment(val recipeId:String) : BottomSheetDialogFragment(), View.OnClickListener {
 
+    private var commentAdapter: CommentAdapter? = null
+    private var commentList: ArrayList<CommentListResponseModel.CommentRecipe> = ArrayList()
     private lateinit var mContext: Context
     private lateinit var binding: FragmentCommentBinding
+    private lateinit var viewModel: CommentFragmentViewModel
 
     companion object {
-        fun newInstance(): CommentFragment {
-            return CommentFragment()
+        fun newInstance(recipeId:String): CommentFragment {
+            return CommentFragment(recipeId)
         }
     }
 
@@ -67,41 +73,114 @@ class CommentFragment : BottomSheetDialogFragment(), View.OnClickListener {
         binding.tvTitle.text = content
         binding.ivBack.setOnClickListener(this)
         setupRecyclerView()
+        setupViewModel()
+        setupObserver()
+        setupListener()
+        callGetCommentListApi()
+    }
 
+    private fun setupListener() {
+        binding.tvNext.setOnClickListener {
+            val userId = PrefManager.getString(PrefManager.KEY_USER_ID)?:""
+            if(userId.isNotEmpty() && recipeId.isNotBlank() && binding.etComment.text.toString().isNotBlank()){
+                viewModel.addRecipeComment(
+                    AddCommentRequestModel(
+                        recipeId,
+                        userId,
+                        etComment.text.toString()
+                    )
+                )
+            }
+        }
+    }
+
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(this,
+            CommentFragmentViewModelProvider(CommentFragmentRepository(RetrofitBuilder.apiService)))
+            .get(CommentFragmentViewModel::class.java)
+    }
+
+    private fun setupObserver() {
+
+        viewModel.getCommentListResource().observe(this, {
+            when(it.status){
+                Status.SUCCESS -> {
+                    it.data?.data?.let { comments ->
+                        commentList.clear()
+                        binding.etComment.text.clear()
+                        commentList.addAll(comments.comment_recipe)
+                        setupRecyclerView()
+                    }
+                }
+                Status.LOADING -> {
+
+                }
+                Status.ERROR -> {
+
+                }
+            }
+        })
+
+        viewModel.addCommentResponseResource.observe(this, {
+            when(it.status){
+
+                Status.SUCCESS -> {
+                    callGetCommentListApi()
+                }
+
+                Status.LOADING -> {
+
+                }
+
+                Status.ERROR -> {
+
+                }
+
+            }
+        })
+
+        viewModel.getDeleteCommentResource().observe(this, {
+            when(it.status){
+
+                Status.SUCCESS -> {
+                    callGetCommentListApi()
+                }
+
+                Status.LOADING -> {
+
+                }
+
+                Status.ERROR -> {
+
+                }
+
+            }
+        })
+    }
+
+    private fun callGetCommentListApi() {
+        viewModel.getCommentList(
+            CommentListRequestModel(
+                offset = 0,
+                limit = 8,
+                recipe_id = recipeId
+            )
+        )
     }
 
     private fun setupRecyclerView() {
-        val commentList: ArrayList<CommentModel> = ArrayList()
-        commentList.add(
-            CommentModel(
-                "julie29",
-                "2 hrs ago",
-                getString(R.string.i_love_this_recipe_for_my_familynof_4_nhint_sub_appricots_for_peaches_it_gives_it_a_sweeter_taste),
-                false
-            )
-        )
-        commentList.add(
-            CommentModel(
-                "cookin52",
-                "4 hrs ago",
-                getString(R.string.i_love_this_recipe_for_my_familynof_4_nhint_sub_appricots_for_peaches_it_gives_it_a_sweeter_taste),
-                false
-            )
-        )
-        commentList.add(
-            CommentModel(
-                "Amberlyn22",
-                "4 hrs ago",
-                getString(R.string.i_love_this_recipe_for_my_familynof_4_nhint_sub_appricots_for_peaches_it_gives_it_a_sweeter_taste),
-                true
-            )
-        )
+        if(commentList.isEmpty())
+            return
 
         binding.rvComment.layoutManager = LinearLayoutManager(activity)
-        val commentAdapter = CommentAdapter(activity, commentList) { position, view ->
-            Utils.showSnackBar(binding.rvComment, "mes")
-        }
+        commentAdapter = CommentAdapter(commentList, object :RecyclerItemClickListener{
+            override fun onItemClick(position: Int, selectedItem: Any?) {
+                val item = selectedItem as CommentListResponseModel.CommentRecipe
+                viewModel.deleteRecipeComment(item.id)
+            }
+        })
         binding.rvComment.adapter = commentAdapter
+
     }
 
     override fun onClick(view: View?) {

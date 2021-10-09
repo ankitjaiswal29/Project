@@ -9,18 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.fighterdiet.R
 import com.fighterdiet.activities.MemberShipActivity
-import com.fighterdiet.activities.RecipeInfoActivity
 import com.fighterdiet.data.model.responseModel.FavouriteListResponseModel
-import com.fighterdiet.data.model.responseModel.RecipeListResponseModel
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
-import com.fighterdiet.interfaces.RecyclerViewItemClickListener
-import com.fighterdiet.models.home_frag.HomeModel
 import java.util.ArrayList
 
 class FavouriteFragmentRecyAdapter(
     private var context: FragmentActivity?,
     private var favouriteList: ArrayList<FavouriteListResponseModel.Favourite>,
-    private var itemClickListener: RecyclerViewItemClickListener?
+    private var itemClickListener: (Any, Any) -> Unit
 ) : RecyclerView.Adapter<FavouriteFragmentRecyAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),

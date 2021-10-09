@@ -105,5 +105,11 @@
     <string name="str_email_id">Email ID</string>
     <string name="str_change_password">Change Password</string>
     <string name="str_cancel_subscription">Cancel Subscription</string>
+    <string name="serving">serving</string>
+    <string name="servings">servings</string>
+    <string name="min_prep_time">min prep time</string>
+    <string name="min_cook_time">min cook time</string>
+    <string name="protein">Protein</string>
+    <string name="calories">Calories</string>
 
 </resources>

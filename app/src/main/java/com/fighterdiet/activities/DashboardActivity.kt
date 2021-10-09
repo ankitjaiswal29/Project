@@ -3,19 +3,28 @@ package com.fighterdiet.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.fighterdiet.R
+import com.fighterdiet.data.api.RetrofitBuilder
+import com.fighterdiet.data.repository.HomeRepository
+import com.fighterdiet.data.repository.HomeViewModelProvider
 import com.fighterdiet.databinding.ActivityDashboardWithCalaoriesBinding
 import com.fighterdiet.fragments.*
 import com.fighterdiet.utils.Constants
+import com.fighterdiet.viewModel.HomeViewModel
 import com.google.android.material.tabs.TabLayout
 
 
 class DashboardActivity : BaseActivity() {
+    private var previousPos: Int = 0
     private lateinit var binding: ActivityDashboardWithCalaoriesBinding
     lateinit var tab6Titles: Array<String>
     lateinit var tab4Titles: Array<String>
@@ -35,17 +44,43 @@ class DashboardActivity : BaseActivity() {
             initialise4Tab()
         }
 
-    }
-
-    override fun setupUI() {
+        setupUI()
 
     }
 
     override fun setupViewModel() {
+
+    }
+
+    override fun setupUI() {
+        binding.etSearchRecipe.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                p0?.let {
+//                    if(it.isNotEmpty()){
+                        val currFragment = supportFragmentManager.findFragmentByTag("HOME") as HomeFragment
+                        if(currFragment.isVisible)
+                            currFragment.getRecipes(it.toString(), 0,8)
+//                    }
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+        })
+
+        binding.ivCloseSearch.setOnClickListener {
+            binding.etSearchRecipe.setText("")
+        }
     }
 
     override fun setupObserver() {
-        TODO("Not yet implemented")
+
     }
 
 
@@ -82,9 +117,13 @@ class DashboardActivity : BaseActivity() {
         setupTabLayoutFor6()
     }
 
-    private fun showFragment(fragment: Fragment) {
+    private fun showFragment(fragment: Fragment, position: Int = -1) {
+        var tag = "else"
+        if(position==0){
+            tag = "HOME"
+        }
         supportFragmentManager.beginTransaction()
-            .replace(R.id.frame_layout, fragment)
+            .replace(R.id.frame_layout, fragment, tag)
             .commit()
     }
 
@@ -97,16 +136,15 @@ class DashboardActivity : BaseActivity() {
         binding.tabs.addTab(binding.tabs.newTab().setIcon(tabIcons6UnSelected[5]))
         binding.tabs.addTab(binding.tabs.newTab().setIcon(tabIcons6UnSelected[6]))
 
-        showFragment(HomeFragment())
+        showFragment(HomeFragment(), 0)
 
         binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 Log.e(">>>>>", ">>>>>" + tab.position)
                 setIcon(tab.position)
-
                 when (tab.position) {
                     0 -> {
-                        showFragment(HomeFragment())
+                        showFragment(HomeFragment(), tab.position)
                     }
                     1 -> {
                         startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
@@ -128,6 +166,7 @@ class DashboardActivity : BaseActivity() {
                         startActivity(SettingsActivity.getStartIntent(this@DashboardActivity))
                     }
                 }
+                previousPos = tab.position
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
@@ -136,6 +175,16 @@ class DashboardActivity : BaseActivity() {
 
             override fun onTabReselected(tab: TabLayout.Tab) {
                 when (tab.position) {
+                    0 -> {
+                        if(previousPos == 0){
+                            if(binding.clSearchRecipe.visibility == View.VISIBLE){
+                                binding.clSearchRecipe.visibility = View.GONE
+                            }else{
+                                binding.clSearchRecipe.visibility = View.VISIBLE
+                            }
+                            return
+                        }
+                    }
                     1 -> {
                         startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
                     }
@@ -212,7 +261,7 @@ class DashboardActivity : BaseActivity() {
         binding.tabs.addTab(binding.tabs.newTab().setIcon(tabIcons4UnSelected[3]))
         binding.tabs.addTab(binding.tabs.newTab().setIcon(tabIcons4UnSelected[4]))
 
-        showFragment(HomeFragment())
+        showFragment(HomeFragment(), 0)
 
         binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -223,7 +272,7 @@ class DashboardActivity : BaseActivity() {
                     0 -> {
                         binding.toolbar.ivTopImage.visibility = View.VISIBLE;
                         binding.toolbar.tvTitle.visibility = View.GONE;
-                        showFragment(HomeFragment())
+                        showFragment(HomeFragment(), tab.position)
                     }
                     1 -> {
                         startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
@@ -247,6 +296,7 @@ class DashboardActivity : BaseActivity() {
                         startActivity(SettingsActivity.getStartIntent(this@DashboardActivity))
                     }
                 }
+                previousPos = tab.position
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
@@ -254,6 +304,16 @@ class DashboardActivity : BaseActivity() {
 
             override fun onTabReselected(tab: TabLayout.Tab) {
                 when (tab.position) {
+                    0 -> {
+                        if(previousPos == 0){
+                            if(binding.clSearchRecipe.visibility == View.VISIBLE){
+                                binding.clSearchRecipe.visibility = View.GONE
+                            }else{
+                                binding.clSearchRecipe.visibility = View.VISIBLE
+                            }
+                            return
+                        }
+                    }
                     1 -> {
                         startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
                     }
