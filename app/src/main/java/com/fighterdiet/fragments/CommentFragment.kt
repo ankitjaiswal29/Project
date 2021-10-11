@@ -16,11 +16,13 @@ import com.fighterdiet.adapters.CommentAdapter
 import com.fighterdiet.data.api.RetrofitBuilder
 import com.fighterdiet.data.model.requestModel.AddCommentRequestModel
 import com.fighterdiet.data.model.requestModel.CommentListRequestModel
+import com.fighterdiet.data.model.requestModel.SpamCommentRequestModel
 import com.fighterdiet.data.model.responseModel.CommentListResponseModel
 import com.fighterdiet.data.repository.CommentFragmentRepository
 import com.fighterdiet.data.repository.CommentFragmentViewModelProvider
 import com.fighterdiet.databinding.FragmentCommentBinding
 import com.fighterdiet.interfaces.RecyclerItemClickListener
+import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.PrefManager
 import com.fighterdiet.utils.Status
 import com.fighterdiet.viewModel.CommentFragmentViewModel
@@ -156,6 +158,23 @@ class CommentFragment(val recipeId:String) : BottomSheetDialogFragment(), View.O
 
             }
         })
+
+        viewModel.getReportSpamResource().observe(this, {
+            when(it.status){
+                Status.SUCCESS -> {
+                    callGetCommentListApi()
+                }
+
+                Status.LOADING -> {
+
+                }
+
+                Status.ERROR -> {
+
+                }
+
+            }
+        })
     }
 
     private fun callGetCommentListApi() {
@@ -174,9 +193,20 @@ class CommentFragment(val recipeId:String) : BottomSheetDialogFragment(), View.O
 
         binding.rvComment.layoutManager = LinearLayoutManager(activity)
         commentAdapter = CommentAdapter(commentList, object :RecyclerItemClickListener{
-            override fun onItemClick(position: Int, selectedItem: Any?) {
+            override fun onItemClick(operationType: Int, selectedItem: Any?) {
                 val item = selectedItem as CommentListResponseModel.CommentRecipe
-                viewModel.deleteRecipeComment(item.id)
+                when(operationType){
+                    Constants.OPERATION_DELETE ->{
+                        viewModel.deleteRecipeComment(item.id)
+                    }
+
+                    Constants.OPERATION_REPORT_SPAM ->{
+                        viewModel.reportSpamComment(SpamCommentRequestModel(
+                            comment_id = item.id.toString(),
+                            recipe_id = recipeId
+                        ))
+                    }
+                }
             }
         })
         binding.rvComment.adapter = commentAdapter

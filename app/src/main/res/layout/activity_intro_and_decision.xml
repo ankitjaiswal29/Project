@@ -58,6 +58,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription" />
+
               <!--  <ImageView
                     android:id="@+id/ivBackgroundImage1"
                     android:layout_width="0dp"

@@ -5,6 +5,7 @@ import com.fighterdiet.data.model.requestModel.*
 import com.fighterdiet.data.model.responseModel.*
 import com.fighterdiet.data.model.responseModel.AddCommentResponseModel
 import okhttp3.ResponseBody
+import org.json.JSONObject
 
 import retrofit2.http.*
 
@@ -75,6 +76,18 @@ interface ApiService {
     suspend fun getCommentListApi(@Body model: CommentListRequestModel): ApiResponse<CommentListResponseModel>
 
     @DELETE("comment-delete/{id}")
-    suspend fun deleteCommentApi(@Path("id") id: Int): ApiResponse<ResponseBody>
+    suspend fun deleteCommentApi(@Path("id") id: Int): ApiResponse<JSONObject>
+
+    @POST("report-spam-comment")
+    suspend fun reportSpamCommentApi(@Body model: SpamCommentRequestModel): ApiResponse<SpamCommentResponseModel>
+
+    @POST("get_allergy")
+    suspend fun getAllergyApi(): ApiResponse<GetAllergyResponseModel>
+
+    @POST("get_volume")
+    suspend fun getVolumeApi(): ApiResponse<GetVolumeResponseModel>
+
+    @POST("get-meal")
+    suspend fun getMealApi(): ApiResponse<GetMealResponseModel>
 
 }

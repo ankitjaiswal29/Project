@@ -7,14 +7,17 @@ import androidx.lifecycle.viewModelScope
 import com.fighterdiet.data.model.ApiResponse
 import com.fighterdiet.data.model.requestModel.AddCommentRequestModel
 import com.fighterdiet.data.model.requestModel.CommentListRequestModel
+import com.fighterdiet.data.model.requestModel.SpamCommentRequestModel
 import com.fighterdiet.data.model.responseModel.AddCommentResponseModel
 import com.fighterdiet.data.model.responseModel.CommentListResponseModel
+import com.fighterdiet.data.model.responseModel.SpamCommentResponseModel
 import com.fighterdiet.data.repository.CommentFragmentRepository
 import com.fighterdiet.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
+import org.json.JSONObject
 import retrofit2.HttpException
 import java.lang.Exception
 
@@ -35,10 +38,17 @@ class CommentFragmentViewModel(val repository: CommentFragmentRepository): ViewM
     }
 
     private val deleteCommentResource =
-        MutableLiveData<Resource<ApiResponse<ResponseBody>>>()
+        MutableLiveData<Resource<ApiResponse<JSONObject>>>()
 
-    fun getDeleteCommentResource() : MutableLiveData<Resource<ApiResponse<ResponseBody>>>{
+    fun getDeleteCommentResource() : MutableLiveData<Resource<ApiResponse<JSONObject>>>{
         return deleteCommentResource
+    }
+
+    private val reportSpamCommentResource =
+        MutableLiveData<Resource<ApiResponse<SpamCommentResponseModel>>>()
+
+    fun getReportSpamResource() : MutableLiveData<Resource<ApiResponse<SpamCommentResponseModel>>>{
+        return reportSpamCommentResource
     }
 
 
@@ -111,6 +121,30 @@ class CommentFragmentViewModel(val repository: CommentFragmentRepository): ViewM
             catch (e:Exception){
                 e.printStackTrace()
                 deleteCommentResource.postValue(Resource.error(null,e.localizedMessage?:"error null"))
+            }
+        }
+    }
+
+    fun reportSpamComment(model: SpamCommentRequestModel){
+        viewModelScope.launch {
+            try {
+                reportSpamCommentResource.postValue(Resource.loading(null))
+                val apiResponse = repository.reportSpamCommentApi(model)
+                withContext(Dispatchers.Main){
+                    try {
+                        if (apiResponse.status) {
+                            reportSpamCommentResource.postValue(Resource.success(data = apiResponse))
+                        }
+                    } catch (e: HttpException) {
+                        reportSpamCommentResource.postValue(Resource.error(null,e.localizedMessage!!))
+                    } catch (e: Throwable) {
+                        reportSpamCommentResource.postValue(Resource.error(null,e.localizedMessage!!))
+                    }
+                }
+            }
+            catch (e:Exception){
+                e.printStackTrace()
+                reportSpamCommentResource.postValue(Resource.error(null,e.localizedMessage?:"error null"))
             }
         }
     }

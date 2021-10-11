@@ -3,6 +3,9 @@ package com.fighterdiet.utils
 import com.fighterdiet.data.model.responseModel.RecipeContentResponseModel
 
 object Constants {
+    const val OPERATION_DELETE = 0
+    const val OPERATION_REPORT_SPAM = 1
+
     var isQuestonnaireCompleted: Boolean = false
     var HUNDRED = 100
     var ZERO = 0

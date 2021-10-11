@@ -4,22 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
-import com.fighterdiet.activities.FilterActivity.Companion.count
 import com.fighterdiet.adapters.DietryInfoAdapter
+import com.fighterdiet.data.model.responseModel.GetAllergyResponseModel
 import com.fighterdiet.databinding.FragmentDietryInfoBinding
 import com.fighterdiet.model.DietryModel
 
-class DietryInfoFragment : Fragment(),
+class DietryInfoFragment(val getAllergyResponseModel: GetAllergyResponseModel) : Fragment(),
     DietryInfoAdapter.DietaryCountListener {
     lateinit var binding: FragmentDietryInfoBinding
     private lateinit var dietryInfoAdapter : DietryInfoAdapter
     private lateinit var dietaryListener: DietaryInfoInterface
     var list:ArrayList<DietryModel> = ArrayList()
+
+    companion object{
+        fun newInstance(getAllergyResponseModel: GetAllergyResponseModel): DietryInfoFragment{
+            return DietryInfoFragment(getAllergyResponseModel)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,50 +41,23 @@ class DietryInfoFragment : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dietaryListener = (activity as DietaryInfoInterface?)!!
-        initialise()
-    }
-
-    private fun initialise() {
-        setUpDietryList()
         setUpRecyclerView()
     }
 
     private fun setUpRecyclerView() {
-        binding.rvDietryInfo.layoutManager = LinearLayoutManager(activity)
-        dietryInfoAdapter = DietryInfoAdapter(activity, list, this)/*{
-                position,view ->
-            Utils.showSnackBar(binding.rvDietryInfo,"mes")
-        }*/
+        if(getAllergyResponseModel.result.isEmpty())
+            return
+
+        dietryInfoAdapter = DietryInfoAdapter(getAllergyResponseModel.result, this)
         binding.rvDietryInfo.adapter = dietryInfoAdapter
     }
 
-    private fun setUpDietryList() {
-        list.add(DietryModel("Milk/Dairy Free", false))
-        list.add(DietryModel("Soy Free", true))
-        list.add(DietryModel("Seafood Free", true))
-        list.add(DietryModel("Shellfish Free", false))
-        list.add(DietryModel("Eggs Free", false))
-        list.add(DietryModel("Peanuts Free", false))
-        list.add(DietryModel("Wheat Free", false))
-        list.add(DietryModel("Tree Nuts Free", true))
-        list.add(DietryModel("Gluten Free", false))
-        list.add(DietryModel("Grains Free", false))
-    }
-
-
-    override fun dietaryInfoAdapterListener(position: Int, checkBox: CheckBox) {
-        if (checkBox.isChecked){
-            count++
-        }else if (!checkBox.isChecked){
-            count--
-
-        }
-        dietaryListener.dietaryInfoCount(count)
-//       Utils.showToast(context, "fragment   $count")
+    override fun dietaryInfoAdapterListener(position: Int, resultModel: GetAllergyResponseModel.Result) {
+        dietaryListener.dietarySelectedInfo(position, resultModel.allergy_id)
     }
 
     interface DietaryInfoInterface{
-        fun dietaryInfoCount(count: Int)
+        fun dietarySelectedInfo(pos: Int, id:Int)
     }
 
 }

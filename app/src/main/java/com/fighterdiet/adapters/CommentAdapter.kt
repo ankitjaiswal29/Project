@@ -15,6 +15,7 @@ import com.fighterdiet.data.model.responseModel.CommentListResponseModel
 import com.fighterdiet.databinding.ItemCommentsBinding
 import com.fighterdiet.interfaces.RecyclerItemClickListener
 import com.fighterdiet.interfaces.RecyclerViewItemClickListener
+import com.fighterdiet.utils.Constants
 import kotlinx.android.synthetic.main.item_delete_spam.view.*
 
 
@@ -67,7 +68,12 @@ class CommentAdapter(
 
             customView.tv_delete.setOnClickListener {
                 mPopupWindowFilter.dismiss()
-                itemClickListener.onItemClick(adapterPosition, commentList[adapterPosition])
+                itemClickListener.onItemClick(Constants.OPERATION_DELETE, commentList[adapterPosition])
+            }
+
+            customView.tv_spam.setOnClickListener {
+                mPopupWindowFilter.dismiss()
+                itemClickListener.onItemClick(Constants.OPERATION_REPORT_SPAM, commentList[adapterPosition])
             }
         }
     }

@@ -107,8 +107,8 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
             when(it.status){
                 Status.SUCCESS -> {
                     recipeContentModel.apply {
-                        this?.let {
-                            it.favourite = 1
+                        this?.apply {
+                            this.favourite = if (this.favourite == 0) 1 else 0
                         }
                     }
                     updateFavUI()
@@ -154,8 +154,7 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
 
     private fun updateFavUI() {
         recipeContentModel?.let {
-            if(it.favourite == 1)
-                binding.ivFav.setImageResource(R.drawable.tb_favorite_icon_blue)
+                binding.ivFav.setImageResource(if(it.favourite == 1) R.drawable.tb_favorite_icon_blue else R.mipmap.heart_holo)
         }
     }
 

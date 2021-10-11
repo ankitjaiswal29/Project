@@ -11,42 +11,36 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.R
 import com.fighterdiet.activities.FilterActivity
+import com.fighterdiet.data.model.responseModel.GetAllergyResponseModel
+import com.fighterdiet.data.model.responseModel.GetVolumeResponseModel
 import com.fighterdiet.databinding.ItemDietryInfoBinding
 import com.fighterdiet.interfaces.RecyclerViewItemClickListener
 import com.fighterdiet.model.VolumeModel
 
 class VolumeAdapter(
-    var context: FragmentActivity?,
-    private var list: ArrayList<VolumeModel>,
+    private var list: ArrayList<GetVolumeResponseModel.Result>,
     private var volumeListener: VolumeCountListener?
 ):RecyclerView.Adapter<VolumeAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         val binding : ItemDietryInfoBinding? = DataBindingUtil.bind(itemView)
 
-        init {
-
-            binding?.cbSelect?.setOnCheckedChangeListener(object :
-                CompoundButton.OnCheckedChangeListener {
-
-                override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-                    volumeListener?.volumeAdapterListener(adapterPosition, binding.cbSelect)
-                    Log.d( "onCheckedChanged: ",""+ FilterActivity.count)
-                }
-            })
-
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view =
-            LayoutInflater.from(context)
+            LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_dietry_info, parent, false)
         return MyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.binding?.tvTitle?.setText(list[position].dietryName)
+        holder.binding?.tvTitle?.setText(list[position].volume_name)
+        holder.binding?.cbSelect?.isChecked = list[position].isChecked
+        holder.binding?.cbSelect?.setOnCheckedChangeListener { buttonView, isChecked ->
+            volumeListener?.volumeAdapterListener(position, list[position])
+            notifyDataSetChanged()
+        }
     }
 
     override fun getItemCount(): Int {
@@ -54,6 +48,6 @@ class VolumeAdapter(
     }
 
     interface VolumeCountListener{
-        fun volumeAdapterListener(position: Int,checkBox: CheckBox)
+        fun volumeAdapterListener(position: Int, resultModel: GetVolumeResponseModel.Result)
     }
 }

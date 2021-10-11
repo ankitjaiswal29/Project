@@ -11,15 +11,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
 import com.fighterdiet.adapters.VolumeAdapter
 import com.fighterdiet.activities.FilterActivity.Companion.count
+import com.fighterdiet.data.model.responseModel.GetAllergyResponseModel
+import com.fighterdiet.data.model.responseModel.GetVolumeResponseModel
 import com.fighterdiet.databinding.FragmentVolumeBinding
 import com.fighterdiet.model.VolumeModel
 
-class VolumeFragment : Fragment(), VolumeAdapter.VolumeCountListener {
+class VolumeFragment(val getVolumeResponseModel: GetVolumeResponseModel) : Fragment(), VolumeAdapter.VolumeCountListener {
     lateinit var binding: FragmentVolumeBinding
     private lateinit var volumeAdapter: VolumeAdapter
     var list: ArrayList<VolumeModel> = ArrayList()
     private lateinit var volumeFragListener: VolumeFragInterface
 
+    companion object{
+        fun newInstance(getVolumeResponseModel: GetVolumeResponseModel): VolumeFragment{
+            return VolumeFragment(getVolumeResponseModel)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,41 +44,24 @@ class VolumeFragment : Fragment(), VolumeAdapter.VolumeCountListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         volumeFragListener = (activity as VolumeFragInterface?)!!
-        initialise()
-    }
-
-    private fun initialise() {
-        setUpDietryList()
         setUpRecyclerView()
     }
 
     private fun setUpRecyclerView() {
+        if(getVolumeResponseModel.result.isEmpty())
+            return
+
         binding.rvVolume.layoutManager = LinearLayoutManager(activity)
-        volumeAdapter = VolumeAdapter(activity, list,this) /*{ position, view ->
-            Utils.showSnackBar(binding.rvVolume, "mes")
-        }*/
+        volumeAdapter = VolumeAdapter(getVolumeResponseModel.result as ArrayList<GetVolumeResponseModel.Result>,this)
         binding.rvVolume.adapter = volumeAdapter
     }
 
-    private fun setUpDietryList() {
-        list.add(VolumeModel("Small Volume", false))
-        list.add(VolumeModel("Medium Volume", true))
-        list.add(VolumeModel("Big Volume", true))
-    }
-
-    override fun volumeAdapterListener(position: Int, checkBox: CheckBox) {
-        if (checkBox.isChecked){
-            count++
-        }else if (!checkBox.isChecked){
-            count--
-
-        }
-        volumeFragListener.volumefragCount(count)
-//       Utils.showToast(context, "fragment   $count")
+    override fun volumeAdapterListener(position: Int, resultModel: GetVolumeResponseModel.Result) {
+        volumeFragListener.volumefragCount(position, resultModel.volume_id)
     }
 
     interface VolumeFragInterface{
-        fun volumefragCount(count: Int)
+        fun volumefragCount(pos: Int, id:Int)
     }
 
 }

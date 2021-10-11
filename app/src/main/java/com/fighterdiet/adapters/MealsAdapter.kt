@@ -1,61 +1,46 @@
 package com.fighterdiet.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.CompoundButton
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.R
-import com.fighterdiet.activities.FilterActivity
+import com.fighterdiet.data.model.responseModel.GetMealResponseModel
 import com.fighterdiet.databinding.ItemDietryInfoBinding
-import com.fighterdiet.interfaces.RecyclerViewItemClickListener
-import com.fighterdiet.model.MealsModel
 
 class MealsAdapter(
-    var context: FragmentActivity?,
-    private var list: ArrayList<MealsModel>,
+    private var list: ArrayList<GetMealResponseModel.Result>,
     private var itemClickListener: MealsCountListener?
 ):RecyclerView.Adapter<MealsAdapter.MyViewHolder>() {
 
 
     inner class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         val binding : ItemDietryInfoBinding? = DataBindingUtil.bind(itemView)
-
-        init {
-
-            binding?.cbSelect?.setOnCheckedChangeListener(object :
-                CompoundButton.OnCheckedChangeListener {
-
-                override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-                    itemClickListener?.mealsInfoAdapterListener(adapterPosition, binding.cbSelect)
-                    Log.d( "onCheckedChanged: ",""+ FilterActivity.count)
-                }
-            })
-
-        }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view =
-            LayoutInflater.from(context)
+            LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_dietry_info, parent, false)
         return MyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.binding?.tvTitle?.setText(list[position].dietryName)
+        holder.binding?.tvTitle?.setText(list[position].meal_name)
+        holder.binding?.cbSelect?.isChecked = list[position].isChecked
+        holder.binding?.cbSelect?.setOnCheckedChangeListener { buttonView, isChecked ->
+            itemClickListener?.mealsInfoAdapterListener(position, list[position])
+            notifyDataSetChanged()
+        }
     }
 
     override fun getItemCount(): Int {
         return list.size
     }
 
+
     interface MealsCountListener{
-        fun mealsInfoAdapterListener(position: Int,checkBox: CheckBox)
+        fun mealsInfoAdapterListener(position: Int, resultModel: GetMealResponseModel.Result)
     }
 }
