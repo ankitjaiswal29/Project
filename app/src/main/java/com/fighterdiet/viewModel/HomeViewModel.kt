@@ -1,10 +1,5 @@
 package com.fighterdiet.viewModel
 
-import android.text.Editable
-import android.text.TextWatcher
-import android.widget.EditText
-import androidx.databinding.Bindable
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,11 +26,18 @@ class HomeViewModel(private val homeRepository: HomeRepository): ViewModel() {
         return recipeListResource
     }
 
-    fun getRecipeList(searchKey: String, offset:Int, limit:Int) {
+    fun getRecipeList(
+        searchKey: String,
+        offset: Int,
+        limit: Int,
+        selectedDietaryMap: HashMap<String, Int>,
+        selectedVolumeMap: HashMap<String, Int>,
+        selectedMealMap: HashMap<String, Int>
+    ) {
         viewModelScope.launch {
             try {
                 recipeListResource.postValue(Resource.loading(null))
-                val apiResponse = homeRepository.recipeListApi(offset.toInt(), limit.toInt(), searchKey)
+                val apiResponse = homeRepository.recipeListApi(offset.toInt(), limit.toInt(), searchKey, selectedDietaryMap, selectedVolumeMap, selectedMealMap)
                 withContext(Dispatchers.Main){
                     try {
                         if (apiResponse.status) {

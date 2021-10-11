@@ -73,6 +73,7 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
                     if (apiResponse.status) {
                         if (apiResponse.code==200){
                             PrefManager.clearPref()
+                            PrefManager.putBoolean(PrefManager.IS_LOGGED_IN, false)
                             val loginIntent = Intent(this, LoginActivity::class.java)
                             loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                             startActivity(loginIntent)

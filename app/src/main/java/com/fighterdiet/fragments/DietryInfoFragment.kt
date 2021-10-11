@@ -1,6 +1,8 @@
 package com.fighterdiet.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,20 +10,20 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fighterdiet.R
 import com.fighterdiet.adapters.DietryInfoAdapter
-import com.fighterdiet.data.model.responseModel.GetAllergyResponseModel
+import com.fighterdiet.data.model.responseModel.GetDietaryResponseModel
 import com.fighterdiet.databinding.FragmentDietryInfoBinding
-import com.fighterdiet.model.DietryModel
+import com.fighterdiet.utils.Constants
 
-class DietryInfoFragment(val getAllergyResponseModel: GetAllergyResponseModel) : Fragment(),
+class DietryInfoFragment(val getDietaryResponseModel: GetDietaryResponseModel) : Fragment(),
     DietryInfoAdapter.DietaryCountListener {
     lateinit var binding: FragmentDietryInfoBinding
     private lateinit var dietryInfoAdapter : DietryInfoAdapter
     private lateinit var dietaryListener: DietaryInfoInterface
-    var list:ArrayList<DietryModel> = ArrayList()
+    var list:ArrayList<GetDietaryResponseModel.Result> = ArrayList()
 
     companion object{
-        fun newInstance(getAllergyResponseModel: GetAllergyResponseModel): DietryInfoFragment{
-            return DietryInfoFragment(getAllergyResponseModel)
+        fun newInstance(getDietaryResponseModel: GetDietaryResponseModel): DietryInfoFragment{
+            return DietryInfoFragment(getDietaryResponseModel)
         }
     }
 
@@ -41,23 +43,39 @@ class DietryInfoFragment(val getAllergyResponseModel: GetAllergyResponseModel) :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dietaryListener = (activity as DietaryInfoInterface?)!!
+        list = getDietaryResponseModel.result as ArrayList<GetDietaryResponseModel.Result>
         setUpRecyclerView()
     }
 
-    private fun setUpRecyclerView() {
-        if(getAllergyResponseModel.result.isEmpty())
-            return
+    override fun onResume() {
+        super.onResume()
+        dietaryListener.initFilterSelectionUi(0)
+    }
 
-        dietryInfoAdapter = DietryInfoAdapter(getAllergyResponseModel.result, this)
+    private fun setUpRecyclerView() {
+        dietryInfoAdapter = DietryInfoAdapter(list, this)
         binding.rvDietryInfo.adapter = dietryInfoAdapter
     }
 
-    override fun dietaryInfoAdapterListener(position: Int, resultModel: GetAllergyResponseModel.Result) {
-        dietaryListener.dietarySelectedInfo(position, resultModel.allergy_id)
+    fun clearDietaryData() {
+        list.forEach {
+            it.isChecked = false
+        }
+        dietryInfoAdapter.notifyDataSetChanged()
+    }
+
+
+    override fun dietaryInfoAdapterListener(
+        position: Int,
+        resultModel: GetDietaryResponseModel.Result
+    ) {
+        Constants.RecipeFilter.selectedDietaryFilter[position] = resultModel
+        dietaryListener.dietarySelectedInfo(position, resultModel.allergy_id, resultModel.isChecked)
     }
 
     interface DietaryInfoInterface{
-        fun dietarySelectedInfo(pos: Int, id:Int)
+        fun dietarySelectedInfo(pos: Int, id:Int, isItemAdd:Boolean)
+        fun initFilterSelectionUi(screenType: Int)
     }
 
 }

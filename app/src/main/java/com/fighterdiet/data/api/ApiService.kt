@@ -4,7 +4,6 @@ import com.fighterdiet.data.model.ApiResponse
 import com.fighterdiet.data.model.requestModel.*
 import com.fighterdiet.data.model.responseModel.*
 import com.fighterdiet.data.model.responseModel.AddCommentResponseModel
-import okhttp3.ResponseBody
 import org.json.JSONObject
 
 import retrofit2.http.*
@@ -23,10 +22,13 @@ interface ApiService {
 
     @GET("recipe-list")
     suspend fun getRecipeListApi(
-        @Query("offset") offset:Int,
-        @Query("limit") limit:Int,
-        @Query("search") search:String
-    ): ApiResponse<RecipeListResponseModel>
+        @Query("offset") offset: Int,
+        @Query("limit") limit: Int,
+        @Query("search") search: String,
+        @QueryMap selectedDietaryMap: HashMap<String, Int>,
+        @QueryMap selectedVolumeMap: HashMap<String, Int>,
+        @QueryMap selectedMealMap: HashMap<String, Int>
+        ): ApiResponse<RecipeListResponseModel>
 
     @GET("recipe-list")
     suspend fun getFavouriteListApi(
@@ -81,13 +83,13 @@ interface ApiService {
     @POST("report-spam-comment")
     suspend fun reportSpamCommentApi(@Body model: SpamCommentRequestModel): ApiResponse<SpamCommentResponseModel>
 
-    @POST("get_allergy")
-    suspend fun getAllergyApi(): ApiResponse<GetAllergyResponseModel>
+    @GET("get-allergy")
+    suspend fun getAllergyApi(): ApiResponse<GetDietaryResponseModel>
 
-    @POST("get_volume")
+    @GET("get-volume")
     suspend fun getVolumeApi(): ApiResponse<GetVolumeResponseModel>
 
-    @POST("get-meal")
+    @GET("get-meal")
     suspend fun getMealApi(): ApiResponse<GetMealResponseModel>
 
 }

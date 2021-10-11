@@ -14,6 +14,7 @@ import com.fighterdiet.data.model.responseModel.RegistrationResponseModel
 import com.fighterdiet.data.repository.LoginRepository
 import com.fighterdiet.data.repository.RegisterRepository
 import com.fighterdiet.utils.Resource
+import com.fighterdiet.utils.Utils
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
@@ -53,8 +54,13 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
         if (TextUtils.isEmpty(email)){
             errorMsg.value = "Please enter email"
             return false
-        }else if (TextUtils.isEmpty(password)) {
+        }
+        if (TextUtils.isEmpty(password)) {
             errorMsg.value = "Please enter password"
+            return false
+        }
+        if(password.length > 16 || password.length < 8){
+            errorMsg.value = "Enter valid password"
             return false
         }
         return true

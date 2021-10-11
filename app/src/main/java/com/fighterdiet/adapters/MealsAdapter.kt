@@ -28,17 +28,22 @@ class MealsAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.binding?.tvTitle?.setText(list[position].meal_name)
-        holder.binding?.cbSelect?.isChecked = list[position].isChecked
-        holder.binding?.cbSelect?.setOnCheckedChangeListener { buttonView, isChecked ->
+        holder.binding?.ivSelection?.setBackgroundResource(
+            if(!list[position].isChecked)
+                R.drawable.dietry_icon_not_selected
+            else
+                R.drawable.dietry_icon_selected)
+
+        holder.binding?.ivSelection?.setOnClickListener {
+            list[position].isChecked = !list[position].isChecked
+            notifyItemChanged(position)
             itemClickListener?.mealsInfoAdapterListener(position, list[position])
-            notifyDataSetChanged()
         }
     }
 
     override fun getItemCount(): Int {
         return list.size
     }
-
 
     interface MealsCountListener{
         fun mealsInfoAdapterListener(position: Int, resultModel: GetMealResponseModel.Result)

@@ -27,6 +27,7 @@ import com.fighterdiet.viewModel.LoginViewModel
 import com.fighterdiet.viewModel.LoginViewModelProvider
 import com.fighterdiet.viewModel.RegisterViewModel
 import com.fighterdiet.viewModel.RegisterViewModelProvider
+import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : BaseActivity(), View.OnClickListener {
@@ -51,6 +52,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
              WindowManager.LayoutParams.FLAG_SECURE
          )*/
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+
+        if(PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
+            startActivity(IntroAndDecisionActivity.getStartIntent(this))
+        }
         initialise()
         setupViewModel()
         setupObserver()
@@ -94,8 +99,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                         if (apiResponse.code==200){
                             PrefManager.putString(PrefManager.KEY_AUTH_TOKEN,apiResponse.data?.token.toString())
                             PrefManager.putString(PrefManager.KEY_USER_ID,apiResponse.data?.user_id.toString())
-                            System.out.println("token"+apiResponse.data?.token.toString())
+                            //System.out.println("token"+apiResponse.data?.token.toString())
                             PrefManager.putString(PrefManager.KEY_AUTH_TOKEN, apiResponse.data?.token?:"")
+                            PrefManager.putBoolean(PrefManager.IS_LOGGED_IN, true)
                             startActivity(IntroAndDecisionActivity.getStartIntent(this))
                         }else{
                             Utils.showSnackBar(binding.root, apiResponse.message)
@@ -117,6 +123,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     private fun initialise() {
         viewFlipper = findViewById<ViewFlipper>(R.id.viewflip)
+//        viewFlipper?.setOnClickListener(this)
         for (i in 0 until imageList.size) {
             // This will create dynamic image views and add them to the ViewFlipper.
             setFlipperImage(imageList.get(i))
@@ -124,7 +131,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
 
 
-        viewFlipper!!.setOnTouchListener(OnTouchListener { v, event ->
+        viewFlipper!!.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     Log.e("Dowwn", "Stop")
@@ -137,10 +144,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 }
             }
             true
-        })
+        }
 
 
-       // Log.e("position", viewFlipper!!.indexOfChild(viewFlipper!!.currentView).toString())
+        // Log.e("position", viewFlipper!!.indexOfChild(viewFlipper!!.currentView).toString())
        // Log.e("position1", viewFlipper!!.displayedChild.toString())
 
 
@@ -162,7 +169,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
         binding.tvForgotPassword.setOnClickListener(this)
         binding.tvCreateAccount.setOnClickListener(this)
-        binding.btnLogin.setOnClickListener(this)
+//        binding.btnLogin.setOnClickListener(this)
         binding.tvSkip.setOnClickListener(this)
 
         /*timer = Timer()
@@ -263,9 +270,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 startActivity(DashboardActivity.getStartIntent(this))
                 finish()
             }
-           /* R.id.btnLogin -> {
-                startActivity(IntroAndDecisionActivity.getStartIntent(this))
-            }*/
+//            R.id.btnLogin -> {
+//                if(isValidated())
+//                    startActivity(IntroAndDecisionActivity.getStartIntent(this))
+//            }
         }
     }
 

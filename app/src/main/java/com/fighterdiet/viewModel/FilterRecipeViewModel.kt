@@ -5,8 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fighterdiet.data.model.ApiResponse
-import com.fighterdiet.data.model.responseModel.FaqListResponseModel
-import com.fighterdiet.data.model.responseModel.GetAllergyResponseModel
+import com.fighterdiet.data.model.responseModel.GetDietaryResponseModel
 import com.fighterdiet.data.model.responseModel.GetMealResponseModel
 import com.fighterdiet.data.model.responseModel.GetVolumeResponseModel
 import com.fighterdiet.data.repository.FilterRecipeRepository
@@ -22,34 +21,34 @@ class FilterRecipeViewModel(private val filterRecipeReository: FilterRecipeRepos
         return errorMsg
     }
 
-    val getAllergyResource =
-        MutableLiveData<Resource<ApiResponse<GetAllergyResponseModel>>>()
+    val getDietaryResource =
+        MutableLiveData<Resource<ApiResponse<GetDietaryResponseModel>>>()
     val getVolumeResource =
         MutableLiveData<Resource<ApiResponse<GetVolumeResponseModel>>>()
 
     val getMealResource =
         MutableLiveData<Resource<ApiResponse<GetMealResponseModel>>>()
 
-    fun getAllergyApi(){
+    fun getDietaryApi(){
         viewModelScope.launch {
             try {
-                getAllergyResource.postValue(Resource.loading(null))
+                getDietaryResource.postValue(Resource.loading(null))
                 val apiResponse = filterRecipeReository.getAllergyApi()
                 withContext(Dispatchers.Main){
                     try {
                         if (apiResponse.status) {
-                            getAllergyResource.postValue(Resource.success(data = apiResponse))
+                            getDietaryResource.postValue(Resource.success(data = apiResponse))
                         }
                     } catch (e: HttpException) {
-                        getAllergyResource.postValue(Resource.error(null,e.localizedMessage!!))
+                        getDietaryResource.postValue(Resource.error(null,e.localizedMessage!!))
                     } catch (e: Throwable) {
-                        getAllergyResource.postValue(Resource.error(null,e.localizedMessage!!))
+                        getDietaryResource.postValue(Resource.error(null,e.localizedMessage!!))
                     }
                 }
             }
             catch (e:Exception){
                 e.printStackTrace()
-                getAllergyResource.postValue(Resource.error(null, e.localizedMessage?:"error null"))
+                getDietaryResource.postValue(Resource.error(null, e.localizedMessage?:"error null"))
             }
         }
     }

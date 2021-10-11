@@ -7,19 +7,13 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.fighterdiet.R
-import com.fighterdiet.data.api.RetrofitBuilder
-import com.fighterdiet.data.repository.HomeRepository
-import com.fighterdiet.data.repository.HomeViewModelProvider
 import com.fighterdiet.databinding.ActivityDashboardWithCalaoriesBinding
 import com.fighterdiet.fragments.*
 import com.fighterdiet.utils.Constants
-import com.fighterdiet.viewModel.HomeViewModel
+import com.fighterdiet.utils.PrefManager
 import com.google.android.material.tabs.TabLayout
 
 
@@ -63,7 +57,11 @@ class DashboardActivity : BaseActivity() {
 //                    if(it.isNotEmpty()){
                         val currFragment = supportFragmentManager.findFragmentByTag("HOME") as HomeFragment
                         if(currFragment.isVisible)
-                            currFragment.getRecipes(it.toString(), 0,8)
+                            currFragment.getRecipes(
+                                it.toString(),
+                                0,
+                                8
+                            )
 //                    }
                 }
             }
@@ -154,6 +152,10 @@ class DashboardActivity : BaseActivity() {
                         showFragment(TrendingFragment())
                     }
                     3 -> {
+                        if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
+                            startActivity(Intent(this@DashboardActivity, LoginActivity::class.java))
+                            return
+                        }
                         showFragment(FavouriteFragment())
                     }
                     4 -> {

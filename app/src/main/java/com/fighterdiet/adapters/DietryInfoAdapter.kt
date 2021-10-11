@@ -7,19 +7,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.R
 import com.fighterdiet.databinding.ItemDietryInfoBinding
-import com.fighterdiet.data.model.responseModel.GetAllergyResponseModel
+import com.fighterdiet.data.model.responseModel.GetDietaryResponseModel
 
 
 class DietryInfoAdapter(
-    private var list: List<GetAllergyResponseModel.Result>,
+    private var list: List<GetDietaryResponseModel.Result>,
     private var itemClickListener: DietaryCountListener?
 ):RecyclerView.Adapter<DietryInfoAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         val binding : ItemDietryInfoBinding? = DataBindingUtil.bind(itemView)
-
-        init {
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -31,12 +28,17 @@ class DietryInfoAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.binding?.tvTitle?.text = list[position].allergy_name
-        holder.binding?.cbSelect?.isChecked = list[position].isChecked
-        holder.binding?.cbSelect?.setOnCheckedChangeListener { buttonView, isChecked ->
-            itemClickListener?.dietaryInfoAdapterListener(position, list[position])
-            notifyDataSetChanged()
-        }
+        holder.binding?.ivSelection?.setBackgroundResource(
+            if(!list[position].isChecked)
+                R.drawable.dietry_icon_not_selected
+            else
+                R.drawable.dietry_icon_selected)
 
+        holder.binding?.ivSelection?.setOnClickListener {
+            list[position].isChecked = !list[position].isChecked
+            notifyItemChanged(position)
+            itemClickListener?.dietaryInfoAdapterListener(position, list[position])
+        }
     }
 
     override fun getItemCount(): Int {
@@ -44,6 +46,6 @@ class DietryInfoAdapter(
     }
 
     interface DietaryCountListener{
-        fun dietaryInfoAdapterListener(position: Int, resultModel: GetAllergyResponseModel.Result)
+        fun dietaryInfoAdapterListener(position: Int, resultModel: GetDietaryResponseModel.Result)
     }
 }

@@ -1,6 +1,6 @@
 package com.fighterdiet.data.model.responseModel
 
-data class GetAllergyResponseModel(
+data class GetDietaryResponseModel(
     val result: List<Result>
 ){
     data class Result(
@@ -8,5 +8,8 @@ data class GetAllergyResponseModel(
         val allergy_name: String
     ){
         var isChecked = false
+        fun getSelectedParseFormat(pos:Int): String{
+            return "allergy_id[$pos]"
+        }
     }
 }

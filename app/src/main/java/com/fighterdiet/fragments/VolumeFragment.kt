@@ -1,25 +1,24 @@
 package com.fighterdiet.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
 import com.fighterdiet.adapters.VolumeAdapter
-import com.fighterdiet.activities.FilterActivity.Companion.count
-import com.fighterdiet.data.model.responseModel.GetAllergyResponseModel
 import com.fighterdiet.data.model.responseModel.GetVolumeResponseModel
 import com.fighterdiet.databinding.FragmentVolumeBinding
-import com.fighterdiet.model.VolumeModel
+import com.fighterdiet.utils.Constants
 
 class VolumeFragment(val getVolumeResponseModel: GetVolumeResponseModel) : Fragment(), VolumeAdapter.VolumeCountListener {
     lateinit var binding: FragmentVolumeBinding
     private lateinit var volumeAdapter: VolumeAdapter
-    var list: ArrayList<VolumeModel> = ArrayList()
+    var list: ArrayList<GetVolumeResponseModel.Result> = ArrayList()
     private lateinit var volumeFragListener: VolumeFragInterface
 
     companion object{
@@ -44,24 +43,37 @@ class VolumeFragment(val getVolumeResponseModel: GetVolumeResponseModel) : Fragm
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         volumeFragListener = (activity as VolumeFragInterface?)!!
+        list = getVolumeResponseModel.result as ArrayList<GetVolumeResponseModel.Result>
         setUpRecyclerView()
     }
 
-    private fun setUpRecyclerView() {
-        if(getVolumeResponseModel.result.isEmpty())
-            return
+    override fun onResume() {
+        super.onResume()
+        volumeFragListener.initFilterSelectionUi(1)
+    }
 
+    private fun setUpRecyclerView() {
         binding.rvVolume.layoutManager = LinearLayoutManager(activity)
-        volumeAdapter = VolumeAdapter(getVolumeResponseModel.result as ArrayList<GetVolumeResponseModel.Result>,this)
+        volumeAdapter = VolumeAdapter(list,this)
         binding.rvVolume.adapter = volumeAdapter
     }
 
+    fun clearVolumeData() {
+        list.forEach {
+            it.isChecked = false
+        }
+        volumeAdapter.notifyDataSetChanged()
+    }
+
+
     override fun volumeAdapterListener(position: Int, resultModel: GetVolumeResponseModel.Result) {
-        volumeFragListener.volumefragCount(position, resultModel.volume_id)
+        Constants.RecipeFilter.selectedVolumeFilter[position] = resultModel
+        volumeFragListener.volumefragCount(position, resultModel.volume_id, resultModel.isChecked)
     }
 
     interface VolumeFragInterface{
-        fun volumefragCount(pos: Int, id:Int)
+        fun volumefragCount(pos: Int, id:Int, isItemAdd:Boolean)
+        fun initFilterSelectionUi(screenType: Int)
     }
 
 }

@@ -11,13 +11,13 @@ import com.fighterdiet.R
 import com.fighterdiet.adapters.MealsAdapter
 import com.fighterdiet.data.model.responseModel.GetMealResponseModel
 import com.fighterdiet.databinding.FragmentMealsBinding
-import com.fighterdiet.model.MealsModel
+import com.fighterdiet.utils.Constants
 
 
 class MealsFragment(val getMealResponseModel: GetMealResponseModel) : Fragment(), MealsAdapter.MealsCountListener {
+    private var list: ArrayList<GetMealResponseModel.Result>  = ArrayList()
     lateinit var binding: FragmentMealsBinding
     private lateinit var mealsAdapter : MealsAdapter
-    var list:ArrayList<MealsModel> = ArrayList()
     private lateinit var mealsListener: MealsInfoInterface
 
     companion object{
@@ -42,24 +42,37 @@ class MealsFragment(val getMealResponseModel: GetMealResponseModel) : Fragment()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mealsListener = (activity as MealsInfoInterface?)!!
+        list = getMealResponseModel.result as ArrayList<GetMealResponseModel.Result>
         setUpRecyclerView()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mealsListener.initFilterSelectionUi(2)
     }
 
     private fun setUpRecyclerView() {
         binding.rvMeals.layoutManager = LinearLayoutManager(activity)
-        mealsAdapter = MealsAdapter(getMealResponseModel.result as ArrayList<GetMealResponseModel.Result>,this)
+        mealsAdapter = MealsAdapter(list,this)
         binding.rvMeals.adapter = mealsAdapter
     }
 
-    override fun mealsInfoAdapterListener(
-        position: Int,
-        resultModel: GetMealResponseModel.Result
-    ) {
-        mealsListener.mealsInfoCount(position, resultModel.volume_id)
+    @Synchronized
+    fun clearMealData() {
+        list.forEach {
+            it.isChecked = false
+        }
+        mealsAdapter.notifyDataSetChanged()
+    }
+
+    override fun mealsInfoAdapterListener(position: Int, resultModel: GetMealResponseModel.Result) {
+        Constants.RecipeFilter.selectedMealFilter[position] = resultModel
+        mealsListener.mealsInfoCount(position, resultModel.meal_id, resultModel.isChecked)
     }
 
     interface MealsInfoInterface{
-        fun mealsInfoCount(pos: Int, id:Int)
+        fun mealsInfoCount(pos: Int, id:Int, isItemAdd:Boolean)
+        fun initFilterSelectionUi(screenType: Int)
     }
 
 }

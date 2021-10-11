@@ -1,5 +1,6 @@
 package com.fighterdiet.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
+import com.fighterdiet.activities.IntroAndDecisionActivity
+import com.fighterdiet.activities.LoginActivity
 import com.fighterdiet.activities.RecipeDetailsActivity
 import com.fighterdiet.adapters.HomeRecipeListRecyclerAdapter
 import com.fighterdiet.data.api.RetrofitBuilder
@@ -18,6 +21,7 @@ import com.fighterdiet.data.repository.HomeRepository
 import com.fighterdiet.data.repository.HomeViewModelProvider
 import com.fighterdiet.databinding.FragmentHomeBinding
 import com.fighterdiet.utils.Constants
+import com.fighterdiet.utils.PrefManager
 import com.fighterdiet.utils.Status
 import com.fighterdiet.viewModel.HomeViewModel
 
@@ -46,14 +50,50 @@ class HomeFragment : BaseFragment() {
         initialize()
     }
 
-    fun getRecipes(searchKeys: String, startFrom: Int, endTo: Int){
-        viewModel.getRecipeList(searchKeys, startFrom, endTo)
+    override fun onStart() {
+        super.onStart()
+        callGetRecipesApi()
+    }
+
+    private fun callGetRecipesApi() {
+
+        getRecipes("",offset,limit/*, selectedDietaryMap, selectedMealMap, selectedVolumeMap*/)
+    }
+
+    fun getRecipes(
+        searchKeys: String,
+        startFrom: Int,
+        endTo: Int/*,
+        selectedDietaryMap: HashMap<String, Int>,
+        selectedMealMap: HashMap<String, Int>,
+        selectedVolumeMap: HashMap<String, Int>*/
+    ){
+        val selectedDietaryMap = HashMap<String, Int>()
+        if(Constants.RecipeFilter.selectedDietaryFilter.isNotEmpty()){
+            Constants.RecipeFilter.selectedDietaryFilter.forEach {
+                selectedDietaryMap["allergy_id[${it.key}]"] = it.value.allergy_id
+            }
+        }
+
+        val selectedVolumeMap = HashMap<String, Int>()
+        if(Constants.RecipeFilter.selectedVolumeFilter.isNotEmpty()){
+            Constants.RecipeFilter.selectedVolumeFilter.forEach {
+                selectedVolumeMap["volume_id[${it.key}]"] = it.value.volume_id
+            }
+        }
+
+        val selectedMealMap = HashMap<String, Int>()
+        if(Constants.RecipeFilter.selectedMealFilter.isNotEmpty()){
+            Constants.RecipeFilter.selectedMealFilter.forEach {
+                selectedMealMap["meal_id[${it.key}]"] = it.value.meal_id
+            }
+        }
+        viewModel.getRecipeList(searchKeys, startFrom, endTo, selectedDietaryMap, selectedVolumeMap, selectedMealMap)
     }
 
     fun setupViewModel() {
             viewModel = ViewModelProvider(this, HomeViewModelProvider(HomeRepository(RetrofitBuilder.apiService)))
             .get(HomeViewModel::class.java)
-        getRecipes("",offset,limit)
     }
 
     fun setupObserver() {
@@ -91,6 +131,10 @@ class HomeFragment : BaseFragment() {
         binding.rvHomeRecycler.layoutManager = layoutManager
         recipeListAdapter = HomeRecipeListRecyclerAdapter(requireActivity(), recipeList) { position, recipe ->
             recipiesModel?.let {
+                if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
+                    startActivity(Intent(requireContext(), LoginActivity::class.java))
+                    return@HomeRecipeListRecyclerAdapter
+                }
                 val act = RecipeDetailsActivity.getStartIntent(requireContext())
                     .putExtra(Constants.RECIPE_ID, recipe.id)
                     .putExtra(Constants.RECIPE_IMAGE, recipe.recipe_image)
@@ -108,21 +152,7 @@ class HomeFragment : BaseFragment() {
             }
         }
         binding.rvHomeRecycler.adapter = recipeListAdapter
-//        binding.rvHomeRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-//                super.onScrollStateChanged(recyclerView, newState)
-//                if (!recyclerView.canScrollVertically(1)){
-//                    val newOffset = offset + 8
-//                    viewModel.getRecipeList("", newOffset, limit)
-//                    offset = newOffset
-//                }
-//                if (!recyclerView.canScrollVertically()){
-//                    val newOffset = offset + 8
-//                    viewModel.getRecipeList("", newOffset, limit)
-//                    offset = newOffset
-//                }
-//            }
-//        })
+
 //        binding.rvHomeRecycler.addOnScrollListener(object :
 //            EndlessRecyclerViewScrollListener(layoutManager) {
 //            override fun onLoadMore(page: Int, totalItemsCount: Int) {

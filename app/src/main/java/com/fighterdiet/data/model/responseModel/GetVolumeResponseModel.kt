@@ -8,5 +8,8 @@ data class GetVolumeResponseModel(
         val volume_name: String
     ){
         var isChecked = false
+        fun getSelectedParseFormat(pos:Int): String{
+            return "volume_id[$pos]"
+        }
     }
 }

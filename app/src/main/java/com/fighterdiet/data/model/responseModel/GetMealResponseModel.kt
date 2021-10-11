@@ -8,5 +8,8 @@ data class GetMealResponseModel(
         val meal_name: String
     ){
         var isChecked = false
+        fun getSelectedParseFormat(pos:Int): String{
+            return "meal_id[$pos]"
+        }
     }
 }

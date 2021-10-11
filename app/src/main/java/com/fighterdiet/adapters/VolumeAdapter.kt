@@ -1,21 +1,13 @@
 package com.fighterdiet.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.CompoundButton
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.R
-import com.fighterdiet.activities.FilterActivity
-import com.fighterdiet.data.model.responseModel.GetAllergyResponseModel
 import com.fighterdiet.data.model.responseModel.GetVolumeResponseModel
 import com.fighterdiet.databinding.ItemDietryInfoBinding
-import com.fighterdiet.interfaces.RecyclerViewItemClickListener
-import com.fighterdiet.model.VolumeModel
 
 class VolumeAdapter(
     private var list: ArrayList<GetVolumeResponseModel.Result>,
@@ -36,10 +28,16 @@ class VolumeAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.binding?.tvTitle?.setText(list[position].volume_name)
-        holder.binding?.cbSelect?.isChecked = list[position].isChecked
-        holder.binding?.cbSelect?.setOnCheckedChangeListener { buttonView, isChecked ->
+        holder.binding?.ivSelection?.setBackgroundResource(
+            if(!list[position].isChecked)
+                R.drawable.dietry_icon_not_selected
+            else
+                R.drawable.dietry_icon_selected)
+
+        holder.binding?.ivSelection?.setOnClickListener {
+            list[position].isChecked = !list[position].isChecked
+            notifyItemChanged(position)
             volumeListener?.volumeAdapterListener(position, list[position])
-            notifyDataSetChanged()
         }
     }
 
