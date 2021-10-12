@@ -11,22 +11,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.fighterdiet.R
 import com.fighterdiet.data.api.RetrofitBuilder
-import com.fighterdiet.data.repository.LogOutRepository
-import com.fighterdiet.data.repository.LoginRepository
+import com.fighterdiet.data.repository.SettingsRepository
 import com.fighterdiet.databinding.FragmentSettingBinding
 import com.fighterdiet.utils.PrefManager
 import com.fighterdiet.utils.ProgressDialog
 import com.fighterdiet.utils.Status
 import com.fighterdiet.utils.Utils
-import com.fighterdiet.viewModel.LogOutViewModel
+import com.fighterdiet.viewModel.SettingsViewModel
 import com.fighterdiet.viewModel.LogOutViewModelProvider
-import com.fighterdiet.viewModel.LoginViewModel
-import com.fighterdiet.viewModel.LoginViewModelProvider
 
 
 class SettingsActivity : BaseActivity(), View.OnClickListener {
     lateinit var binding: FragmentSettingBinding
-    private lateinit var viewModel:LogOutViewModel
+    private lateinit var viewModel:SettingsViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /*getWindow().setFlags(
@@ -48,13 +45,13 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
     override fun setupViewModel() {
         viewModel = ViewModelProvider(
             this,
-            LogOutViewModelProvider(LogOutRepository(RetrofitBuilder.apiService))
-        ).get(LogOutViewModel::class.java)
+            LogOutViewModelProvider(SettingsRepository(RetrofitBuilder.apiService))
+        ).get(SettingsViewModel::class.java)
         binding.logoutViewModel = viewModel
     }
 
     override fun setupObserver() {
-        viewModel.getResources().observe(this,{
+        viewModel.getResourcesLogout().observe(this,{
             when(it.status){
                 Status.LOADING->{
                    // ProgressDialog.showProgressDialog(this)
@@ -171,7 +168,7 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
                     }
                 }
                 R.id.tv_change_password->{
-                    val reset=Intent(this,ResetPasswordActivity::class.java)
+                    val reset=Intent(this,ChangePasswordActivity::class.java)
                     reset.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(reset)
                 }

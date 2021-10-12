@@ -54,7 +54,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
         if(PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
-            startActivity(IntroAndDecisionActivity.getStartIntent(this))
+            startActivity(DashboardActivity.getStartIntent(this).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
         }
         initialise()
         setupViewModel()
@@ -102,7 +102,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                             //System.out.println("token"+apiResponse.data?.token.toString())
                             PrefManager.putString(PrefManager.KEY_AUTH_TOKEN, apiResponse.data?.token?:"")
                             PrefManager.putBoolean(PrefManager.IS_LOGGED_IN, true)
-                            startActivity(IntroAndDecisionActivity.getStartIntent(this))
+                            val intent =DashboardActivity.getStartIntent(this)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
                         }else{
                             Utils.showSnackBar(binding.root, apiResponse.message)
                         }
@@ -267,6 +269,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 startActivity(CreateAccountActivity.getStartIntent(this))
             }
             R.id.tv_skip->{
+                PrefManager.putBoolean(PrefManager.IS_LOGGED_IN, false)
                 startActivity(DashboardActivity.getStartIntent(this))
                 finish()
             }

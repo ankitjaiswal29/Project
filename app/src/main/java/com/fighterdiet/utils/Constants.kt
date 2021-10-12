@@ -6,6 +6,20 @@ import com.fighterdiet.data.model.responseModel.GetVolumeResponseModel
 import com.fighterdiet.data.model.responseModel.RecipeContentResponseModel
 
 object Constants {
+
+    interface InAppSubsProducts {
+        companion object {
+            val monthly_test_subscription = "com.FighterDietRecipe.monthly"
+            val yearly_test_subscription = "com.FighterDietRecipe.yearly"
+        }
+    }
+
+    val productIds = arrayOf<String>("monthly_test_subscription", "yearly_test_subscription")
+    val deviceType = "1"
+    val DEFAULT_PROFILE_ICON_SIZE = 200
+    val EVENT_PUSH_NOTIFICATION = "EVENT_PUSH_NOTIFICATION"
+    val KEY_NOTIFICATION_TYPE="KEY_NOTIFICATION_TYPE"
+
     const val OPERATION_DELETE = 0
     const val OPERATION_REPORT_SPAM = 1
 

@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fighterdiet.data.model.ApiResponse
 import com.fighterdiet.data.model.requestModel.RegisterRequestModel
+import com.fighterdiet.data.model.responseModel.CheckUserNameResponseModel
 import com.fighterdiet.data.model.responseModel.RegistrationResponseModel
 import com.fighterdiet.data.repository.RegisterRepository
 import com.fighterdiet.utils.Resource
@@ -28,7 +29,13 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
     private val resources =
         MutableLiveData<Resource<ApiResponse<RegistrationResponseModel>>>()
 
+    fun getResourcesCheckUser() = resourcesCheckUser
+
+    private val resourcesCheckUser =
+        MutableLiveData<Resource<ApiResponse<CheckUserNameResponseModel>>>()
+
     fun getResources() = resources
+
     fun getErrorMsg(): LiveData<String> {
         return errorMsg
     }
@@ -50,6 +57,22 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
                 } catch (e: Exception) {
                     e.printStackTrace()
                     resources.postValue(Resource.error(null, e.localizedMessage!!))
+                }
+            }
+        }
+
+    }
+
+    fun checkUserNameApi(userName: String) {
+        if (isValid()){
+            viewModelScope.launch {
+                try {
+                    resourcesCheckUser.postValue(Resource.loading(data = null))
+                    val apiResponse = registerRepository.checkUserName(userName)
+                    resourcesCheckUser.postValue(Resource.success(data = apiResponse))
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    resourcesCheckUser.postValue(Resource.error(null, e.localizedMessage!!))
                 }
             }
         }

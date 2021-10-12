@@ -16,6 +16,7 @@ object PrefManager {
     const val KEY_AUTH_TOKEN = "Auth_Token"
     const val KEY_USER_ID = "User ID"
     const val IS_LOGGED_IN = "is logged in"
+    const val IS_SUBSCRIBED = "Is_user_subscribed"
 
 
     fun getString(key: String): String? {

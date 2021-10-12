@@ -2,6 +2,7 @@ package com.fighterdiet.activities
 
 import android.content.Context
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -74,6 +75,7 @@ class DashboardActivity : BaseActivity() {
 
         binding.ivCloseSearch.setOnClickListener {
             binding.etSearchRecipe.setText("")
+            binding.clSearchRecipe.visibility = View.GONE
         }
     }
 
@@ -190,6 +192,12 @@ class DashboardActivity : BaseActivity() {
                     1 -> {
                         startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
                     }
+//                    3 -> {
+//                        if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
+//                            startActivity(Intent(this@DashboardActivity, LoginActivity::class.java))
+//                            return
+//                        }
+//                    }
                     4 -> {
                         startActivity(WeeklyGroceryFragment.getStartIntent(this@DashboardActivity))
                     }
@@ -287,6 +295,10 @@ class DashboardActivity : BaseActivity() {
                         showFragment(TrendingFragment())
                     }
                     3 -> {
+                        if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
+                            startActivity(Intent(this@DashboardActivity, LoginActivity::class.java))
+                            return
+                        }
                         binding.toolbar.ivTopImage.visibility = View.GONE;
                         binding.toolbar.tvTitle.visibility = View.VISIBLE;
                         binding.toolbar.tvTitle.setText("Favorites")
@@ -319,6 +331,14 @@ class DashboardActivity : BaseActivity() {
                     1 -> {
                         startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
                     }
+
+                    3 -> {
+                        if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
+                            startActivity(Intent(this@DashboardActivity, LoginActivity::class.java))
+                            return
+                        }
+                    }
+
                     4 -> {
                         startActivity(SettingsActivity.getStartIntent(this@DashboardActivity))
                     }

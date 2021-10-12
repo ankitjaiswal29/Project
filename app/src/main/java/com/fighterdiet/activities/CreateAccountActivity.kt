@@ -81,6 +81,38 @@ class CreateAccountActivity : BaseActivity() {
             }
         })
 
+        viewModel.getResourcesCheckUser().observe(this, {
+            when (it.status) {
+                Status.LOADING -> {
+                    ProgressDialog.showProgressDialog(this)
+                }
+                Status.ERROR -> {
+                    ProgressDialog.hideProgressDialog()
+                    it.message?.let {
+                        Utils.showSnackBar(binding.root, it)
+                    }
+                }
+                Status.SUCCESS -> {
+                    ProgressDialog.hideProgressDialog()
+//                    val apiResponse = it.data!!
+//
+//                    if (apiResponse.status) {
+//
+//                        if (apiResponse.code==200){
+//                            startActivity(IntroAndDecisionActivity.getStartIntent(this))
+//
+//                        }else{
+//                            Utils.showSnackBar(binding.root, apiResponse.message)
+//                        }
+//
+//                    } else {
+//                        Utils.showSnackBar(binding.root, apiResponse.message)
+//                    }
+
+                }
+            }
+        })
+
         viewModel.getErrorMsg().observe(this, Observer {
             Utils.showSnackBar(binding.root, it)
         })
@@ -88,6 +120,13 @@ class CreateAccountActivity : BaseActivity() {
     }
 
     private fun initialise() {
+        binding.etUserId.setOnFocusChangeListener { view, hasFocus ->
+            if (!hasFocus) {
+                if(binding.etUserId.text.toString().isNotEmpty())
+                    viewModel.checkUserNameApi(binding.etUserId.text.toString())
+            }
+        }
+
         binding.tvLogin.setOnClickListener(View.OnClickListener {
             val loginIntent = Intent(this, LoginActivity::class.java)
             loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

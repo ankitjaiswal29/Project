@@ -44,10 +44,6 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="AppTheme.Membership" parent="Theme.FighterDietApp">
-        <item name="android:windowBackground">@android:color/transparent</item>
-    </style>
-
 
     <style name="AppBottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="colorPrimary">@color/colorPrimaryDark</item>

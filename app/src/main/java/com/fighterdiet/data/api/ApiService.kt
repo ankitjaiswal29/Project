@@ -30,7 +30,7 @@ interface ApiService {
         @QueryMap selectedMealMap: HashMap<String, Int>
         ): ApiResponse<RecipeListResponseModel>
 
-    @GET("recipe-list")
+    @GET("favourite-list")
     suspend fun getFavouriteListApi(
         @Query("offset") offset:Int,
         @Query("limit") limit:Int,
@@ -61,6 +61,12 @@ interface ApiService {
 
     @POST("resend-otp")
     suspend fun resendOtpApi(@Body forgotPasswordRequestModel: ForgotPasswordRequestModel): ApiResponse<ForgotPasswordResponseModel>
+
+    @POST("change-password")
+    suspend fun changePassword(@Body changePasswordRequestModel: ChangePasswordRequestModel): ApiResponse<Any>
+
+    @POST("check-username")
+    suspend fun checkUserName(@Body userName: String): ApiResponse<CheckUserNameResponseModel>
 
     @POST("comment-add")
     suspend fun addRecipeComment(@Body addCommentRequestModel: AddCommentRequestModel): ApiResponse<AddCommentResponseModel>

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
 import com.fighterdiet.activities.IntroAndDecisionActivity
 import com.fighterdiet.activities.LoginActivity
+import com.fighterdiet.activities.MemberShipActivity
 import com.fighterdiet.activities.RecipeDetailsActivity
 import com.fighterdiet.adapters.HomeRecipeListRecyclerAdapter
 import com.fighterdiet.data.api.RetrofitBuilder
@@ -144,9 +145,9 @@ class HomeFragment : BaseFragment() {
                         startActivity(act)
                     }
                     "0" -> {
-                        startActivity(act)
+                        startActivity(MemberShipActivity.getStartIntent(requireContext()))
+//                        startActivity(act)
                     }
-//                    "0" -> startActivity(MemberShipActivity.getStartIntent(context!!))
 
                 }
             }

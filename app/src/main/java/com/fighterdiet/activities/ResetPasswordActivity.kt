@@ -45,7 +45,7 @@ class ResetPasswordActivity : BaseActivity() {
     }
 
     override fun setupObserver() {
-        viewModel.getResources().observe(this,{
+        viewModel.getResourcesForgotPassword().observe(this,{
             when(it.status){
                 Status.LOADING->{
                     ProgressDialog.showProgressDialog(this)
