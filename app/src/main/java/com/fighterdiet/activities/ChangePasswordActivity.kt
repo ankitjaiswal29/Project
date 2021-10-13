@@ -2,6 +2,7 @@ package com.fighterdiet.activities
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.fighterdiet.R
 import com.fighterdiet.data.api.RetrofitBuilder
@@ -20,7 +21,7 @@ class ChangePasswordActivity : BaseActivity() {
     private lateinit var viewModel: ChangePassViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_change_password)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_change_password)
         setupViewModel()
         setupObserver()
     }
@@ -34,6 +35,7 @@ class ChangePasswordActivity : BaseActivity() {
             this,
             ChangePassViewModelProvider(ChangePasswordRepository(RetrofitBuilder.apiService))
         ).get(ChangePassViewModel::class.java)
+
         binding.changePasswordViewModel = viewModel
     }
 

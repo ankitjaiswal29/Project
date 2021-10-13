@@ -62,12 +62,7 @@ class TrendingFragmentRecyAdapter(
             .load(trendingList[position].recipe_image)
             .placeholder(R.color.greencolor)
             .into(holder.binding!!.ivItemHome)
-      //  holder.binding?.ivItemHome?.setImageResource(trendingList[position].recipe_image)
-       /* if (trendingList.get(position).isDescOpened) {
-            holder.binding?.rlCaloriesDesc?.visibility = View.VISIBLE
-        } else {
-            holder.binding?.rlCaloriesDesc?.visibility = View.GONE
-        }*/
+        holder.binding.tvRecipeName.text = trendingList[position].recipe_name
     }
 
     override fun getItemCount(): Int {

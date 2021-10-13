@@ -22,11 +22,13 @@ import com.fighterdiet.data.repository.HomeRepository
 import com.fighterdiet.data.repository.HomeViewModelProvider
 import com.fighterdiet.databinding.FragmentHomeBinding
 import com.fighterdiet.utils.Constants
+import com.fighterdiet.utils.EndlessScrollViewListener
 import com.fighterdiet.utils.PrefManager
 import com.fighterdiet.utils.Status
 import com.fighterdiet.viewModel.HomeViewModel
 
 class HomeFragment : BaseFragment() {
+    private var mSearchedKeyword: String = ""
     private var recipiesModel: RecipeListResponseModel? = null
     private lateinit var viewModel: HomeViewModel
     lateinit var binding: FragmentHomeBinding
@@ -53,22 +55,15 @@ class HomeFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
-        callGetRecipesApi()
-    }
-
-    private fun callGetRecipesApi() {
-
-        getRecipes("",offset,limit/*, selectedDietaryMap, selectedMealMap, selectedVolumeMap*/)
+        getRecipes("",offset,limit)
     }
 
     fun getRecipes(
         searchKeys: String,
         startFrom: Int,
-        endTo: Int/*,
-        selectedDietaryMap: HashMap<String, Int>,
-        selectedMealMap: HashMap<String, Int>,
-        selectedVolumeMap: HashMap<String, Int>*/
+        endTo: Int
     ){
+        mSearchedKeyword = searchKeys
         val selectedDietaryMap = HashMap<String, Int>()
         if(Constants.RecipeFilter.selectedDietaryFilter.isNotEmpty()){
             Constants.RecipeFilter.selectedDietaryFilter.forEach {
@@ -101,12 +96,15 @@ class HomeFragment : BaseFragment() {
         viewModel.getRecipeListResource().observe(viewLifecycleOwner, {
             when(it.status){
                 Status.SUCCESS -> {
-                    recipeList.clear()
+//                    recipeList.clear()
                     recipiesModel = it.data?.data
                     if (it.data?.data?.result.isNullOrEmpty())
                         return@observe
                     recipeList.addAll(it.data?.data?.result!!)
-                    recipeListAdapter.notifyDataSetChanged()
+                    val currSize = binding.rvHomeRecycler.adapter?.itemCount?:0
+                    if(currSize>0)
+                        recipeListAdapter.notifyItemRangeInserted(currSize, recipeList.size - 1)
+
                 }
                 Status.LOADING -> {
 
@@ -154,13 +152,12 @@ class HomeFragment : BaseFragment() {
         }
         binding.rvHomeRecycler.adapter = recipeListAdapter
 
-//        binding.rvHomeRecycler.addOnScrollListener(object :
-//            EndlessRecyclerViewScrollListener(layoutManager) {
-//            override fun onLoadMore(page: Int, totalItemsCount: Int) {
-////                fetchData(page)
-//                getRecipes("",page.toString(),totalItemsCount.toString())
-//            }
-//
-//        })
+        binding.rvHomeRecycler.addOnScrollListener(object :
+            EndlessScrollViewListener(layoutManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int) {
+                getRecipes(mSearchedKeyword,totalItemsCount,limit)
+            }
+
+        })
     }
 }

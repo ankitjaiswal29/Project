@@ -24,11 +24,11 @@ class FavouriteViewModel(private val favouriteRepository: FavouriteRepository):V
         return errorMsg
     }
 
-    fun getFavouriteList(){
+    fun getFavouriteList(offset:Int, limit:Int){
         viewModelScope.launch {
             try {
                 favouriteListResource.postValue(Resource.loading(null))
-                val apiResponse = favouriteRepository.favouriteListApi(2, 2,"")
+                val apiResponse = favouriteRepository.favouriteListApi(offset, limit)
                 withContext(Dispatchers.Main){
                     try {
                         if (apiResponse.status) {

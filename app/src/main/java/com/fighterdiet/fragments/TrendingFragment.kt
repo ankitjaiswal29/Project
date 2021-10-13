@@ -15,6 +15,7 @@ import com.fighterdiet.data.api.RetrofitBuilder
 import com.fighterdiet.data.model.responseModel.TrendingListResponseModel
 import com.fighterdiet.data.repository.TrendingRepository
 import com.fighterdiet.databinding.FragmentTrendingBinding
+import com.fighterdiet.utils.EndlessScrollViewListener
 import com.fighterdiet.utils.Status
 import com.fighterdiet.viewModel.TrendingViewModel
 import com.fighterdiet.viewModel.TrendingViewModelProvider
@@ -25,7 +26,8 @@ class TrendingFragment : BaseFragment() {
     private lateinit var trendingAdapter: TrendingFragmentRecyAdapter
    // var homeList: ArrayList<HomeModel> = ArrayList()
     var trendingList:ArrayList<TrendingListResponseModel.Result> =ArrayList()
-
+    var offset = 0
+    var limit = 8
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,7 +56,7 @@ class TrendingFragment : BaseFragment() {
 
     private fun initialise() {
        // setUpHomeList()
-        setUptrendingRecyclerView()
+        setUpTrendingRecyclerView()
     }
     fun setupViewModel() {
         viewModel = ViewModelProvider(this, TrendingViewModelProvider(
@@ -63,7 +65,7 @@ class TrendingFragment : BaseFragment() {
         )
         )
             .get(TrendingViewModel::class.java)
-        viewModel.getTrendingList()
+        viewModel.getTrendingList(offset, limit)
     }
     fun setupObserver() {
         viewModel.trendingListResource.observe(viewLifecycleOwner, {
@@ -72,7 +74,9 @@ class TrendingFragment : BaseFragment() {
                     if (it.data?.data?.result.isNullOrEmpty())
                         return@observe
                     trendingList.addAll(it.data?.data?.result!!)
-                    trendingAdapter.notifyDataSetChanged()
+                    val currSize = binding.rvTrendingRecycler.adapter?.itemCount?:0
+                    if(currSize>0)
+                        trendingAdapter.notifyItemRangeInserted(currSize, trendingList.size - 1);
                 }
                 Status.LOADING -> {
 
@@ -84,29 +88,21 @@ class TrendingFragment : BaseFragment() {
         })
     }
 
-    private fun setUpHomeList() {
-       /* homeList.add(HomeModel(R.mipmap.easy_chicken, false, false))
-        homeList.add(HomeModel(R.mipmap.rice_pudding, false, false))
-        homeList.add(HomeModel(R.mipmap.banana, false, false))
-
-        homeList.add(HomeModel(R.mipmap.easy_chicken, false, false))
-        homeList.add(HomeModel(R.mipmap.rice_pudding, false, false))
-        homeList.add(HomeModel(R.mipmap.banana, false, false))
-
-        homeList.add(HomeModel(R.mipmap.easy_chicken, false, false))
-        homeList.add(HomeModel(R.mipmap.rice_pudding, false, false))
-        homeList.add(HomeModel(R.mipmap.banana, false, false))
-
-        homeList.add(HomeModel(R.mipmap.easy_chicken, false, false))
-   */ }
-
-    private fun setUptrendingRecyclerView() {
-
-        binding.rvTrendingRecycler.layoutManager = LinearLayoutManager(activity)
+    private fun setUpTrendingRecyclerView() {
+        val layoutManager = LinearLayoutManager(activity)
+        binding.rvTrendingRecycler.layoutManager = layoutManager
         trendingAdapter = TrendingFragmentRecyAdapter(activity, trendingList) { position, view ->
            // Utils.showSnackBar(binding.rvTrendingRecycler, "mes")
         }
         binding.rvTrendingRecycler.adapter = trendingAdapter
+
+        binding.rvTrendingRecycler.addOnScrollListener(object :
+            EndlessScrollViewListener(layoutManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int) {
+                viewModel.getTrendingList(totalItemsCount,limit)
+            }
+
+        })
     }
 
 }

@@ -33,12 +33,12 @@ interface ApiService {
     @GET("favourite-list")
     suspend fun getFavouriteListApi(
         @Query("offset") offset:Int,
-        @Query("limit") limit:Int,
-        @Query("search") search:String
+        @Query("limit") limit:Int
     ): ApiResponse<FavouriteListResponseModel>
 
     @GET("recipe-trending")
     suspend fun getTrendingListApi(
+        @Query("offset") offset:Int,
         @Query("limit") limit:Int,
     ): ApiResponse<TrendingListResponseModel>
 

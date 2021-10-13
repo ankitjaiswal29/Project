@@ -15,6 +15,7 @@ import com.fighterdiet.data.api.RetrofitBuilder
 import com.fighterdiet.data.model.responseModel.FavouriteListResponseModel
 import com.fighterdiet.data.repository.FavouriteRepository
 import com.fighterdiet.databinding.FragmentFavouriteBinding
+import com.fighterdiet.utils.EndlessScrollViewListener
 import com.fighterdiet.utils.Status
 import com.fighterdiet.viewModel.FavouriteViewModeProvider
 import com.fighterdiet.viewModel.FavouriteViewModel
@@ -25,6 +26,9 @@ class FavouriteFragment : BaseFragment() {
     private lateinit var favouriteAdapter: FavouriteFragmentRecyAdapter
   //  var homeList: ArrayList<HomeModel> = ArrayList()
     var favouriteList: ArrayList<FavouriteListResponseModel.Favourite> = ArrayList()
+
+    var offset = 0
+    var limit = 8
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +48,7 @@ class FavouriteFragment : BaseFragment() {
     fun setupViewModel() {
         viewModel = ViewModelProvider(this, FavouriteViewModeProvider(FavouriteRepository(RetrofitBuilder.apiService)))
             .get(FavouriteViewModel::class.java)
-        viewModel.getFavouriteList()
+        viewModel.getFavouriteList(offset, limit)
     }
     fun setupObserver() {
         viewModel.favouriteListResource.observe(viewLifecycleOwner, {
@@ -53,7 +57,9 @@ class FavouriteFragment : BaseFragment() {
                     if (it.data?.data?.result.isNullOrEmpty())
                         return@observe
                     favouriteList.addAll(it.data?.data?.result!!)
-                    favouriteAdapter.notifyDataSetChanged()
+                    val currSize = binding.rvFavouriteRecycler.adapter?.itemCount?:0
+                    if(currSize>0)
+                        favouriteAdapter.notifyItemRangeInserted(currSize, favouriteList.size - 1);
                 }
                 Status.LOADING -> {
 
@@ -70,11 +76,20 @@ class FavouriteFragment : BaseFragment() {
     }
 
     private fun setUpFavouriteRecyclerView() {
-        binding.rvFavouriteRecycler.layoutManager = LinearLayoutManager(activity)
+        val layoutManager = LinearLayoutManager(activity)
+        binding.rvFavouriteRecycler.layoutManager = layoutManager
         favouriteAdapter = FavouriteFragmentRecyAdapter(activity, favouriteList) { position, view ->
            // Utils.showSnackBar(binding.rvFavouriteRecycler, "mes")
         }
         binding.rvFavouriteRecycler.adapter = favouriteAdapter
+
+        binding.rvFavouriteRecycler.addOnScrollListener(object :
+            EndlessScrollViewListener(layoutManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int) {
+                viewModel.getFavouriteList(totalItemsCount,limit)
+            }
+
+        })
     }
 
     private fun setUpHomeList() {

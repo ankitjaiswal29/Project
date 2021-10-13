@@ -23,11 +23,11 @@ class TrendingViewModel(private val trendingRepository: TrendingRepository):View
         return errorMsg
     }
 
-    fun getTrendingList(){
+    fun getTrendingList(offset:Int, limit:Int){
         viewModelScope.launch {
             try {
                 trendingListResource.postValue(Resource.loading(null))
-                val apiResponse = trendingRepository.trendingListApi(2 )
+                val apiResponse = trendingRepository.trendingListApi(offset, limit )
                 withContext(Dispatchers.Main){
                     try {
                         if (apiResponse.status) {
