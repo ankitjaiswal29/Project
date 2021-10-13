@@ -7,19 +7,29 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.android.billingclient.api.*
 import com.fighterdiet.R
+import com.fighterdiet.data.api.RetrofitBuilder
+import com.fighterdiet.data.model.requestModel.PaymentRequestModel
+import com.fighterdiet.data.repository.MembershipRepository
 import com.fighterdiet.databinding.ActivityMemberShipBinding
 import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.PrefManager
+import com.fighterdiet.utils.Status
 import com.fighterdiet.utils.Utils
+import com.fighterdiet.viewModel.MembershipViewModel
+import com.fighterdiet.viewModel.MembershipViewModelProvider
+import retrofit2.Retrofit
 
 class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdatedListener{
 
+    private var currentPurchase: Purchase? = null
     private lateinit var mBillingClient: BillingClient
     private lateinit var orderId: String
     private lateinit var transactionId: String
     private lateinit var skuDetailsList: MutableList<SkuDetails>
+    private lateinit var viewModel: MembershipViewModel
 
 
     private lateinit var binding: ActivityMemberShipBinding
@@ -27,6 +37,7 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_member_ship)
+        setupViewModel()
         skuDetailsList = mutableListOf()
         initialize()
         setupInAppBilling()
@@ -37,11 +48,20 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
     }
 
     override fun setupViewModel() {
-
+        viewModel = ViewModelProvider(
+            this,
+            MembershipViewModelProvider(MembershipRepository(RetrofitBuilder.apiService))
+        ).get(MembershipViewModel::class.java)
     }
 
     override fun setupObserver() {
-
+        viewModel.getResources().observe(this,{
+           Log.d("Response_subscription", it.data.toString())
+            PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, true)
+            currentPurchase?.let {
+                acknowledgePurchase(it.purchaseToken)
+            }
+        })
     }
 
     private fun initialize() {
@@ -61,13 +81,15 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
         view?.id.let {
             when (it) {
                 R.id.clMemberShipYear -> {
-                    finish()
-//                    launchPayment(skuDetailsList[0])
+//                    finish()
+                    if(skuDetailsList.isNotEmpty())
+                        launchPayment(skuDetailsList[0])
 //                    startActivity(RecipeInfoActivity.getStartIntent(this))
                 }
                 R.id.btnMembershipMonth -> {
-                    finish()
-//                    launchPayment(skuDetailsList[1])
+//                    finish()
+                    if(skuDetailsList.isNotEmpty() && skuDetailsList.size>=1)
+                        launchPayment(skuDetailsList[0])
 
 //                    startActivity(RecipeInfoActivity.getStartIntent(this))
                 }
@@ -92,7 +114,6 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
 
                     if (Utils.isOnline(this@MemberShipActivity)) {
                         queryForInAppProducts()
-//                        setupRecyclerView()
                     } else {
 //                        Utils.showSnackBar(
 //                            btnContinuePlan,
@@ -108,28 +129,28 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
     }
 
     private fun queryForInAppProducts() {
-        val skuList: MutableList<String> =
-            ArrayList()
+        val skuList: MutableList<String> = ArrayList()
 
-        skuList.add(Constants.InAppSubsProducts.monthly_test_subscription)
-        skuList.add(Constants.InAppSubsProducts.yearly_test_subscription)
-
+//        skuList.add(Constants.InAppSubsProducts.monthly_test_subscription)
+//        skuList.add(Constants.InAppSubsProducts.yearly_test_subscription)
+        skuList.add(Constants.InAppSubsProducts.monthly_test)
         // for subscription set type BillingClient.SkuType.SUBS and for purchase set type BillingClient.SkuType.INAPP
         val params = SkuDetailsParams.newBuilder()
-        params.setSkusList(skuList).setType(BillingClient.SkuType.SUBS)
+        params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP)
+//        params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP)
 //        progressBar.visibility = View.VISIBLE
         mBillingClient.querySkuDetailsAsync(
             params.build()
         ) { responseCode: BillingResult, skuDetailsList: List<SkuDetails>? ->
 //            progressBar.visibility = View.GONE
             if (responseCode.responseCode == BillingClient.BillingResponseCode.OK && skuDetailsList != null) {
-                if (skuDetailsList.size > 0) {
+                if (skuDetailsList.isNotEmpty()) {
                     this.skuDetailsList.clear()
                     this.skuDetailsList.addAll(skuDetailsList)
 //                    recyclerAdapter.notifyDataSetChanged()
                 } else {
-//                    Toast.makeText(mContext, "No Subscription Product found", Toast.LENGTH_SHORT)
-//                        .show()
+                    Toast.makeText(this, "No Subscription Product found", Toast.LENGTH_SHORT)
+                        .show()
                 }
             } else {
                 Toast.makeText(
@@ -159,6 +180,7 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
             if (p0?.responseCode == BillingClient.BillingResponseCode.OK) {
                 for (purchase in p1!!) {
                     handlePurchase(purchase)
+
                 }
             } else if (p0?.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
                 Toast.makeText(
@@ -193,13 +215,19 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
         var purchseTime = purchase.purchaseTime
         var purchaseState = purchase.purchaseState
         if (purchase.purchaseState != Purchase.PurchaseState.PENDING) {
-            callAddPaymentDetailApi(purchase)
+            currentPurchase = purchase
+            viewModel.callMembershipApi(
+                PaymentRequestModel(
+                    amount = 79.99,
+                    last_reciept = purchase.originalJson
+            ))
         }
+
     }
 
-    private fun callAddPaymentDetailApi(purchase: Purchase) {
-        if (Utils.isOnline(this)) {
-//            progressBar.visibility = View.VISIBLE
+//    private fun callAddPaymentDetailApi(purchase: Purchase) {
+//        if (Utils.isOnline(this)) {
+////            progressBar.visibility = View.VISIBLE
 //            subscriptionPlanViewModel.getPaymentDetailResponse(
 //                mPrefManager.getKeyAuthToken(),
 //                getRequest(purchase)
@@ -215,18 +243,18 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
 //                        }
 //                    }
 //                })
-        } else {
+//        } else {
 //            progressBar.visibility = View.GONE
 //            Utils.showSnackBar(btnContinuePlan, getString(R.string.connection_error_message))
-        }
-    }
+//        }
+//    }
 
     private fun printPurhaseDetails(purchase: Purchase) {
         Log.e(TAG, ">>>>> Transaction Id ::" + purchase.purchaseToken)
         Log.e(TAG, ">>>>> Order Id ::" + purchase.orderId)
         Log.e(TAG, ">>>>> Purchase Time ::" + purchase.purchaseTime)
         Log.e(TAG, ">>>>> Purchase State ::" + purchase.purchaseState)
-        Log.e(TAG, ">>>>> SKU ::" + purchase.sku)
+        Log.e(TAG, ">>>>> SKU ::" + purchase.skus.toString())
         Log.e(TAG, ">>>>> AutoRenewal ::" + purchase.isAutoRenewing)
         Log.e(TAG, ">>>>> isAcknowledged ::" + purchase.isAcknowledged)
         Log.e(TAG, ">>>>>  JSON ::" + purchase.originalJson)
@@ -267,175 +295,4 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
         if (isFinishing)
             mBillingClient.endConnection()
     }
-
-//    private fun startBillingServiceConnection() {
-//        billingClient = BillingClient.newBuilder(this)
-//            .enablePendingPurchases()
-//            .setListener(this).build()
-//
-//        connectToBillingService()
-//    }
-//
-//    private fun connectToBillingService() {
-//        if (!billingClient.isReady) {
-//            billingClient.startConnection(this)
-//        }
-//    }
-//
-//    override fun onPurchasesUpdated(
-//        billingResult: BillingResult,
-//        purchases: MutableList<Purchase>?
-//    ) {
-//        when (billingResult.responseCode) {
-//            BillingClient.BillingResponseCode.OK -> {
-//                purchases?.apply { processPurchases(this.toSet()) }
-//            }
-//            BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED -> {
-//                // call queryPurchases to verify and process all owned items
-//                queryPurchases()
-//            }
-//            BillingClient.BillingResponseCode.SERVICE_DISCONNECTED -> {
-//                connectToBillingService()
-//            }
-//            else -> {
-//                Log.e("BillingClient", "Failed to onPurchasesUpdated")
-//            }
-//        }
-//    }
-//
-//
-//    private fun processPurchases(purchases: Set<Purchase>) {
-//        purchases.forEach { purchase ->
-//            if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
-//                // Implement server verification
-//                // If purchase token is OK, then unlock user access to the content
-//                acknowledgePurchase(purchase)
-//            }
-//        }
-//    }
-//
-//    private fun acknowledgePurchase(purchase: Purchase) {
-////        val skuDetails = skusWithSkuDetails[purchase.sku] ?: run {
-////            Log.e("BillingClient", "Could not find SkuDetails to acknowledge purchase")
-////            return
-////        }
-////        if (isSkuConsumable(purchase.sku)) {
-////            consume(purchase.purchaseToken)
-////        } else if (skuDetails.type == BillingClient.SkuType.SUBS && !purchase.isAcknowledged) {
-////            acknowledge(purchase.purchaseToken)
-////        }
-//    }
-//
-//    private fun isSkuConsumable(sku: String) = CONSUMABLE_SKUS.contains(sku)
-//
-//
-//    private fun consume(purchaseToken: String) {
-//        val params = ConsumeParams.newBuilder()
-//            .setPurchaseToken(purchaseToken)
-//            .build()
-//
-//        billingClient.consumeAsync(
-//            params
-//        ) { billingResult, token ->
-//            when (billingResult.responseCode) {
-//                BillingClient.BillingResponseCode.OK -> {
-////                    entitleUserProducts()
-//                }
-//                else -> {
-//                    Log.e("BillingClient", "Failed to consume purchase $billingResult")
-//                }
-//            }
-//        }
-//    }
-//
-//    private fun acknowledge(purchaseToken: String) {
-//        val acknowledgePurchaseParams = AcknowledgePurchaseParams.newBuilder()
-//            .setPurchaseToken(purchaseToken)
-//            .build()
-//
-//        billingClient.acknowledgePurchase(
-//            acknowledgePurchaseParams
-//        ) { billingResult ->
-//            when (billingResult.responseCode) {
-//                BillingClient.BillingResponseCode.OK -> {
-////                    entitleUserProducts()
-//                }
-//                else -> {
-//                    Log.e("BillingClient", "Failed to acknowledge purchase $billingResult")
-//                }
-//            }
-//        }
-//    }
-//    override fun onBillingServiceDisconnected() {
-//        connectToBillingService()
-//    }
-//
-//    override fun onBillingSetupFinished(billingResult: BillingResult) {
-//        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-//            // The billing client is ready. Retrieve in-app products and subscriptions details
-////            querySkuDetailsAsync(BillingClient.SkuType.INAPP, INAPP_SKUS)
-//
-//            querySkuDetailsAsync(BillingClient.SkuType.SUBS, SUBS_SKUS)
-//
-//            // Refresh your application access based on the billing cache
-//            queryPurchases()
-//        }
-//    }
-//
-//    private suspend fun querySkuDetailsAsync(
-//        @BillingClient.SkuType skuType: String,
-//        skuList: List<String>
-//    ) {
-//        val params = SkuDetailsParams
-//            .newBuilder()
-//            .setSkusList(skuList)
-//            .setType(skuType)
-//
-//        val skuDetailsResult = billingClient.querySkuDetailsAsync(
-//                params.build()
-//            ) { billingResult, skuDetailsList ->
-//                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && skuDetailsList != null) {
-//                    for (details in skuDetailsList) {
-//                        skusWithSkuDetails[details.sku] = details
-//                    }
-//                }
-//            }
-//
-//
-//        purchase(skuDetailsResult)
-//    }
-//
-//    private fun queryPurchases() {
-//        val purchasesResult = HashSet<Purchase>()
-//        var result = billingClient.queryPurchases(BillingClient.SkuType.INAPP)
-//        result.purchasesList?.apply { purchasesResult.addAll(this) }
-//
-//        result = billingClient.queryPurchases(BillingClient.SkuType.SUBS)
-//        result.purchasesList?.apply { purchasesResult.addAll(this) }
-//
-//        processPurchases(purchasesResult)
-//    }
-//
-//    private fun purchase(skuDetails: SkuDetails) {
-//        val flowParams = BillingFlowParams.newBuilder()
-//            .setSkuDetails(skuDetails)
-//            .build()
-//
-//        billingClient.launchBillingFlow(this, flowParams)
-//            .takeIf { billingResult -> billingResult.responseCode != BillingClient.BillingResponseCode.OK }
-//            ?.let { billingResult ->
-//                Log.e("BillingClient", "Failed to launch billing flow $billingResult")
-//            }
-//    }
-//
-//    private object GameSku {
-//        const val WEEKLY = "weekly"
-//        const val ANNUAL = "annual"
-//        const val COIN = "coin"
-//        const val RACE_TRACK = "race_trake"
-//
-//        val INAPP_SKUS = listOf(COIN, RACE_TRACK)
-//        val SUBS_SKUS = listOf(WEEKLY, ANNUAL)
-//        val CONSUMABLE_SKUS = listOf(COIN)
-//    }
 }

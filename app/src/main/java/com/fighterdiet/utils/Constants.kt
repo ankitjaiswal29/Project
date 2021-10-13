@@ -11,6 +11,9 @@ object Constants {
         companion object {
             val monthly_test_subscription = "com.FighterDietRecipe.monthly"
             val yearly_test_subscription = "com.FighterDietRecipe.yearly"
+
+            val monthly_test = "android.test.purchased"
+
         }
     }
 

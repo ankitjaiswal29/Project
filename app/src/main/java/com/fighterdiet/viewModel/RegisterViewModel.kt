@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fighterdiet.data.model.ApiResponse
+import com.fighterdiet.data.model.requestModel.CheckUserNameRequest
 import com.fighterdiet.data.model.requestModel.RegisterRequestModel
 import com.fighterdiet.data.model.responseModel.CheckUserNameResponseModel
 import com.fighterdiet.data.model.responseModel.RegistrationResponseModel
@@ -64,11 +65,12 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
     }
 
     fun checkUserNameApi(userName: String) {
-        if (isValid()){
+        if (userName.length>2){
+            val model = CheckUserNameRequest(user_name = userName)
             viewModelScope.launch {
                 try {
                     resourcesCheckUser.postValue(Resource.loading(data = null))
-                    val apiResponse = registerRepository.checkUserName(userName)
+                    val apiResponse = registerRepository.checkUserName(model)
                     resourcesCheckUser.postValue(Resource.success(data = apiResponse))
                 } catch (e: Exception) {
                     e.printStackTrace()

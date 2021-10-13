@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -31,12 +32,17 @@ class CreateAccountActivity : BaseActivity() {
         )*/
         binding = DataBindingUtil.setContentView(this, R.layout.activity_create_account)
         initialise()
+        setupUI()
         setupViewModel()
         setupObserver()
     }
 
     override fun setupUI() {
-
+        binding.etUserId.setOnFocusChangeListener { view, isFocused ->
+            if(!isFocused){
+                viewModel.checkUserNameApi((view as EditText).text.toString())
+            }
+        }
     }
 
     override fun setupViewModel() {
@@ -94,20 +100,13 @@ class CreateAccountActivity : BaseActivity() {
                 }
                 Status.SUCCESS -> {
                     ProgressDialog.hideProgressDialog()
-//                    val apiResponse = it.data!!
-//
-//                    if (apiResponse.status) {
-//
-//                        if (apiResponse.code==200){
-//                            startActivity(IntroAndDecisionActivity.getStartIntent(this))
-//
-//                        }else{
-//                            Utils.showSnackBar(binding.root, apiResponse.message)
-//                        }
-//
-//                    } else {
-//                        Utils.showSnackBar(binding.root, apiResponse.message)
-//                    }
+                    if(it.data?.data?.key == "0"){
+                        binding.ivVerifiedUsername.visibility = View.VISIBLE
+                        binding.ivVerifiedUsername.setImageResource(R.drawable.ic_green_check3x)
+                    }else{
+                        binding.ivVerifiedUsername.visibility = View.GONE
+                        binding.ivVerifiedUsername.setImageResource(R.drawable.ic_failure)
+                    }
 
                 }
             }
@@ -124,6 +123,9 @@ class CreateAccountActivity : BaseActivity() {
             if (!hasFocus) {
                 if(binding.etUserId.text.toString().isNotEmpty())
                     viewModel.checkUserNameApi(binding.etUserId.text.toString())
+                else{
+                    binding.ivVerifiedUsername.visibility = View.GONE
+                }
             }
         }
 

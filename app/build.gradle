@@ -13,14 +13,14 @@ android {
         applicationId "com.fighterdiet"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 8
-        versionName "2.3"
+        versionCode 9
+        versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -78,5 +78,5 @@ dependencies {
 
     //implementation "com.google.android.exoplayer:exoplayer:2.15.1"
 
-    implementation 'com.android.billingclient:billing-ktx:3.0.0'
+    implementation 'com.android.billingclient:billing-ktx:4.0.0'
 }

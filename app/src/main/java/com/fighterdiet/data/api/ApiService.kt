@@ -66,7 +66,7 @@ interface ApiService {
     suspend fun changePassword(@Body changePasswordRequestModel: ChangePasswordRequestModel): ApiResponse<Any>
 
     @POST("check-username")
-    suspend fun checkUserName(@Body userName: String): ApiResponse<CheckUserNameResponseModel>
+    suspend fun checkUserName(@Body model: CheckUserNameRequest): ApiResponse<CheckUserNameResponseModel>
 
     @POST("comment-add")
     suspend fun addRecipeComment(@Body addCommentRequestModel: AddCommentRequestModel): ApiResponse<AddCommentResponseModel>
@@ -97,5 +97,8 @@ interface ApiService {
 
     @GET("get-meal")
     suspend fun getMealApi(): ApiResponse<GetMealResponseModel>
+
+    @POST("payment")
+    suspend fun callSubscriptionApi(@Body model: PaymentRequestModel): ApiResponse<Any>
 
 }
