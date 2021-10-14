@@ -35,11 +35,25 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
         initialise()
         setupViewModel()
         setupObserver()
+        setupUI()
 
     }
 
     override fun setupUI() {
-
+        if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
+            binding.tvLogOut.visibility = View.GONE
+            binding.vLog.visibility = View.GONE
+            binding.tvChangePassword.visibility = View.GONE
+            binding.vChangePassword.visibility = View.GONE
+            binding.tvFaq.visibility = View.GONE
+            binding.vFaq.visibility = View.GONE
+            binding.tvClear.visibility = View.GONE
+            binding.vClear.visibility = View.GONE
+            binding.tvEmail.visibility = View.GONE
+            binding.vEmail.visibility = View.GONE
+            binding.tvCancelSubscription.visibility = View.GONE
+            binding.vCancelSubscription.visibility = View.GONE
+        }
     }
 
     override fun setupViewModel() {

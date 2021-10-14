@@ -54,8 +54,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
         if(PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
-            startActivity(DashboardActivity.getStartIntent(this).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
-        }
+            val intent =DashboardActivity.getStartIntent(this)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+}
         initialise()
         setupViewModel()
         setupObserver()

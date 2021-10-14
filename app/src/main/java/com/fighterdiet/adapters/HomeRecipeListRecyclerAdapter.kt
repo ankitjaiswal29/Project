@@ -19,6 +19,7 @@ class HomeRecipeListRecyclerAdapter(
     private var recipeList: ArrayList<RecipeListResponseModel.Recipies>,
     private var itemClickListener: (Int, RecipeListResponseModel.Recipies) -> Unit
 ) : RecyclerView.Adapter<HomeRecipeListRecyclerAdapter.MyViewHolder>() {
+    private var isLastUpdated: Boolean = false
     var i = 0
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
@@ -41,29 +42,11 @@ class HomeRecipeListRecyclerAdapter(
                     itemClickListener.invoke(adapterPosition, recipeList[adapterPosition])
                 }
 
-                //Note   Don't remove this code until finalize by client
-
-                /*  else -> {
-                      i++
-                      val handler = Handler()
-                      val run: Runnable = object : Runnable {
-                          override fun run() {
-                              i = 0
-                          }
-                      }
-                      if (i == 1) {
-                          clearSelection()
-                          homeList[adapterPosition].isselected = true
-                          notifyDataSetChanged()
-                          handler.postDelayed(run, 400)
-                          context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
-                      } else if (i == 2) {
-                          context?.startActivity(RecipeInfoActivity.getStartIntent(context!!))
-                      }
-                  }*/
             }
         }
     }
+
+
 
     fun clearSelection() {
         for (i in 0 until recipeList.size) {
@@ -141,6 +124,29 @@ class HomeRecipeListRecyclerAdapter(
         if (recipeList.size != 0) {
             recipeList.removeAt(recipeList.size - 1)
             notifyItemRemoved(recipeList.size)
+        }
+    }
+
+    fun addAll(result: List<RecipeListResponseModel.Recipies>) {
+        if(isLastUpdated){
+            recipeList.clear()
+            isLastUpdated = false
+        }
+
+        recipeList.addAll(result)
+        if(itemCount>0){
+            notifyItemRangeInserted(itemCount, recipeList.size - 1)
+            notifyDataSetChanged()
+        }
+    }
+
+    fun updateAll(result: List<RecipeListResponseModel.Recipies>) {
+        recipeList.clear()
+        isLastUpdated = true
+        recipeList.addAll(result)
+        if(itemCount>0){
+            notifyItemRangeInserted(itemCount, recipeList.size - 1)
+            notifyDataSetChanged()
         }
     }
 }

@@ -29,16 +29,15 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
     VolumeFragment.VolumeFragInterface {
 
     companion object {
-        var volumeCount :Int = 0
-        var mealCount :Int = 0
-        var dietaryCount :Int = 0
         const val TAG = "filterActivity"
 
         fun getStartIntent(context: Context): Intent {
             return Intent(context, FilterActivity::class.java)
         }
     }
-
+    var volumeCount :Int = 0
+    var mealCount :Int = 0
+    var dietaryCount :Int = 0
     private var mealListFragment: MealsFragment? = null
     private var volumeListFragment: VolumeFragment? = null
     private var dietaryInfoFragment: DietryInfoFragment? = null

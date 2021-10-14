@@ -28,6 +28,8 @@ import com.fighterdiet.utils.Status
 import com.fighterdiet.viewModel.HomeViewModel
 
 class HomeFragment : BaseFragment() {
+    private var isPagination: Boolean = false
+    private var isFilterMode: Boolean = false
     private var mSearchedKeyword: String = ""
     private var recipiesModel: RecipeListResponseModel? = null
     private lateinit var viewModel: HomeViewModel
@@ -63,9 +65,17 @@ class HomeFragment : BaseFragment() {
         startFrom: Int,
         endTo: Int
     ){
-        mSearchedKeyword = searchKeys
+        isFilterMode = false
+        isPagination = false
+        mSearchedKeyword = ""
+        if(searchKeys.isNotBlank()){
+            isFilterMode = true
+            mSearchedKeyword = searchKeys
+        }
+
         val selectedDietaryMap = HashMap<String, Int>()
         if(Constants.RecipeFilter.selectedDietaryFilter.isNotEmpty()){
+            isFilterMode = true
             Constants.RecipeFilter.selectedDietaryFilter.forEach {
                 selectedDietaryMap["allergy_id[${it.key}]"] = it.value.allergy_id
             }
@@ -73,6 +83,7 @@ class HomeFragment : BaseFragment() {
 
         val selectedVolumeMap = HashMap<String, Int>()
         if(Constants.RecipeFilter.selectedVolumeFilter.isNotEmpty()){
+            isFilterMode = true
             Constants.RecipeFilter.selectedVolumeFilter.forEach {
                 selectedVolumeMap["volume_id[${it.key}]"] = it.value.volume_id
             }
@@ -80,6 +91,7 @@ class HomeFragment : BaseFragment() {
 
         val selectedMealMap = HashMap<String, Int>()
         if(Constants.RecipeFilter.selectedMealFilter.isNotEmpty()){
+            isFilterMode = true
             Constants.RecipeFilter.selectedMealFilter.forEach {
                 selectedMealMap["meal_id[${it.key}]"] = it.value.meal_id
             }
@@ -96,14 +108,21 @@ class HomeFragment : BaseFragment() {
         viewModel.getRecipeListResource().observe(viewLifecycleOwner, {
             when(it.status){
                 Status.SUCCESS -> {
-//                    recipeList.clear()
-                    recipiesModel = it.data?.data
+                    if(isFilterMode)
+                    {
+                        if (it.data?.data?.result==null)
+                            return@observe
+                        recipeListAdapter.updateAll(it.data.data?.result!!)
+
+                        return@observe
+                    }
+
                     if (it.data?.data?.result.isNullOrEmpty())
                         return@observe
-                    recipeList.addAll(it.data?.data?.result!!)
-                    val currSize = binding.rvHomeRecycler.adapter?.itemCount?:0
-                    if(currSize>0)
-                        recipeListAdapter.notifyItemRangeInserted(currSize, recipeList.size - 1)
+//                    isFilterMode = false
+                    recipiesModel = it.data?.data
+                    recipeListAdapter.addAll(it.data?.data?.result!!)
+
 
                 }
                 Status.LOADING -> {
@@ -155,7 +174,8 @@ class HomeFragment : BaseFragment() {
         binding.rvHomeRecycler.addOnScrollListener(object :
             EndlessScrollViewListener(layoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int) {
-                getRecipes(mSearchedKeyword,totalItemsCount,limit)
+//                if(!isFilterMode)
+                    getRecipes(mSearchedKeyword, totalItemsCount, limit)
             }
 
         })

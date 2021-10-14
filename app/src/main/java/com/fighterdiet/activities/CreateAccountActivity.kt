@@ -105,7 +105,7 @@ class CreateAccountActivity : BaseActivity() {
                         binding.ivVerifiedUsername.setImageResource(R.drawable.ic_green_check3x)
                     }else{
                         binding.ivVerifiedUsername.visibility = View.GONE
-                        binding.ivVerifiedUsername.setImageResource(R.drawable.ic_failure)
+//                        binding.ivVerifiedUsername.setImageResource(R.drawable.ic_failure)
                     }
 
                 }

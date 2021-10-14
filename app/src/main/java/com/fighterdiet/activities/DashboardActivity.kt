@@ -27,6 +27,8 @@ class DashboardActivity : BaseActivity() {
     lateinit var tabIcons4Selected: Array<Int>
     lateinit var tabIcons6UnSelected: Array<Int>
     lateinit var tabIcons6Selected: Array<Int>
+    var offset = 0
+    var limit = 8
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,8 +62,8 @@ class DashboardActivity : BaseActivity() {
                         if(currFragment.isVisible)
                             currFragment.getRecipes(
                                 it.toString(),
-                                0,
-                                8
+                                offset,
+                                limit
                             )
 //                    }
                 }
@@ -76,6 +78,13 @@ class DashboardActivity : BaseActivity() {
         binding.ivCloseSearch.setOnClickListener {
             binding.etSearchRecipe.setText("")
             binding.clSearchRecipe.visibility = View.GONE
+            val currFragment = supportFragmentManager.findFragmentByTag("HOME") as HomeFragment
+            if(currFragment.isVisible)
+                currFragment.getRecipes(
+                    "",
+                    offset,
+                    limit
+                )
         }
     }
 

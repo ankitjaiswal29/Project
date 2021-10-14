@@ -131,12 +131,13 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
     private fun queryForInAppProducts() {
         val skuList: MutableList<String> = ArrayList()
 
-//        skuList.add(Constants.InAppSubsProducts.monthly_test_subscription)
-//        skuList.add(Constants.InAppSubsProducts.yearly_test_subscription)
-        skuList.add(Constants.InAppSubsProducts.monthly_test)
+        skuList.add(Constants.InAppSubsProducts.monthly_test_subscription)
+        skuList.add(Constants.InAppSubsProducts.yearly_test_subscription)
+//        skuList.add(Constants.InAppSubsProducts.monthly_test)
+//        skuList.add(Constants.InAppSubsProducts.monthly_test)
         // for subscription set type BillingClient.SkuType.SUBS and for purchase set type BillingClient.SkuType.INAPP
         val params = SkuDetailsParams.newBuilder()
-        params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP)
+        params.setSkusList(skuList).setType(BillingClient.SkuType.SUBS)
 //        params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP)
 //        progressBar.visibility = View.VISIBLE
         mBillingClient.querySkuDetailsAsync(
