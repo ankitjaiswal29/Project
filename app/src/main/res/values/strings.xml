@@ -86,5 +86,9 @@
     <string name="calories">Calories</string>
     <string name="something_went_wrong">Something went wrong</string>
     <string name="change_password">Change Password</string>
+    <string name="filters_selected_tap_to_clear">Filters selected - Tap to clear</string>
+    <string name="no_data_available">No data available!</string>
+    <string name="privacy_policy"><u>Privacy Policy</u></string>
+    <string name="terms_and_conditions"><u>Terms &amp; Conditions</u></string>
 
 </resources>

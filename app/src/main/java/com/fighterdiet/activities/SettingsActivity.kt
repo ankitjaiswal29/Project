@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -41,18 +42,17 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
 
     override fun setupUI() {
         if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
-            binding.tvLogOut.visibility = View.GONE
-            binding.vLog.visibility = View.GONE
-            binding.tvChangePassword.visibility = View.GONE
-            binding.vChangePassword.visibility = View.GONE
-            binding.tvFaq.visibility = View.GONE
-            binding.vFaq.visibility = View.GONE
-            binding.tvClear.visibility = View.GONE
-            binding.vClear.visibility = View.GONE
-            binding.tvEmail.visibility = View.GONE
-            binding.vEmail.visibility = View.GONE
-            binding.tvCancelSubscription.visibility = View.GONE
-            binding.vCancelSubscription.visibility = View.GONE
+            val inactiveColor = ContextCompat.getColor(this, R.color.gray)
+            binding.tvLogOut.isEnabled = false
+            binding.tvLogOut.setTextColor(inactiveColor)
+            binding.tvChangePassword.isEnabled = false
+            binding.tvChangePassword.setTextColor(inactiveColor)
+            binding.tvClear.isEnabled = false
+            binding.tvClear.setTextColor(inactiveColor)
+            binding.tvEmail.isEnabled = false
+            binding.tvEmail.setTextColor(inactiveColor)
+            binding.tvCancelSubscription.isEnabled = false
+            binding.tvCancelSubscription.setTextColor(inactiveColor)
         }
     }
 
@@ -190,13 +190,13 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
 
                 }
                 R.id.tv_privacy -> {
-                    var quiz = Intent(this, PrivacyAndTermsActivity::class.java)
+                    val quiz = Intent(this, PrivacyAndTermsActivity::class.java)
                     quiz.putExtra("URL", "https://fighterdiet.com/privacy-policy/")
                     quiz.putExtra("PRIVACY", "PRIVACY POLICY")
                     startActivity(quiz)
                 }
                 R.id.tv_terms -> {
-                    var quiz = Intent(this, PrivacyAndTermsActivity::class.java)
+                    val quiz = Intent(this, PrivacyAndTermsActivity::class.java)
                     quiz.putExtra("URL", "https://fighterdiet.com/terms-and-conditions/")
                     quiz.putExtra("PRIVACY", "TERMS AND CONDITIONS")
                     startActivity(quiz)

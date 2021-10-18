@@ -46,6 +46,7 @@ object Constants {
     }
 
     object RecipeFilter{
+        var totalFilterCount :Int = 0
         var selectedDietaryFilter: HashMap<Int, GetDietaryResponseModel.Result> = HashMap()
         var selectedVolumeFilter: HashMap<Int, GetVolumeResponseModel.Result> = HashMap()
         var selectedMealFilter: HashMap<Int, GetMealResponseModel.Result> = HashMap()

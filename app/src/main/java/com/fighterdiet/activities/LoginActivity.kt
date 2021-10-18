@@ -99,14 +99,12 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
                         apiResponse.data
                         if (apiResponse.code==200){
-                            PrefManager.putString(PrefManager.KEY_AUTH_TOKEN,apiResponse.data?.token.toString())
-                            PrefManager.putString(PrefManager.KEY_USER_ID,apiResponse.data?.user_id.toString())
                             //System.out.println("token"+apiResponse.data?.token.toString())
+                            PrefManager.putString(PrefManager.KEY_USER_ID,apiResponse.data?.user_id.toString())
                             PrefManager.putString(PrefManager.KEY_AUTH_TOKEN, apiResponse.data?.token?:"")
                             PrefManager.putBoolean(PrefManager.IS_LOGGED_IN, true)
-                            val intent =DashboardActivity.getStartIntent(this)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                            startActivity(intent)
+                            startActivity(DashboardActivity.getStartIntent(this))
+                            finish()
                         }else{
                             Utils.showSnackBar(binding.root, apiResponse.message)
                         }

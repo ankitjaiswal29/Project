@@ -11,10 +11,14 @@ import com.fighterdiet.data.model.ApiResponse
 import com.fighterdiet.data.model.requestModel.CheckUserNameRequest
 import com.fighterdiet.data.model.requestModel.RegisterRequestModel
 import com.fighterdiet.data.model.responseModel.CheckUserNameResponseModel
+import com.fighterdiet.data.model.responseModel.ErrorResponse
 import com.fighterdiet.data.model.responseModel.RegistrationResponseModel
 import com.fighterdiet.data.repository.RegisterRepository
 import com.fighterdiet.utils.Resource
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class RegisterViewModel(private val registerRepository: RegisterRepository) : ViewModel() {
 
@@ -51,13 +55,21 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
                 //firstName, secondName, email, user_name, password, confirm_password
             )
             viewModelScope.launch {
-                try {
+                 try {
                     resources.postValue(Resource.loading(data = null))
                     val apiResponse = registerRepository.registerApi(registerRequestModel)
                     resources.postValue(Resource.success(data = apiResponse))
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    resources.postValue(Resource.error(null, e.localizedMessage!!))
+                    if(e.message!!.contains("Bad Request", true)){
+                        val gson = Gson()
+                        val type = object : TypeToken<ErrorResponse>() {}.type
+                        val errorResponse: ErrorResponse? = gson.fromJson((e as HttpException).response()?.errorBody()!!.charStream(), type)
+                        resources.postValue(Resource.error(null,
+                            errorResponse?.message?:e.localizedMessage))
+                    }
+                    else
+                        resources.postValue(Resource.error(null, e.localizedMessage))
                 }
             }
         }
@@ -65,7 +77,7 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
     }
 
     fun checkUserNameApi(userName: String) {
-        if (userName.length>2){
+        if (userName.length in 6..12){
             val model = CheckUserNameRequest(user_name = userName)
             viewModelScope.launch {
                 try {

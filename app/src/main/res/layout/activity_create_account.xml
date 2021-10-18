@@ -146,16 +146,17 @@
             android:buttonTint="@color/btnColor"
             app:layout_constraintStart_toEndOf="@id/leftGuideline"
             app:layout_constraintTop_toBottomOf="@id/etConfirmPassword"
-            android:layout_centerInParent="true"
-             />
+            android:layout_centerInParent="true" />
+
         <TextView
             android:id="@+id/tv_privacypolicy_termcondition"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/checkBox3"
             app:layout_constraintTop_toTopOf="@+id/checkBox3"
             app:layout_constraintBottom_toBottomOf="@+id/checkBox3"
             app:layout_constraintEnd_toEndOf="@id/rightGuideline"
+            app:layout_constraintHorizontal_bias="0"
         android:text="@string/str_term_condition"
             android:textColor="@color/white"
             android:layout_marginStart="@dimen/_5sdp"/>

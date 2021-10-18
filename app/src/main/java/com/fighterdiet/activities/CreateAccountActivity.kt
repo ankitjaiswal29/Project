@@ -3,6 +3,8 @@ package com.fighterdiet.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -14,10 +16,7 @@ import com.fighterdiet.R
 import com.fighterdiet.data.api.RetrofitBuilder
 import com.fighterdiet.data.repository.RegisterRepository
 import com.fighterdiet.databinding.ActivityCreateAccountBinding
-import com.fighterdiet.utils.ProgressDialog
-import com.fighterdiet.utils.Status
-import com.fighterdiet.utils.Utils
-import com.fighterdiet.utils.makeLinks
+import com.fighterdiet.utils.*
 import com.fighterdiet.viewModel.RegisterViewModel
 import com.fighterdiet.viewModel.RegisterViewModelProvider
 
@@ -38,11 +37,7 @@ class CreateAccountActivity : BaseActivity() {
     }
 
     override fun setupUI() {
-        binding.etUserId.setOnFocusChangeListener { view, isFocused ->
-            if(!isFocused){
-                viewModel.checkUserNameApi((view as EditText).text.toString())
-            }
-        }
+
     }
 
     override fun setupViewModel() {
@@ -55,15 +50,15 @@ class CreateAccountActivity : BaseActivity() {
 
     override fun setupObserver() {
 
-        viewModel.getResources().observe(this, {
+        viewModel.getResources().observe(this, { it ->
             when (it.status) {
                 Status.LOADING -> {
                     ProgressDialog.showProgressDialog(this)
                 }
                 Status.ERROR -> {
                     ProgressDialog.hideProgressDialog()
-                    it.message?.let {
-                        Utils.showSnackBar(binding.root, it)
+                    it.message?.let { msg ->
+                        Utils.showSnackBar(binding.root, msg)
                     }
                 }
                 Status.SUCCESS -> {
@@ -73,8 +68,11 @@ class CreateAccountActivity : BaseActivity() {
                     if (apiResponse.status) {
 
                         if (apiResponse.code==200){
+                            PrefManager.putString(PrefManager.KEY_USER_ID,apiResponse.data?.user_id.toString())
+                            PrefManager.putString(PrefManager.KEY_AUTH_TOKEN, apiResponse.data?.token?:"")
+                            PrefManager.putBoolean(PrefManager.IS_LOGGED_IN, true)
                             startActivity(IntroAndDecisionActivity.getStartIntent(this))
-
+                            finishAffinity()
                         }else{
                             Utils.showSnackBar(binding.root, apiResponse.message)
                         }
@@ -105,7 +103,6 @@ class CreateAccountActivity : BaseActivity() {
                         binding.ivVerifiedUsername.setImageResource(R.drawable.ic_green_check3x)
                     }else{
                         binding.ivVerifiedUsername.visibility = View.GONE
-//                        binding.ivVerifiedUsername.setImageResource(R.drawable.ic_failure)
                     }
 
                 }
@@ -119,15 +116,28 @@ class CreateAccountActivity : BaseActivity() {
     }
 
     private fun initialise() {
-        binding.etUserId.setOnFocusChangeListener { view, hasFocus ->
-            if (!hasFocus) {
-                if(binding.etUserId.text.toString().isNotEmpty())
-                    viewModel.checkUserNameApi(binding.etUserId.text.toString())
-                else{
+
+        binding.etUserId.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (p0!=null && p0.isNotEmpty()) {
+                    if(p0.length in 6..12)
+                        viewModel.checkUserNameApi(p0.toString())
+                    else
+                        Utils.showSnackBar(binding.root, "User name should be between 6 to 12 characters")
+                }else{
                     binding.ivVerifiedUsername.visibility = View.GONE
                 }
             }
-        }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+        })
 
         binding.tvLogin.setOnClickListener(View.OnClickListener {
             val loginIntent = Intent(this, LoginActivity::class.java)

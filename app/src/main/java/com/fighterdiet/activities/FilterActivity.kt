@@ -35,6 +35,7 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
             return Intent(context, FilterActivity::class.java)
         }
     }
+
     var volumeCount :Int = 0
     var mealCount :Int = 0
     var dietaryCount :Int = 0
@@ -59,8 +60,24 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
         initialise()
     }
 
-    override fun setupUI() {
+    override fun onPause() {
+        if(dietaryCount==0){
+            Constants.RecipeFilter.selectedDietaryFilter.clear()
+        }
 
+        if(mealCount==0){
+            Constants.RecipeFilter.selectedMealFilter.clear()
+        }
+
+        if(volumeCount==0){
+            Constants.RecipeFilter.selectedVolumeFilter.clear()
+        }
+        super.onPause()
+
+    }
+
+    override fun setupUI() {
+        updateTotalFilterCountText()
     }
 
     override fun setupViewModel() {
@@ -75,6 +92,12 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
 
                 Status.SUCCESS -> {
                     dietaryListModel = it.data?.data
+                    Constants.RecipeFilter.selectedDietaryFilter.forEach {
+                        dietaryCount++
+                        dietaryListModel?.let { dietaryResponseModel ->
+                            dietaryResponseModel.result[it.key].isChecked = it.value.isChecked
+                        }
+                    }
                     filterViewModel.getVolumeApi()
                 }
 
@@ -94,6 +117,12 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
 
                 Status.SUCCESS -> {
                     volumeListModel = it.data?.data
+                    Constants.RecipeFilter.selectedVolumeFilter.forEach {
+                        volumeCount++
+                        volumeListModel?.let { volumeResponseModel ->
+                            volumeResponseModel.result[it.key].isChecked = it.value.isChecked
+                        }
+                    }
                     filterViewModel.getMealApi()
                 }
 
@@ -113,9 +142,17 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
 
                 Status.SUCCESS -> {
                     mealListModel = it.data?.data
+
+                    Constants.RecipeFilter.selectedMealFilter.forEach {
+                        mealCount++
+                        mealListModel?.let { mealResponseModel ->
+                            mealResponseModel.result[it.key].isChecked = it.value.isChecked
+                        }
+                    }
+
                     Handler(Looper.getMainLooper()).postDelayed({
                         initialiseViewPager()
-                    },300)
+                    },100)
                 }
 
                 Status.LOADING -> {
@@ -177,6 +214,7 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
 //        binding.viewPager.currentItem = currentFragmentPos
     }
 
+    @Synchronized
     override fun onClick(view: View?) {
         when(view?.id){
 
@@ -186,33 +224,18 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
             }
 
             R.id.tv_cancel ->{
+//                Constants.RecipeFilter.selectedMealFilter.clear()
+//                Constants.RecipeFilter.selectedDietaryFilter.clear()
+//                Constants.RecipeFilter.selectedVolumeFilter.clear()
                 finish()
             }
 
             R.id.tv_clear_all ->{
-//                binding.clBottom.visibility = GONE
-                binding.tvFilterCount.text = ""
-                when(currentScreenType){
-                    0->{
-                        dietaryListModel?.let { list->
-                            dietaryInfoFragment?.clearDietaryData()
-                            dietaryCount = 0
-                        }
-
-                    }
-                    1->{
-                        volumeListModel?.let { list->
-                            volumeListFragment?.clearVolumeData()
-                            volumeCount = 0
-                        }
-                    }
-                    2->{
-                        mealListModel?.let { list->
-                            mealListFragment?.clearMealData()
-                            mealCount = 0
-                        }
-                    }
-                }
+                Constants.RecipeFilter.totalFilterCount = 0
+                Constants.RecipeFilter.selectedMealFilter.clear()
+                Constants.RecipeFilter.selectedDietaryFilter.clear()
+                Constants.RecipeFilter.selectedVolumeFilter.clear()
+                updateTotalFilterCountText()
             }
         }
     }
@@ -224,13 +247,19 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
             this.result[pos].isChecked = isItemAdd
         }
         if(isItemAdd){
+        Constants.RecipeFilter.totalFilterCount++
             mealCount++
         }
         else{
+        Constants.RecipeFilter.totalFilterCount--
             mealCount--
         }
         binding.clBottom.visibility = VISIBLE
-        binding.tvFilterCount.text = "$mealCount filters selected"
+        updateTotalFilterCountText()
+    }
+
+    private fun updateTotalFilterCountText() {
+        binding.tvFilterCount.text = "${Constants.RecipeFilter.totalFilterCount} filters selected"
     }
 
     override fun dietarySelectedInfo(pos: Int, id: Int, isItemAdd: Boolean) {
@@ -238,13 +267,15 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
             this.result[pos].isChecked = isItemAdd
         }
         if(isItemAdd){
+            Constants.RecipeFilter.totalFilterCount++
             dietaryCount++
         }
         else{
+        Constants.RecipeFilter.totalFilterCount--
             dietaryCount--
         }
         binding.clBottom.visibility = VISIBLE
-        binding.tvFilterCount.text = "$dietaryCount filters selected"
+        updateTotalFilterCountText()
     }
 
     override fun volumefragCount(pos: Int, id: Int, isItemAdd: Boolean) {
@@ -252,28 +283,31 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
             this.result[pos].isChecked = isItemAdd
         }
         if(isItemAdd){
+        Constants.RecipeFilter.totalFilterCount++
             volumeCount++
         }
         else{
+        Constants.RecipeFilter.totalFilterCount--
             volumeCount--
         }
         binding.clBottom.visibility = VISIBLE
-        binding.tvFilterCount.text = "$volumeCount filters selected"
+        updateTotalFilterCountText()
     }
 
     override fun initFilterSelectionUi(screenType: Int) {
         currentScreenType = screenType
-        when(screenType){
-            0 -> {
-                binding.tvFilterCount.text = "$dietaryCount filters selected"
-            }
-            1 -> {
-                binding.tvFilterCount.text = "$volumeCount filters selected"
-            }
-            2 -> {
-                binding.tvFilterCount.text = "$mealCount filters selected"
-
-            }
-        }
+//        when(screenType){
+//            0 -> {
+//                binding.tvFilterCount.text = "$tot filters selected"
+//            }
+//            1 -> {
+//                binding.tvFilterCount.text = "$volumeCount filters selected"
+//            }
+//            2 -> {
+//                binding.tvFilterCount.text = "$mealCount filters selected"
+//
+//            }
+//        }
+        //updateTotalFilterCountText()
     }
 }

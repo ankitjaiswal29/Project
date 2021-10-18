@@ -2,6 +2,8 @@ package com.fighterdiet.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -108,17 +110,26 @@ class HomeFragment : BaseFragment() {
         viewModel.getRecipeListResource().observe(viewLifecycleOwner, {
             when(it.status){
                 Status.SUCCESS -> {
+                    binding.tvNoData.visibility = View.GONE
                     if(isFilterMode)
                     {
-                        if (it.data?.data?.result==null)
+                        binding.tvFilterCount.text = "${Constants.RecipeFilter.totalFilterCount} ${ getString(R.string.filters_selected_tap_to_clear) }"
+                        binding.tvFilterCount.visibility = View.VISIBLE
+                        if (it.data?.data?.result == null){
+                            binding.tvNoData.visibility = View.VISIBLE
                             return@observe
+                        }
+
                         recipeListAdapter.updateAll(it.data.data?.result!!)
 
                         return@observe
                     }
 
-                    if (it.data?.data?.result.isNullOrEmpty())
+                    binding.tvFilterCount.visibility = View.GONE
+                    if (it.data?.data?.result.isNullOrEmpty()){
+                        binding.tvNoData.visibility = View.VISIBLE
                         return@observe
+                    }
 //                    isFilterMode = false
                     recipiesModel = it.data?.data
                     recipeListAdapter.addAll(it.data?.data?.result!!)
@@ -141,7 +152,23 @@ class HomeFragment : BaseFragment() {
         } else {
             binding.daysLay.visibility = GONE
         }
+        initClickListeners()
         setUpHomeRecyclerView()
+    }
+
+    @Synchronized
+    private fun initClickListeners() {
+        binding.tvFilterCount.setOnClickListener {
+            Constants.RecipeFilter.selectedVolumeFilter.clear()
+            Constants.RecipeFilter.selectedDietaryFilter.clear()
+            Constants.RecipeFilter.selectedMealFilter.clear()
+            Constants.RecipeFilter.totalFilterCount = 0
+            binding.tvFilterCount.visibility = View.GONE
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                getRecipes("", offset, limit)
+            },100)
+        }
     }
 
     private fun setUpHomeRecyclerView() {

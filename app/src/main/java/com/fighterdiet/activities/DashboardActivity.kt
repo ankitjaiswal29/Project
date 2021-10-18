@@ -16,6 +16,10 @@ import com.fighterdiet.fragments.*
 import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.PrefManager
 import com.google.android.material.tabs.TabLayout
+import android.content.DialogInterface
+
+
+
 
 
 class DashboardActivity : BaseActivity() {
@@ -159,7 +163,10 @@ class DashboardActivity : BaseActivity() {
                         startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
                     }
                     2 -> {
-
+                        if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
+                            startActivity(Intent(this@DashboardActivity, LoginActivity::class.java))
+                            return
+                        }
                         showFragment(TrendingFragment())
                     }
                     3 -> {
@@ -297,10 +304,22 @@ class DashboardActivity : BaseActivity() {
                         startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
                     }
                     2 -> {
-                        //Toast.makeText(applicationContext,"click", Toast.LENGTH_SHORT).show()
-                        binding.toolbar.ivTopImage.visibility = View.GONE;
-                        binding.toolbar.tvTitle.visibility = View.VISIBLE;
-                        binding.toolbar.tvTitle.setText("Trending")
+                        if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
+                            startActivity(Intent(this@DashboardActivity, LoginActivity::class.java))
+                            return
+//                            Builder(context)
+//                                .setTitle("Delete entry")
+//                                .setMessage("Are you sure you want to delete this entry?") // Specifying a listener allows you to take an action before dismissing the dialog.
+//                                // The dialog is automatically dismissed when a dialog button is clicked.
+//                                .setPositiveButton(android.R.string.yes,
+//                                    DialogInterface.OnClickListener { dialog, which ->
+//                                        // Continue with delete operation
+//                                    }) // A null listener allows the button to dismiss the dialog and take no further action.
+//                                .setNegativeButton(android.R.string.no, null)
+//                                .setIcon(android.R.drawable.ic_dialog_alert)
+//                                .show()
+
+                        }
                         showFragment(TrendingFragment())
                     }
                     3 -> {

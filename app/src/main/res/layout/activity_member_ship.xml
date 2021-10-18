@@ -85,7 +85,7 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:paddingTop="@dimen/_5sdp"
-                    android:paddingBottom="@dimen/_3sdp"
+                    android:paddingBottom="@dimen/_5sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -96,7 +96,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_semibold"
                         android:text="BEST OFFER!"
-                        android:textAlignment="center"
+                        android:gravity="center"
                         android:textColor="@color/texttrial"
                         android:textSize="@dimen/_28ssp"
                         android:textStyle="italic"
@@ -127,6 +127,7 @@
                         android:textStyle="italic"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_sign_up_or_dis" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -144,11 +145,46 @@
                     android:text="Sign up for $14.99/month"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/clMemberShipYear" />
 
+                <TextView
+                    android:id="@+id/tv_privacy_policy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:text="@string/privacy_policy"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/view_separator"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="@id/btnMembershipMonth"
+                    app:layout_constraintTop_toBottomOf="@id/btnMembershipMonth" />
+
+                <View
+                    android:id="@+id/view_separator"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:background="@color/white"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_privacy_policy"
+                    app:layout_constraintEnd_toStartOf="@id/tv_term_n_condition"
+                    app:layout_constraintStart_toEndOf="@id/tv_privacy_policy"
+                    app:layout_constraintTop_toTopOf="@id/tv_privacy_policy" />
+
+                <TextView
+                    android:id="@+id/tv_term_n_condition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/terms_and_conditions"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_privacy_policy"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/view_separator"
+                    app:layout_constraintTop_toTopOf="@id/tv_privacy_policy" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -139,7 +139,7 @@
                 android:textColor="@color/exo_black_opacity_70"
                 android:textSize="@dimen/_10ssp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_skip" />
+                app:layout_constraintTop_toBottomOf="@id/btnLogin" />
 
 
             <TextView
@@ -157,13 +157,13 @@
                 android:text="@string/str_create_an_account"
                 android:textSize="@dimen/_10ssp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_skip" />
+                app:layout_constraintTop_toBottomOf="@id/btnLogin" />
 
             <TextView
                 android:id="@+id/tv_skip"
                 android:layout_width="0dp"
                 android:layout_height="31dp"
-                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:text="@string/str_skip"
                 android:gravity="center"
                 android:textColor="@color/white"
@@ -171,7 +171,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/tv_create_account"
                 app:layout_constraintStart_toEndOf="@+id/tv_forgot_password"
-                app:layout_constraintTop_toBottomOf="@id/btnLogin" />
+                app:layout_constraintTop_toBottomOf="@id/tv_forgot_password" />
 
             <include
                 android:id="@+id/layoutIndicator"

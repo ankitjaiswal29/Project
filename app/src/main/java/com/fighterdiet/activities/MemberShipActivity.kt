@@ -38,13 +38,15 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_member_ship)
         setupViewModel()
+        setupObserver()
+        setupUI()
         skuDetailsList = mutableListOf()
         initialize()
         setupInAppBilling()
+
     }
 
     override fun setupUI() {
-
     }
 
     override fun setupViewModel() {
@@ -67,6 +69,8 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
     private fun initialize() {
         binding.clMemberShipYear.setOnClickListener(this)
         binding.btnMembershipMonth.setOnClickListener(this)
+        binding.tvPrivacyPolicy.setOnClickListener(this)
+        binding.tvTermNCondition.setOnClickListener(this)
     }
 
     companion object {
@@ -92,6 +96,19 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
                         launchPayment(skuDetailsList[0])
 
 //                    startActivity(RecipeInfoActivity.getStartIntent(this))
+                }
+                binding.tvPrivacyPolicy.id -> {
+                    val quiz = Intent(this, PrivacyAndTermsActivity::class.java)
+                    quiz.putExtra("URL", "https://fighterdiet.com/privacy-policy/")
+                    quiz.putExtra("PRIVACY", "PRIVACY POLICY")
+                    startActivity(quiz)
+                }
+
+                binding.tvTermNCondition.id -> {
+                    val quiz = Intent(this, PrivacyAndTermsActivity::class.java)
+                    quiz.putExtra("URL", "https://fighterdiet.com/terms-and-conditions/")
+                    quiz.putExtra("PRIVACY", "TERMS AND CONDITIONS")
+                    startActivity(quiz)
                 }
             }
         }
