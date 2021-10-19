@@ -36,9 +36,13 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
         }
     }
 
+    private var isNewChanges: Boolean = false
     var volumeCount :Int = 0
     var mealCount :Int = 0
     var dietaryCount :Int = 0
+    var newChangesInDietarySelection = false
+    var newChangesInVolumeSelection = false
+    var newChangesInMealSelection = false
     private var mealListFragment: MealsFragment? = null
     private var volumeListFragment: VolumeFragment? = null
     private var dietaryInfoFragment: DietryInfoFragment? = null
@@ -54,30 +58,19 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_filter)
+        setupUI()
         setupViewModel()
         setupObserver()
-        setupUI()
         initialise()
     }
 
-    override fun onPause() {
-        if(dietaryCount==0){
-            Constants.RecipeFilter.selectedDietaryFilter.clear()
-        }
-
-        if(mealCount==0){
-            Constants.RecipeFilter.selectedMealFilter.clear()
-        }
-
-        if(volumeCount==0){
-            Constants.RecipeFilter.selectedVolumeFilter.clear()
-        }
-        super.onPause()
-
+    override fun setupUI() {
+        updateIsFilterAppliedUI()
     }
 
-    override fun setupUI() {
-        updateTotalFilterCountText()
+    private fun updateIsFilterAppliedUI() {
+        binding.tvFilterCount.text = "${Constants.RecipeFilter.totalFilterCount} ${getString(R.string.filters_selected)}"
+
     }
 
     override fun setupViewModel() {
@@ -169,7 +162,6 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
 
     private fun initialise() {
         tabTitles = arrayOf("Dietary Info","Volume","Meals")
-
         binding.tvApply.setOnClickListener(this)
         binding.tvCancel.setOnClickListener(this)
         binding.tvClearAll.setOnClickListener(this)
@@ -186,21 +178,22 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
         binding.tab.addTab(binding.tab.newTab().setText("Volume"));
         binding.tab.addTab(binding.tab.newTab().setText("Meals"));
 
-
         dietaryListModel?.let {
-            dietaryInfoFragment = DietryInfoFragment.newInstance(it)
+            dietaryInfoFragment = DietryInfoFragment.newInstance(it, Constants.RecipeFilter.isDietaryListCleared)
             dietaryInfoFragment?.let { fragment ->
                 pagerAdapter.addFragment(fragment, "Dietary Info")
             }
         }
+
         volumeListModel?.let {
-            volumeListFragment = VolumeFragment.newInstance(it)
+            volumeListFragment = VolumeFragment.newInstance(it, Constants.RecipeFilter.isVolumeListCleared)
             volumeListFragment?.let { fragment ->
                     pagerAdapter.addFragment(fragment, "Volume")
                 }
         }
+
         mealListModel?.let {
-            mealListFragment = MealsFragment.newInstance(it)
+            mealListFragment = MealsFragment.newInstance(it, Constants.RecipeFilter.isMealListCleared)
             mealListFragment?.let { fragment ->
                 pagerAdapter.addFragment(fragment, "Meals")
             }
@@ -211,7 +204,6 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
             tab.text = tabTitles[position]
             binding.viewPager.setCurrentItem(tab.position, true)
         }.attach()
-//        binding.viewPager.currentItem = currentFragmentPos
     }
 
     @Synchronized
@@ -219,47 +211,59 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
         when(view?.id){
 
             R.id.tv_apply ->{
-//                val result = Intent()
+                Constants.RecipeFilter.isFilterApplied = true
                 finish()
             }
 
             R.id.tv_cancel ->{
-//                Constants.RecipeFilter.selectedMealFilter.clear()
-//                Constants.RecipeFilter.selectedDietaryFilter.clear()
-//                Constants.RecipeFilter.selectedVolumeFilter.clear()
+                Constants.RecipeFilter.isFilterApplied = false
                 finish()
             }
 
             R.id.tv_clear_all ->{
+                mealCount = 0
+                volumeCount = 0
+                volumeCount = 0
                 Constants.RecipeFilter.totalFilterCount = 0
                 Constants.RecipeFilter.selectedMealFilter.clear()
                 Constants.RecipeFilter.selectedDietaryFilter.clear()
                 Constants.RecipeFilter.selectedVolumeFilter.clear()
                 updateTotalFilterCountText()
+                when(currentScreenType){
+                    0-> {
+                        dietaryInfoFragment?.clearDietaryData()
+                        Constants.RecipeFilter.isDietaryListCleared = true
+                    }
+
+                    1-> {
+                        volumeListFragment?.clearVolumeData()
+                        Constants.RecipeFilter.isVolumeListCleared = true
+                    }
+
+                    2-> {
+                        mealListFragment?.clearMealData()
+                        Constants.RecipeFilter.isMealListCleared = true
+                    }
+                }
+                isNewChanges = false
             }
         }
     }
 
 
     override fun mealsInfoCount(pos: Int, id: Int, isItemAdd: Boolean) {
-//        Utils.showToast(this,count.toString())
         mealListModel?.apply {
             this.result[pos].isChecked = isItemAdd
         }
         if(isItemAdd){
-        Constants.RecipeFilter.totalFilterCount++
             mealCount++
         }
         else{
-        Constants.RecipeFilter.totalFilterCount--
             mealCount--
         }
-        binding.clBottom.visibility = VISIBLE
         updateTotalFilterCountText()
-    }
-
-    private fun updateTotalFilterCountText() {
-        binding.tvFilterCount.text = "${Constants.RecipeFilter.totalFilterCount} filters selected"
+        binding.clBottom.visibility = VISIBLE
+        newChangesInMealSelection = true
     }
 
     override fun dietarySelectedInfo(pos: Int, id: Int, isItemAdd: Boolean) {
@@ -267,15 +271,14 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
             this.result[pos].isChecked = isItemAdd
         }
         if(isItemAdd){
-            Constants.RecipeFilter.totalFilterCount++
             dietaryCount++
         }
         else{
-        Constants.RecipeFilter.totalFilterCount--
             dietaryCount--
         }
-        binding.clBottom.visibility = VISIBLE
         updateTotalFilterCountText()
+        binding.clBottom.visibility = VISIBLE
+        newChangesInDietarySelection = true
     }
 
     override fun volumefragCount(pos: Int, id: Int, isItemAdd: Boolean) {
@@ -283,31 +286,83 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
             this.result[pos].isChecked = isItemAdd
         }
         if(isItemAdd){
-        Constants.RecipeFilter.totalFilterCount++
             volumeCount++
         }
         else{
-        Constants.RecipeFilter.totalFilterCount--
             volumeCount--
         }
-        binding.clBottom.visibility = VISIBLE
         updateTotalFilterCountText()
+        binding.clBottom.visibility = VISIBLE
+        newChangesInVolumeSelection = true
     }
 
-    override fun initFilterSelectionUi(screenType: Int) {
-        currentScreenType = screenType
-//        when(screenType){
-//            0 -> {
-//                binding.tvFilterCount.text = "$tot filters selected"
-//            }
-//            1 -> {
-//                binding.tvFilterCount.text = "$volumeCount filters selected"
-//            }
-//            2 -> {
-//                binding.tvFilterCount.text = "$mealCount filters selected"
-//
-//            }
-//        }
-        //updateTotalFilterCountText()
+    private fun updateTotalFilterCountText() {
+        binding.tvFilterCount.text = "${dietaryCount+volumeCount+mealCount} ${getString(R.string.filters_selected)}"
     }
+
+    override fun getCurrFragmentType(screenType: Int) {
+        currentScreenType = screenType
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        if(!Constants.RecipeFilter.isFilterApplied){
+            return
+        }
+
+        if(dietaryCount==0){
+            Constants.RecipeFilter.selectedDietaryFilter.clear()
+        }else{
+            if(newChangesInDietarySelection)
+                Constants.RecipeFilter.isDietaryListCleared = false
+        }
+
+        if(mealCount==0){
+            Constants.RecipeFilter.selectedMealFilter.clear()
+        }else{
+            if(newChangesInMealSelection)
+                Constants.RecipeFilter.isMealListCleared = false
+        }
+
+        if(volumeCount==0){
+            Constants.RecipeFilter.selectedVolumeFilter.clear()
+        }else{
+            if(newChangesInVolumeSelection)
+                Constants.RecipeFilter.isVolumeListCleared = false
+        }
+
+
+        val totalSelection = dietaryCount+mealCount+volumeCount
+        if(Constants.RecipeFilter.totalFilterCount != totalSelection){
+            Constants.RecipeFilter.totalFilterCount = totalSelection
+        }
+
+        dietaryListModel?.let { model ->
+            model.result.forEachIndexed { index, result ->
+                if(result.isChecked){
+                    Constants.RecipeFilter.selectedDietaryFilter[index] = result
+                }
+            }
+        }
+
+        volumeListModel?.let { model ->
+            model.result.forEachIndexed { index, result ->
+                if(result.isChecked){
+                    Constants.RecipeFilter.selectedVolumeFilter[index] = result
+                }
+            }
+        }
+
+        mealListModel?.let { model ->
+            model.result.forEachIndexed { index, result ->
+                if(result.isChecked){
+                    Constants.RecipeFilter.selectedMealFilter[index] = result
+                }
+            }
+        }
+
+    }
+
+
 }

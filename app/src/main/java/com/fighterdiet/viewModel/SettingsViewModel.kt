@@ -27,9 +27,9 @@ class SettingsViewModel(private val settingsRepository: SettingsRepository):View
     }
     private val errorMsg = MutableLiveData<String>()
 
-    fun getLogOutApi(view: View){
+    fun getLogOutApi(){
         device_token=PrefManager.getString(PrefManager.KEY_AUTH_TOKEN).toString()
-        System.out.println("tok"+device_token)
+//        System.out.println("tok"+device_token)
         if (isValid()){
             val logoutRequestModel= LogoutRequestModel(device_token)
 

@@ -90,5 +90,6 @@
     <string name="no_data_available">No data available!</string>
     <string name="privacy_policy"><u>Privacy Policy</u></string>
     <string name="terms_and_conditions"><u>Terms &amp; Conditions</u></string>
+    <string name="filters_selected">filters selected</string>
 
 </resources>

@@ -14,20 +14,16 @@ import com.fighterdiet.databinding.FragmentMealsBinding
 import com.fighterdiet.utils.Constants
 
 
-class MealsFragment(val getMealResponseModel: GetMealResponseModel) : Fragment(), MealsAdapter.MealsCountListener {
+class MealsFragment(val getMealResponseModel: GetMealResponseModel, val isSelectionCleared: Boolean) : Fragment(), MealsAdapter.MealsCountListener {
     private var list: ArrayList<GetMealResponseModel.Result>  = ArrayList()
     lateinit var binding: FragmentMealsBinding
     private lateinit var mealsAdapter : MealsAdapter
     private lateinit var mealsListener: MealsInfoInterface
 
     companion object{
-        fun newInstance(getMealResponseModel: GetMealResponseModel): MealsFragment{
-            return MealsFragment(getMealResponseModel)
+        fun newInstance(getMealResponseModel: GetMealResponseModel, isSelectionCleared: Boolean = false): MealsFragment{
+            return MealsFragment(getMealResponseModel, isSelectionCleared)
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -46,9 +42,18 @@ class MealsFragment(val getMealResponseModel: GetMealResponseModel) : Fragment()
         setUpRecyclerView()
     }
 
+    private fun modifyListWhenSelectionCleared(list: ArrayList<GetMealResponseModel.Result>) {
+        if(isSelectionCleared){
+            list.forEach {
+                it.isChecked = false
+            }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
-        mealsListener.initFilterSelectionUi(2)
+        modifyListWhenSelectionCleared(list)
+        mealsListener.getCurrFragmentType(2)
     }
 
     private fun setUpRecyclerView() {
@@ -66,13 +71,13 @@ class MealsFragment(val getMealResponseModel: GetMealResponseModel) : Fragment()
     }
 
     override fun mealsInfoAdapterListener(position: Int, resultModel: GetMealResponseModel.Result) {
-        Constants.RecipeFilter.selectedMealFilter[position] = resultModel
+//        Constants.RecipeFilter.selectedMealFilter[position] = resultModel
         mealsListener.mealsInfoCount(position, resultModel.meal_id, resultModel.isChecked)
     }
 
     interface MealsInfoInterface{
         fun mealsInfoCount(pos: Int, id:Int, isItemAdd:Boolean)
-        fun initFilterSelectionUi(screenType: Int)
+        fun getCurrFragmentType(screenType: Int)
     }
 
 }

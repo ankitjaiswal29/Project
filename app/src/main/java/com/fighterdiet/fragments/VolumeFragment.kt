@@ -1,8 +1,6 @@
 package com.fighterdiet.fragments
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,20 +13,17 @@ import com.fighterdiet.data.model.responseModel.GetVolumeResponseModel
 import com.fighterdiet.databinding.FragmentVolumeBinding
 import com.fighterdiet.utils.Constants
 
-class VolumeFragment(val getVolumeResponseModel: GetVolumeResponseModel) : Fragment(), VolumeAdapter.VolumeCountListener {
+class VolumeFragment(val getVolumeResponseModel: GetVolumeResponseModel, val isSelectionCleared: Boolean) : Fragment(), VolumeAdapter.VolumeCountListener {
     lateinit var binding: FragmentVolumeBinding
     private lateinit var volumeAdapter: VolumeAdapter
     var list: ArrayList<GetVolumeResponseModel.Result> = ArrayList()
     private lateinit var volumeFragListener: VolumeFragInterface
 
     companion object{
-        fun newInstance(getVolumeResponseModel: GetVolumeResponseModel): VolumeFragment{
-            return VolumeFragment(getVolumeResponseModel)
+        fun newInstance(getVolumeResponseModel: GetVolumeResponseModel, isSelectionCleared: Boolean = false): VolumeFragment{
+            return VolumeFragment(getVolumeResponseModel, isSelectionCleared)
         }
-    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -47,9 +42,18 @@ class VolumeFragment(val getVolumeResponseModel: GetVolumeResponseModel) : Fragm
         setUpRecyclerView()
     }
 
+    private fun modifyListWhenSelectionCleared(list: ArrayList<GetVolumeResponseModel.Result>) {
+        if(isSelectionCleared){
+            list.forEach {
+                it.isChecked = false
+            }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
-        volumeFragListener.initFilterSelectionUi(1)
+        modifyListWhenSelectionCleared(list)
+        volumeFragListener.getCurrFragmentType(1)
     }
 
     private fun setUpRecyclerView() {
@@ -67,13 +71,13 @@ class VolumeFragment(val getVolumeResponseModel: GetVolumeResponseModel) : Fragm
 
 
     override fun volumeAdapterListener(position: Int, resultModel: GetVolumeResponseModel.Result) {
-        Constants.RecipeFilter.selectedVolumeFilter[position] = resultModel
+//        Constants.RecipeFilter.selectedVolumeFilter[position] = resultModel
         volumeFragListener.volumefragCount(position, resultModel.volume_id, resultModel.isChecked)
     }
 
     interface VolumeFragInterface{
         fun volumefragCount(pos: Int, id:Int, isItemAdd:Boolean)
-        fun initFilterSelectionUi(screenType: Int)
+        fun getCurrFragmentType(screenType: Int)
     }
 
 }

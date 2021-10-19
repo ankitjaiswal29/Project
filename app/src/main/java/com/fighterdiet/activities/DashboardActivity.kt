@@ -17,9 +17,7 @@ import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.PrefManager
 import com.google.android.material.tabs.TabLayout
 import android.content.DialogInterface
-
-
-
+import androidx.appcompat.app.AlertDialog
 
 
 class DashboardActivity : BaseActivity() {
@@ -171,7 +169,7 @@ class DashboardActivity : BaseActivity() {
                     }
                     3 -> {
                         if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
-                            startActivity(Intent(this@DashboardActivity, LoginActivity::class.java))
+                            loginAlertDialog()
                             return
                         }
                         showFragment(FavouriteFragment())
@@ -305,7 +303,7 @@ class DashboardActivity : BaseActivity() {
                     }
                     2 -> {
                         if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
-                            startActivity(Intent(this@DashboardActivity, LoginActivity::class.java))
+                            loginAlertDialog()
                             return
 //                            Builder(context)
 //                                .setTitle("Delete entry")
@@ -324,7 +322,7 @@ class DashboardActivity : BaseActivity() {
                     }
                     3 -> {
                         if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
-                            startActivity(Intent(this@DashboardActivity, LoginActivity::class.java))
+                            loginAlertDialog()
                             return
                         }
                         binding.toolbar.ivTopImage.visibility = View.GONE;
@@ -362,7 +360,7 @@ class DashboardActivity : BaseActivity() {
 
                     3 -> {
                         if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
-                            startActivity(Intent(this@DashboardActivity, LoginActivity::class.java))
+                            loginAlertDialog()
                             return
                         }
                     }
@@ -405,6 +403,22 @@ class DashboardActivity : BaseActivity() {
             binding.toolbar.ivTopImage.visibility = View.VISIBLE;
         else
             binding.toolbar.ivTopImage.visibility = View.GONE;*/
+    }
+
+    private fun loginAlertDialog(){
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("You need to login to access this feature!")
+        builder.setPositiveButton("Proceed") { dialog, which ->
+            dialog.dismiss()
+            startActivity(Intent(this@DashboardActivity, LoginActivity::class.java))
+            finishAffinity()
+            return@setPositiveButton
+        }
+
+        builder.setNegativeButton("Cancel") { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.show()
     }
 
 }

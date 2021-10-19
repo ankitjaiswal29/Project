@@ -32,6 +32,7 @@ import com.fighterdiet.viewModel.HomeViewModel
 class HomeFragment : BaseFragment() {
     private var isPagination: Boolean = false
     private var isFilterMode: Boolean = false
+    private var isSearchMode: Boolean = false
     private var mSearchedKeyword: String = ""
     private var recipiesModel: RecipeListResponseModel? = null
     private lateinit var viewModel: HomeViewModel
@@ -71,7 +72,7 @@ class HomeFragment : BaseFragment() {
         isPagination = false
         mSearchedKeyword = ""
         if(searchKeys.isNotBlank()){
-            isFilterMode = true
+            isSearchMode = true
             mSearchedKeyword = searchKeys
         }
 
@@ -111,10 +112,13 @@ class HomeFragment : BaseFragment() {
             when(it.status){
                 Status.SUCCESS -> {
                     binding.tvNoData.visibility = View.GONE
-                    if(isFilterMode)
+                    if(isFilterMode||isSearchMode)
                     {
-                        binding.tvFilterCount.text = "${Constants.RecipeFilter.totalFilterCount} ${ getString(R.string.filters_selected_tap_to_clear) }"
-                        binding.tvFilterCount.visibility = View.VISIBLE
+                        if(!isSearchMode){
+                            binding.tvFilterCount.text = "${Constants.RecipeFilter.totalFilterCount} ${ getString(R.string.filters_selected_tap_to_clear) }"
+                            binding.tvFilterCount.visibility = View.VISIBLE
+                        }
+
                         if (it.data?.data?.result == null){
                             binding.tvNoData.visibility = View.VISIBLE
                             return@observe
@@ -163,8 +167,8 @@ class HomeFragment : BaseFragment() {
             Constants.RecipeFilter.selectedDietaryFilter.clear()
             Constants.RecipeFilter.selectedMealFilter.clear()
             Constants.RecipeFilter.totalFilterCount = 0
+            Constants.RecipeFilter.isFilterApplied = false
             binding.tvFilterCount.visibility = View.GONE
-
             Handler(Looper.getMainLooper()).postDelayed({
                 getRecipes("", offset, limit)
             },100)

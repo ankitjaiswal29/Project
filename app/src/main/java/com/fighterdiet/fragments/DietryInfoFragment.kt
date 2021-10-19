@@ -1,8 +1,6 @@
 package com.fighterdiet.fragments
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +12,7 @@ import com.fighterdiet.data.model.responseModel.GetDietaryResponseModel
 import com.fighterdiet.databinding.FragmentDietryInfoBinding
 import com.fighterdiet.utils.Constants
 
-class DietryInfoFragment(val getDietaryResponseModel: GetDietaryResponseModel) : Fragment(),
+class DietryInfoFragment(val getDietaryResponseModel: GetDietaryResponseModel, val isSelectionCleared: Boolean) : Fragment(),
     DietryInfoAdapter.DietaryCountListener {
     lateinit var binding: FragmentDietryInfoBinding
     private lateinit var dietryInfoAdapter : DietryInfoAdapter
@@ -22,13 +20,9 @@ class DietryInfoFragment(val getDietaryResponseModel: GetDietaryResponseModel) :
     var list:ArrayList<GetDietaryResponseModel.Result> = ArrayList()
 
     companion object{
-        fun newInstance(getDietaryResponseModel: GetDietaryResponseModel): DietryInfoFragment{
-            return DietryInfoFragment(getDietaryResponseModel)
+        fun newInstance(getDietaryResponseModel: GetDietaryResponseModel, isSelectionCleared: Boolean = false): DietryInfoFragment{
+            return DietryInfoFragment(getDietaryResponseModel, isSelectionCleared)
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(
@@ -47,9 +41,18 @@ class DietryInfoFragment(val getDietaryResponseModel: GetDietaryResponseModel) :
         setUpRecyclerView()
     }
 
+    private fun modifyListWhenSelectionCleared(list: java.util.ArrayList<GetDietaryResponseModel.Result>) {
+        if(isSelectionCleared){
+            list.forEach {
+                it.isChecked = false
+            }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
-        dietaryListener.initFilterSelectionUi(0)
+        modifyListWhenSelectionCleared(list)
+        dietaryListener.getCurrFragmentType(0)
     }
 
     private fun setUpRecyclerView() {
@@ -69,13 +72,14 @@ class DietryInfoFragment(val getDietaryResponseModel: GetDietaryResponseModel) :
         position: Int,
         resultModel: GetDietaryResponseModel.Result
     ) {
-        Constants.RecipeFilter.selectedDietaryFilter[position] = resultModel
+//        if(Constants.RecipeFilter.isFilterApplied)
+//            Constants.RecipeFilter.selectedDietaryFilter[position] = resultModel
         dietaryListener.dietarySelectedInfo(position, resultModel.allergy_id, resultModel.isChecked)
     }
 
     interface DietaryInfoInterface{
         fun dietarySelectedInfo(pos: Int, id:Int, isItemAdd:Boolean)
-        fun initFilterSelectionUi(screenType: Int)
+        fun getCurrFragmentType(screenType: Int)
     }
 
 }

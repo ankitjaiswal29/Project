@@ -34,7 +34,7 @@ class VolumeAdapter(
             else
                 R.drawable.dietry_icon_selected)
 
-        holder.binding?.ivSelection?.setOnClickListener {
+        holder.binding?.root?.setOnClickListener {
             list[position].isChecked = !list[position].isChecked
             notifyItemChanged(position)
             volumeListener?.volumeAdapterListener(position, list[position])

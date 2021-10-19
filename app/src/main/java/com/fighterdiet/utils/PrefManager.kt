@@ -6,11 +6,12 @@ import com.fighterdiet.app.MyApplication
 
 object PrefManager {
 
-    private val KEY_USER_MODEL: String?="MODEL"
-    private var sharedPreferences: SharedPreferences = MyApplication.application.applicationContext.getSharedPreferences(
-        "",
-        Context.MODE_PRIVATE
-    )
+    private val KEY_USER_MODEL: String? = "MODEL"
+    private var sharedPreferences: SharedPreferences =
+        MyApplication.application.applicationContext.getSharedPreferences(
+            "",
+            Context.MODE_PRIVATE
+        )
 
     // Keys
     const val KEY_AUTH_TOKEN = "Auth_Token"
@@ -24,7 +25,7 @@ object PrefManager {
     }
 
     fun getInt(key: String): Int? {
-        return sharedPreferences.getInt(key,0)
+        return sharedPreferences.getInt(key, 0)
     }
 
     fun putString(key: String, value: String?) {
@@ -39,31 +40,30 @@ object PrefManager {
         value?.let { sharedPreferences.edit().putBoolean(key, it).apply() }
     }
 
- /*   fun saveUserModel(userModel: User?) {
-        val gson = Gson()
-        val editor = sharedPreferences.edit()
-        editor.putString(KEY_USER_MODEL, gson.toJson(userModel))
-        editor.apply()
-    }
+    /*   fun saveUserModel(userModel: User?) {
+           val gson = Gson()
+           val editor = sharedPreferences.edit()
+           editor.putString(KEY_USER_MODEL, gson.toJson(userModel))
+           editor.apply()
+       }
 
-    fun getUserModel(): User? {
-        val gson: Gson = Gson()
-        val strUserModel = sharedPreferences.getString(KEY_USER_MODEL, "")
-        if (strUserModel.isNullOrEmpty())
-            return null
-        else
-            return gson.fromJson(strUserModel, User::class.java)
-    }*/
+       fun getUserModel(): User? {
+           val gson: Gson = Gson()
+           val strUserModel = sharedPreferences.getString(KEY_USER_MODEL, "")
+           if (strUserModel.isNullOrEmpty())
+               return null
+           else
+               return gson.fromJson(strUserModel, User::class.java)
+       }*/
 
     fun getBoolean(key: String): Boolean {
         return sharedPreferences.getBoolean(key, false)
     }
 
-  fun clearPref(){
+    fun clearPref() {
         val editor = sharedPreferences.edit()
-       // editor.remove(IS_LOGIN)
-      editor.clear()
-       editor.apply()
+        editor.clear()
+        editor.apply()
     }
 
 }

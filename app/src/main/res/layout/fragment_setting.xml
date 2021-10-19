@@ -73,7 +73,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:text="@string/str_log_out"
-                        android:onClick="@{logoutViewModel.getLogOutApi}"
                         android:textColor="@color/black"
                         app:drawableEndCompat="@drawable/ic_forword"
                         app:layout_constraintTop_toBottomOf="@+id/tv_help_ful" />

@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -27,17 +28,11 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
     private lateinit var viewModel:SettingsViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /*getWindow().setFlags(
-            WindowManager.LayoutParams.FLAG_SECURE,
-            WindowManager.LayoutParams.FLAG_SECURE
-        )*/
         binding = DataBindingUtil.setContentView(this, R.layout.fragment_setting)
-
         initialise()
         setupViewModel()
         setupObserver()
         setupUI()
-
     }
 
     override fun setupUI() {
@@ -86,8 +81,8 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
                             PrefManager.clearPref()
                             PrefManager.putBoolean(PrefManager.IS_LOGGED_IN, false)
                             val loginIntent = Intent(this, LoginActivity::class.java)
-                            loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                             startActivity(loginIntent)
+                            finishAffinity()
                         }else{
                             Utils.showSnackBar(binding.root, apiResponse.message)
                         }
@@ -104,20 +99,6 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
             Utils.showSnackBar(binding.root, it)
         })
     }
-
-    /* override fun onCreateView(
-         inflater: LayoutInflater, container: ViewGroup?,
-         savedInstanceState: Bundle?
-     ): View? {
-         // Inflate the layout for this fragment
-         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false)
-         return binding.root
-     }
-
-     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-         super.onViewCreated(view, savedInstanceState)
-         initialise()
-     }*/
 
     private fun initialise() {
         binding.tvLogOut.setOnClickListener(this)
@@ -140,23 +121,21 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-
-   /* companion object {
-
-        fun getInstance(context: Context): Fragment {
-            val bundle = Bundle()
-            val fragment = SettingFragment()
-            return fragment
-        }
-    }*/
-
     override fun onClick(view: View?) {
         view?.let {
             when (view.id) {
                 R.id.tv_log_out -> {
-                   /* val loginIntent = Intent(this, LoginActivity::class.java)
-                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                    startActivity(loginIntent)*/
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("Do you really want to logout?")
+                    builder.setPositiveButton("Logout") { dialog, which ->
+                        viewModel.getLogOutApi()
+                        dialog.dismiss()
+                    }
+
+                    builder.setNegativeButton("Cancel") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    builder.show()
                 }
 
                 R.id.tv_about_paulin -> {
@@ -205,6 +184,20 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
                 R.id.iv_back ->{
                     finish()
                 }
+                R.id.tv_clear ->{
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("Do you really want to clear cache?")
+                    builder.setPositiveButton("Yes") { dialog, which ->
+                        viewModel.getLogOutApi()
+                        dialog.dismiss()
+                    }
+
+                    builder.setNegativeButton("No") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    builder.show()
+                }
+                else -> {}
             }
         }
     }
