@@ -26,7 +26,6 @@ import com.fighterdiet.viewModel.FaqViewModel
 import com.fighterdiet.viewModel.FaqViewModelProvider
 import com.fighterdiet.viewModel.LoginViewModel
 import com.fighterdiet.viewModel.LoginViewModelProvider
-import kotlinx.android.synthetic.main.activity_faq.*
 import java.util.*
 
 class FaqActivity : BaseActivity(), View.OnClickListener {
@@ -46,7 +45,7 @@ class FaqActivity : BaseActivity(), View.OnClickListener {
         setupRecyclerView()
         setupViewModel()
         setupObserver()
-        et_search.addTextChangedListener {
+        binding.etSearch.addTextChangedListener {
             searchBasedOnFAQ(it.toString())
         }
     }

@@ -27,7 +27,6 @@ import com.fighterdiet.viewModel.LoginViewModel
 import com.fighterdiet.viewModel.LoginViewModelProvider
 import com.fighterdiet.viewModel.RegisterViewModel
 import com.fighterdiet.viewModel.RegisterViewModelProvider
-import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : BaseActivity(), View.OnClickListener {

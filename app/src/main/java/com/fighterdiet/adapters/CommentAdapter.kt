@@ -7,16 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
+import androidx.annotation.NonNull
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.R
 import com.fighterdiet.data.model.responseModel.CommentListResponseModel
 import com.fighterdiet.databinding.ItemCommentsBinding
+import com.fighterdiet.databinding.ItemDeleteSpamBinding
+import com.fighterdiet.databinding.ItemDirectionsLayoutBinding
 import com.fighterdiet.interfaces.RecyclerItemClickListener
-import com.fighterdiet.interfaces.RecyclerViewItemClickListener
 import com.fighterdiet.utils.Constants
-import kotlinx.android.synthetic.main.item_delete_spam.view.*
 
 
 class CommentAdapter(
@@ -24,10 +25,9 @@ class CommentAdapter(
     private var itemClickListener: RecyclerItemClickListener
 ) : RecyclerView.Adapter<CommentAdapter.MyViewHolder>() {
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-        val binding: ItemCommentsBinding? = DataBindingUtil.bind(itemView)
+    inner class MyViewHolder(val bindin: ItemCommentsBinding) : RecyclerView.ViewHolder(bindin.root), View.OnClickListener {
         init {
-            binding?.ivMore?.setOnClickListener(this)
+            bindin.ivMore.setOnClickListener(this)
         }
 
         override fun onClick(viewType: View?) {
@@ -44,13 +44,15 @@ class CommentAdapter(
 
         private fun showPopUpCommunities(viewType: View) {
             var mPopupWindowFilter: PopupWindow? = null
-            val customView: View = LayoutInflater.from(viewType.context).inflate(
-                R.layout.item_delete_spam,
-                null
-            )
+//            val customView: View = LayoutInflater.from(viewType.context).inflate(
+//                R.layout.item_delete_spam,
+//                null
+//            )
+            val bindDialog: ItemDeleteSpamBinding =
+                DataBindingUtil.inflate(LayoutInflater.from(viewType.context), R.layout.item_delete_spam, null, false)
 
             mPopupWindowFilter = PopupWindow(
-                customView,
+                bindDialog.root,
                 ConstraintLayout.LayoutParams.WRAP_CONTENT,
                 ConstraintLayout.LayoutParams.WRAP_CONTENT
             )
@@ -66,12 +68,12 @@ class CommentAdapter(
 
             mPopupWindowFilter.showAsDropDown(viewType)
 
-            customView.tv_delete.setOnClickListener {
+            bindDialog.tvDelete.setOnClickListener {
                 mPopupWindowFilter.dismiss()
                 itemClickListener.onItemClick(Constants.OPERATION_DELETE, commentList[adapterPosition])
             }
 
-            customView.tv_spam.setOnClickListener {
+            bindDialog.tvSpam.setOnClickListener {
                 mPopupWindowFilter.dismiss()
                 itemClickListener.onItemClick(Constants.OPERATION_REPORT_SPAM, commentList[adapterPosition])
             }
@@ -82,10 +84,13 @@ class CommentAdapter(
         parent: ViewGroup,
         viewType: Int
     ): MyViewHolder {
-        val view =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_comments, parent, false)
-        return MyViewHolder(view)
+//        val view =
+//            LayoutInflater.from(parent.context)
+//                .inflate(R.layout.item_comments, parent, false)
+//        return MyViewHolder(view)
+
+        val binding = ItemCommentsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(
@@ -94,9 +99,9 @@ class CommentAdapter(
     ) {
         val content = SpannableString(commentList[position].user_name)
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
-        holder.binding?.userName?.text = content
-        holder.binding?.commentTime?.text = commentList[position].updated_at
-        holder.binding?.comment?.text = commentList[position].comments
+        holder.bindin.userName?.text = content
+        holder.bindin.commentTime?.text = commentList[position].updated_at
+        holder.bindin.comment?.text = commentList[position].comments
         // holder.binding?.imvItemHome?.setImageResource(commentList[position].image)
     }
 

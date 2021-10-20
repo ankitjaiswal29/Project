@@ -27,7 +27,6 @@ import com.fighterdiet.utils.PrefManager
 import com.fighterdiet.utils.Status
 import com.fighterdiet.viewModel.CommentFragmentViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.fragment_comment.*
 
 
 class CommentFragment(val recipeId:String) : BottomSheetDialogFragment(), View.OnClickListener {
@@ -89,7 +88,7 @@ class CommentFragment(val recipeId:String) : BottomSheetDialogFragment(), View.O
                     AddCommentRequestModel(
                         recipeId,
                         userId,
-                        etComment.text.toString()
+                        binding.etComment.text.toString()
                     )
                 )
             }
