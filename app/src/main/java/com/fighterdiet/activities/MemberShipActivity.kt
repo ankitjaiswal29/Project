@@ -150,8 +150,6 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
 
         skuList.add(Constants.InAppSubsProducts.monthly_test_subscription)
         skuList.add(Constants.InAppSubsProducts.yearly_test_subscription)
-//        skuList.add(Constants.InAppSubsProducts.monthly_test)
-//        skuList.add(Constants.InAppSubsProducts.monthly_test)
         // for subscription set type BillingClient.SkuType.SUBS and for purchase set type BillingClient.SkuType.INAPP
         val params = SkuDetailsParams.newBuilder()
         params.setSkusList(skuList).setType(BillingClient.SkuType.SUBS)
@@ -160,12 +158,12 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
         mBillingClient.querySkuDetailsAsync(
             params.build()
         ) { responseCode: BillingResult, skuDetailsList: List<SkuDetails>? ->
-//            progressBar.visibility = View.GONE
+            //progressBar.visibility = View.GONE
             if (responseCode.responseCode == BillingClient.BillingResponseCode.OK && skuDetailsList != null) {
                 if (skuDetailsList.isNotEmpty()) {
                     this.skuDetailsList.clear()
                     this.skuDetailsList.addAll(skuDetailsList)
-//                    recyclerAdapter.notifyDataSetChanged()
+                //recyclerAdapter.notifyDataSetChanged()
                 } else {
                     Toast.makeText(this, "No Subscription Product found", Toast.LENGTH_SHORT)
                         .show()
@@ -195,23 +193,23 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
 
         if (!isFinishing()) {
 
-            if (p0?.responseCode == BillingClient.BillingResponseCode.OK) {
+            if (p0.responseCode == BillingClient.BillingResponseCode.OK) {
                 for (purchase in p1!!) {
                     handlePurchase(purchase)
 
                 }
-            } else if (p0?.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
+            } else if (p0.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
                 Toast.makeText(
                     this, "User cancelled", Toast.LENGTH_SHORT
                 ).show()
-            } else if (p0?.responseCode == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
+            } else if (p0.responseCode == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
                 Toast.makeText(
                     this,
                     "Already Taken",
                     Toast.LENGTH_LONG
                 ).show()
                 queryPurchases()
-            } else if (p0?.responseCode == BillingClient.BillingResponseCode.ITEM_UNAVAILABLE)
+            } else if (p0.responseCode == BillingClient.BillingResponseCode.ITEM_UNAVAILABLE)
 //                Toast.makeText(
 //                    this,
 //                    getString(R.string.str_item_unavailable),

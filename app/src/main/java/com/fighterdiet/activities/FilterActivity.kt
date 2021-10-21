@@ -223,7 +223,7 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
             R.id.tv_clear_all ->{
                 mealCount = 0
                 volumeCount = 0
-                volumeCount = 0
+                dietaryCount = 0
                 Constants.RecipeFilter.totalFilterCount = 0
                 Constants.RecipeFilter.selectedMealFilter.clear()
                 Constants.RecipeFilter.selectedDietaryFilter.clear()
