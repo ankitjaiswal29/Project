@@ -12,9 +12,7 @@ object Constants {
             val monthly_test_subscription = "com.fighter_diet_recipe.monthly"
             val yearly_test_subscription = "com.fighter_diet_recipe.yearly"
             val test = "com.fighter_diet.test"
-
             val monthly_test = "android.test.purchased"
-
         }
     }
 
@@ -32,7 +30,7 @@ object Constants {
     var ZERO = 0
     var ISSUBSCRIPTION = false
 
-    const val SERVER_URL = "http://quytech.net/fighter_diet_backend/public/api/"
+    const val SERVER_URL = "http://quytech.net/fighter_diet_backend/public/api"
     const val LIVE_URL = "https://fighterdietrecipe.com/api/"
 
 

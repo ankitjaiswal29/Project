@@ -44,7 +44,6 @@ class DashboardActivity : BaseActivity() {
         }
 
         setupUI()
-
     }
 
     override fun setupViewModel() {

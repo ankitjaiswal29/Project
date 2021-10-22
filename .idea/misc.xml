@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../Android/Sdk/platforms/android-31/data/res/layout/splash_screen_view.xml" value="0.19322916666666667" />
+        <entry key="..\:/Users/Narayan/Desktop/FD/latest/fighter_diet/app/src/main/res/layout/activity_recipe_info.xml" value="0.2" />
         <entry key="..\:/fighter_diet/app/src/main/res/drawable/bg_rectangle_white_border.xml" value="0.18796296296296297" />
         <entry key="..\:/fighter_diet/app/src/main/res/drawable/bg_round_corner_box.xml" value="0.18796296296296297" />
         <entry key="..\:/fighter_diet/app/src/main/res/drawable/bg_round_corner_top_let_right.xml" value="0.18796296296296297" />
@@ -74,7 +75,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

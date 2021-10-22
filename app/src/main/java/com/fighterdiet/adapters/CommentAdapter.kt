@@ -99,9 +99,9 @@ class CommentAdapter(
     ) {
         val content = SpannableString(commentList[position].user_name)
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
-        holder.bindin.userName?.text = content
-        holder.bindin.commentTime?.text = commentList[position].updated_at
-        holder.bindin.comment?.text = commentList[position].comments
+        holder.bindin.userName.text = content
+        holder.bindin.commentTime.text = commentList[position].updated_at
+        holder.bindin.comment.text = commentList[position].comments
         // holder.binding?.imvItemHome?.setImageResource(commentList[position].image)
     }
 

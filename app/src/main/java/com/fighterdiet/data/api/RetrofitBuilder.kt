@@ -31,7 +31,7 @@ object RetrofitBuilder {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BASE_URL+"/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()
@@ -50,7 +50,7 @@ object RetrofitBuilder {
             .build()
 
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BASE_URL+"/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()

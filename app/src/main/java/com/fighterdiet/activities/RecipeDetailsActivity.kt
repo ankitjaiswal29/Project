@@ -1,9 +1,13 @@
 package com.fighterdiet.activities
 
+import android.R.id
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -24,8 +28,15 @@ import com.fighterdiet.utils.Utils
 import com.fighterdiet.viewModel.RecipeInfoViewModel
 import com.google.android.material.tabs.TabLayout
 import java.lang.Exception
+import java.net.URI
+import android.R.id.shareText
+
+import androidx.core.app.ShareCompat
+
 
 class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
+    private var recipeImage: String? = null
+    private var recipeName: String? = null
     private var recipeNoteModel: RecipeContentResponseModel.RecipeNote? = null
     private var isNoteAvailable: Boolean = false
     private var commentListModel: CommentListResponseModel? = null
@@ -49,8 +60,8 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
             if(recipeId.isNotEmpty()){
                 viewModel.getRecipeContent(RecipeContentRequestModel(recipeId))
             }
-            val image = it.getString(Constants.RECIPE_IMAGE, "")
-            image.let {
+            recipeImage = it.getString(Constants.RECIPE_IMAGE, "")
+            recipeImage.let {
                 try {
                     Glide.with(this)
                         .load(it)
@@ -62,8 +73,8 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                 }
             }
 
-            val name = it.getString(Constants.RECIPE_NAME, "")
-            name.let {
+            recipeName = it.getString(Constants.RECIPE_NAME, "")
+            recipeName.let {
                 try {
                    binding.infoTool.tvTitle.text = it
                 }
@@ -103,15 +114,21 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
             }
         })
 
-        viewModel.getAddToFavResource().observe(this, {
-            when(it.status){
+        viewModel.getAddToFavResource().observe(this, { response ->
+            when(response.status){
                 Status.SUCCESS -> {
                     recipeContentModel.apply {
                         this?.apply {
-                            this.favourite = if (this.favourite == 0) 1 else 0
+                            response.data?.let {
+                                this.favourite = if (it.status) 1 else 0
+                                Toast.makeText(this@RecipeDetailsActivity, response.data.message?:"", Toast.LENGTH_SHORT).show()
+                            }
                         }
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            updateFavUI()
+                        },50)
                     }
-                    updateFavUI()
+
                 }
                 Status.LOADING -> {
 
@@ -264,7 +281,15 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
             }
 
             R.id.iv_share -> {
-                Utils.showToast(this, "Will cover in functionality")
+                val link = "https://fighterdiet.page.link/1gGs"+"?key="+recipeId+"&"+"image="+recipeImage+"&"+"navigationTitle="+recipeName?.replace(" ","_")
+
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.type = "text/plain"
+                intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name))
+                intent.putExtra(Intent.EXTRA_TEXT, link)
+                startActivity(
+                    Intent.createChooser(intent, getString(R.string.share_to))
+                )
             }
 
         }

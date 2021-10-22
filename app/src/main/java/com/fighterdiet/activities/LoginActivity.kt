@@ -19,10 +19,7 @@ import com.fighterdiet.data.api.RetrofitBuilder
 import com.fighterdiet.data.repository.LoginRepository
 import com.fighterdiet.data.repository.RegisterRepository
 import com.fighterdiet.databinding.ActivityLoginBinding
-import com.fighterdiet.utils.PrefManager
-import com.fighterdiet.utils.ProgressDialog
-import com.fighterdiet.utils.Status
-import com.fighterdiet.utils.Utils
+import com.fighterdiet.utils.*
 import com.fighterdiet.viewModel.LoginViewModel
 import com.fighterdiet.viewModel.LoginViewModelProvider
 import com.fighterdiet.viewModel.RegisterViewModel
@@ -63,7 +60,27 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun setupUI() {
+        handleDeepLinking()
+    }
 
+    private fun handleDeepLinking() {
+        val intent = intent
+        if (intent != null && intent.data != null) {
+            val data = intent.data
+            val splittedData = data.toString().split("&")
+            val recipeId = splittedData[0].split("=")[1]
+            val recipeImage = splittedData[1].split("=")[1]
+            val recipeName = splittedData[2].split("=")[1].replace("_" , " ")
+
+            val recipeDetailsActivity = RecipeDetailsActivity.getStartIntent(this)
+            recipeDetailsActivity.putExtra(Constants.RECIPE_ID, recipeId.toString())
+            recipeDetailsActivity.putExtra(Constants.RECIPE_IMAGE, recipeImage.toString())
+            recipeDetailsActivity.putExtra(Constants.RECIPE_NAME, recipeName.toString()).flags =
+                Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+            Log.e(LoginActivity.TAG, ">>>>> Deep Link URl ::" + data.toString())
+            startActivity(recipeDetailsActivity)
+        }
     }
 
     override fun setupViewModel() {
@@ -292,5 +309,4 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             e.printStackTrace()
         }
     }*/
-
 }

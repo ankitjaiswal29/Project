@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.fighterdiet">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -19,68 +20,86 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".activities.ChangePasswordActivity"
-            android:exported="true" />
-        <activity android:name=".activities.ImageZoomOutActivity" />
+            android:exported="false" />
+        <activity
+            android:exported="false"
+            android:name=".activities.ImageZoomOutActivity" />
 <!--        <activity android:name=".fragments.DietryInfoActivity" />-->
         <activity android:name=".activities.FilterActivity" />
         <activity
             android:name=".activities.PrivacyAndTermsActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.SettingsActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".fragments.WeeklyGroceryFragment"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activities.PersonalChartActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activities.FaqActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activities.EvaluationActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.ProfileAfterQuestionsActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.RecipeDetailsActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activities.DashboardActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".activities.PicOneDayMealsActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activities.PicDaySevenMealsActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" /> <!-- <activity -->
         <!-- android:name=".activities.DashboardActivity" -->
         <!-- android:screenOrientation="portrait" /> -->
         <activity
             android:name=".activities.MemberShipActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.QuizActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.IntroAndDecisionActivity"
+            android:exported="false"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.ResetPasswordActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity
             android:name=".activities.CreateAccountActivity"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:windowSoftInputMode="adjustPan" />
@@ -88,13 +107,25 @@
             android:name=".activities.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan"
+            android:exported="true">
             <intent-filter>
                 <action
                     android:name="android.intent.action.MAIN" />
                 <category
                     android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <intent-filter android:label="FighterDiet">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="fighterdiet.com"
+                    android:scheme="https" />
+            </intent-filter>
+
         </activity>
     </application>
 

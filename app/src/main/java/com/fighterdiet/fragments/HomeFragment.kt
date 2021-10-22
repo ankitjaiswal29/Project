@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -193,8 +194,8 @@ class HomeFragment : BaseFragment() {
                         startActivity(act)
                     }
                     "0" -> {
-                        startActivity(MemberShipActivity.getStartIntent(requireContext()))
-//                        startActivity(act)
+//                        startActivity(MemberShipActivity.getStartIntent(requireContext()))
+                        startActivity(act)
                     }
 
                 }

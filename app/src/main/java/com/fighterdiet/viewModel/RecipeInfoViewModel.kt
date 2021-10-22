@@ -79,7 +79,7 @@ class RecipeInfoViewModel(val recipeInfoRepo: RecipeInfoRepository) : ViewModel(
                 val apiResponse = recipeInfoRepo.addRecipeToFavApi(addFavReqModel)
                 withContext(Dispatchers.Main){
                     try {
-                        if (apiResponse.status) {
+                        if (apiResponse.code == 200) {
                             addedToFavResource.postValue(Resource.success(data = apiResponse))
                         }
                     } catch (e: HttpException) {
