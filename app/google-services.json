@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "415351061956",
+    "project_id": "fighterdiet-7d312",
+    "storage_bucket": "fighterdiet-7d312.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:415351061956:android:8fd13ca9330dbf35e2b891",
+        "android_client_info": {
+          "package_name": "com.fighterdiet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "415351061956-u86nqcv748jep513f05o2nnvgc7s1mns.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACjOYXm8Vvc3XJ2BOcF0jEnvAfV5zzCdo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "415351061956-u86nqcv748jep513f05o2nnvgc7s1mns.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "415351061956-c0929lgg16475cv84su3je1v8jrcddgq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.FighterDietRecipe",
+                "app_store_id": "1570211295"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -112,19 +112,25 @@
 
             </com.google.android.material.appbar.AppBarLayout>
 
+<!--
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fillViewport="true"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/vp_info_recepie"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_5sdp" />
 
             </androidx.core.widget.NestedScrollView>
+-->
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/vp_info_recepie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_margin="@dimen/_5sdp" />
+
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -28,12 +28,12 @@ class HomeRecipeListRecyclerAdapter(
 
         init {
             itemView.setOnClickListener(this)
-            binding?.rlCalories?.setOnClickListener(this)
+            binding?.tvCaloriesDescription?.setOnClickListener(this)
         }
 
         override fun onClick(view: View?) {
             when (view!!.id) {
-                R.id.rlCalories -> {
+                R.id.tvCaloriesDescription -> {
                     recipeList[adapterPosition].isDescOpened = !recipeList.get(adapterPosition).isDescOpened
                     notifyDataSetChanged()
                 }
@@ -67,11 +67,8 @@ class HomeRecipeListRecyclerAdapter(
                 .load(recipeList[position].recipe_image)
                 .placeholder(R.color.greencolor)
                 .into(holder.binding!!.ivItemHome)
-            if (recipeList.get(position).isDescOpened) {
-                holder.binding.rlCaloriesDesc.visibility = View.VISIBLE
-            } else {
-                holder.binding.rlCaloriesDesc.visibility = View.GONE
-            }
+
+            holder.binding.tvCaloriesDescription.visibility = if (recipeList[position].isDescOpened) View.VISIBLE else View.GONE
 
             recipeList[position].recipe_name.let {
                 holder.binding.tvRecipeName.text = it

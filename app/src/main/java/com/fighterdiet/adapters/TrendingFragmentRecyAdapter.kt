@@ -25,12 +25,12 @@ class TrendingFragmentRecyAdapter(
 
         init {
             itemView.setOnClickListener(this)
-            binding?.rlCalories?.setOnClickListener(this)
+            binding?.tvCaloriesDescription?.setOnClickListener(this)
         }
 
         override fun onClick(view: View?) {
             when (view!!.id) {
-                R.id.rlCalories -> {
+                R.id.tvCaloriesDescription -> {
 
                    /* if (trendingList.get(adapterPosition).isDescOpened) {
                         trendingList.get(adapterPosition).isDescOpened = false
@@ -62,7 +62,9 @@ class TrendingFragmentRecyAdapter(
             .load(trendingList[position].recipe_image)
             .placeholder(R.color.greencolor)
             .into(holder.binding!!.ivItemHome)
-        holder.binding.tvRecipeName.text = trendingList[position].recipe_name
+        trendingList[position].recipe_name.let {
+            holder.binding.tvRecipeName.text = it
+        }
     }
 
     override fun getItemCount(): Int {

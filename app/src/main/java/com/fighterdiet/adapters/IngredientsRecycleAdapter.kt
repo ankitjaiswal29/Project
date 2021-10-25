@@ -2,16 +2,14 @@ package com.fighterdiet.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.NonNull
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.data.model.responseModel.RecipeContentResponseModel
 import com.fighterdiet.databinding.ItemIngredientsLayoutBinding
 
 class IngredientsRecycleAdapter(
-    val recipeIngredientModel: List<RecipeContentResponseModel.Ingredient>
-    ):RecyclerView.Adapter<IngredientsRecycleAdapter.MyViewHolder>() {
+    private val recipeIngredientModel: List<RecipeContentResponseModel.Ingredient>
+):RecyclerView.Adapter<IngredientsRecycleAdapter.MyViewHolder>() {
 
     class MyViewHolder(val bindin: ItemIngredientsLayoutBinding):RecyclerView.ViewHolder(bindin.root) {
         init {
@@ -20,7 +18,7 @@ class IngredientsRecycleAdapter(
 
         fun bindItems(ingredient: RecipeContentResponseModel.Ingredient) {
             bindin.tvIngredientTitle.text = ingredient.titie
-            bindin.rvIngredientDetail.adapter = IngredientsFillingRecyAdapter(ingredient.data)
+            bindin.rvIngredientDetail.adapter = IngredientsFillingRecyclerAdapter(ingredient.data)
         }
 
     }

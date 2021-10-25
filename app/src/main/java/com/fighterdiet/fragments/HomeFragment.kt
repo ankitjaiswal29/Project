@@ -57,12 +57,15 @@ class HomeFragment : BaseFragment() {
         setupViewModel()
         setupObserver()
         initialize()
-    }
-
-    override fun onStart() {
-        super.onStart()
         getRecipes("",offset,limit)
     }
+
+/*
+    override fun onStart() {
+        super.onStart()
+
+    }
+*/
 
     fun getRecipes(
         searchKeys: String,

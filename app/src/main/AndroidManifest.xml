@@ -122,8 +122,15 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="fighterdiet.com"
+                    android:host="fighterdiet.page.link"
+                    android:pathPrefix="/1gGs"
                     android:scheme="https" />
+
+                <data
+                    android:host="fighterdiet.page.link"
+                    android:pathPrefix="/1gGs"
+                    android:scheme="http" />
+
             </intent-filter>
 
         </activity>

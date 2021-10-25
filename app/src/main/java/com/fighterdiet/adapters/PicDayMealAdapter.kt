@@ -22,7 +22,7 @@ class PicDayMealAdapter(
 
         init {
             itemView.setOnClickListener(this)
-            binding?.rlCalories?.setOnClickListener(this)
+            binding?.tvCaloriesDescription?.setOnClickListener(this)
         }
 
         override fun onClick(view: View?) {
@@ -39,7 +39,7 @@ class PicDayMealAdapter(
             }
 
             when(view?.id){
-                R.id.rlCalories -> {
+                R.id.tvCaloriesDescription -> {
                     homeList.get(adapterPosition).isDescOpened = true
                     notifyDataSetChanged()
                 }
@@ -59,21 +59,19 @@ class PicDayMealAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.binding?.ivItemHome?.setImageResource(homeList[position].image)
-        if (homeList.get(position).isDescOpened) {
-            holder.binding?.rlCaloriesDesc?.visibility = View.VISIBLE
-        } else {
-            holder.binding?.rlCaloriesDesc?.visibility = View.GONE
-        }
-        
-     /*   if (homeList[position].isselected){
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                holder.binding?.imvItemHome?.foreground = ContextCompat.getDrawable(context!!, R.drawable.bg_image_selected)
-            }
-        }else{
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                holder.binding?.imvItemHome?.foreground = null
-            }
-        }*/
+
+        holder.binding?.tvCaloriesDescription?.visibility = if (homeList[position].isDescOpened) View.VISIBLE else View.GONE
+
+
+        /*   if (homeList[position].isselected){
+               if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                   holder.binding?.imvItemHome?.foreground = ContextCompat.getDrawable(context!!, R.drawable.bg_image_selected)
+               }
+           }else{
+               if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                   holder.binding?.imvItemHome?.foreground = null
+               }
+           }*/
     }
 
     override fun getItemCount(): Int {

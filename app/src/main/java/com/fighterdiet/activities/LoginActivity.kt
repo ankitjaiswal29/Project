@@ -51,10 +51,11 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
         if(PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
             val intent =DashboardActivity.getStartIntent(this)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
-}
+            finish()
+        }
         initialise()
+        setupUI()
         setupViewModel()
         setupObserver()
     }
@@ -73,25 +74,22 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             val recipeName = splittedData[2].split("=")[1].replace("_" , " ")
 
             val recipeDetailsActivity = RecipeDetailsActivity.getStartIntent(this)
-            recipeDetailsActivity.putExtra(Constants.RECIPE_ID, recipeId.toString())
-            recipeDetailsActivity.putExtra(Constants.RECIPE_IMAGE, recipeImage.toString())
-            recipeDetailsActivity.putExtra(Constants.RECIPE_NAME, recipeName.toString()).flags =
-                Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            recipeDetailsActivity.putExtra(Constants.RECIPE_ID, recipeId)
+            recipeDetailsActivity.putExtra(Constants.RECIPE_IMAGE, recipeImage)
+            recipeDetailsActivity.putExtra(Constants.RECIPE_NAME, recipeName)
 
             Log.e(LoginActivity.TAG, ">>>>> Deep Link URl ::" + data.toString())
             startActivity(recipeDetailsActivity)
+            finish()
         }
     }
 
     override fun setupViewModel() {
-
         viewModel = ViewModelProvider(
             this,
             LoginViewModelProvider(LoginRepository(RetrofitBuilder.apiService))
         ).get(LoginViewModel::class.java)
         binding.loginViewModel = viewModel
-
-
     }
 
     override fun setupObserver() {

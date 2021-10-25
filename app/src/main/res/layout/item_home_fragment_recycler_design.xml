@@ -19,59 +19,47 @@
             tools:ignore="ContentDescription"
             tools:src="@mipmap/walkthrough_3" />
 
-        <RelativeLayout
-            android:id="@+id/rlCalories"
+
+        <TextView
+            android:id="@+id/tv_recipe_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:alpha="0.8"
+            android:background="@color/white"
+            android:fontFamily="@font/inter_semibold"
+            android:padding="@dimen/_5sdp"
+            android:text="Chicken Pomodoro \nwith Broccoli"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/_12ssp"
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_15sdp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/iv_item_home"
-            app:layout_constraintTop_toTopOf="@+id/iv_item_home">
+            app:layout_constraintTop_toTopOf="@+id/iv_item_home"/>
 
-            <TextView
-                android:id="@+id/tv_recipe_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="0.8"
-                android:background="@color/white"
-                android:fontFamily="@font/inter_semibold"
-                android:padding="@dimen/_5sdp"
-                android:text="Chicken Pomodoro \nwith Broccoli"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_12ssp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rlCaloriesDesc"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/tvCaloriesDescription"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_90sdp"
-            android:layout_marginTop="@dimen/_50sdp"
-            android:layout_marginBottom="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:alpha="0.8"
+            android:background="@color/white"
+            android:fontFamily="@font/inter_semibold"
             android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintVertical_bias="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:alpha="0.8"
-                android:background="@color/white"
-                android:fontFamily="@font/inter_semibold"
-                android:padding="@dimen/_5sdp"
-                android:paddingEnd="@dimen/_20sdp"
-                android:text="Chicken Pomodoro \nwith Broccoli"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_15ssp" />
-
-        </RelativeLayout>
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingEnd="@dimen/_20sdp"
+            android:paddingStart="@dimen/_7sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="Chicken Pomodoro \nwith Broccoli"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/_15ssp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

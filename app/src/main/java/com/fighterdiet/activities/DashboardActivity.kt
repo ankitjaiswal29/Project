@@ -304,17 +304,6 @@ class DashboardActivity : BaseActivity() {
                         if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
                             loginAlertDialog()
                             return
-//                            Builder(context)
-//                                .setTitle("Delete entry")
-//                                .setMessage("Are you sure you want to delete this entry?") // Specifying a listener allows you to take an action before dismissing the dialog.
-//                                // The dialog is automatically dismissed when a dialog button is clicked.
-//                                .setPositiveButton(android.R.string.yes,
-//                                    DialogInterface.OnClickListener { dialog, which ->
-//                                        // Continue with delete operation
-//                                    }) // A null listener allows the button to dismiss the dialog and take no further action.
-//                                .setNegativeButton(android.R.string.no, null)
-//                                .setIcon(android.R.drawable.ic_dialog_alert)
-//                                .show()
 
                         }
                         showFragment(TrendingFragment())
@@ -326,7 +315,7 @@ class DashboardActivity : BaseActivity() {
                         }
                         binding.toolbar.ivTopImage.visibility = View.GONE;
                         binding.toolbar.tvTitle.visibility = View.VISIBLE;
-                        binding.toolbar.tvTitle.setText("Favorites")
+                        binding.toolbar.tvTitle.text = "Favorites"
                         showFragment(FavouriteFragment())
                     }
                     4 -> {

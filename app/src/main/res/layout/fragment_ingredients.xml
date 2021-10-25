@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -13,8 +13,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:paddingBottom="@dimen/_30sdp"
             tools:context=".fragments.IngredientsFragment">
 
@@ -40,8 +38,10 @@
                 android:id="@+id/rv_ingredient_group"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="true"
                 app:layout_constraintEnd_toEndOf="@id/rightGuideline"
                 app:layout_constraintStart_toStartOf="@id/leftGuideline"
+                app:layout_constraintBottom_toTopOf="@id/tv_note"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:itemCount="2"
                 tools:listitem="@layout/item_ingredients_layout" />
@@ -92,4 +92,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+
 </layout>

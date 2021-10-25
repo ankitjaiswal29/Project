@@ -25,18 +25,14 @@ class FavouriteFragmentRecyAdapter(
 
         init {
             itemView.setOnClickListener(this)
-            binding?.rlCalories?.setOnClickListener(this)
+            binding?.tvCaloriesDescription?.setOnClickListener(this)
         }
 
         override fun onClick(view: View?) {
             when (view!!.id) {
-                R.id.rlCalories -> {
+                R.id.tvCaloriesDescription -> {
 
-                    if (favouriteList.get(adapterPosition).isDescOpened) {
-                        favouriteList.get(adapterPosition).isDescOpened = false
-                    } else {
-                        favouriteList.get(adapterPosition).isDescOpened = true
-                    }
+                    favouriteList[adapterPosition].isDescOpened = !favouriteList[adapterPosition].isDescOpened
                     notifyDataSetChanged()
                 }
 
@@ -70,11 +66,8 @@ class FavouriteFragmentRecyAdapter(
             .load(favouriteList[position].recipe_image)
             .placeholder(R.color.greencolor)
             .into(holder.binding!!.ivItemHome)
-        if (favouriteList.get(position).isDescOpened) {
-            holder.binding.rlCaloriesDesc.visibility = View.VISIBLE
-        } else {
-            holder.binding.rlCaloriesDesc.visibility = View.GONE
-        }
+
+        holder.binding.tvCaloriesDescription.visibility = if (favouriteList[position].isDescOpened) View.VISIBLE else View.GONE
 
         favouriteList[position].recipe_name.let {
             holder.binding.tvRecipeName.text = it

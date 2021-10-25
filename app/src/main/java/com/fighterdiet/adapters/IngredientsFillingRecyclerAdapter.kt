@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.data.model.responseModel.RecipeContentResponseModel
 import com.fighterdiet.databinding.ItemFillingDesignBinding
 
-class IngredientsFillingRecyAdapter(
+class IngredientsFillingRecyclerAdapter(
     private var ingredientData: List<RecipeContentResponseModel.Ingredient.Data>,
-):RecyclerView.Adapter<IngredientsFillingRecyAdapter.MyViewHolder>() {
+):RecyclerView.Adapter<IngredientsFillingRecyclerAdapter.MyViewHolder>() {
 
     class MyViewHolder(val bindin: ItemFillingDesignBinding):RecyclerView.ViewHolder(bindin.root) {
         fun onBindView(data: RecipeContentResponseModel.Ingredient.Data) {
@@ -20,7 +20,7 @@ class IngredientsFillingRecyAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ItemFillingDesignBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return IngredientsFillingRecyAdapter.MyViewHolder(binding)
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
