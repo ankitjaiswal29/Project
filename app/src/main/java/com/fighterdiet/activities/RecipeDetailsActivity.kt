@@ -268,9 +268,11 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
             }
 
             R.id.iv_banner -> {
-                startActivity(
-                    ImageZoomOutActivity.getStartIntent(this).putExtra("from", "Activity")
-                )
+                recipeImage?.let {
+                    startActivity(
+                        ImageZoomOutActivity.getStartIntent(this, it)
+                    )
+                }
             }
 
             R.id.iv_fav -> {

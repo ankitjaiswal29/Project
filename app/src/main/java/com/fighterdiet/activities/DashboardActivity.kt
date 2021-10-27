@@ -306,6 +306,7 @@ class DashboardActivity : BaseActivity() {
                             return
 
                         }
+                        binding.clSearchRecipe.visibility = View.GONE
                         showFragment(TrendingFragment())
                     }
                     3 -> {
@@ -313,6 +314,7 @@ class DashboardActivity : BaseActivity() {
                             loginAlertDialog()
                             return
                         }
+                        binding.clSearchRecipe.visibility = View.GONE
                         binding.toolbar.ivTopImage.visibility = View.GONE;
                         binding.toolbar.tvTitle.visibility = View.VISIBLE;
                         binding.toolbar.tvTitle.text = "Favorites"
@@ -343,14 +345,15 @@ class DashboardActivity : BaseActivity() {
                         }
                     }
                     1 -> {
+
                         startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
                     }
 
                     3 -> {
-                        if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
-                            loginAlertDialog()
-                            return
-                        }
+//                        if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
+//                            loginAlertDialog()
+//                            return
+//                        }
                     }
 
                     4 -> {
@@ -407,6 +410,20 @@ class DashboardActivity : BaseActivity() {
             dialog.dismiss()
         }
         builder.show()
+    }
+
+    override fun onBackPressed() {
+        when(previousPos){
+            2,3 -> {
+                binding.toolbar.ivTopImage.visibility = View.VISIBLE;
+                binding.toolbar.tvTitle.visibility = View.GONE;
+                showFragment(HomeFragment(), 0)
+                setIcon4(0)
+                previousPos = 0
+            }
+            else -> super.onBackPressed()
+        }
+
     }
 
 }

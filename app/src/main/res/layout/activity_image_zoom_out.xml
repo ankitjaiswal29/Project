@@ -10,14 +10,21 @@
     android:background="@color/white"
     tools:context=".activities.ImageZoomOutActivity">
 
-    <WebView
-        android:id="@+id/wv_image"
-        android:scrollbars="none"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_centerInParent="true"
+<!--    <WebView-->
+<!--        android:id="@+id/wv_image"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:scrollbars="none" />-->
+
+    <ImageView
+        android:id="@+id/iv_banner"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="fitCenter"
+        android:scrollbars="none" />
+
 
     <ImageView
         android:id="@+id/iv_close"

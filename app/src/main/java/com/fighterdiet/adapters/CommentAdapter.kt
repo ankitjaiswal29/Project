@@ -44,10 +44,6 @@ class CommentAdapter(
 
         private fun showPopUpCommunities(viewType: View) {
             var mPopupWindowFilter: PopupWindow? = null
-//            val customView: View = LayoutInflater.from(viewType.context).inflate(
-//                R.layout.item_delete_spam,
-//                null
-//            )
             val bindDialog: ItemDeleteSpamBinding =
                 DataBindingUtil.inflate(LayoutInflater.from(viewType.context), R.layout.item_delete_spam, null, false)
 
@@ -100,7 +96,10 @@ class CommentAdapter(
         val content = SpannableString(commentList[position].user_name)
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
         holder.bindin.userName.text = content
-        holder.bindin.commentTime.text = commentList[position].updated_at
+        if(commentList[position].updated_at.isNotEmpty()){
+            val date = commentList[position].updated_at.split("T")
+            holder.bindin.commentTime.text = "${date[0]} ${date[1].split(".")[0]}"
+        }
         holder.bindin.comment.text = commentList[position].comments
         // holder.binding?.imvItemHome?.setImageResource(commentList[position].image)
     }

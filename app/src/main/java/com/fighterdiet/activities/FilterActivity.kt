@@ -314,22 +314,34 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
         if(dietaryCount==0){
             Constants.RecipeFilter.selectedDietaryFilter.clear()
         }else{
-            if(newChangesInDietarySelection)
+            if(newChangesInDietarySelection){
+                Constants.RecipeFilter.selectedDietaryFilter.forEach {
+                    it.value.isChecked = false
+                }
                 Constants.RecipeFilter.isDietaryListCleared = false
+            }
         }
 
         if(mealCount==0){
             Constants.RecipeFilter.selectedMealFilter.clear()
         }else{
-            if(newChangesInMealSelection)
+            if(newChangesInMealSelection){
+                Constants.RecipeFilter.selectedMealFilter.forEach {
+                    it.value.isChecked = false
+                }
                 Constants.RecipeFilter.isMealListCleared = false
+            }
         }
 
         if(volumeCount==0){
             Constants.RecipeFilter.selectedVolumeFilter.clear()
         }else{
-            if(newChangesInVolumeSelection)
+            if(newChangesInVolumeSelection){
+                Constants.RecipeFilter.selectedVolumeFilter.forEach {
+                    it.value.isChecked = false
+                }
                 Constants.RecipeFilter.isVolumeListCleared = false
+            }
         }
 
 
@@ -341,7 +353,7 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
         dietaryListModel?.let { model ->
             model.result.forEachIndexed { index, result ->
                 if(result.isChecked){
-                    Constants.RecipeFilter.selectedDietaryFilter[index] = result
+                     Constants.RecipeFilter.selectedDietaryFilter[index] = result
                 }
             }
         }
