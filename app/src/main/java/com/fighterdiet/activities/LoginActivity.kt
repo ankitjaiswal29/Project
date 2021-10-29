@@ -1,5 +1,6 @@
 package com.fighterdiet.activities
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -24,9 +25,14 @@ import com.fighterdiet.viewModel.LoginViewModel
 import com.fighterdiet.viewModel.LoginViewModelProvider
 import com.fighterdiet.viewModel.RegisterViewModel
 import com.fighterdiet.viewModel.RegisterViewModelProvider
+import kotlin.math.abs
 
 
 class LoginActivity : BaseActivity(), View.OnClickListener {
+    private val MIN_DIST = 150
+    private var x2: Float = 0f
+    private var x1: Float = 0f
+
     private lateinit var binding: ActivityLoginBinding
     private lateinit var viewModel:LoginViewModel
    // private lateinit var adapter: ViewPagerAdapter
@@ -137,30 +143,50 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun initialise() {
         viewFlipper = findViewById<ViewFlipper>(R.id.viewflip)
-//        viewFlipper?.setOnClickListener(this)
-        for (i in 0 until imageList.size) {
+        for (i in imageList.indices) {
             // This will create dynamic image views and add them to the ViewFlipper.
             setFlipperImage(imageList.get(i))
         }
 
-
-
-        viewFlipper!!.setOnTouchListener { v, event ->
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    Log.e("Dowwn", "Stop")
-                    if (viewFlipper!!.isFlipping)
-                        viewFlipper!!.stopFlipping()
-                }
-                MotionEvent.ACTION_UP -> {
-                    viewFlipper!!.startFlipping()
-                    Log.e("UP", "start")
-                }
-            }
-            true
-        }
+//        viewFlipper!!.setOnTouchListener { v, event ->
+//            when (event.action) {
+//                MotionEvent.ACTION_DOWN -> {
+//                    x1 = event.x
+//                }
+//                MotionEvent.ACTION_UP -> {
+//                    x2 = event.x
+//                    val deltaX = x2 - x1
+//                    if(abs(deltaX) > MIN_DIST){
+//                        // Right to Left swipe
+//                        if(x1 > x2){
+//                            var position = viewFlipper!!.displayedChild
+//                            if(position==imageList.size-1){
+//                                position = 0
+//                            }else
+//                                position++
+//
+//                            viewFlipper!!.displayedChild = imageList[position]
+//                            setupIndicator(imageList[position])
+//                        }
+//                        // Left to Right Swipe
+//                        else{
+//                            var position = viewFlipper!!.displayedChild
+//                            if(position==0){
+//                                position = imageList.size-1
+//                            }else
+//                                position--
+//
+//                            viewFlipper!!.displayedChild = imageList[position]
+//                            setupIndicator(imageList[position])
+//                        }
+//                    }
+//                }
+//            }
+//            true
+//        }
 
 
         // Log.e("position", viewFlipper!!.indexOfChild(viewFlipper!!.currentView).toString())
@@ -168,7 +194,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
 
         /*adapter = ViewPagerAdapter(this)
-
         adapter.addFragment(WalkThroughFragment.getInstance(0))
         adapter.addFragment(WalkThroughFragment.getInstance(1))
         adapter.addFragment(WalkThroughFragment.getInstance(2))
@@ -187,23 +212,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         binding.tvCreateAccount.setOnClickListener(this)
 //        binding.btnLogin.setOnClickListener(this)
         binding.tvSkip.setOnClickListener(this)
-
-        /*timer = Timer()
-        timer.schedule(object : TimerTask() {
-            override fun run() {
-                runOnUiThread(object : Runnable {
-                    override fun run() {
-                        if (isWalkthroughHold)
-                            return
-                        if (currentPage == 3)
-                            currentPage = -1
-                        // binding.viewpager.setCurrentItem(currentPage + 1, true)
-
-                    }
-
-                })
-            }
-        }, duration, duration)*/
     }
 
 
