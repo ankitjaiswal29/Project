@@ -14,15 +14,15 @@ import com.fighterdiet.databinding.FragmentMealsBinding
 import com.fighterdiet.utils.Constants
 
 
-class MealsFragment(val getMealResponseModel: GetMealResponseModel, val isSelectionCleared: Boolean) : Fragment(), MealsAdapter.MealsCountListener {
+class MealsFragment(val getMealResponseModel: GetMealResponseModel) : Fragment(), MealsAdapter.MealsCountListener {
     private var list: ArrayList<GetMealResponseModel.Result>  = ArrayList()
     lateinit var binding: FragmentMealsBinding
     private lateinit var mealsAdapter : MealsAdapter
     private lateinit var mealsListener: MealsInfoInterface
 
     companion object{
-        fun newInstance(getMealResponseModel: GetMealResponseModel, isSelectionCleared: Boolean = false): MealsFragment{
-            return MealsFragment(getMealResponseModel, isSelectionCleared)
+        fun newInstance(getMealResponseModel: GetMealResponseModel): MealsFragment{
+            return MealsFragment(getMealResponseModel)
         }
     }
 
@@ -37,16 +37,18 @@ class MealsFragment(val getMealResponseModel: GetMealResponseModel, val isSelect
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         mealsListener = (activity as MealsInfoInterface?)!!
         list = getMealResponseModel.result as ArrayList<GetMealResponseModel.Result>
         setUpRecyclerView()
     }
 
     private fun modifyListWhenSelectionCleared(list: ArrayList<GetMealResponseModel.Result>) {
-        if(isSelectionCleared){
+        if(Constants.RecipeFilter.isFilterCleared){
             list.forEach {
                 it.isChecked = false
             }
+            mealsAdapter.notifyDataSetChanged()
         }
     }
 

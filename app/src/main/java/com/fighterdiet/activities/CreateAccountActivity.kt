@@ -124,10 +124,7 @@ class CreateAccountActivity : BaseActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (p0!=null && p0.isNotEmpty()) {
-                    if(p0.length in 6..12)
-                        viewModel.checkUserNameApi(p0.toString())
-                    else
-                        Utils.showSnackBar(binding.root, "User name should be between 6 to 12 characters")
+
                 }else{
                     binding.ivVerifiedUsername.visibility = View.GONE
                 }
@@ -139,11 +136,22 @@ class CreateAccountActivity : BaseActivity() {
 
         })
 
+        binding.etUserId.setOnFocusChangeListener { view, isFocused ->
+            if(!isFocused){
+                if((view as EditText).text.length in 6..12)
+                    viewModel.checkUserNameApi((view as EditText).text.toString())
+                else
+                    Utils.showToast(this, "User name should be between 6 to 12 characters")
+            }
+
+        }
+
         binding.tvLogin.setOnClickListener(View.OnClickListener {
             val loginIntent = Intent(this, LoginActivity::class.java)
             loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(loginIntent)
         })
+
         binding.tvPrivacypolicyTermcondition.makeLinks(
             Pair("Terms & Conditions",View.OnClickListener {
 

@@ -30,6 +30,7 @@
             android:padding="@dimen/_5sdp"
             android:text="Chicken Pomodoro \nwith Broccoli"
             android:textColor="@color/colorBlack"
+            android:maxWidth="@dimen/_200sdp"
             android:textSize="@dimen/_12ssp"
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_15sdp"

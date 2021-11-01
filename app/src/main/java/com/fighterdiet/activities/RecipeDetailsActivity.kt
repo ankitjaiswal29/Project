@@ -97,9 +97,10 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                     it.data?.let { recipeContent ->
                         recipeContentModel = recipeContent.data
 
+//                        isNoteAvailable = true
+                        recipeNoteModel = recipeContent.data?.recipe_note as RecipeContentResponseModel.RecipeNote
 //                        if(recipeContent.data?.recipe_note is RecipeContentResponseModel.RecipeNote){
-//                            isNoteAvailable = true
-//                            recipeNoteModel = recipeContent.data?.recipe_note as RecipeContentResponseModel.RecipeNote
+//
 //                        }
                         initialise()
                     }
@@ -207,9 +208,9 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
     private fun updateRecipeNote() {
         Constants.RecipeDetails.recipeNotes = ""
 //        if(isNoteAvailable){
-//            recipeNoteModel?.let {
-//                Constants.RecipeDetails.recipeNotes = it.description
-//            }
+            recipeNoteModel?.let {
+                Constants.RecipeDetails.recipeNotes = it.description
+            }
 //        }
     }
 
@@ -299,7 +300,7 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
 
     override fun onBackPressed() {
 
-       /* recipeContentModel?.let {
+        recipeContentModel?.let {
             if(recipeNoteModel == null && Constants.RecipeDetails.recipeNotes.isNotEmpty()){
                 viewModel.addNotesApi(AddNotesRequestModel(
                     recipe_id = recipeId,
@@ -321,9 +322,9 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                 }
             }
             return
-        }*/
+        }
 
-        super.onBackPressed()
+//        super.onBackPressed()
 
     }
 }

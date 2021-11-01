@@ -127,9 +127,8 @@ class HomeRecipeListRecyclerAdapter(
     fun addAll(result: List<RecipeListResponseModel.Recipies>) {
         if(isLastUpdated){
             recipeList.clear()
-            isLastUpdated = false
         }
-
+        isLastUpdated = false
         recipeList.addAll(result)
         if(itemCount>0){
             notifyItemRangeInserted(itemCount, recipeList.size - 1)
@@ -137,8 +136,13 @@ class HomeRecipeListRecyclerAdapter(
         }
     }
 
-    fun updateAll(result: List<RecipeListResponseModel.Recipies>) {
-        recipeList.clear()
+    fun updateAll(result: List<RecipeListResponseModel.Recipies>, isSearchMode: Boolean) {
+        if(!isLastUpdated)
+            recipeList.clear()
+
+        if(isSearchMode)
+            recipeList.clear()
+
         isLastUpdated = true
         recipeList.addAll(result)
         if(itemCount>0){

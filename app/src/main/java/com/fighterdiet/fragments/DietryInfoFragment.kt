@@ -12,7 +12,7 @@ import com.fighterdiet.data.model.responseModel.GetDietaryResponseModel
 import com.fighterdiet.databinding.FragmentDietryInfoBinding
 import com.fighterdiet.utils.Constants
 
-class DietryInfoFragment(val getDietaryResponseModel: GetDietaryResponseModel, val isSelectionCleared: Boolean) : Fragment(),
+class DietryInfoFragment(val getDietaryResponseModel: GetDietaryResponseModel) : Fragment(),
     DietryInfoAdapter.DietaryCountListener {
     lateinit var binding: FragmentDietryInfoBinding
     private lateinit var dietryInfoAdapter : DietryInfoAdapter
@@ -20,8 +20,8 @@ class DietryInfoFragment(val getDietaryResponseModel: GetDietaryResponseModel, v
     var list:ArrayList<GetDietaryResponseModel.Result> = ArrayList()
 
     companion object{
-        fun newInstance(getDietaryResponseModel: GetDietaryResponseModel, isSelectionCleared: Boolean = false): DietryInfoFragment{
-            return DietryInfoFragment(getDietaryResponseModel, isSelectionCleared)
+        fun newInstance(getDietaryResponseModel: GetDietaryResponseModel): DietryInfoFragment{
+            return DietryInfoFragment(getDietaryResponseModel)
         }
     }
 
@@ -42,10 +42,11 @@ class DietryInfoFragment(val getDietaryResponseModel: GetDietaryResponseModel, v
     }
 
     private fun modifyListWhenSelectionCleared(list: java.util.ArrayList<GetDietaryResponseModel.Result>) {
-        if(isSelectionCleared){
+        if(Constants.RecipeFilter.isFilterCleared){
             list.forEach {
                 it.isChecked = false
             }
+            dietryInfoAdapter.notifyDataSetChanged()
         }
     }
 

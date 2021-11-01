@@ -18,6 +18,7 @@ import com.fighterdiet.utils.PrefManager
 import com.google.android.material.tabs.TabLayout
 import android.content.DialogInterface
 import androidx.appcompat.app.AlertDialog
+import com.fighterdiet.utils.Utils.loginAlertDialog
 
 
 class DashboardActivity : BaseActivity() {
@@ -160,15 +161,15 @@ class DashboardActivity : BaseActivity() {
                         startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
                     }
                     2 -> {
-                        if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
-                            startActivity(Intent(this@DashboardActivity, LoginActivity::class.java))
-                            return
-                        }
+//                        if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
+//                            loginAlertDialog(this@DashboardActivity)
+//                            return
+//                        }
                         showFragment(TrendingFragment())
                     }
                     3 -> {
                         if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
-                            loginAlertDialog()
+                            loginAlertDialog(this@DashboardActivity)
                             return
                         }
                         showFragment(FavouriteFragment())
@@ -302,21 +303,24 @@ class DashboardActivity : BaseActivity() {
                     }
                     2 -> {
                         if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
-                            loginAlertDialog()
+                            loginAlertDialog(this@DashboardActivity)
                             return
 
                         }
                         binding.clSearchRecipe.visibility = View.GONE
+                        binding.toolbar.ivTopImage.visibility = View.GONE
+                        binding.toolbar.tvTitle.visibility = View.VISIBLE
+                        binding.toolbar.tvTitle.text = "Trending"
                         showFragment(TrendingFragment())
                     }
                     3 -> {
                         if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
-                            loginAlertDialog()
+                            loginAlertDialog(this@DashboardActivity)
                             return
                         }
                         binding.clSearchRecipe.visibility = View.GONE
-                        binding.toolbar.ivTopImage.visibility = View.GONE;
-                        binding.toolbar.tvTitle.visibility = View.VISIBLE;
+                        binding.toolbar.ivTopImage.visibility = View.GONE
+                        binding.toolbar.tvTitle.visibility = View.VISIBLE
                         binding.toolbar.tvTitle.text = "Favorites"
                         showFragment(FavouriteFragment())
                     }
@@ -394,22 +398,6 @@ class DashboardActivity : BaseActivity() {
             binding.toolbar.ivTopImage.visibility = View.VISIBLE;
         else
             binding.toolbar.ivTopImage.visibility = View.GONE;*/
-    }
-
-    private fun loginAlertDialog(){
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("You need to login to access this feature!")
-        builder.setPositiveButton("Proceed") { dialog, which ->
-            dialog.dismiss()
-            startActivity(Intent(this@DashboardActivity, LoginActivity::class.java))
-            finishAffinity()
-            return@setPositiveButton
-        }
-
-        builder.setNegativeButton("Cancel") { dialog, which ->
-            dialog.dismiss()
-        }
-        builder.show()
     }
 
     override fun onBackPressed() {

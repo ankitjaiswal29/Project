@@ -44,9 +44,11 @@ object Constants {
     }
 
     object RecipeFilter{
-        var isDietaryListCleared: Boolean = true
-        var isVolumeListCleared: Boolean = true
-        var isMealListCleared: Boolean = true
+//        var isDietaryListCleared: Boolean = true
+//        var isVolumeListCleared: Boolean = true
+//        var isMealListCleared: Boolean = true
+
+        var isFilterCleared: Boolean = false
         var isFilterApplied: Boolean = false
         var totalFilterCount :Int = 0
         var selectedDietaryFilter: HashMap<Int, GetDietaryResponseModel.Result> = HashMap()

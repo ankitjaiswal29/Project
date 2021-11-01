@@ -3,12 +3,14 @@ package com.fighterdiet.utils
 import android.R
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
+import com.fighterdiet.activities.LoginActivity
 import com.fighterdiet.utils.Constants.HUNDRED
 import com.fighterdiet.utils.Constants.ZERO
 import com.google.android.material.snackbar.Snackbar
@@ -63,5 +65,20 @@ object Utils {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
+    fun loginAlertDialog(activity: Activity){
+        val builder = AlertDialog.Builder(activity)
+        builder.setTitle("You need to login to access this feature!")
+        builder.setPositiveButton("Proceed") { dialog, which ->
+            dialog.dismiss()
+            activity.startActivity(Intent(activity, LoginActivity::class.java))
+            activity.finishAffinity()
+            return@setPositiveButton
+        }
+
+        builder.setNegativeButton("Cancel") { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.show()
+    }
 
 }

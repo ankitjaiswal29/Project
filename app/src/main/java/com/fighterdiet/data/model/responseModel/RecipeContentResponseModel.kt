@@ -1,11 +1,13 @@
 package com.fighterdiet.data.model.responseModel
 
+import com.google.gson.internal.LinkedTreeMap
+
 data class RecipeContentResponseModel(
     val directions: List<Direction>,
     var favourite: Int,
     val info: List<Info>,
     val ingredients: List<Ingredient>,
-    val recipe_note: Any,
+    val recipe_note: RecipeNote,
     val tips: List<Tip>
 ){
     data class Direction(

@@ -15,36 +15,13 @@ import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
 class TrendingFragmentRecyAdapter(
     private var context: FragmentActivity?,
     private var trendingList: ArrayList<TrendingListResponseModel.Result>,
-    private var itemClickListener: (Any, Any) -> Unit
+    private var itemClickListener: (Int, TrendingListResponseModel.Result) -> Unit
 ) : RecyclerView.Adapter<TrendingFragmentRecyAdapter.MyViewHolder>() {
 
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-        View.OnClickListener {
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val binding: ItemHomeFragmentRecyclerDesignBinding? = DataBindingUtil.bind(itemView)
 
-        init {
-            itemView.setOnClickListener(this)
-            binding?.tvCaloriesDescription?.setOnClickListener(this)
-        }
-
-        override fun onClick(view: View?) {
-            when (view!!.id) {
-                R.id.tvCaloriesDescription -> {
-
-                   /* if (trendingList.get(adapterPosition).isDescOpened) {
-                        trendingList.get(adapterPosition).isDescOpened = false
-                    } else {
-                        trendingList.get(adapterPosition).isDescOpened = true
-                    }
-                    notifyDataSetChanged()*/
-                }
-
-                else -> {
-                    context?.startActivity(MemberShipActivity.getStartIntent(context!!))
-                }
-            }
-        }
     }
 
     override fun onCreateViewHolder(
@@ -64,6 +41,9 @@ class TrendingFragmentRecyAdapter(
             .into(holder.binding!!.ivItemHome)
         trendingList[position].recipe_name.let {
             holder.binding.tvRecipeName.text = it
+        }
+        holder.binding.root.setOnClickListener {
+            itemClickListener.invoke(position, trendingList[position])
         }
     }
 

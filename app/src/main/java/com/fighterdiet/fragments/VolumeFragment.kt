@@ -13,15 +13,15 @@ import com.fighterdiet.data.model.responseModel.GetVolumeResponseModel
 import com.fighterdiet.databinding.FragmentVolumeBinding
 import com.fighterdiet.utils.Constants
 
-class VolumeFragment(val getVolumeResponseModel: GetVolumeResponseModel, val isSelectionCleared: Boolean) : Fragment(), VolumeAdapter.VolumeCountListener {
+class VolumeFragment(val getVolumeResponseModel: GetVolumeResponseModel) : Fragment(), VolumeAdapter.VolumeCountListener {
     lateinit var binding: FragmentVolumeBinding
     private lateinit var volumeAdapter: VolumeAdapter
     var list: ArrayList<GetVolumeResponseModel.Result> = ArrayList()
     private lateinit var volumeFragListener: VolumeFragInterface
 
     companion object{
-        fun newInstance(getVolumeResponseModel: GetVolumeResponseModel, isSelectionCleared: Boolean = false): VolumeFragment{
-            return VolumeFragment(getVolumeResponseModel, isSelectionCleared)
+        fun newInstance(getVolumeResponseModel: GetVolumeResponseModel): VolumeFragment{
+            return VolumeFragment(getVolumeResponseModel)
         }
 
     }
@@ -43,10 +43,11 @@ class VolumeFragment(val getVolumeResponseModel: GetVolumeResponseModel, val isS
     }
 
     private fun modifyListWhenSelectionCleared(list: ArrayList<GetVolumeResponseModel.Result>) {
-        if(isSelectionCleared){
+        if(Constants.RecipeFilter.isFilterCleared){
             list.forEach {
                 it.isChecked = false
             }
+            volumeAdapter.notifyDataSetChanged()
         }
     }
 

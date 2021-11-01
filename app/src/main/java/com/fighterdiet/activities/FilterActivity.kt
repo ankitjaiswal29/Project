@@ -43,13 +43,17 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
     var newChangesInDietarySelection = false
     var newChangesInVolumeSelection = false
     var newChangesInMealSelection = false
+
     private var mealListFragment: MealsFragment? = null
     private var volumeListFragment: VolumeFragment? = null
     private var dietaryInfoFragment: DietryInfoFragment? = null
-    private var currentScreenType: Int = -1
+
     private var dietaryListModel: GetDietaryResponseModel? = null
     private var volumeListModel: GetVolumeResponseModel? = null
     private var mealListModel: GetMealResponseModel? = null
+
+    private var currentScreenType: Int = -1
+
     private lateinit var binding : ActivityFilterBinding
     private lateinit var tabTitles:Array<String>
     private lateinit var filterViewModel : FilterRecipeViewModel
@@ -82,7 +86,6 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
     override fun setupObserver() {
         filterViewModel.getDietaryResource.observe(this,{
             when(it.status){
-
                 Status.SUCCESS -> {
                     dietaryListModel = it.data?.data
                     Constants.RecipeFilter.selectedDietaryFilter.forEach {
@@ -101,7 +104,6 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
                 Status.ERROR -> {
 
                 }
-
             }
         })
 
@@ -145,7 +147,7 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
 
                     Handler(Looper.getMainLooper()).postDelayed({
                         initialiseViewPager()
-                    },100)
+                    },10)
                 }
 
                 Status.LOADING -> {
@@ -179,21 +181,21 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
         binding.tab.addTab(binding.tab.newTab().setText("Meals"));
 
         dietaryListModel?.let {
-            dietaryInfoFragment = DietryInfoFragment.newInstance(it, Constants.RecipeFilter.isDietaryListCleared)
+            dietaryInfoFragment = DietryInfoFragment.newInstance(it)
             dietaryInfoFragment?.let { fragment ->
                 pagerAdapter.addFragment(fragment, "Dietary Info")
             }
         }
 
         volumeListModel?.let {
-            volumeListFragment = VolumeFragment.newInstance(it, Constants.RecipeFilter.isVolumeListCleared)
+            volumeListFragment = VolumeFragment.newInstance(it)
             volumeListFragment?.let { fragment ->
                     pagerAdapter.addFragment(fragment, "Volume")
                 }
         }
 
         mealListModel?.let {
-            mealListFragment = MealsFragment.newInstance(it, Constants.RecipeFilter.isMealListCleared)
+            mealListFragment = MealsFragment.newInstance(it)
             mealListFragment?.let { fragment ->
                 pagerAdapter.addFragment(fragment, "Meals")
             }
@@ -229,20 +231,21 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
                 Constants.RecipeFilter.selectedDietaryFilter.clear()
                 Constants.RecipeFilter.selectedVolumeFilter.clear()
                 updateTotalFilterCountText()
+                Constants.RecipeFilter.isFilterCleared = true
                 when(currentScreenType){
                     0-> {
                         dietaryInfoFragment?.clearDietaryData()
-                        Constants.RecipeFilter.isDietaryListCleared = true
+//                        Constants.RecipeFilter.isDietaryListCleared = true
                     }
 
                     1-> {
                         volumeListFragment?.clearVolumeData()
-                        Constants.RecipeFilter.isVolumeListCleared = true
+//                        Constants.RecipeFilter.isVolumeListCleared = true
                     }
 
                     2-> {
                         mealListFragment?.clearMealData()
-                        Constants.RecipeFilter.isMealListCleared = true
+//                        Constants.RecipeFilter.isMealListCleared = true
                     }
                 }
                 isNewChanges = false
@@ -297,6 +300,7 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
     }
 
     private fun updateTotalFilterCountText() {
+        Constants.RecipeFilter.isFilterCleared = false
         binding.tvFilterCount.text = "${dietaryCount+volumeCount+mealCount} ${getString(R.string.filters_selected)}"
     }
 
@@ -318,7 +322,8 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
                 Constants.RecipeFilter.selectedDietaryFilter.forEach {
                     it.value.isChecked = false
                 }
-                Constants.RecipeFilter.isDietaryListCleared = false
+//                Constants.RecipeFilter.isDietaryListCleared = false
+                Constants.RecipeFilter.isFilterCleared = false
             }
         }
 
@@ -329,7 +334,8 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
                 Constants.RecipeFilter.selectedMealFilter.forEach {
                     it.value.isChecked = false
                 }
-                Constants.RecipeFilter.isMealListCleared = false
+//                Constants.RecipeFilter.isMealListCleared = false
+                Constants.RecipeFilter.isFilterCleared = false
             }
         }
 
@@ -340,7 +346,8 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
                 Constants.RecipeFilter.selectedVolumeFilter.forEach {
                     it.value.isChecked = false
                 }
-                Constants.RecipeFilter.isVolumeListCleared = false
+//                Constants.RecipeFilter.isVolumeListCleared = false
+                Constants.RecipeFilter.isFilterCleared = false
             }
         }
 

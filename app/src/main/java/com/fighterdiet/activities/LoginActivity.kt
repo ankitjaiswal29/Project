@@ -123,6 +123,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                             PrefManager.putString(PrefManager.KEY_USER_ID,apiResponse.data?.user_id.toString())
                             PrefManager.putString(PrefManager.KEY_AUTH_TOKEN, apiResponse.data?.token?:"")
                             PrefManager.putBoolean(PrefManager.IS_LOGGED_IN, true)
+                            apiResponse.data?.is_subscribed?.let { isSubscribed ->
+                                PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, isSubscribed=="1")
+                            }
                             startActivity(DashboardActivity.getStartIntent(this))
                             finish()
                         }else{

@@ -18,6 +18,7 @@ import com.fighterdiet.databinding.ItemDeleteSpamBinding
 import com.fighterdiet.databinding.ItemDirectionsLayoutBinding
 import com.fighterdiet.interfaces.RecyclerItemClickListener
 import com.fighterdiet.utils.Constants
+import com.fighterdiet.utils.PrefManager
 
 
 class CommentAdapter(
@@ -60,6 +61,10 @@ class CommentAdapter(
 
             if (Build.VERSION.SDK_INT >= 21) {
                 mPopupWindowFilter.elevation = 5.0f
+            }
+
+            if(commentList[adapterPosition].user_id == PrefManager.getString(PrefManager.KEY_USER_ID)?.toInt()?:0) {
+                bindDialog.tvDelete.visibility = View.VISIBLE
             }
 
             mPopupWindowFilter.showAsDropDown(viewType)

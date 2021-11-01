@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -14,9 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
-import com.fighterdiet.activities.IntroAndDecisionActivity
 import com.fighterdiet.activities.LoginActivity
-import com.fighterdiet.activities.MemberShipActivity
 import com.fighterdiet.activities.RecipeDetailsActivity
 import com.fighterdiet.adapters.HomeRecipeListRecyclerAdapter
 import com.fighterdiet.data.api.RetrofitBuilder
@@ -71,6 +68,7 @@ class HomeFragment : BaseFragment() {
     ){
         isFilterMode = false
         isPagination = false
+        isSearchMode = false
         mSearchedKeyword = ""
         if(searchKeys.isNotBlank()){
             isSearchMode = true
@@ -119,25 +117,26 @@ class HomeFragment : BaseFragment() {
                             binding.tvFilterCount.text = "${Constants.RecipeFilter.totalFilterCount} ${ getString(R.string.filters_selected_tap_to_clear) }"
                             binding.tvFilterCount.visibility = View.VISIBLE
                         }
-
-                        if (it.data?.data?.result == null){
-                            binding.tvNoData.visibility = View.VISIBLE
-                            return@observe
+                        if(!it.data?.data?.result.isNullOrEmpty())
+                            recipeListAdapter.updateAll(it.data?.data?.result!!, isSearchMode)
+                        else{
+                            if(isSearchMode)
+                                binding.tvNoData.visibility = View.VISIBLE
                         }
-
-                        recipeListAdapter.updateAll(it.data.data?.result!!)
-
                         return@observe
                     }
 
                     binding.tvFilterCount.visibility = View.GONE
-                    if (it.data?.data?.result.isNullOrEmpty()){
-                        binding.tvNoData.visibility = View.VISIBLE
-                        return@observe
-                    }
 //                    isFilterMode = false
                     recipiesModel = it.data?.data
-                    recipeListAdapter.addAll(it.data?.data?.result!!)
+                    if(!it.data?.data?.result.isNullOrEmpty())
+                        recipeListAdapter.addAll(it.data?.data?.result!!)
+
+//                    if (recipeListAdapter.itemCount==0){
+//                        binding.tvNoData.visibility = View.VISIBLE
+//                        return@observe
+//                    }
+                    recipeListAdapter.notifyDataSetChanged()
 
 
                 }
@@ -191,6 +190,7 @@ class HomeFragment : BaseFragment() {
                     .putExtra(Constants.RECIPE_NAME, recipe.recipe_name)
                 when(it.is_subscribed){
                     "1" -> {
+
                         startActivity(act)
                     }
                     "0" -> {
