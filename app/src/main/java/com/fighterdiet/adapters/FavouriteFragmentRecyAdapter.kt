@@ -10,13 +10,14 @@ import com.bumptech.glide.Glide
 import com.fighterdiet.R
 import com.fighterdiet.activities.MemberShipActivity
 import com.fighterdiet.data.model.responseModel.FavouriteListResponseModel
+import com.fighterdiet.data.model.responseModel.TrendingListResponseModel
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
 import java.util.ArrayList
 
 class FavouriteFragmentRecyAdapter(
     private var context: FragmentActivity?,
     private var favouriteList: ArrayList<FavouriteListResponseModel.Favourite>,
-    private var itemClickListener: (Any, Any) -> Unit
+    private var itemClickListener: (Int, FavouriteListResponseModel.Favourite) -> Unit
 ) : RecyclerView.Adapter<FavouriteFragmentRecyAdapter.MyViewHolder>() {
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
@@ -30,14 +31,14 @@ class FavouriteFragmentRecyAdapter(
 
         override fun onClick(view: View?) {
             when (view!!.id) {
-                R.id.tvCaloriesDescription -> {
-
-                    favouriteList[adapterPosition].isDescOpened = !favouriteList[adapterPosition].isDescOpened
-                    notifyDataSetChanged()
-                }
+//                R.id.tvCaloriesDescription -> {
+//
+//                    favouriteList[adapterPosition].isDescOpened = !favouriteList[adapterPosition].isDescOpened
+//                    notifyDataSetChanged()
+//                }
 
                 else -> {
-                    context?.startActivity(MemberShipActivity.getStartIntent(context!!))
+//                    context?.startActivity(MemberShipActivity.getStartIntent(context!!))
                 }
 
 //                R.id.rlCalories -> {
@@ -72,12 +73,9 @@ class FavouriteFragmentRecyAdapter(
         favouriteList[position].recipe_name.let {
             holder.binding.tvRecipeName.text = it
         }
-        /*holder.binding?.ivItemHome?.setImageResource(homeList[position].i)
-        if (homeList.get(position).isDescOpened) {
-            holder.binding?.rlCaloriesDesc?.visibility = View.VISIBLE
-        } else {
-            holder.binding?.rlCaloriesDesc?.visibility = View.GONE
-        }*/
+        holder.binding.root.setOnClickListener {
+            itemClickListener.invoke(position, favouriteList[position])
+        }
     }
 
     override fun getItemCount(): Int {

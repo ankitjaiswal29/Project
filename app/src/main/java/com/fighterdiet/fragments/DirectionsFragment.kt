@@ -37,30 +37,44 @@ class DirectionsFragment(val recipeDirectionModel: List<RecipeContentResponseMod
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_directions, container,false)
+
+        Constants.RecipeDetails.recipeNotesLive.observe(viewLifecycleOwner,{
+            binding.etNote.setText(it)
+        })
+        initListener()
+        initRv()
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initListener()
-        initRv()
-        binding.etNote.setText(Constants.RecipeDetails.recipeNotes)
-    }
-
     private fun initListener() {
-        binding.etNote.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//        binding.etNote.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//                if(p0.toString()!=binding.etNote.text.toString())
+//                    Constants.RecipeDetails.recipeNotesLive.postValue(p0.toString())
+//            }
+//
+//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//
+//
+//            }
+//
+//            override fun afterTextChanged(p0: Editable?) {
+//
+//            }
+//
+//        })
 
-            }
+//        binding.etNote.setOnFocusChangeListener { view, isFocused ->
+//            if(!isFocused){
+//                Constants.RecipeDetails.recipeNotesLive.postValue(binding.etNote.text.toString())
+//            }
+//        }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                Constants.RecipeDetails.recipeNotes = p0.toString()
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-
-        })
     }
+
+    override fun onPause() {
+        super.onPause()
+        Constants.RecipeDetails.recipeNotesLive.postValue(binding.etNote.text.toString())
+    }
+
 }

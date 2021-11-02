@@ -14,4 +14,5 @@ class ViewPagerRecipeInfoAdapter(var fragments: ArrayList<Fragment>,
     override fun getItem(position: Int): Fragment {
         return fragments.get(position)
     }
+
 }

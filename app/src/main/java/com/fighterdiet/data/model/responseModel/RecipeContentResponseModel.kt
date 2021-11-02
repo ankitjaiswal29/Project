@@ -1,13 +1,17 @@
 package com.fighterdiet.data.model.responseModel
 
+import android.os.Parcelable
+import com.google.gson.JsonObject
 import com.google.gson.internal.LinkedTreeMap
+import kotlinx.android.parcel.Parcelize
+import org.json.JSONObject
 
 data class RecipeContentResponseModel(
     val directions: List<Direction>,
     var favourite: Int,
     val info: List<Info>,
     val ingredients: List<Ingredient>,
-    val recipe_note: RecipeNote,
+    var recipe_note: Any,
     val tips: List<Tip>
 ){
     data class Direction(
@@ -52,13 +56,14 @@ data class RecipeContentResponseModel(
         val updated_at: String
     )
 
+    @Parcelize
     data class RecipeNote(
-        val id: Int,
-        val user_id: Int,
-        val receipe_id: Int,
-        val type: Int,
+        val id: Double,
+        val user_id: Double,
+        val receipe_id: Double,
+        val type: Double,
         val description: String,
         val created_at: String,
         val updated_at: String
-    )
+    ): Parcelable
 }

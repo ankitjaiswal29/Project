@@ -93,32 +93,57 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
 
     }
 
-    fun isValid() :Boolean{
+    private fun isValid() :Boolean{
         if (TextUtils.isEmpty(user_name)){
             errorMsg.value = "Please enter user name"
             return false
-        }else if (TextUtils.isEmpty(first_name)) {
+        }
+
+        if (TextUtils.isEmpty(first_name)) {
             errorMsg.value = "Please enter first name"
             return false
-        } else if (TextUtils.isEmpty(last_name)) {
+        }
+
+        if (TextUtils.isEmpty(last_name)) {
             errorMsg.value = "Please enter last name"
             return false
-        } else if (TextUtils.isEmpty(email)) {
+        }
+
+        if (TextUtils.isEmpty(email)) {
             errorMsg.value = "Please enter email"
             return false
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             errorMsg.value = "Please enter valid email"
             return false
-        } else if (TextUtils.isEmpty(password)) {
+        }
+
+        if (TextUtils.isEmpty(password)) {
             errorMsg.value = "Please enter password"
             return false
-        } else if (TextUtils.isEmpty(confirm_password)) {
+        }
+
+        if (password.length in 7..20) {
+            errorMsg.value = "Minimum password should be 8 digits"
+            return false
+        }
+
+        if (TextUtils.isEmpty(confirm_password)) {
             errorMsg.value = "Please enter confirm password"
             return false
-        } else if (!password.equals(confirm_password)) {
+        }
+
+        if (confirm_password.length in 7..20) {
+            errorMsg.value = "Minimum password should be 8 digits"
+            return false
+        }
+
+        if (!password.equals(confirm_password)) {
             errorMsg.value = "password and confirm password doesn't match."
             return false
         }
+
         return true
     }
 

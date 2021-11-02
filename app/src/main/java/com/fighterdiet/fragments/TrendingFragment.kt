@@ -100,15 +100,15 @@ class TrendingFragment : BaseFragment() {
                 return@TrendingFragmentRecyAdapter
             }
 
-            if(PrefManager.getBoolean(PrefManager.IS_SUBSCRIBED)){
+//            if(PrefManager.getBoolean(PrefManager.IS_SUBSCRIBED)){
                 val act = RecipeDetailsActivity.getStartIntent(requireContext())
                     .putExtra(Constants.RECIPE_ID, data.id)
                     .putExtra(Constants.RECIPE_IMAGE, data.recipe_image)
                     .putExtra(Constants.RECIPE_NAME, data.recipe_name)
                 startActivity(act)
-            }
-            else
-                startActivity(Intent(requireActivity(), MemberShipActivity::class.java))
+//            }
+//            else
+//                startActivity(Intent(requireActivity(), MemberShipActivity::class.java))
 
         }
         binding.rvTrendingRecycler.adapter = trendingAdapter
@@ -116,7 +116,7 @@ class TrendingFragment : BaseFragment() {
         binding.rvTrendingRecycler.addOnScrollListener(object :
             EndlessScrollViewListener(layoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int) {
-                viewModel.getTrendingList(totalItemsCount,limit)
+//                viewModel.getTrendingList(totalItemsCount,limit)
             }
 
         })

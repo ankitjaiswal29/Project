@@ -93,7 +93,7 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
                 R.id.btnMembershipMonth -> {
 //                    finish()
                     if(skuDetailsList.isNotEmpty() && skuDetailsList.size>=1)
-                        launchPayment(skuDetailsList[0])
+                        launchPayment(skuDetailsList[1])
 
 //                    startActivity(RecipeInfoActivity.getStartIntent(this))
                 }

@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
 import com.fighterdiet.activities.LoginActivity
+import com.fighterdiet.activities.MemberShipActivity
 import com.fighterdiet.activities.RecipeDetailsActivity
 import com.fighterdiet.adapters.HomeRecipeListRecyclerAdapter
 import com.fighterdiet.data.api.RetrofitBuilder
@@ -31,6 +32,7 @@ class HomeFragment : BaseFragment() {
     private var isPagination: Boolean = false
     private var isFilterMode: Boolean = false
     private var isSearchMode: Boolean = false
+    private var isLoadingSameSearch: Boolean = false
     private var mSearchedKeyword: String = ""
     private var recipiesModel: RecipeListResponseModel? = null
     private lateinit var viewModel: HomeViewModel
@@ -69,6 +71,7 @@ class HomeFragment : BaseFragment() {
         isFilterMode = false
         isPagination = false
         isSearchMode = false
+        isLoadingSameSearch = false
         mSearchedKeyword = ""
         if(searchKeys.isNotBlank()){
             isSearchMode = true
@@ -179,26 +182,27 @@ class HomeFragment : BaseFragment() {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvHomeRecycler.layoutManager = layoutManager
         recipeListAdapter = HomeRecipeListRecyclerAdapter(requireActivity(), recipeList) { position, recipe ->
-            recipiesModel?.let {
-                if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
-                    startActivity(Intent(requireContext(), LoginActivity::class.java))
-                    return@HomeRecipeListRecyclerAdapter
-                }
-                val act = RecipeDetailsActivity.getStartIntent(requireContext())
-                    .putExtra(Constants.RECIPE_ID, recipe.id)
-                    .putExtra(Constants.RECIPE_IMAGE, recipe.recipe_image)
-                    .putExtra(Constants.RECIPE_NAME, recipe.recipe_name)
-                when(it.is_subscribed){
-                    "1" -> {
+            if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
+                startActivity(Intent(requireContext(), LoginActivity::class.java))
+                return@HomeRecipeListRecyclerAdapter
+            }
+            val act = RecipeDetailsActivity.getStartIntent(requireContext())
+                .putExtra(Constants.RECIPE_ID, recipe.id)
+                .putExtra(Constants.RECIPE_IMAGE, recipe.recipe_image)
+                .putExtra(Constants.RECIPE_NAME, recipe.recipe_name)
+            when(recipiesModel?.is_subscribed){
+                "1" -> {
 
-                        startActivity(act)
-                    }
-                    "0" -> {
-//                        startActivity(MemberShipActivity.getStartIntent(requireContext()))
-                        startActivity(act)
-                    }
-
+                    startActivity(act)
                 }
+                "0" -> {
+                    if(position == 0){
+                        startActivity(MemberShipActivity.getStartIntent(requireContext()))
+                    }
+                    else
+                        startActivity(act)
+                }
+
             }
         }
         binding.rvHomeRecycler.adapter = recipeListAdapter
@@ -206,7 +210,7 @@ class HomeFragment : BaseFragment() {
         binding.rvHomeRecycler.addOnScrollListener(object :
             EndlessScrollViewListener(layoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int) {
-//                if(!isFilterMode)
+                if(!isSearchMode)
                     getRecipes(mSearchedKeyword, totalItemsCount, limit)
             }
 

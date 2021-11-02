@@ -1,6 +1,5 @@
 package com.fighterdiet.activities
 
-import android.R.id
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -24,17 +23,21 @@ import com.fighterdiet.fragments.*
 import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.PrefManager
 import com.fighterdiet.utils.Status
-import com.fighterdiet.utils.Utils
 import com.fighterdiet.viewModel.RecipeInfoViewModel
 import com.google.android.material.tabs.TabLayout
 import java.lang.Exception
-import java.net.URI
-import android.R.id.shareText
 
-import androidx.core.app.ShareCompat
+import com.google.gson.internal.LinkedTreeMap
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
+    private lateinit var viewPagerAdapter: ViewPagerRecipeInfoAdapter
+    private lateinit var infoFragment: Fragment
+    private lateinit var ingredientsFragment: Fragment
+    private lateinit var directionsFragment: Fragment
+    private lateinit var tipsFragment: Fragment
     private var recipeImage: String? = null
     private var recipeName: String? = null
     private var recipeNoteModel: RecipeContentResponseModel.RecipeNote? = null
@@ -56,8 +59,8 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
 
     override fun setupUI() {
         intent.extras?.let {
-            recipeId = it.getString(Constants.RECIPE_ID, "")
-            if(recipeId.isNotEmpty()){
+            recipeId = it.getInt(Constants.RECIPE_ID, 0).toString()
+            if(recipeId.isNotEmpty() && recipeId != "0"){
                 viewModel.getRecipeContent(RecipeContentRequestModel(recipeId))
             }
             recipeImage = it.getString(Constants.RECIPE_IMAGE, "")
@@ -97,12 +100,27 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                     it.data?.let { recipeContent ->
                         recipeContentModel = recipeContent.data
 
-//                        isNoteAvailable = true
-                        recipeNoteModel = recipeContent.data?.recipe_note as RecipeContentResponseModel.RecipeNote
-//                        if(recipeContent.data?.recipe_note is RecipeContentResponseModel.RecipeNote){
-//
-//                        }
-                        initialise()
+                        recipeContent.data?.let {
+
+                            if(it.recipe_note !is String){
+                                val recipeNotesTree:LinkedTreeMap<String, Any> = recipeContentModel?.recipe_note as LinkedTreeMap<String, Any>
+
+                                recipeNoteModel = RecipeContentResponseModel.RecipeNote(
+                                    recipeNotesTree["id"] as Double,
+                                    recipeNotesTree["user_id"] as Double,
+                                    recipeNotesTree["receipe_id"] as Double,
+                                    recipeNotesTree["type"] as Double,
+                                    recipeNotesTree["description"] as String,
+                                    recipeNotesTree["created_at"] as String,
+                                    recipeNotesTree["updated_at"] as String
+                                )
+                                isNoteAvailable = true
+                                it.recipe_note = recipeNoteModel as RecipeContentResponseModel.RecipeNote
+                            }
+                            initialise()
+
+                        }
+
                     }
 
                 }
@@ -184,14 +202,14 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
         binding.ivShare.setOnClickListener(this)
 
         recipeContentModel?.let {
-            val info = InfoFragment.getInstance(it.info)
-            val ingredientsFragment = IngredientsFragment.getInstance(it.ingredients)
-            val directions = DirectionsFragment.getInstance(it.directions)
-            val tipsFragment = TipsFragment.getInstance(it.tips)
+            infoFragment = InfoFragment.getInstance(it.info)
+            ingredientsFragment = IngredientsFragment.getInstance(it.ingredients)
+            directionsFragment = DirectionsFragment.getInstance(it.directions)
+            tipsFragment = TipsFragment.getInstance(it.tips)
 
-            fragments.add(info)
+            fragments.add(infoFragment)
             fragments.add(ingredientsFragment)
-            fragments.add(directions)
+            fragments.add(directionsFragment)
             fragments.add(tipsFragment)
         }
 
@@ -210,17 +228,21 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
 //        if(isNoteAvailable){
             recipeNoteModel?.let {
                 Constants.RecipeDetails.recipeNotes = it.description
+                Constants.RecipeDetails.recipeNotesLive.postValue(it.description)
+                return
             }
+        Constants.RecipeDetails.recipeNotesLive.postValue("")
 //        }
     }
 
     private fun setupTabs() {
-        val adapter = ViewPagerRecipeInfoAdapter(
+        viewPagerAdapter = ViewPagerRecipeInfoAdapter(
             fragments,
             supportFragmentManager,
             binding.tab.tabCount
         )
-        binding.vpInfoRecepie.adapter = adapter
+
+        binding.vpInfoRecepie.adapter = viewPagerAdapter
 
         binding.vpInfoRecepie.addOnPageChangeListener(
             TabLayout.TabLayoutOnPageChangeListener(
@@ -308,12 +330,32 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                 ))
             }
             else{
-                if(Constants.RecipeDetails.recipeNotes != recipeNoteModel?.description)
+                val currentFragment: Fragment
+                when(binding.vpInfoRecepie.currentItem){
+                    0 -> {
+                        currentFragment = infoFragment as InfoFragment
+                        Constants.RecipeDetails.recipeNotesLive.value = currentFragment.binding.etNoteInfo.text.toString()
+                    }
+                    1 -> {
+                        currentFragment = ingredientsFragment as IngredientsFragment
+                        Constants.RecipeDetails.recipeNotesLive.value = currentFragment.binding.etNoteIngred.text.toString()
+                    }
+                    2 -> {
+                        currentFragment = directionsFragment as DirectionsFragment
+                        Constants.RecipeDetails.recipeNotesLive.value = currentFragment.binding.etNote.text.toString()
+                    }
+                    3 -> {
+                        currentFragment = tipsFragment as TipsFragment
+                        Constants.RecipeDetails.recipeNotesLive.value = currentFragment.binding.etNote.text.toString()
+                    }
+                }
+
+                if(Constants.RecipeDetails.recipeNotesLive.value != recipeNoteModel?.description)
                 {
                     viewModel.updateNotesApi(
                         UpdateNotesRequestModel(
                             note_id = recipeNoteModel?.id.toString(),
-                            description = Constants.RecipeDetails.recipeNotes
+                            description = Constants.RecipeDetails.recipeNotesLive.value!!
                         )
                     )
                 }

@@ -12,7 +12,7 @@ data class RecipeListResponseModel(
 ):Parcelable{
     @Parcelize
     data class Recipies(
-        val id: String?,
+        val id: Int?,
         val recipe_name: String?,
         val recipe_image: String?,
         val calories: String?,

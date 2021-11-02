@@ -3,9 +3,9 @@ package com.fighterdiet.data.model.responseModel
 data class FavouriteListResponseModel(val active: String, val is_subscribed: String, val result: List<Favourite>,
                                       val totalRecord: Int){
     data class Favourite(
-        val id: Int?,
+        val recipe_id: Int?,
+        val user_id: Int?,
         val recipe_name: String?,
-        val recipe_image: String?,
         val calories: String?,
         val protein: String?,
         val serving_for: String?,
@@ -14,8 +14,12 @@ data class FavouriteListResponseModel(val active: String, val is_subscribed: Str
         val tips: String?,
         val meal: String?,
         val volume: String?,
+        val recipe_image: String?,
+
+        //self created field
         var isSelected: Boolean = false,
-        var isDescOpened:Boolean = false
-    )
+        var isDescOpened:Boolean = false,
+
+        )
 
 }

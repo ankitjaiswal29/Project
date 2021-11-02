@@ -1,5 +1,6 @@
 package com.fighterdiet.utils
 
+import androidx.lifecycle.MutableLiveData
 import com.fighterdiet.data.model.responseModel.GetDietaryResponseModel
 import com.fighterdiet.data.model.responseModel.GetMealResponseModel
 import com.fighterdiet.data.model.responseModel.GetVolumeResponseModel
@@ -41,6 +42,7 @@ object Constants {
 
     object RecipeDetails{
         var recipeNotes: String = ""
+        var recipeNotesLive: MutableLiveData<String> = MutableLiveData("")
     }
 
     object RecipeFilter{

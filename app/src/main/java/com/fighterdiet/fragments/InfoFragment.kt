@@ -23,42 +23,47 @@ class InfoFragment(val recipeInfoModel: List<RecipeContentResponseModel.Info>) :
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_info, container, false)
+
+        Constants.RecipeDetails.recipeNotesLive.observe(viewLifecycleOwner,{
+            binding.etNoteInfo.setText(it)
+        })
+
+        initialise()
+        setupUI()
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initialise()
-        setupUI()
+    private fun initialise() {
+//        binding.etNoteInfo.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//                if(p0.toString()!=binding.etNoteInfo.text.toString())
+//                    Constants.RecipeDetails.recipeNotesLive.postValue(p0.toString())
+//            }
+//
+//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//
+//            }
+//
+//
+//            override fun afterTextChanged(p0: Editable?) {
+//
+//            }
+//
+//        })
+
     }
 
-    private fun initialise() {
-        binding.etNoteInfo.addTextChangedListener(object :TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                Constants.RecipeDetails.recipeNotes = p0.toString()
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-        })
+    override fun onPause() {
+        super.onPause()
+        Constants.RecipeDetails.recipeNotesLive.postValue(binding.etNoteInfo.text.toString())
     }
 
     private fun setupUI() {
-        binding.etNoteInfo.setText(Constants.RecipeDetails.recipeNotes)
         if(recipeInfoModel.isNullOrEmpty())
             return
 

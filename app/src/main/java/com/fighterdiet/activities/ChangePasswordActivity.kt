@@ -3,6 +3,7 @@ package com.fighterdiet.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.fighterdiet.R
 import com.fighterdiet.data.api.RetrofitBuilder
@@ -59,10 +60,11 @@ class ChangePasswordActivity : BaseActivity() {
                     if (apiResponse.status) {
                         if (apiResponse.code==200){
                             PrefManager.clearPref()
+                            Utils.showToast(this, it.message)
                             PrefManager.putBoolean(PrefManager.IS_LOGGED_IN, false)
                             val loginIntent = Intent(this, LoginActivity::class.java)
-                            loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                             startActivity(loginIntent)
+                            finishAffinity()
                         }else{
                             Utils.showSnackBar(binding.root, apiResponse.message)
                         }
@@ -75,8 +77,8 @@ class ChangePasswordActivity : BaseActivity() {
             }
 
         })
-//        viewModel.getErrorMsg().observe(this, Observer {
-//            Utils.showSnackBar(binding.root, it)
-//        })
+        viewModel.getErrorMsg().observe(this, Observer {
+            Utils.showSnackBar(binding.root, it)
+        })
     }
 }
