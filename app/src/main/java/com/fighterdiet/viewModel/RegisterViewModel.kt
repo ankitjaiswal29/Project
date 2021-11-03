@@ -73,7 +73,6 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
                 }
             }
         }
-
     }
 
     fun checkUserNameApi(userName: String) {
@@ -90,7 +89,6 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
                 }
             }
         }
-
     }
 
     private fun isValid() :Boolean{
@@ -124,7 +122,7 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
             return false
         }
 
-        if (password.length in 7..20) {
+        if (password.length < 8 || password.length > 20 ) {
             errorMsg.value = "Minimum password should be 8 digits"
             return false
         }
@@ -134,7 +132,7 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
             return false
         }
 
-        if (confirm_password.length in 7..20) {
+        if (confirm_password.length < 8 || confirm_password.length > 20) {
             errorMsg.value = "Minimum password should be 8 digits"
             return false
         }

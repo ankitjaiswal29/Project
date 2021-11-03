@@ -191,7 +191,7 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
 
     override fun onPurchasesUpdated(p0: BillingResult, p1: MutableList<Purchase>?) {
 
-        if (!isFinishing()) {
+        if (!isFinishing) {
 
             if (p0.responseCode == BillingClient.BillingResponseCode.OK) {
                 for (purchase in p1!!) {
