@@ -1,10 +1,7 @@
 package com.fighterdiet.utils
 
 import androidx.lifecycle.MutableLiveData
-import com.fighterdiet.data.model.responseModel.GetDietaryResponseModel
-import com.fighterdiet.data.model.responseModel.GetMealResponseModel
-import com.fighterdiet.data.model.responseModel.GetVolumeResponseModel
-import com.fighterdiet.data.model.responseModel.RecipeContentResponseModel
+import com.fighterdiet.data.model.responseModel.*
 
 object Constants {
 
@@ -39,6 +36,10 @@ object Constants {
     const val RECIPE_ID = "recipe_id"
     const val RECIPE_IMAGE = "recipe_image"
     const val RECIPE_NAME = "recipe_name"
+
+    object DashboardDetails{
+        var recipiesModel: RecipeListResponseModel? = null
+    }
 
     object RecipeDetails{
         var recipeNotes: String = ""

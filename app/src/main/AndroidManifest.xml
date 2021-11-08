@@ -20,12 +20,14 @@
         android:theme="@style/Theme.FighterDietApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.UpdatePasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:exported="false"
-            android:name=".activities.ImageZoomOutActivity" />
-<!--        <activity android:name=".fragments.DietryInfoActivity" />-->
+            android:name=".activities.ImageZoomOutActivity"
+            android:exported="false" /> <!-- <activity android:name=".fragments.DietryInfoActivity" /> -->
         <activity android:name=".activities.FilterActivity" />
         <activity
             android:name=".activities.PrivacyAndTermsActivity"
@@ -106,19 +108,18 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activities.LoginActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="true">
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
-                <action
-                    android:name="android.intent.action.MAIN" />
-                <category
-                    android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <intent-filter android:label="FighterDiet">
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
@@ -126,14 +127,11 @@
                     android:host="fighterdiet.page.link"
                     android:pathPrefix="/1gGs"
                     android:scheme="https" />
-
                 <data
                     android:host="fighterdiet.page.link"
                     android:pathPrefix="/1gGs"
                     android:scheme="http" />
-
             </intent-filter>
-
         </activity>
     </application>
 

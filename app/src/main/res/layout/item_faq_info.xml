@@ -47,62 +47,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
+            tools:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_info_header_section">
 
-
-           <!-- <ImageView
-                android:id="@+id/iv_video_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:src="@mipmap/bg_video"
+            <View
+                android:id="@+id/view_divider"
+                android:layout_margin="@dimen/_5sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@color/darkGrey"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:src="@mipmap/icn_play"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_video_image"
-                app:layout_constraintEnd_toEndOf="@+id/iv_video_image"
-                app:layout_constraintStart_toStartOf="@+id/iv_video_image"
-                app:layout_constraintTop_toTopOf="@+id/iv_video_image" />
--->
             <TextView
                 android:id="@+id/product_info_subtitle"
                 android:layout_width="match_parent"
-                app:layout_constraintTop_toTopOf="parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_5sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
-                android:background="@android:drawable/screen_background_dark_transparent"
-                android:fontFamily="@font/inter_medium"
+                android:fontFamily="@font/inter_regular"
                 android:gravity="start"
                 android:text="@string/calories_budgets_are_your_tool_to_help_you"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_14ssp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-           <!-- <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:background="@android:drawable/screen_background_dark_transparent"
-                android:fontFamily="@font/inter_medium"
-                android:gravity="center"
-                android:maxLines="1"
-                android:text="@string/calories_budgets_are_your_tool_to_help_you"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_14ssp"
-                app:layout_constraintBottom_toBottomOf="@id/iv_video_image"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />-->
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_divider"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

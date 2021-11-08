@@ -169,8 +169,8 @@ class FaqActivity : BaseActivity(), View.OnClickListener {
                FaqAdapter(this@FaqActivity, faqList, binding.mainView)*/
         productInfoAdapter =
             FaqAdapter(this@FaqActivity, faqList, binding.mainView)
-        binding.rvFaq.setLayoutManager(LinearLayoutManager(this))
-        binding.rvFaq.setAdapter(productInfoAdapter)
+        binding.rvFaq.layoutManager = LinearLayoutManager(this)
+        binding.rvFaq.adapter = productInfoAdapter
     }
 
 

@@ -65,6 +65,9 @@ interface ApiService {
     @POST("change-password")
     suspend fun changePassword(@Body changePasswordRequestModel: ChangePasswordRequestModel): ApiResponse<Any>
 
+    @PUT("reset-password")
+    suspend fun resetPassword(@Body changePasswordRequestModel: ResetPasswordRequestModel): ApiResponse<Any>
+
     @POST("check-username")
     suspend fun checkUserName(@Body model: CheckUserNameRequest): ApiResponse<CheckUserNameResponseModel>
 

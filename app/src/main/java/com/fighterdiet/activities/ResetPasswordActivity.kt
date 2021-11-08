@@ -108,4 +108,9 @@ class ResetPasswordActivity : BaseActivity() {
             return Intent(context, ResetPasswordActivity::class.java)
         }
     }
+
+    override fun onStop() {
+        super.onStop()
+        finish()
+    }
 }

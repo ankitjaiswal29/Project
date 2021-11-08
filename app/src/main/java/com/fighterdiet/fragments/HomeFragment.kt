@@ -34,7 +34,7 @@ class HomeFragment : BaseFragment() {
     private var isSearchMode: Boolean = false
     private var isLoadingSameSearch: Boolean = false
     private var mSearchedKeyword: String = ""
-    private var recipiesModel: RecipeListResponseModel? = null
+//    private var recipiesModel: RecipeListResponseModel? = null
     private lateinit var viewModel: HomeViewModel
     lateinit var binding: FragmentHomeBinding
     private lateinit var recipeListAdapter: HomeRecipeListRecyclerAdapter
@@ -131,7 +131,8 @@ class HomeFragment : BaseFragment() {
 
                     binding.tvFilterCount.visibility = View.GONE
 //                    isFilterMode = false
-                    recipiesModel = it.data?.data
+                    Constants.DashboardDetails.recipiesModel = it.data?.data
+
                     if(!it.data?.data?.result.isNullOrEmpty())
                         recipeListAdapter.addAll(it.data?.data?.result!!)
 
@@ -190,7 +191,7 @@ class HomeFragment : BaseFragment() {
                 .putExtra(Constants.RECIPE_ID, recipe.id)
                 .putExtra(Constants.RECIPE_IMAGE, recipe.recipe_image)
                 .putExtra(Constants.RECIPE_NAME, recipe.recipe_name)
-            when(recipiesModel?.is_subscribed){
+            when(Constants.DashboardDetails.recipiesModel?.is_subscribed){
                 "1" -> {
 
                     startActivity(act)

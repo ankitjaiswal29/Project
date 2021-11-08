@@ -80,6 +80,7 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
     override fun setupViewModel() {
         filterViewModel = ViewModelProvider(this, FilterRecipeModelProvider(FilterRecipeRepository(RetrofitBuilder.apiService)))
             .get(FilterRecipeViewModel::class.java)
+        binding.pbFilter.visibility = View.VISIBLE
         filterViewModel.getDietaryApi()
     }
 
@@ -145,6 +146,7 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
                         }
                     }
 
+                    binding.pbFilter.visibility = View.GONE
                     Handler(Looper.getMainLooper()).postDelayed({
                         initialiseViewPager()
                     },10)
@@ -214,6 +216,7 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
 
             R.id.tv_apply ->{
                 Constants.RecipeFilter.isFilterApplied = true
+                startActivity(DashboardActivity.getStartIntent(this))
                 finish()
             }
 
@@ -232,6 +235,8 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
                 Constants.RecipeFilter.selectedVolumeFilter.clear()
                 updateTotalFilterCountText()
                 Constants.RecipeFilter.isFilterCleared = true
+                Constants.RecipeFilter.isFilterApplied = false
+
                 when(currentScreenType){
                     0-> {
                         dietaryInfoFragment?.clearDietaryData()

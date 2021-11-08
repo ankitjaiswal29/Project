@@ -323,35 +323,34 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
     override fun onBackPressed() {
 
         recipeContentModel?.let {
-            if(recipeNoteModel == null && Constants.RecipeDetails.recipeNotes.isNotEmpty()){
+            val currentFragment: Fragment
+            when(binding.vpInfoRecepie.currentItem){
+                0 -> {
+                    currentFragment = infoFragment as InfoFragment
+                    Constants.RecipeDetails.recipeNotesLive.value = currentFragment.binding.etNoteInfo.text.toString()
+                }
+                1 -> {
+                    currentFragment = ingredientsFragment as IngredientsFragment
+                    Constants.RecipeDetails.recipeNotesLive.value = currentFragment.binding.etNoteIngred.text.toString()
+                }
+                2 -> {
+                    currentFragment = directionsFragment as DirectionsFragment
+                    Constants.RecipeDetails.recipeNotesLive.value = currentFragment.binding.etNote.text.toString()
+                }
+                3 -> {
+                    currentFragment = tipsFragment as TipsFragment
+                    Constants.RecipeDetails.recipeNotesLive.value = currentFragment.binding.etNote.text.toString()
+                }
+            }
+
+            if(recipeNoteModel == null && Constants.RecipeDetails.recipeNotesLive.value!!.isNotEmpty()){
                 viewModel.addNotesApi(AddNotesRequestModel(
                     recipe_id = recipeId,
-                    description = Constants.RecipeDetails.recipeNotes
+                    description = Constants.RecipeDetails.recipeNotesLive.value!!
                 ))
             }
             else{
-                val currentFragment: Fragment
-                when(binding.vpInfoRecepie.currentItem){
-                    0 -> {
-                        currentFragment = infoFragment as InfoFragment
-                        Constants.RecipeDetails.recipeNotesLive.value = currentFragment.binding.etNoteInfo.text.toString()
-                    }
-                    1 -> {
-                        currentFragment = ingredientsFragment as IngredientsFragment
-                        Constants.RecipeDetails.recipeNotesLive.value = currentFragment.binding.etNoteIngred.text.toString()
-                    }
-                    2 -> {
-                        currentFragment = directionsFragment as DirectionsFragment
-                        Constants.RecipeDetails.recipeNotesLive.value = currentFragment.binding.etNote.text.toString()
-                    }
-                    3 -> {
-                        currentFragment = tipsFragment as TipsFragment
-                        Constants.RecipeDetails.recipeNotesLive.value = currentFragment.binding.etNote.text.toString()
-                    }
-                }
-
-                if(Constants.RecipeDetails.recipeNotesLive.value != recipeNoteModel?.description)
-                {
+                if(Constants.RecipeDetails.recipeNotesLive.value != recipeNoteModel?.description) {
                     viewModel.updateNotesApi(
                         UpdateNotesRequestModel(
                             note_id = recipeNoteModel?.id.toString(),

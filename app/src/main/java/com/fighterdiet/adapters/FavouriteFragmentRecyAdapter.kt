@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.fighterdiet.R
 import com.fighterdiet.activities.MemberShipActivity
@@ -19,7 +20,7 @@ class FavouriteFragmentRecyAdapter(
     private var favouriteList: ArrayList<FavouriteListResponseModel.Favourite>,
     private var itemClickListener: (Int, FavouriteListResponseModel.Favourite) -> Unit
 ) : RecyclerView.Adapter<FavouriteFragmentRecyAdapter.MyViewHolder>() {
-
+    private lateinit var circularProgressDrawable: CircularProgressDrawable
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         val binding: ItemHomeFragmentRecyclerDesignBinding? = DataBindingUtil.bind(itemView)
@@ -56,6 +57,10 @@ class FavouriteFragmentRecyAdapter(
         parent: ViewGroup,
         viewType: Int
     ): MyViewHolder {
+        circularProgressDrawable = CircularProgressDrawable(parent.context)
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.start()
         val view =
             LayoutInflater.from(context)
                 .inflate(R.layout.item_home_fragment_recycler_design, parent, false)
@@ -65,7 +70,7 @@ class FavouriteFragmentRecyAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         Glide.with(holder.itemView.context)
             .load(favouriteList[position].recipe_image)
-            .placeholder(R.color.greencolor)
+            .placeholder(circularProgressDrawable)
             .into(holder.binding!!.ivItemHome)
 
         holder.binding.tvCaloriesDescription.visibility = if (favouriteList[position].isDescOpened) View.VISIBLE else View.GONE

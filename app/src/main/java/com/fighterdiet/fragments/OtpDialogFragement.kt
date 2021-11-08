@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.fighterdiet.R
 import com.fighterdiet.activities.IntroAndDecisionActivity
+import com.fighterdiet.activities.UpdatePasswordActivity
 import com.fighterdiet.data.api.RetrofitBuilder
 import com.fighterdiet.data.model.requestModel.VerifyOtpRequestModel
 import com.fighterdiet.data.repository.RegisterRepository
@@ -18,10 +19,7 @@ import com.fighterdiet.data.repository.ResendOtpRepository
 import com.fighterdiet.data.repository.VerifyOtpRepository
 import com.fighterdiet.databinding.FragmentCommentBinding
 import com.fighterdiet.databinding.OtpDialogFragmentBinding
-import com.fighterdiet.utils.OtpTextWatcher
-import com.fighterdiet.utils.ProgressDialog
-import com.fighterdiet.utils.Status
-import com.fighterdiet.utils.Utils
+import com.fighterdiet.utils.*
 import com.fighterdiet.viewModel.ResendOtpViewModel
 import com.fighterdiet.viewModel.ResendOtpViewModelProvider
 import com.fighterdiet.viewModel.VerifyOtpViewModel
@@ -135,7 +133,13 @@ class OtpDialogFragement: DialogFragment() {
                     if (apiResponse.status) {
 
                         if (apiResponse.code==200){
-                           startActivity(IntroAndDecisionActivity.getStartIntent(requireContext()))
+                            PrefManager.putString(PrefManager.KEY_USER_ID,apiResponse.data?.user_id.toString())
+                            PrefManager.putString(PrefManager.KEY_AUTH_TOKEN, apiResponse.data?.token?:"")
+                            PrefManager.putBoolean(PrefManager.IS_LOGGED_IN, true)
+                            apiResponse.data?.is_subscribed?.let { isSubscribed ->
+                                PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, isSubscribed=="1")
+                            }
+                           startActivity(UpdatePasswordActivity.getStartIntent(requireContext()))
 
                         }else{
                             Utils.showSnackBar(binding.root, apiResponse.message)
