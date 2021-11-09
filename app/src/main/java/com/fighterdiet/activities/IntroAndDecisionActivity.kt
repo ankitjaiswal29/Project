@@ -145,16 +145,15 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener,AndExoPlay
         if (url.equals("SETTING")) {
             binding.tvIntroNext.visibility = GONE
         }
-        /*    binding.clDecisionScreen.visibility = View.GONE
-
-            binding.tvDecisionYes.setBackgroundResource(R.drawable.shape_decision_selected)
+        /*
+        binding.clDecisionScreen.visibility = View.GONE
+        binding.tvDecisionYes.setBackgroundResource(R.drawable.shape_decision_selected)
     */
         binding.tvIntroNext.setOnClickListener(this)
 
         binding.ivBackgroundImage1.setOnClickListener(this)
 
         /*  binding.tvDecisionNext.setOnClickListener(this)
-
           binding.tvDecisionYes.setOnClickListener(this)
           binding.tvDecisionNo.setOnClickListener(this)*/
     }

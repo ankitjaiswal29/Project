@@ -11,24 +11,25 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/darkGrey">
+        android:background="#EBEBEB">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/darkGrey"
-            android:fillViewport="true"
-            android:scrollbars="none"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+<!--        <ScrollView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:background="@color/darkGrey"-->
+<!--            android:fillViewport="true"-->
+<!--            android:scrollbars="none"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clIntroScreen"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:background="#EBEBEB"
                 android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@id/tvIntroNext"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -141,7 +142,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </ScrollView>
+<!--        </ScrollView>-->
 
 
         <TextView
@@ -150,11 +151,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:fontFamily="@font/inter_semibold"
             android:text="@string/str_next"
+            android:layout_marginTop="@dimen/_10sdp"
             android:textColor="@color/texttrial"
             android:textSize="@dimen/_20ssp"
+            app:layout_constraintTop_toBottomOf="@id/clIntroScreen"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
