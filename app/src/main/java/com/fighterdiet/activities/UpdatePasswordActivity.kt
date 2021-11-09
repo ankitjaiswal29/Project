@@ -73,7 +73,12 @@ class UpdatePasswordActivity : BaseActivity() {
                     if (apiResponse.status) {
                         if (apiResponse.code==200){
                             Utils.showToast(this, "Password is changed successfully")
-                            val loginIntent = Intent(this, DashboardActivity::class.java)
+//                            val loginIntent = Intent(this, DashboardActivity::class.java)
+//                            startActivity(loginIntent)
+//                            finishAffinity()
+                            PrefManager.clearPref()
+                            PrefManager.putBoolean(PrefManager.IS_LOGGED_IN, false)
+                            val loginIntent = Intent(this, LoginActivity::class.java)
                             startActivity(loginIntent)
                             finishAffinity()
                         }else{

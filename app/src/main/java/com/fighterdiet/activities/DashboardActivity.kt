@@ -36,7 +36,7 @@ class DashboardActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard_with_calaories)
-
+        previousPos = 0
 
         if (Constants.isQuestonnaireCompleted) {
             initialise6Tab()

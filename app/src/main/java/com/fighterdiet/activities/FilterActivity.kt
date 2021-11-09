@@ -215,9 +215,9 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
         when(view?.id){
 
             R.id.tv_apply ->{
-                Constants.RecipeFilter.isFilterApplied = true
+                Constants.RecipeFilter.isFilterApplied = dietaryCount+volumeCount+mealCount != 0
                 startActivity(DashboardActivity.getStartIntent(this))
-                finish()
+                finishAffinity()
             }
 
             R.id.tv_cancel ->{

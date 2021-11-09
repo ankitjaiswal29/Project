@@ -32,15 +32,11 @@ class CommentAdapter(
         }
 
         override fun onClick(viewType: View?) {
-
             when(viewType?.id){
-
                 R.id.iv_more ->{
                     showPopUpCommunities(viewType)
                 }
-
             }
-
         }
 
         private fun showPopUpCommunities(viewType: View) {
@@ -59,9 +55,10 @@ class CommentAdapter(
 //            // constraintRoot.background.alpha = 129
 //            mPopupWindowFilter!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));
 
-            if (Build.VERSION.SDK_INT >= 21) {
-                mPopupWindowFilter.elevation = 5.0f
-            }
+            mPopupWindowFilter.elevation = 5.0f
+
+            if(commentList.isEmpty())
+                return
 
             if(commentList[adapterPosition].user_id == PrefManager.getString(PrefManager.KEY_USER_ID)?.toInt()?:0) {
                 bindDialog.tvDelete.visibility = View.VISIBLE
@@ -112,5 +109,4 @@ class CommentAdapter(
     override fun getItemCount(): Int {
         return commentList.size
     }
-
 }

@@ -92,5 +92,7 @@
     <string name="terms_and_conditions"><u>Terms &amp; Conditions</u></string>
     <string name="filters_selected">filters selected</string>
     <string name="share_to">Share to</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
 
 </resources>

@@ -17,8 +17,15 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:fullBackupContent="true"
+        android:allowBackup="true"
         android:theme="@style/Theme.FighterDietApp"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:ignore="LockedOrientationActivity">
+        <activity
+            android:name=".activities.HelpAndSupportActivity"
+            android:exported="true" >
+        </activity>
         <activity
             android:name=".activities.UpdatePasswordActivity"
             android:exported="false" />
@@ -27,7 +34,7 @@
             android:exported="false" />
         <activity
             android:name=".activities.ImageZoomOutActivity"
-            android:exported="false" /> <!-- <activity android:name=".fragments.DietryInfoActivity" /> -->
+            android:exported="false" />
         <activity android:name=".activities.FilterActivity" />
         <activity
             android:name=".activities.PrivacyAndTermsActivity"
