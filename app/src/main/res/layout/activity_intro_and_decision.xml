@@ -13,52 +13,55 @@
         android:layout_height="match_parent"
         android:background="#EBEBEB">
 
-<!--        <ScrollView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:background="@color/darkGrey"-->
-<!--            android:fillViewport="true"-->
-<!--            android:scrollbars="none"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent">-->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/darkGrey"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clIntroScreen"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="#EBEBEB"
                 android:visibility="visible"
-                app:layout_constraintBottom_toTopOf="@id/tvIntroNext"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
 
-                <com.potyvideo.library.AndExoPlayerView
-                    android:id="@+id/ivBackgroundImage1"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_390sdp"
-                    android:adjustViewBounds="true"
-                    android:src="@mipmap/pauline_intro_2"
-                   app:andexo_show_full_screen="false"
-                    app:andexo_show_controller="true"
+                <FrameLayout
+                    android:id="@+id/fl_media_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/ll_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                    tools:ignore="ContentDescription" />
-                <ImageView
-                    android:id="@+id/ivBackgroundImage2"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_390sdp"
-                    android:adjustViewBounds="true"
-                    android:visibility="gone"
-                    android:src="@mipmap/pauline_intro_2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="ContentDescription" />
+                    <com.potyvideo.library.AndExoPlayerView
+                        android:id="@+id/ivBackgroundImage1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_300sdp"
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/pauline_intro_2"
+                        app:andexo_show_full_screen="false"
+                        app:andexo_show_controller="true"
+                        tools:ignore="ContentDescription" />
+
+                    <ImageView
+                        android:id="@+id/ivBackgroundImage2"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_300sdp"
+                        android:adjustViewBounds="true"
+                        android:visibility="gone"
+                        android:src="@mipmap/pauline_intro_2"
+                        tools:ignore="ContentDescription" />
+                </FrameLayout>
 
               <!--  <ImageView
                     android:id="@+id/ivBackgroundImage1"
@@ -76,32 +79,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/play"
-                    app:layout_constraintBottom_toBottomOf="@+id/ivBackgroundImage1"
-                    app:layout_constraintEnd_toEndOf="@+id/ivBackgroundImage1"
-                    app:layout_constraintStart_toStartOf="@+id/ivBackgroundImage1"
-                    app:layout_constraintTop_toTopOf="@+id/ivBackgroundImage1"
+                    app:layout_constraintBottom_toBottomOf="@+id/fl_media_content"
+                    app:layout_constraintEnd_toEndOf="@+id/fl_media_content"
+                    app:layout_constraintStart_toStartOf="@+id/fl_media_content"
+                    app:layout_constraintTop_toTopOf="@+id/fl_media_content"
                     tools:ignore="ContentDescription" />
 
                 <View
                     android:id="@+id/view_separator"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_10sdp"
-                    app:layout_constraintBottom_toBottomOf="@id/ivBackgroundImage1"
+                    app:layout_constraintBottom_toBottomOf="@id/fl_media_content"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-
-                    />
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <LinearLayout
                     android:id="@+id/ll_text"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:background="@drawable/bg_top_right_left_round_corner_grey_color"
                     android:orientation="vertical"
                     android:paddingStart="@dimen/start_screen_margin"
                     android:paddingTop="@dimen/_5sdp"
                     android:paddingEnd="@dimen/end_screen_margin"
                     android:paddingBottom="@dimen/_20sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/view_separator">
@@ -130,7 +132,8 @@
                     <TextView
                         android:id="@+id/iv_about"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/inter_medium"
                         android:text="@={aboutResponseModel.about}"
@@ -138,28 +141,25 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10ssp" />
 
+                    <TextView
+                        android:id="@+id/tvIntroNext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:fontFamily="@font/inter_semibold"
+                        android:text="@string/str_next"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:textColor="@color/texttrial"
+                        android:textSize="@dimen/_20ssp"
+                        app:layout_constraintTop_toBottomOf="@id/ll_text"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--        </ScrollView>-->
-
-
-        <TextView
-            android:id="@+id/tvIntroNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:fontFamily="@font/inter_semibold"
-            android:text="@string/str_next"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:textColor="@color/texttrial"
-            android:textSize="@dimen/_20ssp"
-            app:layout_constraintTop_toBottomOf="@id/clIntroScreen"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

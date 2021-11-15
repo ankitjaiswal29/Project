@@ -20,7 +20,6 @@ import android.content.DialogInterface
 import androidx.appcompat.app.AlertDialog
 import com.fighterdiet.utils.Utils.loginAlertDialog
 
-
 class DashboardActivity : BaseActivity() {
     private var previousPos: Int = 0
     private lateinit var binding: ActivityDashboardWithCalaoriesBinding

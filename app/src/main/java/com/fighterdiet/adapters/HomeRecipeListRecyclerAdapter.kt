@@ -158,5 +158,9 @@ class HomeRecipeListRecyclerAdapter(
         }
     }
 
+    fun clearAll(){
+        recipeList.clear()
+    }
+
 
 }

@@ -217,6 +217,7 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
             R.id.tv_apply ->{
                 Constants.RecipeFilter.isFilterApplied = dietaryCount+volumeCount+mealCount != 0
                 startActivity(DashboardActivity.getStartIntent(this))
+                Constants.DashboardDetails.isApiRequestNeeded = true
                 finishAffinity()
             }
 
@@ -233,6 +234,7 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
                 Constants.RecipeFilter.selectedMealFilter.clear()
                 Constants.RecipeFilter.selectedDietaryFilter.clear()
                 Constants.RecipeFilter.selectedVolumeFilter.clear()
+                Constants.DashboardDetails.isApiRequestNeeded = true
                 updateTotalFilterCountText()
                 Constants.RecipeFilter.isFilterCleared = true
                 Constants.RecipeFilter.isFilterApplied = false
@@ -315,7 +317,6 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
 
     override fun onPause() {
         super.onPause()
-
         if(!Constants.RecipeFilter.isFilterApplied){
             return
         }

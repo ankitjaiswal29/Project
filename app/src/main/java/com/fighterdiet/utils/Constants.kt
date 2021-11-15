@@ -38,6 +38,7 @@ object Constants {
     const val RECIPE_NAME = "recipe_name"
 
     object DashboardDetails{
+        var isApiRequestNeeded: Boolean = true
         var recipiesModel: RecipeListResponseModel? = null
     }
 
@@ -47,10 +48,6 @@ object Constants {
     }
 
     object RecipeFilter{
-//        var isDietaryListCleared: Boolean = true
-//        var isVolumeListCleared: Boolean = true
-//        var isMealListCleared: Boolean = true
-
         var isFilterCleared: Boolean = false
         var isFilterApplied: Boolean = false
         var totalFilterCount :Int = 0

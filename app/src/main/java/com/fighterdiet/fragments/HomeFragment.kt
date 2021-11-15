@@ -29,12 +29,9 @@ import com.fighterdiet.utils.Status
 import com.fighterdiet.viewModel.HomeViewModel
 
 class HomeFragment : BaseFragment() {
-    private var isPagination: Boolean = false
     private var isFilterMode: Boolean = false
     private var isSearchMode: Boolean = false
-    private var isLoadingSameSearch: Boolean = false
     private var mSearchedKeyword: String = ""
-//    private var recipiesModel: RecipeListResponseModel? = null
     private lateinit var viewModel: HomeViewModel
     lateinit var binding: FragmentHomeBinding
     private lateinit var recipeListAdapter: HomeRecipeListRecyclerAdapter
@@ -60,7 +57,10 @@ class HomeFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
-        getRecipes("",offset,limit)
+        if(Constants.DashboardDetails.isApiRequestNeeded){
+            getRecipes("",offset,limit)
+            Constants.DashboardDetails.isApiRequestNeeded = true
+        }
     }
 
     fun getRecipes(
@@ -69,9 +69,7 @@ class HomeFragment : BaseFragment() {
         endTo: Int
     ){
         isFilterMode = false
-        isPagination = false
         isSearchMode = false
-        isLoadingSameSearch = false
         mSearchedKeyword = ""
         if(searchKeys.isNotBlank()){
             isSearchMode = true
@@ -113,7 +111,8 @@ class HomeFragment : BaseFragment() {
         viewModel.getRecipeListResource().observe(viewLifecycleOwner, {
             when(it.status){
                 Status.SUCCESS -> {
-                    binding.tvNoData.visibility = View.GONE
+                    binding.tvNoData.visibility = GONE
+
                     if(isFilterMode||isSearchMode)
                     {
                         if(!isSearchMode){
@@ -129,17 +128,11 @@ class HomeFragment : BaseFragment() {
                         return@observe
                     }
 
-                    binding.tvFilterCount.visibility = View.GONE
-//                    isFilterMode = false
+                    binding.tvFilterCount.visibility = GONE
                     Constants.DashboardDetails.recipiesModel = it.data?.data
 
                     if(!it.data?.data?.result.isNullOrEmpty())
                         recipeListAdapter.addAll(it.data?.data?.result!!)
-
-//                    if (recipeListAdapter.itemCount==0){
-//                        binding.tvNoData.visibility = View.VISIBLE
-//                        return@observe
-//                    }
                     recipeListAdapter.notifyDataSetChanged()
 
 
@@ -172,7 +165,8 @@ class HomeFragment : BaseFragment() {
             Constants.RecipeFilter.selectedMealFilter.clear()
             Constants.RecipeFilter.totalFilterCount = 0
             Constants.RecipeFilter.isFilterApplied = false
-            binding.tvFilterCount.visibility = View.GONE
+            binding.tvFilterCount.visibility = GONE
+            recipeListAdapter.clearAll()
             Handler(Looper.getMainLooper()).postDelayed({
                 getRecipes("", offset, limit)
             },100)
@@ -187,6 +181,8 @@ class HomeFragment : BaseFragment() {
                 startActivity(Intent(requireContext(), LoginActivity::class.java))
                 return@HomeRecipeListRecyclerAdapter
             }
+
+            Constants.DashboardDetails.isApiRequestNeeded = false
             val act = RecipeDetailsActivity.getStartIntent(requireContext())
                 .putExtra(Constants.RECIPE_ID, recipe.id)
                 .putExtra(Constants.RECIPE_IMAGE, recipe.recipe_image)
@@ -200,8 +196,9 @@ class HomeFragment : BaseFragment() {
                     if(position == 0){
                         startActivity(MemberShipActivity.getStartIntent(requireContext()))
                     }
-                    else
+                    else{
                         startActivity(act)
+                    }
                 }
 
             }

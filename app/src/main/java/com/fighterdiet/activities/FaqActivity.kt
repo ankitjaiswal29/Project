@@ -100,73 +100,7 @@ class FaqActivity : BaseActivity(), View.OnClickListener {
 
     }
 
-    /* et_search.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
-         override fun onQueryTextSubmit(query: String?): Boolean {
-             return false
-         }
-
-         override fun onQueryTextChange(newText: String?): Boolean {
-             adapter.filter.filter(newText)
-             return false
-         }
-
-     })*/
-
     private fun setupRecyclerView() {
-        /*      val faqList: MutableList<FaqModel> = ArrayList<FaqModel>()
-              faqList.add(
-                  FaqModel(
-                      getString(R.string.faq_one)
-                  )
-              )
-              faqList.add(
-                  FaqModel(
-                      getString(R.string.faq_two)
-                  )
-              )
-              faqList.add(
-                  FaqModel(
-                      getString(R.string.faq_three)
-                  )
-              )
-              faqList.add(
-                  FaqModel(
-                      getString(R.string.faq_four)
-                  )
-              )
-              faqList.add(
-                  FaqModel(
-                      getString(R.string.faq_five)
-                  )
-              )
-              faqList.add(
-                  FaqModel(
-                      getString(R.string.faq_six)
-                  )
-              )
-              faqList.add(
-                  FaqModel(
-                      getString(R.string.faq_seven)
-                  )
-              )
-              faqList.add(
-                  FaqModel(
-                      getString(R.string.faq_eight)
-                  )
-              )
-              faqList.add(
-                  FaqModel(
-                      getString(R.string.faq_nine)
-                  )
-              )
-              faqList.add(
-                  FaqModel(
-                      getString(R.string.faq_ten)
-                  )
-              )*/
-
-        /*   val productInfoAdapter =
-               FaqAdapter(this@FaqActivity, faqList, binding.mainView)*/
         productInfoAdapter =
             FaqAdapter(this@FaqActivity, faqList, binding.mainView)
         binding.rvFaq.layoutManager = LinearLayoutManager(this)
@@ -184,12 +118,9 @@ class FaqActivity : BaseActivity(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         when (view?.id) {
-
             R.id.iv_back -> {
                 onBackPressed()
             }
-
-
         }
     }
 

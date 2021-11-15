@@ -6,6 +6,7 @@ data class FaqListResponseModel(
     data class Result(
         val answer: String,
         val id: Int,
-        val question: String
+        val question: String,
+        var isOpened: Boolean = false
     )
 }
