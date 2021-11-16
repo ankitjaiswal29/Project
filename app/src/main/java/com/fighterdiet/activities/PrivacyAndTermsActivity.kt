@@ -1,9 +1,13 @@
 package com.fighterdiet.activities
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.View.GONE
 import android.view.WindowManager
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.fighterdiet.R
@@ -11,6 +15,13 @@ import com.fighterdiet.databinding.ActivityPrivacyAndTermsBinding
 
 class PrivacyAndTermsActivity : BaseActivity(), View.OnClickListener {
     private lateinit var binding: ActivityPrivacyAndTermsBinding
+    private val webViewClient = object : WebViewClient() {
+        override fun onPageFinished(view: WebView?, url: String?) {
+            super.onPageFinished(view, url)
+            binding.pbPrivacyPolicy.visibility = View.GONE
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
        /* getWindow().setFlags(
@@ -19,6 +30,11 @@ class PrivacyAndTermsActivity : BaseActivity(), View.OnClickListener {
         )*/
         binding = DataBindingUtil.setContentView(this, R.layout.activity_privacy_and_terms)
         initialise()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.pbPrivacyPolicy.visibility = View.VISIBLE
     }
 
     private fun initialise() {
@@ -33,19 +49,18 @@ class PrivacyAndTermsActivity : BaseActivity(), View.OnClickListener {
             title = bundle.getString("PRIVACY")!!
         }
 
-        binding.toolbar.tvTitle.setText(title)
-
-        var webSettings = binding.wvTermsAndPrivacy.settings
-        webSettings.javaScriptEnabled = true
+        binding.toolbar.tvTitle.text = title
+        val webSettings = binding.wvTermsAndPrivacy.settings
         binding.wvTermsAndPrivacy.loadUrl(url)
-        binding.wvTermsAndPrivacy.settings.domStorageEnabled = true
-        binding.wvTermsAndPrivacy.settings.useWideViewPort = true
+        webSettings.domStorageEnabled = true
+        webSettings.useWideViewPort = true
+        webSettings.builtInZoomControls = false
+        webSettings.javaScriptEnabled = true
         binding.wvTermsAndPrivacy.computeScroll()
         binding.wvTermsAndPrivacy.overlayHorizontalScrollbar()
         binding.wvTermsAndPrivacy.isVerticalScrollBarEnabled = true
         binding.wvTermsAndPrivacy.isHorizontalScrollBarEnabled = true
-        binding.wvTermsAndPrivacy.settings.builtInZoomControls = false
-
+        binding.wvTermsAndPrivacy.webViewClient = webViewClient
     }
 
     override fun onBackPressed() {

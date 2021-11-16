@@ -15,124 +15,135 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.google.android.material.appbar.AppBarLayout
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fitsSystemWindows="true">
+                android:layout_height="wrap_content">
 
-                <com.google.android.material.appbar.CollapsingToolbarLayout
+                <com.google.android.material.appbar.AppBarLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fitsSystemWindows="true"
-                    app:contentScrim="?android:attr/colorControlHighlight"
-                    app:expandedTitleMarginEnd="64dp"
-                    app:expandedTitleMarginStart="48dp"
-                    app:expandedTitleTextAppearance="@android:color/transparent"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                    android:fitsSystemWindows="true">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/cl_banner_img"
+                    <com.google.android.material.appbar.CollapsingToolbarLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:fitsSystemWindows="true"
+                        app:contentScrim="?android:attr/colorControlHighlight"
+                        app:expandedTitleMarginEnd="64dp"
+                        app:expandedTitleMarginStart="48dp"
+                        app:expandedTitleTextAppearance="@android:color/transparent"
+                        app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                        <ImageView
-                            android:id="@+id/iv_banner"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/cl_banner_img"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:adjustViewBounds="true"
-                            android:fitsSystemWindows="true"
-                            android:scaleType="centerCrop"
-                            android:src="@mipmap/img_det_page"
-                            app:layout_collapseMode="parallax"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="ContentDescription" />
+                            android:layout_height="wrap_content">
 
-                        <ImageView
-                            android:id="@+id/iv_fav"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginBottom="@dimen/_10sdp"
-                            android:src="@mipmap/heart_holo"
-                            app:layout_constraintBottom_toBottomOf="@+id/iv_banner"
-                            app:layout_constraintStart_toStartOf="parent"
-                            tools:ignore="ContentDescription" />
+                            <ImageView
+                                android:id="@+id/iv_banner"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:adjustViewBounds="true"
+                                android:fitsSystemWindows="true"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/img_det_page"
+                                app:layout_collapseMode="pin"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="ContentDescription" />
 
-                        <ImageView
-                            android:id="@+id/iv_comment"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            android:padding="@dimen/_2sdp"
-                            android:src="@mipmap/chat_holo"
-                            app:layout_constraintBottom_toBottomOf="@+id/iv_fav"
-                            app:layout_constraintStart_toEndOf="@+id/iv_fav"
-                            tools:ignore="ContentDescription" />
+                            <View
+                                app:layout_constraintTop_toTopOf="@id/iv_fav"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintBottom_toBottomOf="@id/iv_fav"
+                                android:alpha="0.5"
+                                android:background="@color/black"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"/>
 
-                        <ImageView
-                            android:id="@+id/iv_share"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            android:padding="@dimen/_2sdp"
-                            android:src="@mipmap/share_holo"
-                            app:layout_constraintBottom_toBottomOf="@+id/iv_fav"
-                            app:layout_constraintStart_toEndOf="@+id/iv_comment"
-                            tools:ignore="ContentDescription" />
+                            <ImageView
+                                android:id="@+id/iv_fav"
+                                android:layout_width="@dimen/_45sdp"
+                                android:layout_height="@dimen/_45sdp"
+                                android:padding="@dimen/_12sdp"
+                                android:src="@mipmap/heart_holo"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                app:layout_constraintBottom_toBottomOf="@+id/iv_banner"
+                                app:layout_constraintStart_toStartOf="parent"
+                                tools:ignore="ContentDescription"
+                                app:tint="@color/white"/>
 
-                        <ImageView
-                            android:layout_width="@dimen/_24sdp"
-                            android:layout_height="@dimen/_24sdp"
-                            android:layout_margin="@dimen/_20sdp"
-                            android:padding="@dimen/_2sdp"
-                            android:src="@mipmap/icn_check"
-                            android:visibility="gone"
-                            app:layout_constraintBottom_toBottomOf="@+id/iv_banner"
-                            app:layout_constraintEnd_toEndOf="@+id/iv_banner" />
+                            <ImageView
+                                android:id="@+id/iv_comment"
+                                android:layout_width="@dimen/_45sdp"
+                                android:layout_height="@dimen/_45sdp"
+                                android:padding="@dimen/_12sdp"
+                                android:src="@mipmap/chat_holo"
+                                app:layout_constraintBottom_toBottomOf="@+id/iv_fav"
+                                app:layout_constraintStart_toEndOf="@+id/iv_fav"
+                                tools:ignore="ContentDescription"
+                                app:tint="@color/white"/>
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                            <ImageView
+                                android:id="@+id/iv_share"
+                                android:layout_width="@dimen/_45sdp"
+                                android:layout_height="@dimen/_45sdp"
+                                android:padding="@dimen/_12sdp"
+                                android:src="@mipmap/share_holo"
+                                app:layout_constraintBottom_toBottomOf="@+id/iv_fav"
+                                app:layout_constraintStart_toEndOf="@+id/iv_comment"
+                                tools:ignore="ContentDescription"
+                                app:tint="@color/white"/>
 
-                </com.google.android.material.appbar.CollapsingToolbarLayout>
+                            <ImageView
+                                android:layout_width="@dimen/_45sdp"
+                                android:layout_height="@dimen/_45sdp"
+                                android:padding="@dimen/_10sdp"
+                                android:layout_marginEnd="@dimen/_20sdp"
+                                android:src="@mipmap/icn_check"
+                                android:visibility="gone"
+                                tools:visibility="visible"
+                                app:layout_constraintBottom_toBottomOf="@+id/iv_banner"
+                                app:layout_constraintEnd_toEndOf="@+id/iv_banner" />
 
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tab"
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tab"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        app:tabGravity="fill"
+                        app:tabIndicatorColor="@color/texttrial"
+                        app:tabMode="scrollable" />
+
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <!--
+                            <androidx.core.widget.NestedScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fillViewport="true"
+                                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+                            </androidx.core.widget.NestedScrollView>
+                -->
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/vp_info_recepie"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    app:tabGravity="fill"
-                    app:tabIndicatorColor="@color/texttrial"
-                    app:tabMode="scrollable" />
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    android:layout_margin="@dimen/_5sdp" />
 
-            </com.google.android.material.appbar.AppBarLayout>
-
-<!--
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fillViewport="true"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-
-            </androidx.core.widget.NestedScrollView>
--->
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/vp_info_recepie"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                android:layout_margin="@dimen/_5sdp" />
-
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </LinearLayout>
 

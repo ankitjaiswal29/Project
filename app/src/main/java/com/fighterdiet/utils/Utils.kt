@@ -67,15 +67,15 @@ object Utils {
 
     fun loginAlertDialog(activity: Activity){
         val builder = AlertDialog.Builder(activity)
-        builder.setTitle("You need to login to access this feature!")
-        builder.setPositiveButton("Proceed") { dialog, which ->
+        builder.setTitle("Complete registration for more information!")
+        builder.setPositiveButton("Register") { dialog, which ->
             dialog.dismiss()
             activity.startActivity(Intent(activity, LoginActivity::class.java))
             activity.finishAffinity()
             return@setPositiveButton
         }
 
-        builder.setNegativeButton("Cancel") { dialog, which ->
+        builder.setNegativeButton("Dismiss") { dialog, which ->
             dialog.dismiss()
         }
         builder.show()

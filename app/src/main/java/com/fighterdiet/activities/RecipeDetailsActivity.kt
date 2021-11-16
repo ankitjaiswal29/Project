@@ -191,6 +191,7 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
     private fun updateFavUI() {
         recipeContentModel?.let {
                 binding.ivFav.setImageResource(if(it.favourite == 1) R.drawable.tb_favorite_icon_blue else R.mipmap.heart_holo)
+                binding.ivFav.setColorFilter(if(it.favourite == 1) resources.getColor(R.color.skyblue) else resources.getColor(R.color.white))
         }
     }
 
@@ -321,7 +322,6 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun onBackPressed() {
-
         recipeContentModel?.let {
             val currentFragment: Fragment
             when(binding.vpInfoRecepie.currentItem){
@@ -350,7 +350,7 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                 ))
             }
             else{
-                if(Constants.RecipeDetails.recipeNotesLive.value != recipeNoteModel?.description) {
+                if(recipeNoteModel != null && Constants.RecipeDetails.recipeNotesLive.value != recipeNoteModel?.description) {
                     viewModel.updateNotesApi(
                         UpdateNotesRequestModel(
                             note_id = recipeNoteModel?.id.toString(),
@@ -364,8 +364,5 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
             }
             return
         }
-
-//        super.onBackPressed()
-
     }
 }

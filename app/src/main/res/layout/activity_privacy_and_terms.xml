@@ -4,22 +4,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <include layout="@layout/toolbar_black_background"/>
-
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar_info"/>
-
-        <WebView
-            android:id="@+id/wv_terms_and_privacy"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <include layout="@layout/toolbar_black_background"/>
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar_info"/>
+
+            <WebView
+                android:id="@+id/wv_terms_and_privacy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/pb_privacy_policy"
+            android:indeterminateTint="@color/black"
+            android:indeterminate="true"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
 
 </layout>

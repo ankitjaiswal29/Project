@@ -9,6 +9,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,13 +23,11 @@ import com.fighterdiet.data.model.responseModel.RecipeListResponseModel
 import com.fighterdiet.data.repository.HomeRepository
 import com.fighterdiet.data.repository.HomeViewModelProvider
 import com.fighterdiet.databinding.FragmentHomeBinding
-import com.fighterdiet.utils.Constants
-import com.fighterdiet.utils.EndlessScrollViewListener
-import com.fighterdiet.utils.PrefManager
-import com.fighterdiet.utils.Status
+import com.fighterdiet.interfaces.DashboardCallback
+import com.fighterdiet.utils.*
 import com.fighterdiet.viewModel.HomeViewModel
 
-class HomeFragment : BaseFragment() {
+class HomeFragment(val dashboardCallback: DashboardCallback) : BaseFragment() {
     private var isFilterMode: Boolean = false
     private var isSearchMode: Boolean = false
     private var mSearchedKeyword: String = ""
@@ -37,6 +36,11 @@ class HomeFragment : BaseFragment() {
     private lateinit var recipeListAdapter: HomeRecipeListRecyclerAdapter
     var recipeList: ArrayList<RecipeListResponseModel.Recipies> = ArrayList()
 
+    companion object{
+        fun initFragment(dashboardCallback: DashboardCallback):HomeFragment{
+            return HomeFragment(dashboardCallback)
+        }
+    }
     var offset = 0
     var limit = 8
 
@@ -45,22 +49,13 @@ class HomeFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         setupViewModel()
         setupObserver()
+        initClickListeners()
+        setUpHomeRecyclerView()
         initialize()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        if(Constants.DashboardDetails.isApiRequestNeeded){
-            getRecipes("",offset,limit)
-            Constants.DashboardDetails.isApiRequestNeeded = true
-        }
+        getRecipes("",offset,limit)
+        return binding.root
     }
 
     fun getRecipes(
@@ -99,6 +94,7 @@ class HomeFragment : BaseFragment() {
                 selectedMealMap["meal_id[${it.key}]"] = it.value.meal_id
             }
         }
+
         viewModel.getRecipeList(searchKeys, startFrom, endTo, selectedDietaryMap, selectedVolumeMap, selectedMealMap)
     }
 
@@ -111,6 +107,7 @@ class HomeFragment : BaseFragment() {
         viewModel.getRecipeListResource().observe(viewLifecycleOwner, {
             when(it.status){
                 Status.SUCCESS -> {
+                    dashboardCallback.onDataLoaded()
                     binding.tvNoData.visibility = GONE
 
                     if(isFilterMode||isSearchMode)
@@ -153,11 +150,8 @@ class HomeFragment : BaseFragment() {
         } else {
             binding.daysLay.visibility = GONE
         }
-        initClickListeners()
-        setUpHomeRecyclerView()
     }
 
-    @Synchronized
     private fun initClickListeners() {
         binding.tvFilterCount.setOnClickListener {
             Constants.RecipeFilter.selectedVolumeFilter.clear()
@@ -169,7 +163,7 @@ class HomeFragment : BaseFragment() {
             recipeListAdapter.clearAll()
             Handler(Looper.getMainLooper()).postDelayed({
                 getRecipes("", offset, limit)
-            },100)
+            },50)
         }
     }
 
@@ -178,18 +172,17 @@ class HomeFragment : BaseFragment() {
         binding.rvHomeRecycler.layoutManager = layoutManager
         recipeListAdapter = HomeRecipeListRecyclerAdapter(requireActivity(), recipeList) { position, recipe ->
             if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
-                startActivity(Intent(requireContext(), LoginActivity::class.java))
+                Utils.loginAlertDialog(requireActivity())
                 return@HomeRecipeListRecyclerAdapter
             }
 
-            Constants.DashboardDetails.isApiRequestNeeded = false
             val act = RecipeDetailsActivity.getStartIntent(requireContext())
                 .putExtra(Constants.RECIPE_ID, recipe.id)
                 .putExtra(Constants.RECIPE_IMAGE, recipe.recipe_image)
                 .putExtra(Constants.RECIPE_NAME, recipe.recipe_name)
             when(Constants.DashboardDetails.recipiesModel?.is_subscribed){
                 "1" -> {
-
+                    Constants.DashboardDetails.isApiRequestNeeded = false
                     startActivity(act)
                 }
                 "0" -> {
@@ -197,6 +190,7 @@ class HomeFragment : BaseFragment() {
                         startActivity(MemberShipActivity.getStartIntent(requireContext()))
                     }
                     else{
+                        Constants.DashboardDetails.isApiRequestNeeded = false
                         startActivity(act)
                     }
                 }

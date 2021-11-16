@@ -27,7 +27,6 @@ class FavouriteFragment : BaseFragment() {
     private lateinit var favouriteAdapter: FavouriteFragmentRecyAdapter
   //  var homeList: ArrayList<HomeModel> = ArrayList()
     var favouriteList: ArrayList<FavouriteListResponseModel.Favourite> = ArrayList()
-
     var offset = 0
     var limit = 8
 
@@ -63,6 +62,7 @@ class FavouriteFragment : BaseFragment() {
         viewModel.favouriteListResource.observe(viewLifecycleOwner, {
             when(it.status){
                 Status.SUCCESS -> {
+                    binding.pbFav.visibility = View.GONE
                     binding.tvNoData.visibility = View.GONE
                     if (!it.data?.data?.result.isNullOrEmpty()){
 //                        if(!isLoadMore)
@@ -104,6 +104,7 @@ class FavouriteFragment : BaseFragment() {
                 return@FavouriteFragmentRecyAdapter
             }
 
+            Constants.DashboardDetails.isApiRequestNeeded = false
 //            if(PrefManager.getBoolean(PrefManager.IS_SUBSCRIBED)){
             val act = RecipeDetailsActivity.getStartIntent(requireContext())
                 .putExtra(Constants.RECIPE_ID, favModel.recipe_id)
@@ -124,23 +125,6 @@ class FavouriteFragment : BaseFragment() {
             }
 
         })
-    }
-
-    private fun setUpHomeList() {
-     /*   homeList.add(HomeModel(R.mipmap.easy_chicken, false, false))
-        homeList.add(HomeModel(R.mipmap.rice_pudding, false, false))
-        homeList.add(HomeModel(R.mipmap.banana, false, false))
-
-        homeList.add(HomeModel(R.mipmap.easy_chicken, false, false))
-        homeList.add(HomeModel(R.mipmap.rice_pudding, false, false))
-        homeList.add(HomeModel(R.mipmap.banana, false, false))
-
-        homeList.add(HomeModel(R.mipmap.easy_chicken, false, false))
-        homeList.add(HomeModel(R.mipmap.rice_pudding, false, false))
-        homeList.add(HomeModel(R.mipmap.banana, false, false))
-
-        homeList.add(HomeModel(R.mipmap.easy_chicken, false, false))
-*/
     }
 
     companion object {

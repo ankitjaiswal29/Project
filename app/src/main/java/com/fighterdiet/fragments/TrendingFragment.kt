@@ -76,6 +76,7 @@ class TrendingFragment : BaseFragment() {
                 Status.SUCCESS -> {
                     if (it.data?.data?.result.isNullOrEmpty())
                         return@observe
+                    binding.pbTrending.visibility = View.GONE
                     trendingList.addAll(it.data?.data?.result!!)
                     val currSize = binding.rvTrendingRecycler.adapter?.itemCount?:0
                     if(currSize>0)
@@ -100,6 +101,7 @@ class TrendingFragment : BaseFragment() {
                 return@TrendingFragmentRecyAdapter
             }
 
+            Constants.DashboardDetails.isApiRequestNeeded = false
 //            if(PrefManager.getBoolean(PrefManager.IS_SUBSCRIBED)){
                 val act = RecipeDetailsActivity.getStartIntent(requireContext())
                     .putExtra(Constants.RECIPE_ID, data.id)

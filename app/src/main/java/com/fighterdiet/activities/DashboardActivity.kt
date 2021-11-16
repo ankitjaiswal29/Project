@@ -18,6 +18,7 @@ import com.fighterdiet.utils.PrefManager
 import com.google.android.material.tabs.TabLayout
 import android.content.DialogInterface
 import androidx.appcompat.app.AlertDialog
+import com.fighterdiet.interfaces.DashboardCallback
 import com.fighterdiet.utils.Utils.loginAlertDialog
 
 class DashboardActivity : BaseActivity() {
@@ -32,9 +33,19 @@ class DashboardActivity : BaseActivity() {
     var offset = 0
     var limit = 8
 
+    private val callbackDashboard = object : DashboardCallback{
+        override fun onDataLoaded() {
+            binding.pbDashboardAct.visibility = View.GONE
+        }
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard_with_calaories)
+        Constants.DashboardDetails.isApiRequestNeeded = true
+        setupUI()
+
         previousPos = 0
 
         if (Constants.isQuestonnaireCompleted) {
@@ -42,8 +53,15 @@ class DashboardActivity : BaseActivity() {
         } else {
             initialise4Tab()
         }
+    }
 
-        setupUI()
+    override fun onResume() {
+        super.onResume()
+        if(Constants.DashboardDetails.isApiRequestNeeded){
+            showDashboardPb(true)
+            showFragment(HomeFragment.initFragment(callbackDashboard), 0)
+            Constants.DashboardDetails.isApiRequestNeeded = true
+        }
     }
 
     override fun setupViewModel() {
@@ -146,24 +164,18 @@ class DashboardActivity : BaseActivity() {
         binding.tabs.addTab(binding.tabs.newTab().setIcon(tabIcons6UnSelected[5]))
         binding.tabs.addTab(binding.tabs.newTab().setIcon(tabIcons6UnSelected[6]))
 
-        showFragment(HomeFragment(), 0)
-
         binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 Log.e(">>>>>", ">>>>>" + tab.position)
-                setIcon(tab.position)
                 when (tab.position) {
-                    0 -> {
-                        showFragment(HomeFragment(), tab.position)
+                    0 ->{
+                        showDashboardPb(true)
+                        showFragment(HomeFragment.initFragment(callbackDashboard), tab.position)
                     }
                     1 -> {
                         startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
                     }
                     2 -> {
-//                        if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
-//                            loginAlertDialog(this@DashboardActivity)
-//                            return
-//                        }
                         showFragment(TrendingFragment())
                     }
                     3 -> {
@@ -182,7 +194,13 @@ class DashboardActivity : BaseActivity() {
                     6 -> {
                         startActivity(SettingsActivity.getStartIntent(this@DashboardActivity))
                     }
+                    else -> {
+                        showDashboardPb(true)
+                        showFragment(HomeFragment.initFragment(callbackDashboard), tab.position)
+                    }
                 }
+                setIcon(tab.position)
+
                 previousPos = tab.position
             }
 
@@ -220,6 +238,10 @@ class DashboardActivity : BaseActivity() {
                 }
             }
         })
+    }
+
+    private fun showDashboardPb(status: Boolean) {
+        binding.pbDashboardAct.visibility = if(status) View.VISIBLE else View.GONE
     }
 
     private fun setIcon(position: Int) {
@@ -284,18 +306,18 @@ class DashboardActivity : BaseActivity() {
         binding.tabs.addTab(binding.tabs.newTab().setIcon(tabIcons4UnSelected[3]))
         binding.tabs.addTab(binding.tabs.newTab().setIcon(tabIcons4UnSelected[4]))
 
-        showFragment(HomeFragment(), 0)
+//        showFragment(HomeFragment.initFragment(callbackDashboard), 0)
 
         binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 Log.e(">>>>>", ">>>>>" + tab.position)
-                setIcon4(tab.position)
 
                 when (tab.position) {
                     0 -> {
+                        showDashboardPb(true)
                         binding.toolbar.ivTopImage.visibility = View.VISIBLE;
                         binding.toolbar.tvTitle.visibility = View.GONE;
-                        showFragment(HomeFragment(), tab.position)
+                        showFragment(HomeFragment.initFragment(callbackDashboard), tab.position)
                     }
                     1 -> {
                         startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
@@ -324,11 +346,20 @@ class DashboardActivity : BaseActivity() {
                         showFragment(FavouriteFragment())
                     }
                     4 -> {
+                        Constants.DashboardDetails.isApiRequestNeeded = false
                         binding.toolbar.ivTopImage.visibility = View.VISIBLE;
                         binding.toolbar.tvTitle.visibility = View.GONE;
                         startActivity(SettingsActivity.getStartIntent(this@DashboardActivity))
                     }
+                    else ->{
+                        showDashboardPb(true)
+                        binding.toolbar.ivTopImage.visibility = View.VISIBLE;
+                        binding.toolbar.tvTitle.visibility = View.GONE;
+                        showFragment(HomeFragment.initFragment(callbackDashboard), tab.position)
+                    }
                 }
+                setIcon4(tab.position)
+
                 previousPos = tab.position
             }
 
@@ -404,7 +435,8 @@ class DashboardActivity : BaseActivity() {
             2,3 -> {
                 binding.toolbar.ivTopImage.visibility = View.VISIBLE;
                 binding.toolbar.tvTitle.visibility = View.GONE;
-                showFragment(HomeFragment(), 0)
+                showDashboardPb(true)
+                showFragment(HomeFragment.initFragment(callbackDashboard), 0)
                 setIcon4(0)
                 previousPos = 0
             }

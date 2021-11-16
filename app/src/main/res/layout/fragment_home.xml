@@ -6,8 +6,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:descendantFocusability="blocksDescendants"
-        android:focusable="true"
         tools:context=".fragments.HomeFragment">
 
         <include
@@ -36,6 +34,7 @@
             android:id="@+id/rv_home_recycler"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:descendantFocusability="afterDescendants"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_filter_count"
