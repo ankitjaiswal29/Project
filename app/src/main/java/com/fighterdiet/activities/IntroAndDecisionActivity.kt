@@ -54,6 +54,7 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener,AndExoPlay
             this,
             AboutPaulinNordinViewModelProvider(AboutPaulinNordinRepository(RetrofitBuilder.apiService))
         ).get(AboutPaulinNordinViewModel::class.java)
+        binding.pbAboutIntro.visibility = View.VISIBLE
        viewModel.getAboutPaulinNordinList()
         //binding.about=viewModel
          }
@@ -73,11 +74,12 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener,AndExoPlay
 
                 }
                 Status.SUCCESS -> {
-                    ProgressDialog.hideProgressDialog()
+//                    ProgressDialog.hideProgressDialog()
                     val apiResponse = it.data!!
 
                     if (apiResponse.status) {
                         if (apiResponse.code==200){
+                            binding.pbAboutIntro.visibility = View.GONE
                             binding.aboutResponseModel=apiResponse.data
                            // binding.ivAbout.text=apiResponse.data?.about
                             if(apiResponse.data?.extension.equals("mp4")){
@@ -130,9 +132,7 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener,AndExoPlay
                 binding.ivBackgroundImage1.startPlayer()
                 flag=true
             }
-
         }
-
     }
 
     private fun initialise() {
@@ -140,18 +140,22 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener,AndExoPlay
         var url: String = ""
         val bundle = intent.extras
         if (bundle != null) {
-            url = bundle.getString("SETTING")!!
+            url = bundle.getString("From")!!
+            if (url == "SETTING") {
+                binding.tvIntroNext.visibility = GONE
+            }
         }
-        if (url.equals("SETTING")) {
-            binding.tvIntroNext.visibility = GONE
-        }
+        else
+            binding.ivBackIntro.visibility = GONE
+
+
         /*
         binding.clDecisionScreen.visibility = View.GONE
         binding.tvDecisionYes.setBackgroundResource(R.drawable.shape_decision_selected)
     */
         binding.tvIntroNext.setOnClickListener(this)
-
         binding.ivBackgroundImage1.setOnClickListener(this)
+        binding.ivBackIntro.setOnClickListener(this)
 
         /*  binding.tvDecisionNext.setOnClickListener(this)
           binding.tvDecisionYes.setOnClickListener(this)
@@ -203,6 +207,10 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener,AndExoPlay
                 finish()
 //                binding.clIntroScreen.visibility = View.GONE
 //                binding.clDecisionScreen.visibility = View.VISIBLE
+            }
+
+            R.id.iv_back_intro -> {
+                onBackPressed()
             }
 
 

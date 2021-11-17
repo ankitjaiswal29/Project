@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.View
 import android.view.View.GONE
 import android.view.WindowManager
+import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
@@ -15,12 +16,15 @@ import com.fighterdiet.databinding.ActivityPrivacyAndTermsBinding
 
 class PrivacyAndTermsActivity : BaseActivity(), View.OnClickListener {
     private lateinit var binding: ActivityPrivacyAndTermsBinding
-    private val webViewClient = object : WebViewClient() {
-        override fun onPageFinished(view: WebView?, url: String?) {
-            super.onPageFinished(view, url)
-            binding.pbPrivacyPolicy.visibility = View.GONE
+
+    private val webChromeClient = object : WebChromeClient() {
+        override fun onProgressChanged(view: WebView?, newProgress: Int) {
+            super.onProgressChanged(view, newProgress)
+            if(newProgress > 75)
+                binding.pbPrivacyPolicy.visibility = View.GONE
         }
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +64,7 @@ class PrivacyAndTermsActivity : BaseActivity(), View.OnClickListener {
         binding.wvTermsAndPrivacy.overlayHorizontalScrollbar()
         binding.wvTermsAndPrivacy.isVerticalScrollBarEnabled = true
         binding.wvTermsAndPrivacy.isHorizontalScrollBarEnabled = true
-        binding.wvTermsAndPrivacy.webViewClient = webViewClient
+        binding.wvTermsAndPrivacy.webChromeClient = webChromeClient
     }
 
     override fun onBackPressed() {

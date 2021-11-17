@@ -63,17 +63,6 @@
                         tools:ignore="ContentDescription" />
                 </FrameLayout>
 
-              <!--  <ImageView
-                    android:id="@+id/ivBackgroundImage1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:src="@mipmap/pauline_intro_2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="ContentDescription" />-->
-
                 <ImageView
                     android:id="@+id/iv_play"
                     android:layout_width="wrap_content"
@@ -129,31 +118,57 @@
                         android:layout_height="@dimen/_3sdp"
                         android:background="@color/black" />
 
-                    <TextView
-                        android:id="@+id/iv_about"
+                    <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@={aboutResponseModel.about}"
-                        android:textAlignment="textStart"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_10ssp" />
+                        android:layout_height="0dp">
 
-                    <TextView
-                        android:id="@+id/tvIntroNext"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:fontFamily="@font/inter_semibold"
-                        android:text="@string/str_next"
+                        <TextView
+                            android:id="@+id/iv_about"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="@={aboutResponseModel.about}"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10ssp" />
+
+                        <ProgressBar
+                            android:id="@+id/pb_about_intro"
+                            android:indeterminate="true"
+                            android:indeterminateTint="@color/black"
+                            android:layout_gravity="center"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"/>
+
+                    </FrameLayout>
+
+                    <RelativeLayout
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:textColor="@color/texttrial"
-                        android:textSize="@dimen/_20ssp"
-                        app:layout_constraintTop_toBottomOf="@id/ll_text"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvIntroNext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_alignParentEnd="true"
+                            android:fontFamily="@font/inter_semibold"
+                            android:text="@string/str_next"
+                            android:textColor="@color/texttrial"
+                            android:textSize="@dimen/_20ssp"/>
+
+                        <ImageView
+                            android:id="@+id/iv_back_intro"
+                            android:padding="@dimen/_10sdp"
+                            android:layout_centerInParent="true"
+                            android:src="@mipmap/icn_back_blue"
+                            android:layout_alignParentStart="true"
+                            android:layout_width="@dimen/_35sdp"
+                            android:layout_height="@dimen/_35sdp"/>
+                    </RelativeLayout>
 
                 </LinearLayout>
 

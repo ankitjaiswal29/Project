@@ -18,6 +18,7 @@ import com.fighterdiet.data.model.requestModel.*
 import com.fighterdiet.data.model.responseModel.CommentListResponseModel
 import com.fighterdiet.data.model.responseModel.RecipeContentResponseModel
 import com.fighterdiet.data.repository.RecipeInfoViewModelProvider
+import com.fighterdiet.databinding.ActivityRecipeInfo2Binding
 import com.fighterdiet.databinding.ActivityRecipeInfoBinding
 import com.fighterdiet.fragments.*
 import com.fighterdiet.utils.Constants
@@ -45,13 +46,13 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
     private var commentListModel: CommentListResponseModel? = null
     private var recipeId: String = ""
     private var recipeContentModel: RecipeContentResponseModel? = null
-    lateinit var binding: ActivityRecipeInfoBinding
+    lateinit var binding: ActivityRecipeInfo2Binding
     private val fragments = ArrayList<Fragment>()
     private lateinit var viewModel: RecipeInfoViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_recipe_info)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_recipe_info2)
         setupViewModel()
         setupObserver()
         setupUI()
