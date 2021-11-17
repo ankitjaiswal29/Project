@@ -1,6 +1,5 @@
 package com.fighterdiet.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,12 +8,10 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
-import com.fighterdiet.activities.LoginActivity
 import com.fighterdiet.activities.MemberShipActivity
 import com.fighterdiet.activities.RecipeDetailsActivity
 import com.fighterdiet.adapters.HomeRecipeListRecyclerAdapter

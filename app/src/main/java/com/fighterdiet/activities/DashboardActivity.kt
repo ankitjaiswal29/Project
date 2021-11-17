@@ -2,7 +2,6 @@ package com.fighterdiet.activities
 
 import android.content.Context
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,12 +12,10 @@ import androidx.fragment.app.Fragment
 import com.fighterdiet.R
 import com.fighterdiet.databinding.ActivityDashboardWithCalaoriesBinding
 import com.fighterdiet.fragments.*
+import com.fighterdiet.interfaces.DashboardCallback
 import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.PrefManager
 import com.google.android.material.tabs.TabLayout
-import android.content.DialogInterface
-import androidx.appcompat.app.AlertDialog
-import com.fighterdiet.interfaces.DashboardCallback
 import com.fighterdiet.utils.Utils.loginAlertDialog
 
 class DashboardActivity : BaseActivity() {
@@ -33,7 +30,11 @@ class DashboardActivity : BaseActivity() {
     var offset = 0
     var limit = 8
 
-    private val callbackDashboard = object : DashboardCallback{
+    private val callbackDashboard = object : DashboardCallback {
+        override fun onStartLoader() {
+            binding.pbDashboardAct.visibility = View.VISIBLE
+        }
+
         override fun onDataLoaded() {
             binding.pbDashboardAct.visibility = View.GONE
         }
@@ -176,14 +177,14 @@ class DashboardActivity : BaseActivity() {
                         startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
                     }
                     2 -> {
-                        showFragment(TrendingFragment())
+                        showFragment(TrendingFragment.initFragment(callbackDashboard))
                     }
                     3 -> {
                         if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
                             loginAlertDialog(this@DashboardActivity)
                             return
                         }
-                        showFragment(FavouriteFragment())
+                        showFragment(FavouriteFragment.initFragment(callbackDashboard))
                     }
                     4 -> {
                         startActivity(WeeklyGroceryFragment.getStartIntent(this@DashboardActivity))
@@ -332,7 +333,7 @@ class DashboardActivity : BaseActivity() {
                         binding.toolbar.ivTopImage.visibility = View.GONE
                         binding.toolbar.tvTitle.visibility = View.VISIBLE
                         binding.toolbar.tvTitle.text = "Trending"
-                        showFragment(TrendingFragment())
+                        showFragment(TrendingFragment.initFragment(callbackDashboard))
                     }
                     3 -> {
                         if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
@@ -343,7 +344,7 @@ class DashboardActivity : BaseActivity() {
                         binding.toolbar.ivTopImage.visibility = View.GONE
                         binding.toolbar.tvTitle.visibility = View.VISIBLE
                         binding.toolbar.tvTitle.text = "Favorites"
-                        showFragment(FavouriteFragment())
+                        showFragment(FavouriteFragment.initFragment(callbackDashboard))
                     }
                     4 -> {
                         Constants.DashboardDetails.isApiRequestNeeded = false

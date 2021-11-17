@@ -1,29 +1,25 @@
 package com.fighterdiet.fragments
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fighterdiet.R
-import com.fighterdiet.activities.LoginActivity
-import com.fighterdiet.activities.MemberShipActivity
 import com.fighterdiet.activities.RecipeDetailsActivity
 import com.fighterdiet.adapters.TrendingFragmentRecyAdapter
 import com.fighterdiet.data.api.RetrofitBuilder
 import com.fighterdiet.data.model.responseModel.TrendingListResponseModel
 import com.fighterdiet.data.repository.TrendingRepository
 import com.fighterdiet.databinding.FragmentTrendingBinding
+import com.fighterdiet.interfaces.DashboardCallback
 import com.fighterdiet.utils.*
 import com.fighterdiet.viewModel.TrendingViewModel
 import com.fighterdiet.viewModel.TrendingViewModelProvider
 
-class TrendingFragment : BaseFragment() {
+class TrendingFragment(val dashboardCallback: DashboardCallback) : BaseFragment() {
     private lateinit var viewModel: TrendingViewModel
     lateinit var binding: FragmentTrendingBinding
     private lateinit var trendingAdapter: TrendingFragmentRecyAdapter
@@ -41,14 +37,12 @@ class TrendingFragment : BaseFragment() {
         return binding.root
     }
 
-    companion object {
-
-        fun getInstance(context: Context): Fragment {
-            val bundle = Bundle()
-            val fragment = TrendingFragment()
-            return fragment
+    companion object{
+        fun initFragment(dashboardCallback: DashboardCallback):TrendingFragment{
+            return TrendingFragment(dashboardCallback)
         }
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,15 +62,20 @@ class TrendingFragment : BaseFragment() {
         )
         )
             .get(TrendingViewModel::class.java)
+
+        dashboardCallback.onStartLoader()
         viewModel.getTrendingList(offset, limit)
     }
     fun setupObserver() {
         viewModel.trendingListResource.observe(viewLifecycleOwner, {
             when(it.status){
                 Status.SUCCESS -> {
+
                     if (it.data?.data?.result.isNullOrEmpty())
                         return@observe
-                    binding.pbTrending.visibility = View.GONE
+
+                    dashboardCallback.onDataLoaded()
+//                    binding.pbTrending.visibility = View.GONE
                     trendingList.addAll(it.data?.data?.result!!)
                     val currSize = binding.rvTrendingRecycler.adapter?.itemCount?:0
                     if(currSize>0)

@@ -16,11 +16,12 @@ import com.fighterdiet.data.api.RetrofitBuilder
 import com.fighterdiet.data.model.responseModel.FavouriteListResponseModel
 import com.fighterdiet.data.repository.FavouriteRepository
 import com.fighterdiet.databinding.FragmentFavouriteBinding
+import com.fighterdiet.interfaces.DashboardCallback
 import com.fighterdiet.utils.*
 import com.fighterdiet.viewModel.FavouriteViewModeProvider
 import com.fighterdiet.viewModel.FavouriteViewModel
 
-class FavouriteFragment : BaseFragment() {
+class FavouriteFragment(val dashboardCallback: DashboardCallback) : BaseFragment() {
     private var isLoadMore: Boolean = false
     private lateinit var viewModel: FavouriteViewModel
     lateinit var binding: FragmentFavouriteBinding
@@ -29,6 +30,12 @@ class FavouriteFragment : BaseFragment() {
     var favouriteList: ArrayList<FavouriteListResponseModel.Favourite> = ArrayList()
     var offset = 0
     var limit = 8
+
+    companion object{
+        fun initFragment(dashboardCallback: DashboardCallback):FavouriteFragment{
+            return FavouriteFragment(dashboardCallback)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,6 +61,7 @@ class FavouriteFragment : BaseFragment() {
         super.onStart()
         if(::viewModel.isInitialized){
             isLoadMore = false
+            dashboardCallback.onStartLoader()
             viewModel.getFavouriteList(offset, limit)
         }
     }
@@ -62,7 +70,8 @@ class FavouriteFragment : BaseFragment() {
         viewModel.favouriteListResource.observe(viewLifecycleOwner, {
             when(it.status){
                 Status.SUCCESS -> {
-                    binding.pbFav.visibility = View.GONE
+                    dashboardCallback.onDataLoaded()
+//                    binding.pbFav.visibility = View.GONE
                     binding.tvNoData.visibility = View.GONE
                     if (!it.data?.data?.result.isNullOrEmpty()){
 //                        if(!isLoadMore)
@@ -125,15 +134,6 @@ class FavouriteFragment : BaseFragment() {
             }
 
         })
-    }
-
-    companion object {
-
-        fun getInstance(context: Context): Fragment {
-            val bundle = Bundle()
-            val fragment = FavouriteFragment()
-            return fragment
-        }
     }
 
 }
