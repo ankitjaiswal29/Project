@@ -38,7 +38,7 @@
                     android:hint="Pick Day 7 Meals"
                     android:fontFamily="@font/inter_bold"
                     android:textSize="@dimen/_20ssp"
-                    android:textColorHint="@color/texttrial"
+                    android:textColorHint="@color/blue_main"
                     android:drawableStart="@mipmap/icn_search"
                     android:drawablePadding="@dimen/_5sdp"
                     android:background="@null"

@@ -14,7 +14,7 @@
     <color name="colorBlack">#000000</color>
 
 
-    <color name="texttrial">#4394C1</color>
+    <color name="blue_main">#4394C1</color>
     <color name="off_box">#B8CDDF</color>
     <color name="member">#AFD1E2</color>
 
@@ -34,6 +34,7 @@
     <color name="selected_background">#4394c1</color>
 
     <color name="opt_heading">#E1DCD9</color>
+    <color name="lightGray">#EBEBEB</color>
 
 
 </resources>

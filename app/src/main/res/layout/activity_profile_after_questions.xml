@@ -130,7 +130,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/inter_bold"
                                     android:text="1,500-2000"
-                                    android:textColor="@color/texttrial"
+                                    android:textColor="@color/blue_main"
                                     android:textSize="@dimen/_14ssp" />
 
                                 <TextView
@@ -148,7 +148,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/inter_bold"
                                     android:text="10,500-14,000"
-                                    android:textColor="@color/texttrial"
+                                    android:textColor="@color/blue_main"
                                     android:textSize="@dimen/_14ssp" />
 
                                 <TextView
@@ -182,7 +182,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_bold"
                             android:text="120g"
-                            android:textColor="@color/texttrial"
+                            android:textColor="@color/blue_main"
                             android:textSize="@dimen/_12ssp"
                             app:layout_constraintStart_toStartOf="@+id/v_gram_cal"
                             app:layout_constraintTop_toBottomOf="@+id/v_gram_cal" />
@@ -193,7 +193,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_bold"
                             android:text="240g"
-                            android:textColor="@color/texttrial"
+                            android:textColor="@color/blue_main"
                             android:textSize="@dimen/_12ssp"
                             app:layout_constraintEnd_toEndOf="@+id/v_gram_cal"
                             app:layout_constraintTop_toBottomOf="@+id/v_gram_cal" />

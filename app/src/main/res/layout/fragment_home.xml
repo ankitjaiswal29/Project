@@ -18,7 +18,7 @@
             android:id="@+id/tv_filter_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/texttrial"
+            android:background="@color/blue_main"
             android:text="@string/filters_selected_tap_to_clear"
             android:textColor="@color/white"
             android:textSize="@dimen/_12ssp"

@@ -158,6 +158,7 @@ class HomeFragment(val dashboardCallback: DashboardCallback) : BaseFragment() {
             Constants.RecipeFilter.isFilterApplied = false
             binding.tvFilterCount.visibility = GONE
             recipeListAdapter.clearAll()
+            dashboardCallback.onStartLoader()
             Handler(Looper.getMainLooper()).postDelayed({
                 getRecipes("", offset, limit)
             },50)

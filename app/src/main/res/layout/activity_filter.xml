@@ -69,9 +69,9 @@
             android:layout_height="@dimen/_30sdp"
             app:layout_constraintTop_toBottomOf="@+id/v_top"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@color/texttrial"
+            app:tabIndicatorColor="@color/blue_main"
             app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/texttrial" />
+            app:tabSelectedTextColor="@color/blue_main" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
@@ -85,7 +85,7 @@
             android:id="@+id/cl_bottom"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-            android:background="@color/texttrial"
+            android:background="@color/blue_main"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent">

@@ -20,14 +20,14 @@
             android:text="@string/for_the_filling"
             android:fontFamily="@font/inter_bold"
             android:textStyle="bold"
-            android:textColor="@color/texttrial"
+            android:textColor="@color/blue_main"
             android:textSize="@dimen/_20ssp" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:id="@+id/v_filling"
-            android:background="@color/texttrial"
+            android:background="@color/blue_main"
             app:layout_constraintStart_toStartOf="@+id/tv_direction_heading"
             app:layout_constraintTop_toBottomOf="@+id/tv_direction_heading"
             app:layout_constraintEnd_toEndOf="@+id/tv_direction_heading" />

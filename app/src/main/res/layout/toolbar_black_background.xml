@@ -8,8 +8,8 @@
         android:layout_height="wrap_content"
         android:background="@color/toolbar_color"
         android:paddingTop="@dimen/_10sdp"
-        android:paddingBottom="@dimen/_10sdp"
-        app:layout_scrollFlags="scroll|enterAlways">
+        android:paddingBottom="@dimen/_7sdp"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
         <TextView
             android:id="@+id/tv_title"
@@ -30,7 +30,7 @@
         <ImageView
             android:id="@+id/ivTopImage"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_height="@dimen/_35sdp"
             android:adjustViewBounds="true"
             android:src="@mipmap/fighterdiet_app_logo_white"
             app:layout_constraintBottom_toBottomOf="parent"

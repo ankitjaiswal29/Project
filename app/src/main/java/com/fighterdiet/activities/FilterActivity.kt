@@ -21,6 +21,7 @@ import com.fighterdiet.databinding.ActivityFilterBinding
 import com.fighterdiet.fragments.*
 import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.Status
+import com.fighterdiet.utils.Utils
 import com.fighterdiet.viewModel.FilterRecipeViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -227,38 +228,46 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
             }
 
             R.id.tv_clear_all ->{
-                mealCount = 0
-                volumeCount = 0
-                dietaryCount = 0
-                Constants.RecipeFilter.totalFilterCount = 0
-                Constants.RecipeFilter.selectedMealFilter.clear()
-                Constants.RecipeFilter.selectedDietaryFilter.clear()
-                Constants.RecipeFilter.selectedVolumeFilter.clear()
-                Constants.DashboardDetails.isApiRequestNeeded = true
-                updateTotalFilterCountText()
-                Constants.RecipeFilter.isFilterCleared = true
-                Constants.RecipeFilter.isFilterApplied = false
+                if(mealCount+volumeCount+dietaryCount > 0){
 
-                when(currentScreenType){
-                    0-> {
-                        dietaryInfoFragment?.clearDietaryData()
+                    mealCount = 0
+                    volumeCount = 0
+                    dietaryCount = 0
+                    Constants.RecipeFilter.totalFilterCount = 0
+                    Constants.RecipeFilter.selectedMealFilter.clear()
+                    Constants.RecipeFilter.selectedDietaryFilter.clear()
+                    Constants.RecipeFilter.selectedVolumeFilter.clear()
+                    Constants.DashboardDetails.isApiRequestNeeded = true
+                    updateTotalFilterCountText()
+                    Constants.RecipeFilter.isFilterCleared = true
+                    Constants.RecipeFilter.isFilterApplied = false
+
+                    when(currentScreenType){
+                        0-> {
+                            dietaryInfoFragment?.clearDietaryData()
 //                        Constants.RecipeFilter.isDietaryListCleared = true
-                    }
+                        }
 
-                    1-> {
-                        volumeListFragment?.clearVolumeData()
+                        1-> {
+                            volumeListFragment?.clearVolumeData()
 //                        Constants.RecipeFilter.isVolumeListCleared = true
-                    }
+                        }
 
-                    2-> {
-                        mealListFragment?.clearMealData()
+                        2-> {
+                            mealListFragment?.clearMealData()
 //                        Constants.RecipeFilter.isMealListCleared = true
+                        }
                     }
+                    isNewChanges = false
+
                 }
-                isNewChanges = false
+                else{
+                    Utils.showToast(this, "Filter is already cleared!")
+                }
             }
         }
     }
+
 
 
     override fun mealsInfoCount(pos: Int, id: Int, isItemAdd: Boolean) {
@@ -389,5 +398,7 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
 
     }
 
-
+    fun isShowLoader(isShow: Boolean) {
+        binding.pbFilter.visibility = if(isShow) View.VISIBLE else View.GONE
+    }
 }

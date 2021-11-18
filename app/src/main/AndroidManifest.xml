@@ -107,6 +107,10 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activities.AboutPauliActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".activities.ResetPasswordActivity"
             android:exported="false"
             android:screenOrientation="portrait"

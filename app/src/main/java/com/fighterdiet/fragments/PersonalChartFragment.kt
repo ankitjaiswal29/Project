@@ -1,7 +1,6 @@
 package com.fighterdiet.fragments
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,8 +17,6 @@ import com.fighterdiet.utils.Utils
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
-import com.github.mikephil.charting.formatter.IAxisValueFormatter
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.StackedValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
@@ -145,7 +142,7 @@ class PersonalChartFragment : Fragment(), View.OnClickListener {
         binding.barChart.data = barData
 
         barDataSet.setColors(
-            getResources().getColor(R.color.texttrial),
+            getResources().getColor(R.color.blue_main),
             getResources().getColor(R.color.orange),
             getResources().getColor(R.color.skyblue),
             getResources().getColor(R.color.green),

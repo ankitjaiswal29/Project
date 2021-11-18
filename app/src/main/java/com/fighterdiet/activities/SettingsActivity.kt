@@ -139,8 +139,7 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
                 }
 
                 R.id.tv_about_paulin -> {
-                    val loginIntent = Intent(this, IntroAndDecisionActivity::class.java)
-                    loginIntent.putExtra("From", "SETTING")
+                    val loginIntent = Intent(this, AboutPauliActivity::class.java)
                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     startActivity(loginIntent)
                 }

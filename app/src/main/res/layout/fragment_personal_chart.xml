@@ -116,7 +116,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/inter_bold"
                                 android:text="1,234"
-                                android:textColor="@color/texttrial"
+                                android:textColor="@color/blue_main"
                                 android:textSize="@dimen/_12ssp" />
 
                             <TextView
@@ -169,7 +169,7 @@
                         android:layout_marginStart="@dimen/_10sdp"
                         android:fontFamily="@font/inter_bold"
                         android:text="120g"
-                        android:textColor="@color/texttrial"
+                        android:textColor="@color/blue_main"
                         android:textSize="@dimen/_12ssp"
                         app:layout_constraintStart_toStartOf="@+id/v_gram_cal"
                         app:layout_constraintTop_toBottomOf="@+id/v_gram_cal" />
@@ -181,7 +181,7 @@
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:fontFamily="@font/inter_bold"
                         android:text="240g"
-                        android:textColor="@color/texttrial"
+                        android:textColor="@color/blue_main"
                         android:textSize="@dimen/_12ssp"
                         app:layout_constraintEnd_toEndOf="@+id/v_gram_cal"
                         app:layout_constraintTop_toBottomOf="@+id/v_gram_cal" />
@@ -229,7 +229,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_bold"
                             android:text="7,878"
-                            android:textColor="@color/texttrial"
+                            android:textColor="@color/blue_main"
                             android:textSize="@dimen/_11ssp" />
 
                         <TextView
@@ -315,7 +315,7 @@
                                     android:id="@+id/v_blue"
                                     android:layout_width="@dimen/_10sdp"
                                     android:layout_height="@dimen/_10sdp"
-                                    android:background="@color/texttrial"
+                                    android:background="@color/blue_main"
                                     app:layout_constraintStart_toStartOf="@+id/barChart"
                                     app:layout_constraintTop_toBottomOf="@+id/barChart" />
 

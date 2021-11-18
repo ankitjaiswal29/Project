@@ -19,7 +19,6 @@ import com.fighterdiet.data.model.responseModel.CommentListResponseModel
 import com.fighterdiet.data.model.responseModel.RecipeContentResponseModel
 import com.fighterdiet.data.repository.RecipeInfoViewModelProvider
 import com.fighterdiet.databinding.ActivityRecipeInfo2Binding
-import com.fighterdiet.databinding.ActivityRecipeInfoBinding
 import com.fighterdiet.fragments.*
 import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.PrefManager
@@ -192,7 +191,7 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
     private fun updateFavUI() {
         recipeContentModel?.let {
                 binding.ivFav.setImageResource(if(it.favourite == 1) R.drawable.tb_favorite_icon_blue else R.mipmap.heart_holo)
-                binding.ivFav.setColorFilter(if(it.favourite == 1) resources.getColor(R.color.skyblue) else resources.getColor(R.color.white))
+                binding.ivFav.setColorFilter(if(it.favourite == 1) resources.getColor(R.color.blue_main) else resources.getColor(R.color.white))
         }
     }
 

@@ -10,7 +10,7 @@
 
         <gradient
             android:angle="0"
-            android:endColor="@color/texttrial"
+            android:endColor="@color/blue_main"
             android:startColor="@color/skyblue"
             android:type="sweep"
             android:useLevel="false" />

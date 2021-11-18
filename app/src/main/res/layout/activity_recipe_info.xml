@@ -121,7 +121,7 @@
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_marginEnd="@dimen/_5sdp"
                         app:tabGravity="fill"
-                        app:tabIndicatorColor="@color/texttrial"
+                        app:tabIndicatorColor="@color/blue_main"
                         app:tabMode="scrollable" />
 
                 </com.google.android.material.appbar.AppBarLayout>
