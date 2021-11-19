@@ -41,7 +41,7 @@ class QuizAnswerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerVie
         }
 
         override fun onClick(v: View?) {
-            selectedOption = adapterPosition
+            selectedOption = bindingAdapterPosition
             notifyDataSetChanged()
         }
     }
@@ -65,8 +65,8 @@ class QuizAnswerAdapter(var context: Context) : RecyclerView.Adapter<RecyclerVie
         }
 
         override fun onClick(v: View?) {
-            question.answers.get(adapterPosition).isSelected =
-                !question.answers.get(adapterPosition).isSelected
+            question.answers.get(bindingAdapterPosition).isSelected =
+                !question.answers.get(bindingAdapterPosition).isSelected
             notifyDataSetChanged()
         }
     }

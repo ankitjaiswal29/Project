@@ -34,7 +34,7 @@ class FavouriteFragmentRecyAdapter(
             when (view!!.id) {
 //                R.id.tvCaloriesDescription -> {
 //
-//                    favouriteList[adapterPosition].isDescOpened = !favouriteList[adapterPosition].isDescOpened
+//                    favouriteList[bindingAdapterPosition].isDescOpened = !favouriteList[bindingAdapterPosition].isDescOpened
 //                    notifyDataSetChanged()
 //                }
 
@@ -43,7 +43,7 @@ class FavouriteFragmentRecyAdapter(
                 }
 
 //                R.id.rlCalories -> {
-//                    homeList.get(adapterPosition).isDescOpened = true
+//                    homeList.get(bindingAdapterPosition).isDescOpened = true
 //                    notifyDataSetChanged()
 //                }
 //                else -> {

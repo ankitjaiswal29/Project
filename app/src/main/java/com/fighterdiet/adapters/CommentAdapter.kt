@@ -60,7 +60,7 @@ class CommentAdapter(
             if(commentList.isEmpty())
                 return
 
-            if(commentList[adapterPosition].user_id == PrefManager.getString(PrefManager.KEY_USER_ID)?.toInt()?:0) {
+            if(commentList[bindingAdapterPosition].user_id == PrefManager.getString(PrefManager.KEY_USER_ID)?.toInt()?:0) {
                 bindDialog.tvDelete.visibility = View.VISIBLE
             }
 
@@ -68,12 +68,12 @@ class CommentAdapter(
 
             bindDialog.tvDelete.setOnClickListener {
                 mPopupWindowFilter.dismiss()
-                itemClickListener.onItemClick(Constants.OPERATION_DELETE, commentList[adapterPosition])
+                itemClickListener.onItemClick(Constants.OPERATION_DELETE, commentList[bindingAdapterPosition])
             }
 
             bindDialog.tvSpam.setOnClickListener {
                 mPopupWindowFilter.dismiss()
-                itemClickListener.onItemClick(Constants.OPERATION_REPORT_SPAM, commentList[adapterPosition])
+                itemClickListener.onItemClick(Constants.OPERATION_REPORT_SPAM, commentList[bindingAdapterPosition])
             }
         }
     }

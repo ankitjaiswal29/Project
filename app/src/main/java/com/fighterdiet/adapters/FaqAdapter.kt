@@ -31,6 +31,7 @@ class FaqAdapter(
             }
         }
 
+
         fun toggleItemOpen(open: Boolean, binding: ItemFaqInfoBinding?) {
             if(binding==null)
                 return

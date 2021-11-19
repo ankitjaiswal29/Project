@@ -33,14 +33,14 @@ class PicDayMealAdapter(
                         doubleClickLastTime = 0
 //                        doAction()
                     }else{
-//                        itemClickListener!!.onItemClick(adapterPosition,view)
+//                        itemClickListener!!.onItemClick(bindingAdapterPosition,view)
                         doubleClickLastTime = System.currentTimeMillis()
                     }
             }
 
             when(view?.id){
                 R.id.tvCaloriesDescription -> {
-                    homeList.get(adapterPosition).isDescOpened = true
+                    homeList.get(bindingAdapterPosition).isDescOpened = true
                     notifyDataSetChanged()
                 }
 

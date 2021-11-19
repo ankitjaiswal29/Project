@@ -9,7 +9,7 @@
         android:background="@color/toolbar_color"
         android:paddingTop="@dimen/_10sdp"
         android:paddingBottom="@dimen/_7sdp"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+        app:layout_scrollFlags="scroll|enterAlways">
 
         <TextView
             android:id="@+id/tv_title"

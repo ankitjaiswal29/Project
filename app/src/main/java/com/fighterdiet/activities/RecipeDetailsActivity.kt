@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.fighterdiet.R
 import com.fighterdiet.adapters.ViewPagerRecipeInfoAdapter
@@ -19,6 +20,7 @@ import com.fighterdiet.data.model.responseModel.CommentListResponseModel
 import com.fighterdiet.data.model.responseModel.RecipeContentResponseModel
 import com.fighterdiet.data.repository.RecipeInfoViewModelProvider
 import com.fighterdiet.databinding.ActivityRecipeInfo2Binding
+import com.fighterdiet.databinding.ActivityRecipeInfoBinding
 import com.fighterdiet.fragments.*
 import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.PrefManager
@@ -45,16 +47,25 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
     private var commentListModel: CommentListResponseModel? = null
     private var recipeId: String = ""
     private var recipeContentModel: RecipeContentResponseModel? = null
-    lateinit var binding: ActivityRecipeInfo2Binding
+    lateinit var binding: ActivityRecipeInfoBinding
     private val fragments = ArrayList<Fragment>()
     private lateinit var viewModel: RecipeInfoViewModel
+    private lateinit var circularProgressDrawable: CircularProgressDrawable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_recipe_info2)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_recipe_info)
+        initProgress()
         setupViewModel()
         setupObserver()
         setupUI()
+    }
+
+    private fun initProgress() {
+        circularProgressDrawable = CircularProgressDrawable(this)
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.start()
     }
 
     override fun setupUI() {
@@ -64,11 +75,11 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                 viewModel.getRecipeContent(RecipeContentRequestModel(recipeId))
             }
             recipeImage = it.getString(Constants.RECIPE_IMAGE, "")
-            recipeImage.let {
+            recipeImage.let {imageUrl ->
                 try {
                     Glide.with(this)
-                        .load(it)
-                        .placeholder(R.color.skyblue)
+                        .load(imageUrl)
+                        .placeholder(circularProgressDrawable)
                         .into(binding.ivBanner)
                 }
                 catch (e:Exception){
@@ -79,7 +90,7 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
             recipeName = it.getString(Constants.RECIPE_NAME, "")
             recipeName.let {
                 try {
-                   binding.infoTool.tvTitle.text = it
+                   binding.tvTitle.text = it
                 }
                 catch (e:Exception){
                     e.printStackTrace()
@@ -118,9 +129,7 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                                 it.recipe_note = recipeNoteModel as RecipeContentResponseModel.RecipeNote
                             }
                             initialise()
-
                         }
-
                     }
 
                 }
@@ -147,13 +156,10 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                             updateFavUI()
                         },50)
                     }
-
                 }
                 Status.LOADING -> {
-
                 }
                 Status.ERROR -> {
-
                 }
             }
         })
@@ -196,7 +202,7 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun initialise() {
-        binding.infoTool.back.setOnClickListener(this)
+        binding.back.setOnClickListener(this)
         binding.ivComment.setOnClickListener(this)
         binding.ivBanner.setOnClickListener(this)
         binding.ivFav.setOnClickListener(this)

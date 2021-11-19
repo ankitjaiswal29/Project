@@ -14,7 +14,7 @@ class RecipeTipsRecycleAdapter(
     class MyViewHolder(val bind: ItemDirectionsLayoutBinding):RecyclerView.ViewHolder(bind.root) {
 
         fun bindItems(tips: RecipeContentResponseModel.Tip) {
-            bind.tvDirectionHeading.text = "Tips #${adapterPosition+1}"
+            bind.tvDirectionHeading.text = "Tips #${bindingAdapterPosition+1}"
             bind.tvDirectionDesc.text = tips.tips
         }
 

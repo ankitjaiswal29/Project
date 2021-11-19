@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.fighterdiet.R
 import com.fighterdiet.data.model.responseModel.RecipeListResponseModel
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
@@ -37,12 +38,12 @@ class HomeRecipeListRecyclerAdapter(
         override fun onClick(view: View?) {
             when (view!!.id) {
                 R.id.tvCaloriesDescription -> {
-                    recipeList[adapterPosition].isDescOpened = !recipeList.get(adapterPosition).isDescOpened
+                    recipeList[bindingAdapterPosition].isDescOpened = !recipeList.get(bindingAdapterPosition).isDescOpened
                     notifyDataSetChanged()
                 }
 
                 else -> {
-                    itemClickListener.invoke(adapterPosition, recipeList[adapterPosition])
+                    itemClickListener.invoke(bindingAdapterPosition, recipeList[bindingAdapterPosition])
                 }
 
             }
@@ -72,6 +73,8 @@ class HomeRecipeListRecyclerAdapter(
         try {
             Glide.with(holder.itemView.context)
                 .load(recipeList[position].recipe_image)
+                .override( 500)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(circularProgressDrawable)
                 .into(holder.binding!!.ivItemHome)
 

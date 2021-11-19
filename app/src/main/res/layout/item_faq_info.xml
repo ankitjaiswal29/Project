@@ -67,6 +67,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_5sdp"
+                android:autoLink="web"
+                android:linksClickable="true"
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:fontFamily="@font/inter_regular"
                 android:gravity="start"

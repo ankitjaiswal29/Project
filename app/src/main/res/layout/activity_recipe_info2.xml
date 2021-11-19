@@ -26,19 +26,20 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.google.android.material.appbar.CollapsingToolbarLayout
-                        android:id="@+id/ct_recipe_details"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fitsSystemWindows="true"
-                        app:contentScrim="?android:attr/colorControlHighlight"
-                        app:expandedTitleMarginEnd="64dp"
-                        app:expandedTitleMarginStart="48dp"
-                        app:expandedTitleTextAppearance="@android:color/transparent"
-                        app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+<!--                    <com.google.android.material.appbar.CollapsingToolbarLayout-->
+<!--                        android:id="@+id/ct_recipe_details"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fitsSystemWindows="true"-->
+<!--                        app:contentScrim="?android:attr/colorControlHighlight"-->
+<!--                        app:expandedTitleMarginEnd="64dp"-->
+<!--                        app:expandedTitleMarginStart="48dp"-->
+<!--                        app:expandedTitleTextAppearance="@android:color/transparent"-->
+<!--                        app:layout_scrollFlags="scroll|enterAlwaysCollapsed">-->
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/cl_banner_img"
+                            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
@@ -113,7 +114,7 @@
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    </com.google.android.material.appbar.CollapsingToolbarLayout>
+<!--                    </com.google.android.material.appbar.CollapsingToolbarLayout>-->
 
                     <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tab"
@@ -138,12 +139,11 @@
                             </androidx.core.widget.NestedScrollView>
                 -->
 
-                <androidx.viewpager.widget.ViewPager
+                <com.fighterdiet.custom_view.DynamicHeightViewPager
                     android:id="@+id/vp_info_recepie"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     android:layout_margin="@dimen/_5sdp" />
 
             </androidx.coordinatorlayout.widget.CoordinatorLayout>

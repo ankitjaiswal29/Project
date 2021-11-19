@@ -49,11 +49,11 @@ class DashboardActivity : BaseActivity() {
 
         previousPos = 0
 
-        if (Constants.isQuestonnaireCompleted) {
-            initialise6Tab()
-        } else {
+//        if (Constants.isQuestonnaireCompleted) {
+//            initialise6Tab()
+//        } else {
             initialise4Tab()
-        }
+//        }
     }
 
     override fun onResume() {

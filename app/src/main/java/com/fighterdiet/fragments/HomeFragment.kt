@@ -24,7 +24,7 @@ import com.fighterdiet.interfaces.DashboardCallback
 import com.fighterdiet.utils.*
 import com.fighterdiet.viewModel.HomeViewModel
 
-class HomeFragment(val dashboardCallback: DashboardCallback) : BaseFragment() {
+class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragment() {
     private var isFilterMode: Boolean = false
     private var isSearchMode: Boolean = false
     private var mSearchedKeyword: String = ""
