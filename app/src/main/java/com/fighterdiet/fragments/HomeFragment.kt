@@ -179,18 +179,13 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
                 .putExtra(Constants.RECIPE_IMAGE, recipe.recipe_image)
                 .putExtra(Constants.RECIPE_NAME, recipe.recipe_name)
             when(Constants.DashboardDetails.recipiesModel?.is_subscribed){
-                "1" -> {
+
+                "0" -> {
+                    startActivity(MemberShipActivity.getStartIntent(requireContext()))
+                }
+                else -> {
                     Constants.DashboardDetails.isApiRequestNeeded = false
                     startActivity(act)
-                }
-                "0" -> {
-                    if(position == 0){
-                        startActivity(MemberShipActivity.getStartIntent(requireContext()))
-                    }
-                    else{
-                        Constants.DashboardDetails.isApiRequestNeeded = false
-                        startActivity(act)
-                    }
                 }
 
             }

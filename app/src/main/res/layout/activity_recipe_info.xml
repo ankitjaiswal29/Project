@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
-        app:layoutDescription="@xml/activity_recipe_info_xml_constraintlayout_scene">
+        app:layoutDescription="@xml/activity_recipe_info_scene">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -186,21 +186,21 @@
             android:id="@+id/tab"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl_banner_img"
             app:tabGravity="fill"
+            android:background="@color/white"
             app:tabIndicatorColor="@color/blue_main"
             app:tabMode="scrollable" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/vp_info_recepie"
             android:layout_width="match_parent"
+            android:background="@color/white"
             android:layout_height="0dp"
+            android:paddingTop="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_margin="@dimen/_5sdp"
             android:nestedScrollingEnabled="false"
             app:layout_constraintVertical_bias="0"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"

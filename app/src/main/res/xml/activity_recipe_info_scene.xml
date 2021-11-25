@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@+id/cl_banner_img" />
+        <Constraint
+            android:id="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/tab"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            app:layout_constraintTop_toBottomOf="@id/cl_banner_img"
+            android:layout_marginStart="@dimen/_5sdp"
+            app:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint android:id="@id/cl_banner_img" />
+
+        <Constraint
+            android:id="@+id/toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/tab"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            app:layout_constraintTop_toBottomOf="@id/info_tool"
+            app:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@+id/start" >
+        <OnSwipe app:dragDirection="dragUp"
+            app:touchAnchorId="@id/vp_info_recepie"/>
+    </Transition>
+</MotionScene>
