@@ -3,14 +3,17 @@ package com.fighterdiet.fragments
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.R
 import com.fighterdiet.activities.MemberShipActivity
 import com.fighterdiet.activities.RecipeDetailsActivity
@@ -25,12 +28,14 @@ import com.fighterdiet.utils.*
 import com.fighterdiet.viewModel.HomeViewModel
 
 class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragment() {
+    private var currentPage: Int = 1
+    private var totalCountOfData: Int = -1
     private var isFilterMode: Boolean = false
     private var isSearchMode: Boolean = false
     private var mSearchedKeyword: String = ""
     private lateinit var viewModel: HomeViewModel
     lateinit var binding: FragmentHomeBinding
-    private lateinit var recipeListAdapter: HomeRecipeListRecyclerAdapter
+    lateinit var recipeListAdapter: HomeRecipeListRecyclerAdapter
     var recipeList: ArrayList<RecipeListResponseModel.Recipies> = ArrayList()
 
     companion object{
@@ -63,6 +68,7 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
         isFilterMode = false
         isSearchMode = false
         mSearchedKeyword = ""
+
         if(searchKeys.isNotBlank()){
             isSearchMode = true
             mSearchedKeyword = searchKeys
@@ -107,6 +113,8 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
                     dashboardCallback.onDataLoaded()
                     binding.tvNoData.visibility = GONE
 
+                    totalCountOfData = it.data?.data?.totalRecord?:0
+
                     if(isFilterMode||isSearchMode)
                     {
                         if(!isSearchMode){
@@ -114,9 +122,9 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
                             binding.tvFilterCount.visibility = View.VISIBLE
                         }
                         if(!it.data?.data?.result.isNullOrEmpty())
-                            recipeListAdapter.updateAll(it.data?.data?.result!!, isSearchMode)
+                            recipeListAdapter.updateAll(it.data?.data?.result!!, isSearchMode, mSearchedKeyword)
                         else{
-                            if(isSearchMode)
+                            if(totalCountOfData == 0)
                                 binding.tvNoData.visibility = View.VISIBLE
                         }
                         return@observe
@@ -125,9 +133,12 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
                     binding.tvFilterCount.visibility = GONE
                     Constants.DashboardDetails.recipiesModel = it.data?.data
 
-                    if(!it.data?.data?.result.isNullOrEmpty())
-                        recipeListAdapter.addAll(it.data?.data?.result!!)
-                    recipeListAdapter.notifyDataSetChanged()
+                    if(!it.data?.data?.result.isNullOrEmpty()){
+                        recipeListAdapter.addAll(it.data?.data?.result!!, mSearchedKeyword)
+//                        setUpHomeRecyclerView()
+                    }
+
+//                    recipeListAdapter.notifyDataSetChanged()
 
 
                 }
@@ -165,7 +176,7 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
         }
     }
 
-    private fun setUpHomeRecyclerView() {
+     fun setUpHomeRecyclerView() {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvHomeRecycler.layoutManager = layoutManager
         recipeListAdapter = HomeRecipeListRecyclerAdapter(requireActivity(), recipeList) { position, recipe ->
@@ -187,16 +198,17 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
                     Constants.DashboardDetails.isApiRequestNeeded = false
                     startActivity(act)
                 }
-
             }
         }
         binding.rvHomeRecycler.adapter = recipeListAdapter
-
         binding.rvHomeRecycler.addOnScrollListener(object :
             EndlessScrollViewListener(layoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int) {
-                if(!isSearchMode)
+                if(page*limit > totalItemsCount){
+                    Log.d("End","End of file")
+                }else{
                     getRecipes(mSearchedKeyword, totalItemsCount, limit)
+                }
             }
 
         })

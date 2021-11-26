@@ -24,6 +24,7 @@ class HomeRecipeListRecyclerAdapter(
     private lateinit var circularProgressDrawable: CircularProgressDrawable
     private var isLastUpdated: Boolean = false
     var i = 0
+    private var mSearchedKeyword:String = ""
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
@@ -74,7 +75,7 @@ class HomeRecipeListRecyclerAdapter(
             Glide.with(holder.itemView.context)
                 .load(recipeList[position].recipe_image)
                 .override( 500)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .placeholder(circularProgressDrawable)
                 .into(holder.binding!!.ivItemHome)
 
@@ -134,35 +135,38 @@ class HomeRecipeListRecyclerAdapter(
         }
     }
 
-    fun addAll(result: List<RecipeListResponseModel.Recipies>) {
+    fun addAll(result: List<RecipeListResponseModel.Recipies>, mSearchedKeyword: String) {
         if(isLastUpdated){
-            recipeList.clear()
+            clearAll()
         }
         isLastUpdated = false
         recipeList.addAll(result)
-        if(itemCount>0){
-            notifyItemRangeInserted(itemCount, recipeList.size - 1)
-            notifyDataSetChanged()
-        }
+        notifyDataSetChanged()
     }
 
-    fun updateAll(result: List<RecipeListResponseModel.Recipies>, isSearchMode: Boolean) {
-        if(!isLastUpdated)
-            recipeList.clear()
+    fun updateAll(
+        result: List<RecipeListResponseModel.Recipies>,
+        isSearchMode: Boolean,
+        mSearchedKeyword: String
+    ) {
+        if(!isLastUpdated){
+            clearAll()
+        }
 
-        if(isSearchMode)
+        if(isSearchMode && (this.mSearchedKeyword != mSearchedKeyword)){
             recipeList.clear()
+            this.mSearchedKeyword = mSearchedKeyword
+        }
 
         isLastUpdated = true
         recipeList.addAll(result)
-        if(itemCount>0){
-            notifyItemRangeInserted(itemCount, recipeList.size - 1)
-            notifyDataSetChanged()
-        }
+        notifyDataSetChanged()
+
     }
 
     fun clearAll(){
         recipeList.clear()
+        notifyDataSetChanged()
     }
 
 

@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fighterdiet.R
@@ -70,30 +71,47 @@ class DashboardActivity : BaseActivity() {
     }
 
     override fun setupUI() {
-        binding.etSearchRecipe.addTextChangedListener(object :TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//        binding.etSearchRecipe.addTextChangedListener(object :TextWatcher{
+//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//
+//            }
+//
+//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//                p0?.let {
+////                    if(it.isNotEmpty()){
+//                        val currFragment = supportFragmentManager.findFragmentByTag("HOME") as HomeFragment
+//                        if(currFragment.isVisible)
+//                            currFragment.getRecipes(
+//                                it.toString(),
+//                                offset,
+//                                limit
+//                            )
+////                    }
+//                }
+//            }
+//
+//            override fun afterTextChanged(p0: Editable?) {
+//
+//            }
+//
+//        })
 
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                p0?.let {
-//                    if(it.isNotEmpty()){
+        binding.etSearchRecipe.setOnEditorActionListener { v, actionId, event ->
+                return@setOnEditorActionListener when (actionId) {
+                    EditorInfo.IME_ACTION_DONE -> {
                         val currFragment = supportFragmentManager.findFragmentByTag("HOME") as HomeFragment
                         if(currFragment.isVisible)
                             currFragment.getRecipes(
-                                it.toString(),
+                                binding.etSearchRecipe.text.toString(),
                                 offset,
                                 limit
                             )
-//                    }
+                        true
+                    }
+                    else -> false
                 }
             }
 
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-
-        })
 
         binding.ivCloseSearch.setOnClickListener {
             binding.etSearchRecipe.setText("")
@@ -105,6 +123,9 @@ class DashboardActivity : BaseActivity() {
                     offset,
                     limit
                 )
+
+            currFragment.setUpHomeRecyclerView()
+            currFragment.recipeListAdapter.clearAll()
         }
     }
 
