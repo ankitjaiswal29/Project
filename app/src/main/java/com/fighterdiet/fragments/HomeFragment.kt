@@ -115,6 +115,10 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
 
                     totalCountOfData = it.data?.data?.totalRecord?:0
 
+                    if(totalCountOfData == 0){
+                        binding.tvNoData.visibility = View.VISIBLE
+                        return@observe
+                    }
                     if(isFilterMode||isSearchMode)
                     {
                         if(!isSearchMode){
@@ -135,10 +139,8 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
 
                     if(!it.data?.data?.result.isNullOrEmpty()){
                         recipeListAdapter.addAll(it.data?.data?.result!!, mSearchedKeyword)
-//                        setUpHomeRecyclerView()
-                    }
 
-//                    recipeListAdapter.notifyDataSetChanged()
+                    }
 
 
                 }

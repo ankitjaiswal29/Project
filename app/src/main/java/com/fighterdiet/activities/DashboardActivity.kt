@@ -233,13 +233,17 @@ class DashboardActivity : BaseActivity() {
             override fun onTabReselected(tab: TabLayout.Tab) {
                 when (tab.position) {
                     0 -> {
-                        if(previousPos == 0){
-                            if(binding.clSearchRecipe.visibility == View.VISIBLE){
-                                binding.clSearchRecipe.visibility = View.GONE
-                            }else{
-                                binding.clSearchRecipe.visibility = View.VISIBLE
+                        when(previousPos){
+                            0,2,3 -> {
+                                if(binding.clSearchRecipe.visibility == View.VISIBLE){
+                                    binding.clSearchRecipe.visibility = View.GONE
+                                }else{
+                                    binding.clSearchRecipe.visibility = View.VISIBLE
+                                }
+                                return
                             }
-                            return
+
+
                         }
                     }
                     1 -> {

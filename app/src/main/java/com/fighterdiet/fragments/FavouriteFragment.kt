@@ -77,7 +77,7 @@ class FavouriteFragment(val dashboardCallback: DashboardCallback) : BaseFragment
 //                        if(!isLoadMore)
                         favouriteList.clear()
                         favouriteList.addAll(it.data?.data?.result!!)
-                        favouriteAdapter.notifyDataSetChanged()
+//                        setUpFavouriteRecyclerView()
                     }
                     else{
                         if(!isLoadMore){
@@ -86,9 +86,7 @@ class FavouriteFragment(val dashboardCallback: DashboardCallback) : BaseFragment
                         if(favouriteList.isEmpty())
                             binding.tvNoData.visibility = View.VISIBLE
                     }
-//                    val currSize = binding.rvFavouriteRecycler.adapter?.itemCount?:0
-//                    if(currSize>0)
-//                        favouriteAdapter.notifyItemRangeInserted(currSize, favouriteList.size - 1)
+                    favouriteAdapter.notifyDataSetChanged()
                 }
                 Status.LOADING -> {
 

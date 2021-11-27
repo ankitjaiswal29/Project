@@ -7,6 +7,7 @@ import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
@@ -24,6 +25,7 @@ import com.fighterdiet.databinding.FragmentCommentBinding
 import com.fighterdiet.interfaces.RecyclerItemClickListener
 import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.PrefManager
+import com.fighterdiet.utils.ProgressDialog
 import com.fighterdiet.utils.Status
 import com.fighterdiet.viewModel.CommentFragmentViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -73,7 +75,6 @@ class CommentFragment(val recipeId:String) : BottomSheetDialogFragment(), View.O
         content.setSpan(UnderlineSpan(), 0, content.length, 0)
         binding.tvTitle.text = content
         binding.ivBack.setOnClickListener(this)
-        setupRecyclerView()
         setupViewModel()
         setupObserver()
         setupListener()
@@ -93,6 +94,27 @@ class CommentFragment(val recipeId:String) : BottomSheetDialogFragment(), View.O
                 )
             }
         }
+
+        binding.etComment.setOnEditorActionListener { v, actionId, event ->
+            return@setOnEditorActionListener when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    ProgressDialog.showProgressDialog(requireContext())
+                    val userId = PrefManager.getString(PrefManager.KEY_USER_ID)?:""
+                    if(userId.isNotEmpty() && recipeId.isNotBlank() && binding.etComment.text.toString().isNotBlank()) {
+                        viewModel.addRecipeComment(
+                            AddCommentRequestModel(
+                                recipeId,
+                                userId,
+                                binding.etComment.text.toString()
+                            )
+                        )
+                    }
+                    true
+                }
+                else -> false
+            }
+        }
+
     }
 
     private fun setupViewModel() {
@@ -101,17 +123,61 @@ class CommentFragment(val recipeId:String) : BottomSheetDialogFragment(), View.O
             .get(CommentFragmentViewModel::class.java)
     }
 
+    private fun callGetCommentListApi() {
+        ProgressDialog.showProgressDialog(requireContext())
+        viewModel.getCommentList(
+            CommentListRequestModel(
+                offset = 0,
+                limit = 8,
+                recipe_id = recipeId
+            )
+        )
+    }
+
+    private fun setupRecyclerView() {
+        if(commentList.isEmpty())
+            return
+
+        binding.rvComment.layoutManager = LinearLayoutManager(activity)
+        commentAdapter = CommentAdapter(commentList, object :RecyclerItemClickListener{
+            override fun onItemClick(operationType: Int, selectedItem: Any?, pos: Int) {
+                val item = selectedItem as CommentListResponseModel.CommentRecipe
+                when(operationType){
+                    Constants.OPERATION_DELETE ->{
+                        ProgressDialog.showProgressDialog(requireContext())
+                        viewModel.deleteRecipeComment(item.id)
+                    }
+
+                    Constants.OPERATION_REPORT_SPAM ->{
+                        ProgressDialog.showProgressDialog(requireContext())
+                        viewModel.reportSpamComment(SpamCommentRequestModel(
+                            comment_id = item.id.toString(),
+                            recipe_id = recipeId
+                        ))
+                    }
+                }
+            }
+        })
+        binding.rvComment.adapter = commentAdapter
+
+    }
+
     private fun setupObserver() {
 
         viewModel.getCommentListResource().observe(this, {
             when(it.status){
                 Status.SUCCESS -> {
+
                     it.data?.data?.let { comments ->
                         commentList.clear()
                         binding.etComment.text.clear()
-                        commentList.addAll(comments.comment_recipe)
+                        if(comments.comment_recipe.isNotEmpty())
+                            commentList.addAll(comments.comment_recipe)
                         setupRecyclerView()
+                        ProgressDialog.hideProgressDialog()
                     }
+
+                    commentAdapter?.notifyDataSetChanged()
                 }
                 Status.LOADING -> {
 
@@ -174,42 +240,6 @@ class CommentFragment(val recipeId:String) : BottomSheetDialogFragment(), View.O
 
             }
         })
-    }
-
-    private fun callGetCommentListApi() {
-        viewModel.getCommentList(
-            CommentListRequestModel(
-                offset = 0,
-                limit = 8,
-                recipe_id = recipeId
-            )
-        )
-    }
-
-    private fun setupRecyclerView() {
-        if(commentList.isEmpty())
-            return
-
-        binding.rvComment.layoutManager = LinearLayoutManager(activity)
-        commentAdapter = CommentAdapter(commentList, object :RecyclerItemClickListener{
-            override fun onItemClick(operationType: Int, selectedItem: Any?) {
-                val item = selectedItem as CommentListResponseModel.CommentRecipe
-                when(operationType){
-                    Constants.OPERATION_DELETE ->{
-                        viewModel.deleteRecipeComment(item.id)
-                    }
-
-                    Constants.OPERATION_REPORT_SPAM ->{
-                        viewModel.reportSpamComment(SpamCommentRequestModel(
-                            comment_id = item.id.toString(),
-                            recipe_id = recipeId
-                        ))
-                    }
-                }
-            }
-        })
-        binding.rvComment.adapter = commentAdapter
-
     }
 
     override fun onClick(view: View?) {

@@ -16,7 +16,6 @@ import com.fighterdiet.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.HttpException
 import java.lang.Exception

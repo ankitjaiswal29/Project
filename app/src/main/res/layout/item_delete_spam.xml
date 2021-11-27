@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <LinearLayout
         android:layout_width="200dp"
         android:background="@drawable/bg_delete_comment"
-        android:padding="@dimen/_10sdp"
+        android:padding="@dimen/_7sdp"
         android:orientation="vertical"
         android:gravity="center"
         android:layout_height="wrap_content">
@@ -18,7 +19,7 @@
             android:paddingEnd="@dimen/_20sdp"
             android:paddingStart="@dimen/_20sdp"
             android:visibility="gone"
-            android:layout_marginBottom="10dp"
+            tools:visibility="visible"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:background="@drawable/shape_height"
@@ -36,6 +37,8 @@
             android:paddingStart="@dimen/_20sdp"
             android:paddingEnd="@dimen/_20sdp"
             android:text="Report spam"
+            android:visibility="visible"
+            tools:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/tv_delete"
             app:layout_constraintStart_toStartOf="@+id/tv_delete"
             app:layout_constraintEnd_toEndOf="@+id/tv_delete"

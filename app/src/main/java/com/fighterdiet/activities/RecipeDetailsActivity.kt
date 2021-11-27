@@ -24,6 +24,7 @@ import com.fighterdiet.databinding.ActivityRecipeInfoBinding
 import com.fighterdiet.fragments.*
 import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.PrefManager
+import com.fighterdiet.utils.ProgressDialog
 import com.fighterdiet.utils.Status
 import com.fighterdiet.viewModel.RecipeInfoViewModel
 import com.google.android.material.tabs.TabLayout
@@ -72,6 +73,7 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
         intent.extras?.let {
             recipeId = it.getInt(Constants.RECIPE_ID, 0).toString()
             if(recipeId.isNotEmpty() && recipeId != "0"){
+                ProgressDialog.showProgressDialog(this)
                 viewModel.getRecipeContent(RecipeContentRequestModel(recipeId))
             }
             recipeImage = it.getString(Constants.RECIPE_IMAGE, "")
@@ -108,6 +110,7 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
         viewModel.getRecipeInfoResource().observe(this, {
             when(it.status){
                 Status.SUCCESS -> {
+                    ProgressDialog.hideProgressDialog()
                     it.data?.let { recipeContent ->
                         recipeContentModel = recipeContent.data
 
@@ -145,6 +148,7 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
         viewModel.getAddToFavResource().observe(this, { response ->
             when(response.status){
                 Status.SUCCESS -> {
+                    ProgressDialog.hideProgressDialog()
                     recipeContentModel.apply {
                         this?.apply {
                             response.data?.let {
@@ -306,6 +310,7 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
             }
 
             R.id.iv_fav -> {
+                ProgressDialog.showProgressDialog(this)
                 viewModel.addToFavApi(AddToFavRequestModel(
                     recipeId,
                     PrefManager.getString(PrefManager.KEY_USER_ID)?:""
