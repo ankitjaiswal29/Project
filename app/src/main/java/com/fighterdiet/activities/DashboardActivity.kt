@@ -3,6 +3,8 @@ package com.fighterdiet.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -16,6 +18,7 @@ import com.fighterdiet.fragments.*
 import com.fighterdiet.interfaces.DashboardCallback
 import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.PrefManager
+import com.fighterdiet.utils.Utils
 import com.google.android.material.tabs.TabLayout
 import com.fighterdiet.utils.Utils.loginAlertDialog
 
@@ -106,6 +109,7 @@ class DashboardActivity : BaseActivity() {
                                 offset,
                                 limit
                             )
+                        Utils.hideKeyboard(this@DashboardActivity, binding.coordinatorDashboard)
                         true
                     }
                     else -> false
@@ -114,18 +118,21 @@ class DashboardActivity : BaseActivity() {
 
 
         binding.ivCloseSearch.setOnClickListener {
-            binding.etSearchRecipe.setText("")
-            binding.clSearchRecipe.visibility = View.GONE
-            val currFragment = supportFragmentManager.findFragmentByTag("HOME") as HomeFragment
-            if(currFragment.isVisible)
-                currFragment.getRecipes(
-                    "",
-                    offset,
-                    limit
-                )
+            if (binding.etSearchRecipe.text.isNotEmpty()){
+                binding.etSearchRecipe.setText("")
+                val currFragment = supportFragmentManager.findFragmentByTag("HOME") as HomeFragment
+                if(currFragment.isVisible)
+                    currFragment.getRecipes(
+                        "",
+                        offset,
+                        limit
+                    )
 
-            currFragment.setUpHomeRecyclerView()
-            currFragment.recipeListAdapter.clearAll()
+                currFragment.setUpHomeRecyclerView()
+                currFragment.recipeListAdapter.clearAll()
+            }
+//            binding.clSearchRecipe.visibility = View.GONE
+            Utils.hideKeyboard(this@DashboardActivity, binding.coordinatorDashboard)
         }
     }
 
