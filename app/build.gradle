@@ -96,4 +96,7 @@ dependencies {
     // zendex
     implementation group: 'com.zendesk', name: 'chat', version: '3.1.0'
     implementation group: 'com.zendesk', name: 'messaging', version: '5.1.0'
+
+    //time ago library
+    implementation 'com.github.marlonlom:timeago:4.0.3'
 }

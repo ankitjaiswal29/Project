@@ -14,6 +14,10 @@ import com.fighterdiet.activities.LoginActivity
 import com.fighterdiet.utils.Constants.HUNDRED
 import com.fighterdiet.utils.Constants.ZERO
 import com.google.android.material.snackbar.Snackbar
+import java.time.LocalDateTime
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 object Utils {
@@ -80,5 +84,15 @@ object Utils {
         }
         builder.show()
     }
+
+//    fun stringDateToMillies(): Long? {
+//        val date = "Tue Apr 23 16:08:28 GMT+05:30 2013"
+//        val formatter: DateTimeFormatter =
+//            DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH)
+//        val localDate: LocalDateTime = LocalDateTime.parse(date, formatter)
+//        val timeInMilliseconds: Long = localDate.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli()
+////        Log.d(TAG, "Date in milli :: FOR API >= 26 >>> $timeInMilliseconds")
+//        return timeInMilliseconds
+//    }
 
 }

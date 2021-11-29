@@ -19,6 +19,7 @@ import com.fighterdiet.databinding.ItemDirectionsLayoutBinding
 import com.fighterdiet.interfaces.RecyclerItemClickListener
 import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.PrefManager
+import com.fighterdiet.utils.Utils
 
 
 class CommentAdapter(
@@ -102,6 +103,7 @@ class CommentAdapter(
         holder.bindin.userName.text = content
         if(commentList[position].updated_at.isNotEmpty()){
             val date = commentList[position].updated_at.split("T")
+//            holder.bindin.commentTime.text = Utils.stringDateToMillies()
             holder.bindin.commentTime.text = "${date[0]} ${date[1].split(".")[0]}"
         }
         holder.bindin.comment.text = commentList[position].comments
