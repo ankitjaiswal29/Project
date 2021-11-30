@@ -49,6 +49,7 @@ class FavouriteFragment(val dashboardCallback: DashboardCallback) : BaseFragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initialise()
+        isLoadMore = false
         setupViewModel()
         setupObserver()
     }
@@ -57,11 +58,12 @@ class FavouriteFragment(val dashboardCallback: DashboardCallback) : BaseFragment
             .get(FavouriteViewModel::class.java)
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         if(::viewModel.isInitialized){
-            isLoadMore = false
+//            isLoadMore = false
             dashboardCallback.onStartLoader()
+//            setUpFavouriteRecyclerView()
             viewModel.getFavouriteList(offset, limit)
         }
     }
@@ -74,10 +76,10 @@ class FavouriteFragment(val dashboardCallback: DashboardCallback) : BaseFragment
 //                    binding.pbFav.visibility = View.GONE
                     binding.tvNoData.visibility = View.GONE
                     if (!it.data?.data?.result.isNullOrEmpty()){
-//                        if(!isLoadMore)
-                        favouriteList.clear()
+                        if(!isLoadMore)
+                            favouriteList.clear()
                         favouriteList.addAll(it.data?.data?.result!!)
-//                        setUpFavouriteRecyclerView()
+
                     }
                     else{
                         if(!isLoadMore){
@@ -86,6 +88,7 @@ class FavouriteFragment(val dashboardCallback: DashboardCallback) : BaseFragment
                         if(favouriteList.isEmpty())
                             binding.tvNoData.visibility = View.VISIBLE
                     }
+                    isLoadMore = false
                     favouriteAdapter.notifyDataSetChanged()
                 }
                 Status.LOADING -> {

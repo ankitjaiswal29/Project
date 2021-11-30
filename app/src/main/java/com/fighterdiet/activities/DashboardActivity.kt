@@ -42,7 +42,6 @@ class DashboardActivity : BaseActivity() {
         override fun onDataLoaded() {
             binding.pbDashboardAct.visibility = View.GONE
         }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,30 +73,6 @@ class DashboardActivity : BaseActivity() {
     }
 
     override fun setupUI() {
-//        binding.etSearchRecipe.addTextChangedListener(object :TextWatcher{
-//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//
-//            }
-//
-//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//                p0?.let {
-////                    if(it.isNotEmpty()){
-//                        val currFragment = supportFragmentManager.findFragmentByTag("HOME") as HomeFragment
-//                        if(currFragment.isVisible)
-//                            currFragment.getRecipes(
-//                                it.toString(),
-//                                offset,
-//                                limit
-//                            )
-////                    }
-//                }
-//            }
-//
-//            override fun afterTextChanged(p0: Editable?) {
-//
-//            }
-//
-//        })
 
         binding.etSearchRecipe.setOnEditorActionListener { v, actionId, event ->
                 return@setOnEditorActionListener when (actionId) {
@@ -131,7 +106,8 @@ class DashboardActivity : BaseActivity() {
                 currFragment.setUpHomeRecyclerView()
                 currFragment.recipeListAdapter.clearAll()
             }
-//            binding.clSearchRecipe.visibility = View.GONE
+            else
+                binding.clSearchRecipe.visibility = View.GONE
             Utils.hideKeyboard(this@DashboardActivity, binding.coordinatorDashboard)
         }
     }

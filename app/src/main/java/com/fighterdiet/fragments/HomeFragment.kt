@@ -97,7 +97,7 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
                 selectedMealMap["meal_id[${it.key}]"] = it.value.meal_id
             }
         }
-
+        dashboardCallback.onStartLoader()
         viewModel.getRecipeList(searchKeys, startFrom, endTo, selectedDietaryMap, selectedVolumeMap, selectedMealMap)
     }
 
@@ -141,8 +141,6 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
                         recipeListAdapter.addAll(it.data?.data?.result!!, mSearchedKeyword)
 
                     }
-
-
                 }
                 Status.LOADING -> {
 
