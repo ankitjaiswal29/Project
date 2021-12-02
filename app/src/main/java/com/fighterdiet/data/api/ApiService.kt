@@ -101,7 +101,7 @@ interface ApiService {
     @GET("get-meal")
     suspend fun getMealApi(): ApiResponse<GetMealResponseModel>
 
-    @POST("payment")
+    @POST("androidPayment")
     suspend fun callSubscriptionApi(@Body model: PaymentRequestModel): ApiResponse<Any>
 
 }

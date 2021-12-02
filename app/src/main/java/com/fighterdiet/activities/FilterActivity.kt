@@ -229,7 +229,6 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
 
             R.id.tv_clear_all ->{
                 if(mealCount+volumeCount+dietaryCount > 0){
-
                     mealCount = 0
                     volumeCount = 0
                     dietaryCount = 0
@@ -238,9 +237,12 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
                     Constants.RecipeFilter.selectedDietaryFilter.clear()
                     Constants.RecipeFilter.selectedVolumeFilter.clear()
                     Constants.DashboardDetails.isApiRequestNeeded = true
-                    updateTotalFilterCountText()
+                    Constants.RecipeFilter.isFilterCleared = false
+
                     Constants.RecipeFilter.isFilterCleared = true
                     Constants.RecipeFilter.isFilterApplied = false
+
+                    updateTotalFilterCountText()
 
                     when(currentScreenType){
                         0-> {
@@ -316,7 +318,6 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
     }
 
     private fun updateTotalFilterCountText() {
-        Constants.RecipeFilter.isFilterCleared = false
         binding.tvFilterCount.text = "${dietaryCount+volumeCount+mealCount} ${getString(R.string.filters_selected)}"
     }
 

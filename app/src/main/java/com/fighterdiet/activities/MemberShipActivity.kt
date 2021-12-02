@@ -20,10 +20,12 @@ import com.fighterdiet.utils.Status
 import com.fighterdiet.utils.Utils
 import com.fighterdiet.viewModel.MembershipViewModel
 import com.fighterdiet.viewModel.MembershipViewModelProvider
+import com.google.gson.Gson
 import retrofit2.Retrofit
 
 class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdatedListener{
 
+    private var choosenMembership: Int = -1
     private var currentPurchase: Purchase? = null
     private lateinit var mBillingClient: BillingClient
     private lateinit var orderId: String
@@ -87,11 +89,13 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
                 R.id.clMemberShipYear -> {
 //                    finish()
                     if(skuDetailsList.isNotEmpty())
+                        choosenMembership = 1
                         launchPayment(skuDetailsList[0])
 //                    startActivity(RecipeInfoActivity.getStartIntent(this))
                 }
                 R.id.btnMembershipMonth -> {
 //                    finish()
+                    choosenMembership = 0
                     if(skuDetailsList.isNotEmpty() && skuDetailsList.size>=1)
                         launchPayment(skuDetailsList[1])
 
@@ -230,13 +234,11 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
         orderId = purchase.orderId
         var purchseTime = purchase.purchaseTime
         var purchaseState = purchase.purchaseState
+        val model = Gson().fromJson<PaymentRequestModel>(purchase.originalJson, PaymentRequestModel::class.java)
+        model.amount = if(choosenMembership == 0) 14.99.toString() else 79.99.toString()
         if (purchase.purchaseState != Purchase.PurchaseState.PENDING) {
             currentPurchase = purchase
-            viewModel.callMembershipApi(
-                PaymentRequestModel(
-                    amount = 79.99,
-                    last_reciept = purchase.originalJson
-            ))
+            viewModel.callMembershipApi(model)
         }
 
     }

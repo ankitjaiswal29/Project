@@ -79,7 +79,6 @@ class FavouriteFragment(val dashboardCallback: DashboardCallback) : BaseFragment
                         if(!isLoadMore)
                             favouriteList.clear()
                         favouriteList.addAll(it.data?.data?.result!!)
-
                     }
                     else{
                         if(!isLoadMore){

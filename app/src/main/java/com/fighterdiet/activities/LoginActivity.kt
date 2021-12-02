@@ -126,6 +126,16 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                             apiResponse.data?.is_subscribed?.let { isSubscribed ->
                                 PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, isSubscribed=="1")
                             }
+                            Constants.RecipeFilter.totalFilterCount = 0
+                            Constants.RecipeFilter.selectedMealFilter.clear()
+                            Constants.RecipeFilter.selectedDietaryFilter.clear()
+                            Constants.RecipeFilter.selectedVolumeFilter.clear()
+                            Constants.DashboardDetails.isApiRequestNeeded = true
+                            Constants.RecipeFilter.isFilterCleared = false
+
+                            Constants.RecipeFilter.isFilterCleared = true
+                            Constants.RecipeFilter.isFilterApplied = false
+
                             startActivity(DashboardActivity.getStartIntent(this))
                             finish()
                         }else{
