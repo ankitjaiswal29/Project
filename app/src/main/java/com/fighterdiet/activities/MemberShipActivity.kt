@@ -3,6 +3,8 @@ package com.fighterdiet.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -90,14 +92,14 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
 //                    finish()
                     if(skuDetailsList.isNotEmpty())
                         choosenMembership = 1
-                        launchPayment(skuDetailsList[0])
+                        launchPayment(skuDetailsList[1])
 //                    startActivity(RecipeInfoActivity.getStartIntent(this))
                 }
                 R.id.btnMembershipMonth -> {
 //                    finish()
                     choosenMembership = 0
                     if(skuDetailsList.isNotEmpty() && skuDetailsList.size>=1)
-                        launchPayment(skuDetailsList[1])
+                        launchPayment(skuDetailsList[0])
 
 //                    startActivity(RecipeInfoActivity.getStartIntent(this))
                 }
@@ -191,6 +193,7 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
             flowParams
         )
 
+
     }
 
     override fun onPurchasesUpdated(p0: BillingResult, p1: MutableList<Purchase>?) {
@@ -212,7 +215,7 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
                     "Already Taken",
                     Toast.LENGTH_LONG
                 ).show()
-                queryPurchases()
+//                queryPurchases()
             } else if (p0.responseCode == BillingClient.BillingResponseCode.ITEM_UNAVAILABLE)
 //                Toast.makeText(
 //                    this,
@@ -290,8 +293,10 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
 //            if (isShowView) {
 //                finish()
 //            } else {
-//                startActivity(Intent(mContext, DashboardActivity::class.java))
 //            }
+            Handler(Looper.getMainLooper()).postDelayed({
+                startActivity(Intent(this@MemberShipActivity, DashboardActivity::class.java))
+            },1000)
         }
     }
 

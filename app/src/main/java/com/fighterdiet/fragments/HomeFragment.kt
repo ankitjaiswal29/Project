@@ -190,7 +190,7 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
                 .putExtra(Constants.RECIPE_IMAGE, recipe.recipe_image)
                 .putExtra(Constants.RECIPE_NAME, recipe.recipe_name)
             when(Constants.DashboardDetails.recipiesModel?.is_subscribed){
-
+//            when(if(PrefManager.getBoolean(PrefManager.IS_SUBSCRIBED)) "1" else "0"){
                 "0" -> {
                     startActivity(MemberShipActivity.getStartIntent(requireContext()))
                 }
