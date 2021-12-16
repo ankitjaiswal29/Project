@@ -11,12 +11,10 @@ class FilterPagerAdapter(
     lifecycle: Lifecycle
 ):FragmentStateAdapter(fragmentManager,lifecycle){
     private val fragments = ArrayList<Fragment>()
-    private val titles = ArrayList<String>()
 
 
-    fun addFragment(fragment: Fragment, title: String) {
+    fun addFragment(fragment: Fragment) {
         fragments.add(fragment)
-        titles.add(title)
     }
 
     override fun getItemCount(): Int {

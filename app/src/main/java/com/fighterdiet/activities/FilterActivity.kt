@@ -186,21 +186,21 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
         dietaryListModel?.let {
             dietaryInfoFragment = DietryInfoFragment.newInstance(it)
             dietaryInfoFragment?.let { fragment ->
-                pagerAdapter.addFragment(fragment, "Dietary Info")
+                pagerAdapter.addFragment(fragment)
             }
         }
 
         volumeListModel?.let {
             volumeListFragment = VolumeFragment.newInstance(it)
             volumeListFragment?.let { fragment ->
-                    pagerAdapter.addFragment(fragment, "Volume")
+                    pagerAdapter.addFragment(fragment)
                 }
         }
 
         mealListModel?.let {
             mealListFragment = MealsFragment.newInstance(it)
             mealListFragment?.let { fragment ->
-                pagerAdapter.addFragment(fragment, "Meals")
+                pagerAdapter.addFragment(fragment)
             }
         }
 

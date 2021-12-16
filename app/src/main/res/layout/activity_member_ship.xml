@@ -109,7 +109,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_regular"
-                        android:text="Sign up for $75.99/year"
+                        android:text="Sign up for $79.99/year"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14ssp"
                         android:textStyle="italic"

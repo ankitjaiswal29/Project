@@ -63,9 +63,11 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
     override fun setupObserver() {
         viewModel.getResources().observe(this,{
            Log.d("Response_subscription", it.data.toString())
-            PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, true)
-            currentPurchase?.let {
-                acknowledgePurchase(it.purchaseToken)
+            if(it.status == Status.SUCCESS){
+                PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, true)
+                currentPurchase?.let {
+                    acknowledgePurchase(it.purchaseToken)
+                }
             }
         })
     }
@@ -155,6 +157,7 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
         val skuList: MutableList<String> = ArrayList()
 
         skuList.add(Constants.InAppSubsProducts.monthly_test_subscription)
+//        skuList.add(Constants.InAppSubsProducts.yearly_test_subscription)
         skuList.add(Constants.InAppSubsProducts.yearly_test_subscription)
         // for subscription set type BillingClient.SkuType.SUBS and for purchase set type BillingClient.SkuType.INAPP
         val params = SkuDetailsParams.newBuilder()
@@ -167,6 +170,7 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
             //progressBar.visibility = View.GONE
             if (responseCode.responseCode == BillingClient.BillingResponseCode.OK && skuDetailsList != null) {
                 if (skuDetailsList.isNotEmpty()) {
+                    Log.e(">>>>> ", skuDetailsList.toString())
                     this.skuDetailsList.clear()
                     this.skuDetailsList.addAll(skuDetailsList)
                 //recyclerAdapter.notifyDataSetChanged()
@@ -241,7 +245,9 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
         model.amount = if(choosenMembership == 0) 14.99.toString() else 79.99.toString()
         if (purchase.purchaseState != Purchase.PurchaseState.PENDING) {
             currentPurchase = purchase
-            viewModel.callMembershipApi(model)
+//            viewModel.callMembershipApi(model)
+            acknowledgePurchase(purchase.purchaseToken)
+
         }
 
     }
@@ -288,15 +294,16 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
         mBillingClient.acknowledgePurchase(params) { billingResult ->
             val responseCode = billingResult.responseCode
             val debugMessage = billingResult.debugMessage
-            Log.e(">>", ">>>>> Purchase is acknowledged")
             PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, true)
-//            if (isShowView) {
-//                finish()
-//            } else {
-//            }
-            Handler(Looper.getMainLooper()).postDelayed({
-                startActivity(Intent(this@MemberShipActivity, DashboardActivity::class.java))
-            },1000)
+            if(billingResult.responseCode == BillingClient.BillingResponseCode.OK){
+                Toast.makeText(this, "Subscription is successful", Toast.LENGTH_SHORT).show();
+                Handler(Looper.getMainLooper()).postDelayed({
+                    Log.e(">>", ">>>>> Purchase is acknowledged\nresponse code===>${billingResult.responseCode}\nDebug Message===>${billingResult.debugMessage}")
+                    startActivity(Intent(this@MemberShipActivity, DashboardActivity::class.java))
+                    finish()
+                },700)
+
+            }
         }
     }
 
