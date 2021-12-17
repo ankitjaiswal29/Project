@@ -16,10 +16,7 @@ import com.fighterdiet.data.api.RetrofitBuilder
 import com.fighterdiet.data.model.requestModel.PaymentRequestModel
 import com.fighterdiet.data.repository.MembershipRepository
 import com.fighterdiet.databinding.ActivityMemberShipBinding
-import com.fighterdiet.utils.Constants
-import com.fighterdiet.utils.PrefManager
-import com.fighterdiet.utils.Status
-import com.fighterdiet.utils.Utils
+import com.fighterdiet.utils.*
 import com.fighterdiet.viewModel.MembershipViewModel
 import com.fighterdiet.viewModel.MembershipViewModelProvider
 import com.google.gson.Gson
@@ -62,7 +59,7 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
 
     override fun setupObserver() {
         viewModel.getResources().observe(this,{
-           Log.d("Response_subscription", it.data.toString())
+            Log.d("Response_subscription", it.data.toString())
             if(it.status == Status.SUCCESS){
                 PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, true)
                 currentPurchase?.let {
@@ -245,8 +242,8 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
         model.amount = if(choosenMembership == 0) 14.99.toString() else 79.99.toString()
         if (purchase.purchaseState != Purchase.PurchaseState.PENDING) {
             currentPurchase = purchase
-//            viewModel.callMembershipApi(model)
-            acknowledgePurchase(purchase.purchaseToken)
+            viewModel.callMembershipApi(model)
+//            acknowledgePurchase(purchase.purchaseToken)
 
         }
 
@@ -288,6 +285,7 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
     }
 
     private fun acknowledgePurchase(purchaseToken: String) {
+        ProgressDialog.showProgressDialog(this)
         val params = AcknowledgePurchaseParams.newBuilder()
             .setPurchaseToken(purchaseToken)
             .build()
@@ -295,14 +293,18 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
             val responseCode = billingResult.responseCode
             val debugMessage = billingResult.debugMessage
             PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, true)
+
+
             if(billingResult.responseCode == BillingClient.BillingResponseCode.OK){
+                ProgressDialog.showProgressDialog(this)
                 Toast.makeText(this, "Subscription is successful", Toast.LENGTH_SHORT).show();
                 Handler(Looper.getMainLooper()).postDelayed({
+                    ProgressDialog.hideProgressDialog()
+
                     Log.e(">>", ">>>>> Purchase is acknowledged\nresponse code===>${billingResult.responseCode}\nDebug Message===>${billingResult.debugMessage}")
                     startActivity(Intent(this@MemberShipActivity, DashboardActivity::class.java))
-                    finish()
-                },700)
-
+                    finishAffinity()
+                },300)
             }
         }
     }

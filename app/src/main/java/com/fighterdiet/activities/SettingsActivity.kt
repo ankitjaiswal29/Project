@@ -49,6 +49,11 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
             binding.tvCancelSubscription.isEnabled = false
             binding.tvCancelSubscription.setTextColor(inactiveColor)
         }
+        if(!PrefManager.getBoolean(PrefManager.IS_SUBSCRIBED)){
+            binding.tvCancelSubscription.visibility = View.GONE
+        }else{
+            binding.tvCancelSubscription.visibility = View.VISIBLE
+        }
     }
 
     override fun setupViewModel() {
@@ -165,7 +170,11 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
                     startActivity(reset)
                 }
                 R.id.tv_cancel_subscription->{
-
+                    val browserIntent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://play.google.com/store/account/subscriptions")
+                    )
+                    startActivity(browserIntent)
                 }
                 R.id.tv_privacy -> {
                     val quiz = Intent(this, PrivacyAndTermsActivity::class.java)

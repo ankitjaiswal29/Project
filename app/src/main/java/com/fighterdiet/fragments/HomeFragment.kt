@@ -137,6 +137,16 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
                     binding.tvFilterCount.visibility = GONE
                     Constants.DashboardDetails.recipiesModel = it.data?.data
 
+                    when(Constants.DashboardDetails.recipiesModel?.is_subscribed){
+//            when(if(PrefManager.getBoolean(PrefManager.IS_SUBSCRIBED)) "1" else "0"){
+                        "0", "expired" -> {
+                            PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, false)
+                        }
+                        else -> {
+                            PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, true)
+                        }
+                    }
+
                     if(!it.data?.data?.result.isNullOrEmpty()){
                         recipeListAdapter.addAll(it.data?.data?.result!!, mSearchedKeyword)
 
@@ -189,15 +199,24 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
                 .putExtra(Constants.RECIPE_ID, recipe.id)
                 .putExtra(Constants.RECIPE_IMAGE, recipe.recipe_image)
                 .putExtra(Constants.RECIPE_NAME, recipe.recipe_name)
-            when(Constants.DashboardDetails.recipiesModel?.is_subscribed){
-//            when(if(PrefManager.getBoolean(PrefManager.IS_SUBSCRIBED)) "1" else "0"){
-                "0", "expired" -> {
-                    startActivity(MemberShipActivity.getStartIntent(requireContext()))
-                }
-                else -> {
-                    Constants.DashboardDetails.isApiRequestNeeded = false
-                    startActivity(act)
-                }
+//            when(Constants.DashboardDetails.recipiesModel?.is_subscribed){
+////            when(if(PrefManager.getBoolean(PrefManager.IS_SUBSCRIBED)) "1" else "0"){
+//                "0", "expired" -> {
+//                    startActivity(MemberShipActivity.getStartIntent(requireContext()))
+//                }
+//                else -> {
+//
+//                    Constants.DashboardDetails.isApiRequestNeeded = false
+//                    startActivity(act)
+//                }
+//            }
+
+            if(PrefManager.getBoolean(PrefManager.IS_SUBSCRIBED)){
+                Constants.DashboardDetails.isApiRequestNeeded = false
+                startActivity(act)
+            }
+            else{
+                startActivity(MemberShipActivity.getStartIntent(requireContext()))
             }
         }
         binding.rvHomeRecycler.adapter = recipeListAdapter
