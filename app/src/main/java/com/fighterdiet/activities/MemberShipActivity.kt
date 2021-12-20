@@ -59,6 +59,7 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
 
     override fun setupObserver() {
         viewModel.getResources().observe(this,{
+            ProgressDialog.hideProgressDialog()
             Log.d("Response_subscription", it.data.toString())
             if(it.status == Status.SUCCESS){
                 PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, true)
@@ -199,10 +200,12 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
 
     override fun onPurchasesUpdated(p0: BillingResult, p1: MutableList<Purchase>?) {
 
+
         if (!isFinishing) {
 
             if (p0.responseCode == BillingClient.BillingResponseCode.OK) {
                 for (purchase in p1!!) {
+                    ProgressDialog.showProgressDialog(this)
                     handlePurchase(purchase)
 
                 }
@@ -293,18 +296,17 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
             val responseCode = billingResult.responseCode
             val debugMessage = billingResult.debugMessage
             PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, true)
-
-
             if(billingResult.responseCode == BillingClient.BillingResponseCode.OK){
-                ProgressDialog.showProgressDialog(this)
                 Toast.makeText(this, "Subscription is successful", Toast.LENGTH_SHORT).show();
                 Handler(Looper.getMainLooper()).postDelayed({
                     ProgressDialog.hideProgressDialog()
-
                     Log.e(">>", ">>>>> Purchase is acknowledged\nresponse code===>${billingResult.responseCode}\nDebug Message===>${billingResult.debugMessage}")
                     startActivity(Intent(this@MemberShipActivity, DashboardActivity::class.java))
                     finishAffinity()
                 },300)
+            }
+            else{
+                ProgressDialog.hideProgressDialog()
             }
         }
     }
