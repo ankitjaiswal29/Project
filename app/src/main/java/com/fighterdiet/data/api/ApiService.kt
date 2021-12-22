@@ -13,7 +13,6 @@ interface ApiService {
     @POST("register")
     suspend fun registerApi(@Body registerRequestModel: RegisterRequestModel): ApiResponse<RegistrationResponseModel>
 
-
     @POST("login")
     suspend fun loginApi(@Body registerRequestModel: LoginRequestModel): ApiResponse<LoginResponseModel>
 
