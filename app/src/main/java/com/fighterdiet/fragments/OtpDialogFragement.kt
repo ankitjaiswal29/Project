@@ -43,7 +43,7 @@ class OtpDialogFragement: DialogFragment() {
         userId = bundle?.getString("userid","")
         email=bundle?.getString("email","")
 
-        Toast.makeText(context,otp+userId,Toast.LENGTH_LONG).show()
+//        Toast.makeText(context,otp+userId,Toast.LENGTH_LONG).show()
 
         val dialogView: View =
             layoutInflater.inflate(R.layout.otp_dialog_fragment, container, false)
@@ -92,7 +92,7 @@ class OtpDialogFragement: DialogFragment() {
 
                         if (apiResponse.code==200){
                             Utils.showSnackBar(binding.root, apiResponse.message)
-                            Toast.makeText(context,apiResponse.data?.otp.toString()+apiResponse.data?.user_id.toString(), Toast.LENGTH_LONG).show()
+                            //Toast.makeText(context,apiResponse.data?.otp.toString()+apiResponse.data?.user_id.toString(), Toast.LENGTH_LONG).show()
 
                             //    startActivity(IntroAndDecisionActivity.getStartIntent(context!!.applicationContext))
 
