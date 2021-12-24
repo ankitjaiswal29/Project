@@ -142,12 +142,12 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
                     if (Utils.isOnline(this@MemberShipActivity)) {
                         queryForInAppProducts()
                     }
-//                    else {
-//                        Utils.showSnackBar(
-//                            btnContinuePlan,
-//                            getString(R.string.connection_error_message)
-//                        )
-//                    }
+//                  else {
+//                      Utils.showSnackBar(
+//                          btnContinuePlan,
+//                          getString(R.string.connection_error_message)
+//                      )
+//                  }
                 } else {
                     Log.e(TAG, ">>>>> onBillingSetupFinished Not OK Response")
                 }
@@ -225,9 +225,6 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
     }
 
     private fun handlePurchase(purchase: Purchase) {
-//        Handler(Looper.getMainLooper()).post {
-//            ProgressDialog.showProgressDialog(this)
-//        }
         printPurchaseDetails(purchase)
         transactionId = purchase.purchaseToken
         orderId = purchase.orderId
@@ -241,30 +238,6 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
         }
 
     }
-
-//    private fun callAddPaymentDetailApi(purchase: Purchase) {
-//        if (Utils.isOnline(this)) {
-////            progressBar.visibility = View.VISIBLE
-//            subscriptionPlanViewModel.getPaymentDetailResponse(
-//                mPrefManager.getKeyAuthToken(),
-//                getRequest(purchase)
-//            )
-//                .observe(this, Observer {
-//                    progressBar.visibility = View.GONE
-//                    if (it != null && it.code == 200 && it.status) {
-//                        mPrefManager.setKeyIsSubscribedUser(true)
-//                        acknowledgePurchase(purchase.purchaseToken)
-//                    } else {
-//                        it?.message.let {
-//                            Utils.showSnackBar(btnContinuePlan, it)
-//                        }
-//                    }
-//                })
-//        } else {
-//            progressBar.visibility = View.GONE
-//            Utils.showSnackBar(btnContinuePlan, getString(R.string.connection_error_message))
-//        }
-//    }
 
     private fun printPurchaseDetails(purchase: Purchase) {
         Log.e(TAG, ">>>>> Transaction Id ::" + purchase.purchaseToken)
@@ -287,15 +260,14 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
         mBillingClient.acknowledgePurchase(params) { billingResult ->
             val responseCode = billingResult.responseCode
             val debugMessage = billingResult.debugMessage
-            PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, true)
+
             if(billingResult.responseCode == BillingClient.BillingResponseCode.OK){
-                Toast.makeText(this, "Subscription is successful", Toast.LENGTH_SHORT).show();
                 Handler(Looper.getMainLooper()).post{
-                    ProgressDialog.hideProgressDialog()
-                    Log.e(">>", ">>>>> Purchase is acknowledged\nresponse code===>${billingResult.responseCode}\nDebug Message===>${billingResult.debugMessage}")
                     startActivity(Intent(this@MemberShipActivity, DashboardActivity::class.java))
                     finishAffinity()
+                    ProgressDialog.hideProgressDialog()
                 }
+                PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, true)
             }
             else{
                 ProgressDialog.hideProgressDialog()
