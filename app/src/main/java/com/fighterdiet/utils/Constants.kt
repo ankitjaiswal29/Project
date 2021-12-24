@@ -7,8 +7,8 @@ object Constants {
 
     interface InAppSubsProducts {
         companion object {
-            val monthly_test_subscription = "com.fighter_diet_recipe.monthly"
-            val yearly_test_subscription = "com.fighter_diet_recipe.yearly"
+            val monthly_subscription = "com.fighter_diet_recipe.monthly"
+            val yearly_subscription = "com.fighter_diet_recipe.yearly"
 //            val three_monthly_test = "com.fighter_diet.test"
 //            val test_yearly = "com.test.yearly"
 //            val six_monthly_test = "com.test.half_year"

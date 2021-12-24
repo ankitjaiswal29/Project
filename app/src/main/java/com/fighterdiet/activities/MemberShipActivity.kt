@@ -20,7 +20,6 @@ import com.fighterdiet.utils.*
 import com.fighterdiet.viewModel.MembershipViewModel
 import com.fighterdiet.viewModel.MembershipViewModelProvider
 import com.google.gson.Gson
-import retrofit2.Retrofit
 
 class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdatedListener{
 
@@ -59,12 +58,22 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
 
     override fun setupObserver() {
         viewModel.getResources().observe(this,{
-            ProgressDialog.hideProgressDialog()
             Log.d("Response_subscription", it.data.toString())
-            if(it.status == Status.SUCCESS){
-                PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, true)
-                currentPurchase?.let {
-                    acknowledgePurchase(it.purchaseToken)
+            when(it.status){
+                Status.SUCCESS -> {
+                    ProgressDialog.hideProgressDialog()
+                    PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, true)
+                    currentPurchase?.let { currentPurchase ->
+                        acknowledgePurchase(currentPurchase.purchaseToken)
+                    }
+                }
+
+                Status.ERROR -> {
+                    ProgressDialog.hideProgressDialog()
+                }
+
+                Status.LOADING -> {
+                    ProgressDialog.showProgressDialog(this)
                 }
             }
         })
@@ -89,19 +98,14 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
         view?.id.let {
             when (it) {
                 R.id.clMemberShipYear -> {
-//                    finish()
                     if(skuDetailsList.isNotEmpty())
                         choosenMembership = 1
                         launchPayment(skuDetailsList[1])
-//                    startActivity(RecipeInfoActivity.getStartIntent(this))
                 }
                 R.id.btnMembershipMonth -> {
-//                    finish()
                     choosenMembership = 0
                     if(skuDetailsList.isNotEmpty() && skuDetailsList.size>=1)
                         launchPayment(skuDetailsList[0])
-
-//                    startActivity(RecipeInfoActivity.getStartIntent(this))
                 }
                 binding.tvPrivacyPolicy.id -> {
                     val quiz = Intent(this, PrivacyAndTermsActivity::class.java)
@@ -137,12 +141,13 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
 
                     if (Utils.isOnline(this@MemberShipActivity)) {
                         queryForInAppProducts()
-                    } else {
+                    }
+//                    else {
 //                        Utils.showSnackBar(
 //                            btnContinuePlan,
 //                            getString(R.string.connection_error_message)
 //                        )
-                    }
+//                    }
                 } else {
                     Log.e(TAG, ">>>>> onBillingSetupFinished Not OK Response")
                 }
@@ -153,25 +158,18 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
 
     private fun queryForInAppProducts() {
         val skuList: MutableList<String> = ArrayList()
-
-        skuList.add(Constants.InAppSubsProducts.monthly_test_subscription)
-//        skuList.add(Constants.InAppSubsProducts.yearly_test_subscription)
-        skuList.add(Constants.InAppSubsProducts.yearly_test_subscription)
-        // for subscription set type BillingClient.SkuType.SUBS and for purchase set type BillingClient.SkuType.INAPP
+        skuList.add(Constants.InAppSubsProducts.monthly_subscription)
+        skuList.add(Constants.InAppSubsProducts.yearly_subscription)
         val params = SkuDetailsParams.newBuilder()
         params.setSkusList(skuList).setType(BillingClient.SkuType.SUBS)
-//        params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP)
-//        progressBar.visibility = View.VISIBLE
         mBillingClient.querySkuDetailsAsync(
             params.build()
         ) { responseCode: BillingResult, skuDetailsList: List<SkuDetails>? ->
-            //progressBar.visibility = View.GONE
             if (responseCode.responseCode == BillingClient.BillingResponseCode.OK && skuDetailsList != null) {
                 if (skuDetailsList.isNotEmpty()) {
                     Log.e(">>>>> ", skuDetailsList.toString())
                     this.skuDetailsList.clear()
                     this.skuDetailsList.addAll(skuDetailsList)
-                //recyclerAdapter.notifyDataSetChanged()
                 } else {
                     Toast.makeText(this, "No Subscription Product found", Toast.LENGTH_SHORT)
                         .show()
@@ -185,7 +183,6 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
     }
 
     private fun launchPayment(skuDetails: SkuDetails) {
-
         val flowParams: BillingFlowParams = BillingFlowParams.newBuilder()
             .setSkuDetails(skuDetails)
             .build()
@@ -194,20 +191,13 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
             this,
             flowParams
         )
-
-
     }
 
     override fun onPurchasesUpdated(p0: BillingResult, p1: MutableList<Purchase>?) {
-
-
         if (!isFinishing) {
-
             if (p0.responseCode == BillingClient.BillingResponseCode.OK) {
                 for (purchase in p1!!) {
-                    ProgressDialog.showProgressDialog(this)
                     handlePurchase(purchase)
-
                 }
             } else if (p0.responseCode == BillingClient.BillingResponseCode.USER_CANCELED) {
                 Toast.makeText(
@@ -219,7 +209,6 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
                     "Already Taken",
                     Toast.LENGTH_LONG
                 ).show()
-//                queryPurchases()
             } else if (p0.responseCode == BillingClient.BillingResponseCode.ITEM_UNAVAILABLE)
 //                Toast.makeText(
 //                    this,
@@ -236,7 +225,10 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
     }
 
     private fun handlePurchase(purchase: Purchase) {
-        printPurhaseDetails(purchase)
+//        Handler(Looper.getMainLooper()).post {
+//            ProgressDialog.showProgressDialog(this)
+//        }
+        printPurchaseDetails(purchase)
         transactionId = purchase.purchaseToken
         orderId = purchase.orderId
         var purchseTime = purchase.purchaseTime
@@ -246,8 +238,6 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
         if (purchase.purchaseState != Purchase.PurchaseState.PENDING) {
             currentPurchase = purchase
             viewModel.callMembershipApi(model)
-//            acknowledgePurchase(purchase.purchaseToken)
-
         }
 
     }
@@ -276,7 +266,7 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
 //        }
 //    }
 
-    private fun printPurhaseDetails(purchase: Purchase) {
+    private fun printPurchaseDetails(purchase: Purchase) {
         Log.e(TAG, ">>>>> Transaction Id ::" + purchase.purchaseToken)
         Log.e(TAG, ">>>>> Order Id ::" + purchase.orderId)
         Log.e(TAG, ">>>>> Purchase Time ::" + purchase.purchaseTime)
@@ -288,7 +278,9 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
     }
 
     private fun acknowledgePurchase(purchaseToken: String) {
-        ProgressDialog.showProgressDialog(this)
+        Handler(Looper.getMainLooper()).post {
+            ProgressDialog.showProgressDialog(this@MemberShipActivity)
+        }
         val params = AcknowledgePurchaseParams.newBuilder()
             .setPurchaseToken(purchaseToken)
             .build()
@@ -298,12 +290,12 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
             PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, true)
             if(billingResult.responseCode == BillingClient.BillingResponseCode.OK){
                 Toast.makeText(this, "Subscription is successful", Toast.LENGTH_SHORT).show();
-                Handler(Looper.getMainLooper()).postDelayed({
+                Handler(Looper.getMainLooper()).post{
                     ProgressDialog.hideProgressDialog()
                     Log.e(">>", ">>>>> Purchase is acknowledged\nresponse code===>${billingResult.responseCode}\nDebug Message===>${billingResult.debugMessage}")
                     startActivity(Intent(this@MemberShipActivity, DashboardActivity::class.java))
                     finishAffinity()
-                },300)
+                }
             }
             else{
                 ProgressDialog.hideProgressDialog()
