@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.fighterdiet.R
-import com.fighterdiet.activities.MemberShipActivity
 import com.fighterdiet.data.model.responseModel.TrendingListResponseModel
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
+import com.fighterdiet.utils.Utils
+import java.net.URI
+import java.net.URL
 
 class TrendingFragmentRecyAdapter(
     private var context: FragmentActivity?,
@@ -41,10 +43,13 @@ class TrendingFragmentRecyAdapter(
         return MyViewHolder(view)
     }
 
+
+
     override fun onBindViewHolder(holder: TrendingFragmentRecyAdapter.MyViewHolder, position: Int) {
         Glide.with(holder.itemView.context)
             .load(trendingList[position].recipe_image)
             .placeholder(circularProgressDrawable)
+            .override(900)
             .into(holder.binding!!.ivItemHome)
         trendingList[position].recipe_name.let {
             holder.binding.tvRecipeName.text = it

@@ -14,6 +14,8 @@ import com.fighterdiet.activities.LoginActivity
 import com.fighterdiet.utils.Constants.HUNDRED
 import com.fighterdiet.utils.Constants.ZERO
 import com.google.android.material.snackbar.Snackbar
+import java.net.URI
+import java.net.URL
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
@@ -94,5 +96,19 @@ object Utils {
 ////        Log.d(TAG, "Date in milli :: FOR API >= 26 >>> $timeInMilliseconds")
 //        return timeInMilliseconds
 //    }
+
+    fun getEncodedUrl(urlString: String): URL? {
+        val url = URL(urlString)
+        val uri = URI(
+            url.protocol,
+            url.userInfo,
+            url.host,
+            url.port,
+            url.path,
+            url.query,
+            url.ref
+        )
+        return uri.toURL()
+    }
 
 }

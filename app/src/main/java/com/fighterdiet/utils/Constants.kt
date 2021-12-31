@@ -30,7 +30,8 @@ object Constants {
     var ISSUBSCRIPTION = false
 
     const val SERVER_URL = "http://quytech.net/fighter_diet_backend/public/api"
-    const val LIVE_URL = "https://fighterdietrecipe.com/api/"
+    const val LIVE_URL = "https://fighterdietrecipe.com/api"
+
 
 
     const val RECIPE_MODEL = "model_recipe"

@@ -14,6 +14,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.fighterdiet.R
 import com.fighterdiet.data.model.responseModel.RecipeListResponseModel
 import com.fighterdiet.databinding.ItemHomeFragmentRecyclerDesignBinding
+import com.fighterdiet.utils.Utils
 import java.util.*
 
 class HomeRecipeListRecyclerAdapter(
@@ -71,13 +72,18 @@ class HomeRecipeListRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        if(holder.binding==null)
+            return
+
         try {
-            Glide.with(holder.itemView.context)
-                .load(recipeList[position].recipe_image)
-                .override( 500)
-                .diskCacheStrategy(DiskCacheStrategy.DATA)
-                .placeholder(circularProgressDrawable)
-                .into(holder.binding!!.ivItemHome)
+            recipeList[position].recipe_image?.let {
+                Glide.with(holder.itemView.context)
+                    .load(it)
+                    .override( 900)
+                    .diskCacheStrategy(DiskCacheStrategy.DATA)
+                    .placeholder(circularProgressDrawable)
+                    .into(holder.binding.ivItemHome)
+            }
 
             holder.binding.tvCaloriesDescription.visibility = if (recipeList[position].isDescOpened) View.VISIBLE else View.GONE
 

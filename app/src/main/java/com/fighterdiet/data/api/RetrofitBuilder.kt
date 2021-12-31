@@ -13,7 +13,8 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitBuilder {
 
-    private const val BASE_URL: String = Constants.SERVER_URL
+//    private const val BASE_URL: String = Constants.SERVER_URL
+    private const val BASE_URL: String = Constants.LIVE_URL
     val context: Context = MyApplication.getInstance().applicationContext
 
     private fun getRetrofit(): Retrofit {
