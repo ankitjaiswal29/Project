@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fighter Diet</string>
+    <string name="app_name">FighterDiet Recipes</string>
     <string name="hint_email">Email or Username</string>
     <string name="hint_password">Password</string>
     <string name="str_btn_login">Login</string>

@@ -71,7 +71,7 @@ class InfoFragment(val recipeInfoModel: List<RecipeContentResponseModel.Info>) :
             binding.tvBigMeals.text = it.recipe_volume
             binding.tvPrepTime.text = "${it.prep_time} ${getString(R.string.min_prep_time)}"
             binding.tvCookTime.text = "${it.cook_time} ${getString(R.string.min_cook_time)}"
-            binding.tvProteins.text = "${getProtein(it.calories)} ${getString(R.string.protein)}"
+            binding.tvProteins.text = "${getProtein(it.protein)} ${getString(R.string.protein)}"
             binding.tvCalories.text = "${it.calories} ${getString(R.string.calories)}"
             binding.tvServing.text = if(it.serving_for.toInt() <= 1) "${it.serving_for} ${getString(R.string.serving)}" else "${it.serving_for} ${getString(R.string.servings)}"
         }
