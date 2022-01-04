@@ -15,10 +15,7 @@ import com.fighterdiet.R
 import com.fighterdiet.data.api.RetrofitBuilder
 import com.fighterdiet.data.repository.SettingsRepository
 import com.fighterdiet.databinding.FragmentSettingBinding
-import com.fighterdiet.utils.PrefManager
-import com.fighterdiet.utils.ProgressDialog
-import com.fighterdiet.utils.Status
-import com.fighterdiet.utils.Utils
+import com.fighterdiet.utils.*
 import com.fighterdiet.viewModel.SettingsViewModel
 import com.fighterdiet.viewModel.LogOutViewModelProvider
 
@@ -49,11 +46,16 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
             binding.tvCancelSubscription.isEnabled = false
             binding.tvCancelSubscription.setTextColor(inactiveColor)
         }
-        if(!PrefManager.getBoolean(PrefManager.IS_SUBSCRIBED)){
-            binding.tvCancelSubscription.visibility = View.GONE
-        }else{
-            binding.tvCancelSubscription.visibility = View.VISIBLE
+
+        when(Constants.DashboardDetails.recipiesModel?.is_subscribed){
+            "0", "expired" -> {
+                binding.tvCancelSubscription.visibility = View.GONE
+            }
+            else -> {
+                binding.tvCancelSubscription.visibility = View.VISIBLE
+            }
         }
+
     }
 
     override fun setupViewModel() {
