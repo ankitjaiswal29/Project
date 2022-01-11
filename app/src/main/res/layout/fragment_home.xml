@@ -30,23 +30,29 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_home_recycler"
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/rv_home_recycler_swipe"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:descendantFocusability="afterDescendants"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_filter_count"
-            tools:itemCount="3"
-            tools:listitem="@layout/item_home_fragment_recycler_design" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_filter_count">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_home_recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="afterDescendants"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_home_fragment_recycler_design" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <TextView
             android:id="@+id/tv_no_data"
-            app:layout_constraintBottom_toBottomOf="@id/rv_home_recycler"
-            app:layout_constraintEnd_toEndOf="@id/rv_home_recycler"
-            app:layout_constraintStart_toStartOf="@id/rv_home_recycler"
-            app:layout_constraintTop_toTopOf="@id/rv_home_recycler"
+            app:layout_constraintBottom_toBottomOf="@id/rv_home_recycler_swipe"
+            app:layout_constraintEnd_toEndOf="@id/rv_home_recycler_swipe"
+            app:layout_constraintStart_toStartOf="@id/rv_home_recycler_swipe"
+            app:layout_constraintTop_toTopOf="@id/rv_home_recycler_swipe"
             android:visibility="gone"
             tools:visibility="gone"
             android:background="@color/white"

@@ -161,6 +161,63 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
             }
         })
     }
+    fun setupObserver2() {
+        viewModel.getRecipeListResource().observe(viewLifecycleOwner, {
+            when(it.status){
+                Status.SUCCESS -> {
+                    dashboardCallback.onDataLoaded()
+                    binding.tvNoData.visibility = GONE
+
+                    binding.rvHomeRecyclerSwipe.isRefreshing = false
+
+                    Constants.DashboardDetails.recipiesModel = it.data?.data
+
+                    when(Constants.DashboardDetails.recipiesModel?.is_subscribed){
+                        "0", "expired" -> {
+                            PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, false)
+                        }
+                        else -> {
+                            PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, true)
+                        }
+                    }
+
+                    totalCountOfData = it.data?.data?.totalRecord?:0
+
+                    if(totalCountOfData == 0){
+                        binding.tvNoData.visibility = View.VISIBLE
+                        return@observe
+                    }
+                    if(isFilterMode||isSearchMode)
+                    {
+                        if(!isSearchMode){
+                            binding.tvFilterCount.text = "${Constants.RecipeFilter.totalFilterCount} ${ getString(R.string.filters_selected_tap_to_clear) }"
+                            binding.tvFilterCount.visibility = View.VISIBLE
+                        }
+                        if(!it.data?.data?.result.isNullOrEmpty())
+                            recipeListAdapter.updateAll(it.data?.data?.result!!, isSearchMode, mSearchedKeyword)
+                        else{
+                            if(totalCountOfData == 0)
+                                binding.tvNoData.visibility = View.VISIBLE
+                        }
+                        return@observe
+                    }
+
+                    binding.tvFilterCount.visibility = GONE
+
+                    if(!it.data?.data?.result.isNullOrEmpty()){
+                        recipeListAdapter.addAll(it.data?.data?.result!!, mSearchedKeyword)
+
+                    }
+                }
+                Status.LOADING -> {
+
+                }
+                Status.ERROR -> {
+
+                }
+            }
+        })
+    }
 
     private fun initialize() {
         if (Constants.isQuestonnaireCompleted) {
@@ -183,6 +240,10 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
             Handler(Looper.getMainLooper()).postDelayed({
                 getRecipes("", offset, limit)
             },50)
+        }
+
+        binding.rvHomeRecyclerSwipe.setOnRefreshListener {
+                setupObserver2()
         }
     }
 

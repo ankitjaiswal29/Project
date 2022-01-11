@@ -103,5 +103,9 @@ dependencies {
 
     //time ago library
     implementation 'com.github.marlonlom:timeago:4.0.3'
+
+    //swipe to refresh
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
 }
 apply plugin: 'com.google.firebase.crashlytics'
