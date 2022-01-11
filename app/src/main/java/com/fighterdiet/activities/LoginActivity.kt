@@ -26,6 +26,14 @@ import com.fighterdiet.viewModel.LoginViewModelProvider
 import com.fighterdiet.viewModel.RegisterViewModel
 import com.fighterdiet.viewModel.RegisterViewModelProvider
 import kotlin.math.abs
+import android.content.pm.PackageManager
+
+import android.content.SharedPreferences
+
+import android.content.pm.PackageInfo
+
+
+
 
 
 class LoginActivity : BaseActivity(), View.OnClickListener {
@@ -54,6 +62,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
              WindowManager.LayoutParams.FLAG_SECURE
          )*/
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        clearDataIfVersionChange()
 
         if(PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
             val intent =DashboardActivity.getStartIntent(this)
@@ -64,6 +73,24 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         setupUI()
         setupViewModel()
         setupObserver()
+    }
+
+    fun clearDataIfVersionChange() {
+        try {
+            val pInfo = packageManager.getPackageInfo(packageName, 0)
+            val mCurrentVersion = pInfo.versionCode
+            val mSharedPreferences = getSharedPreferences("app_name", MODE_PRIVATE)
+            val mEditor = mSharedPreferences.edit()
+            mEditor.apply()
+            val last_version = mSharedPreferences.getInt("last_version", -1)
+            if (last_version != mCurrentVersion) {
+                PrefManager.clearPref()
+            }
+            mEditor.putInt("last_version", mCurrentVersion)
+            mEditor.commit()
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        }
     }
 
     override fun setupUI() {

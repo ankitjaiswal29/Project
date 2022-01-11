@@ -153,7 +153,7 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                         this?.apply {
                             response.data?.let {
                                 this.favourite = if (it.status) 1 else 0
-                                Toast.makeText(this@RecipeDetailsActivity, response.data.message?:"", Toast.LENGTH_SHORT).show()
+//                                Toast.makeText(this@RecipeDetailsActivity, response.data.message?:"", Toast.LENGTH_SHORT).show()
                             }
                         }
                         Handler(Looper.getMainLooper()).postDelayed({

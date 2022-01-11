@@ -34,7 +34,6 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     fun getLoginApi(view:View){
         if (isValid()){
             val loginRequestModel=LoginRequestModel(email,password)
-
             viewModelScope.launch {
                 try {
                     resources.postValue(Resource.loading(data = null))
@@ -44,7 +43,6 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
                     e.printStackTrace()
                     resources.postValue(Resource.error(null, e.localizedMessage!!))
                 }
-
             }
         }
 
@@ -53,7 +51,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     fun isValid() :Boolean{
         if (TextUtils.isEmpty(email)){
             errorMsg.value = "Please enter email"
-            return false
+            return false 
         }
         if (TextUtils.isEmpty(password)) {
             errorMsg.value = "Please enter password"
