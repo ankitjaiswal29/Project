@@ -1,6 +1,8 @@
 package com.fighterdiet.fragments
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +51,13 @@ class TrendingFragment(val dashboardCallback: DashboardCallback) : BaseFragment(
         initialise()
         setupViewModel()
         setupObserver()
+
+        binding.rvTrendingRecyclerSwipe.setOnRefreshListener {
+            Handler(Looper.getMainLooper()).postDelayed({
+                viewModel.getTrendingList(0, 8)
+
+            },50)
+        }
     }
 
     private fun initialise() {
@@ -80,11 +89,17 @@ class TrendingFragment(val dashboardCallback: DashboardCallback) : BaseFragment(
                     val currSize = binding.rvTrendingRecycler.adapter?.itemCount?:0
                     if(currSize>0)
                         trendingAdapter.notifyItemRangeInserted(currSize, trendingList.size - 1);
+
+                    if(binding.rvTrendingRecyclerSwipe.isRefreshing){
+                       // trendingAdapter.clearAll()
+                        binding.rvTrendingRecyclerSwipe.isRefreshing = false
+                    }
                 }
                 Status.LOADING -> {
 
                 }
                 Status.ERROR -> {
+                    binding.rvTrendingRecyclerSwipe.isRefreshing = false
 
                 }
             }

@@ -7,14 +7,19 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_trending_recycler"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/rv_trending_recycler_swipe"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:itemCount="3"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:listitem="@layout/item_home_fragment_recycler_design" />
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_trending_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:itemCount="3"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:listitem="@layout/item_home_fragment_recycler_design" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <!--<ProgressBar
             android:id="@+id/pb_trending"

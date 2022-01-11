@@ -62,4 +62,9 @@ class TrendingFragmentRecyAdapter(
     override fun getItemCount(): Int {
         return trendingList.size
     }
+
+    fun clearAll(){
+        trendingList.clear()
+        notifyDataSetChanged()
+    }
 }

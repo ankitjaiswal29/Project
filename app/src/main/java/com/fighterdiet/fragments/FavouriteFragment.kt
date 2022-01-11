@@ -2,6 +2,8 @@ package com.fighterdiet.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,6 +54,13 @@ class FavouriteFragment(val dashboardCallback: DashboardCallback) : BaseFragment
         isLoadMore = false
         setupViewModel()
         setupObserver()
+
+        binding.rvFavouriteRecyclerSwipe.setOnRefreshListener {
+            Handler(Looper.getMainLooper()).postDelayed({
+                viewModel.getFavouriteList(0,8)
+
+            },50)
+        }
     }
     fun setupViewModel() {
         viewModel = ViewModelProvider(this, FavouriteViewModeProvider(FavouriteRepository(RetrofitBuilder.apiService)))
@@ -86,9 +95,17 @@ class FavouriteFragment(val dashboardCallback: DashboardCallback) : BaseFragment
                         }
                         if(favouriteList.isEmpty())
                             binding.tvNoData.visibility = View.VISIBLE
+
+
                     }
                     isLoadMore = false
                     favouriteAdapter.notifyDataSetChanged()
+
+
+                    if(binding.rvFavouriteRecyclerSwipe.isRefreshing){
+                        // trendingAdapter.clearAll()
+                        binding.rvFavouriteRecyclerSwipe.isRefreshing = false
+                    }
                 }
                 Status.LOADING -> {
 

@@ -8,14 +8,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragments.FavouriteFragment">
-
-        <androidx.recyclerview.widget.RecyclerView
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/rv_favourite_recycler_swipe"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/rv_favourite_recycler"
-            tools:listitem="@layout/item_home_fragment_recycler_design"
-            tools:itemCount="3"
-            />
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/rv_favourite_recycler"
+                tools:listitem="@layout/item_home_fragment_recycler_design"
+                tools:itemCount="3"
+                />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
         <TextView
             android:id="@+id/tv_no_data"
