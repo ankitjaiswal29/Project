@@ -27,7 +27,7 @@ import com.fighterdiet.interfaces.DashboardCallback
 import com.fighterdiet.utils.*
 import com.fighterdiet.viewModel.HomeViewModel
 
-class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragment() {
+class HomeFragment constructor(private val dashboardCallback: DashboardCallback) : BaseFragment() {
     private var currentPage: Int = 1
     private var totalCountOfData: Int = -1
     private var isFilterMode: Boolean = false
@@ -37,7 +37,6 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
     lateinit var binding: FragmentHomeBinding
     lateinit var recipeListAdapter: HomeRecipeListRecyclerAdapter
     var recipeList: ArrayList<RecipeListResponseModel.Recipies> = ArrayList()
-
     companion object{
         fun initFragment(dashboardCallback: DashboardCallback):HomeFragment{
             return HomeFragment(dashboardCallback)
@@ -208,7 +207,7 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
             }
 
             val act = RecipeDetailsActivity.getStartIntent(requireContext())
-                .putExtra(Constants.RECIPE_ID, recipe.id)
+                .putExtra(Constants.RECIPE_ID, recipe.id.toString())
                 .putExtra(Constants.RECIPE_IMAGE, recipe.recipe_image)
                 .putExtra(Constants.RECIPE_NAME, recipe.recipe_name)
 

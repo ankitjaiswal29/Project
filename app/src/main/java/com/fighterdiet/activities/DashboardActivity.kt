@@ -22,7 +22,7 @@ import com.fighterdiet.utils.Utils
 import com.google.android.material.tabs.TabLayout
 import com.fighterdiet.utils.Utils.loginAlertDialog
 
-class DashboardActivity : BaseActivity() {
+class DashboardActivity constructor() : BaseActivity() {
     private var previousPos: Int = 0
     private lateinit var binding: ActivityDashboardWithCalaoriesBinding
     lateinit var tab6Titles: Array<String>

@@ -84,6 +84,12 @@ class FavouriteFragment(val dashboardCallback: DashboardCallback) : BaseFragment
                     dashboardCallback.onDataLoaded()
 //                    binding.pbFav.visibility = View.GONE
                     binding.tvNoData.visibility = View.GONE
+
+                    if(binding.rvFavouriteRecyclerSwipe.isRefreshing){
+                        favouriteAdapter.clearAll()
+                        binding.rvFavouriteRecyclerSwipe.isRefreshing = false
+                    }
+
                     if (!it.data?.data?.result.isNullOrEmpty()){
                         if(!isLoadMore)
                             favouriteList.clear()
@@ -102,16 +108,12 @@ class FavouriteFragment(val dashboardCallback: DashboardCallback) : BaseFragment
                     favouriteAdapter.notifyDataSetChanged()
 
 
-                    if(binding.rvFavouriteRecyclerSwipe.isRefreshing){
-                        // trendingAdapter.clearAll()
-                        binding.rvFavouriteRecyclerSwipe.isRefreshing = false
-                    }
                 }
                 Status.LOADING -> {
 
                 }
                 Status.ERROR -> {
-
+                    binding.rvFavouriteRecyclerSwipe.isRefreshing = false
                 }
             }
         })
@@ -133,7 +135,7 @@ class FavouriteFragment(val dashboardCallback: DashboardCallback) : BaseFragment
             Constants.DashboardDetails.isApiRequestNeeded = false
 //            if(PrefManager.getBoolean(PrefManager.IS_SUBSCRIBED)){
             val act = RecipeDetailsActivity.getStartIntent(requireContext())
-                .putExtra(Constants.RECIPE_ID, favModel.recipe_id)
+                .putExtra(Constants.RECIPE_ID, favModel.recipe_id.toString())
                 .putExtra(Constants.RECIPE_IMAGE, favModel.recipe_image)
                 .putExtra(Constants.RECIPE_NAME, favModel.recipe_name)
             startActivity(act)

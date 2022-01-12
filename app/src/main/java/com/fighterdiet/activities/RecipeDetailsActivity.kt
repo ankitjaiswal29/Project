@@ -71,8 +71,8 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
 
     override fun setupUI() {
         intent.extras?.let {
-            recipeId = it.getInt(Constants.RECIPE_ID, 0).toString()
-            if(recipeId.isNotEmpty() && recipeId != "0"){
+            recipeId = it.getString(Constants.RECIPE_ID, "")
+            if(recipeId.isNotEmpty()){
                 ProgressDialog.showProgressDialog(this)
                 viewModel.getRecipeContent(RecipeContentRequestModel(recipeId))
             }

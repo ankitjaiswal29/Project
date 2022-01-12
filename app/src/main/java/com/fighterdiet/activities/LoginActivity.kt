@@ -1,5 +1,4 @@
 package com.fighterdiet.activities
-
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -32,10 +31,6 @@ import android.content.SharedPreferences
 
 import android.content.pm.PackageInfo
 
-
-
-
-
 class LoginActivity : BaseActivity(), View.OnClickListener {
     private val MIN_DIST = 150
     private var x2: Float = 0f
@@ -53,7 +48,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         R.mipmap.walkthrough_1, R.mipmap.walkthrough_2,
         R.mipmap.walkthrough_3, R.mipmap.walkthrough_4
     )
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

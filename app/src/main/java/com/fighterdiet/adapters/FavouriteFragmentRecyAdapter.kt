@@ -86,4 +86,9 @@ class FavouriteFragmentRecyAdapter(
     override fun getItemCount(): Int {
         return favouriteList.size
     }
+
+    fun clearAll(){
+        favouriteList.clear()
+        notifyDataSetChanged()
+    }
 }
