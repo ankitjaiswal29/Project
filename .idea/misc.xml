@@ -100,10 +100,12 @@
         <entry key="app/src/main/res/layout/activity_update_password.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/days_layout_design.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_dietry_info.xml" value="0.19322916666666667" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/fragment_favourite.xml" value="0.2869791666666667" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_info.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_ingredients.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/layout/fragment_trending.xml" value="0.2869791666666667" />
         <entry key="app/src/main/res/layout/item_comments.xml" value="0.19322916666666667" />
         <entry key="app/src/main/res/layout/item_dietry_info.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_faq_info.xml" value="0.22" />
