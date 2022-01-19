@@ -73,9 +73,21 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
         intent.extras?.let {
             recipeId = it.getString(Constants.RECIPE_ID, "")
             if(recipeId.isNotEmpty()){
+
+                if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN) || PrefManager.getString(PrefManager.KEY_AUTH_TOKEN).isNullOrBlank()){
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    finish()
+                }
+
+                else if(!PrefManager.getBoolean(PrefManager.IS_SUBSCRIBED)){
+                    startActivity(DashboardActivity.getStartIntent(this))
+                    finish()
+                }
+
                 ProgressDialog.showProgressDialog(this)
                 viewModel.getRecipeContent(RecipeContentRequestModel(recipeId))
             }
+
             recipeImage = it.getString(Constants.RECIPE_IMAGE, "")
             recipeImage.let {imageUrl ->
                 try {

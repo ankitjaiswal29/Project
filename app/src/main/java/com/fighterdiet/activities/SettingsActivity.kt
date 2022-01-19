@@ -87,6 +87,7 @@ class SettingsActivity : BaseActivity(), View.OnClickListener {
                         if (apiResponse.code==200){
                             PrefManager.clearPref()
                             PrefManager.putBoolean(PrefManager.IS_LOGGED_IN, false)
+                            PrefManager.putString(PrefManager.KEY_AUTH_TOKEN, "")
                             val loginIntent = Intent(this, LoginActivity::class.java)
                             startActivity(loginIntent)
                             finishAffinity()

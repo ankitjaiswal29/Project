@@ -101,13 +101,14 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             val recipeName = splittedData[2].split("=")[1].replace("_" , " ")
 
             val recipeDetailsActivity = RecipeDetailsActivity.getStartIntent(this)
-            recipeDetailsActivity.putExtra(Constants.RECIPE_ID, recipeId)
-            recipeDetailsActivity.putExtra(Constants.RECIPE_IMAGE, recipeImage)
-            recipeDetailsActivity.putExtra(Constants.RECIPE_NAME, recipeName)
-
-            Log.e(LoginActivity.TAG, ">>>>> Deep Link URl ::" + data.toString())
-            startActivity(recipeDetailsActivity)
-            finish()
+            if(recipeId.isNotBlank()){
+                recipeDetailsActivity.putExtra(Constants.RECIPE_ID, recipeId)
+                recipeDetailsActivity.putExtra(Constants.RECIPE_IMAGE, recipeImage)
+                recipeDetailsActivity.putExtra(Constants.RECIPE_NAME, recipeName)
+                Log.e(LoginActivity.TAG, ">>>>> Deep Link URl ::" + data.toString())
+                startActivity(recipeDetailsActivity)
+                finish()
+            }
         }
     }
 
