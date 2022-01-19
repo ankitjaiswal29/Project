@@ -1,15 +1,14 @@
 package com.fighterdiet.activities
+
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnTouchListener
 import android.view.animation.Animation
 import android.widget.ImageView
-import android.widget.Toast
 import android.widget.ViewFlipper
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -17,19 +16,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.fighterdiet.R
 import com.fighterdiet.data.api.RetrofitBuilder
 import com.fighterdiet.data.repository.LoginRepository
-import com.fighterdiet.data.repository.RegisterRepository
 import com.fighterdiet.databinding.ActivityLoginBinding
 import com.fighterdiet.utils.*
 import com.fighterdiet.viewModel.LoginViewModel
 import com.fighterdiet.viewModel.LoginViewModelProvider
-import com.fighterdiet.viewModel.RegisterViewModel
-import com.fighterdiet.viewModel.RegisterViewModelProvider
-import kotlin.math.abs
-import android.content.pm.PackageManager
-
-import android.content.SharedPreferences
-
-import android.content.pm.PackageInfo
 
 class LoginActivity : BaseActivity(), View.OnClickListener {
     private val MIN_DIST = 150
@@ -95,9 +85,21 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         if (intent != null && intent.data != null) {
             val data = intent.data
             val splittedData = data.toString().split("&")
-            val recipeId = splittedData[0].split("=")[1]
-            val recipeImage = splittedData[1].split("=")[1]
-            val recipeName = splittedData[2].split("=")[1].replace("_" , " ")
+            val recipeId = try {
+                splittedData[0].split("=")[1]
+            } catch (e: Exception) {
+                ""
+            }
+            val recipeImage = try {
+                splittedData[1].split("=")[1]
+            } catch (e: Exception) {
+                ""
+            }
+            val recipeName = try {
+                splittedData[2].split("=")[1].replace("_", " ")
+            } catch (e: Exception) {
+                ""
+            }
 
             val recipeDetailsActivity = RecipeDetailsActivity.getStartIntent(this)
             if(recipeId.isNotBlank()){

@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.fighterdiet.R
@@ -75,7 +76,6 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
 
     private fun updateIsFilterAppliedUI() {
         binding.tvFilterCount.text = "${Constants.RecipeFilter.totalFilterCount} ${getString(R.string.filters_selected)}"
-
     }
 
     override fun setupViewModel() {
@@ -179,9 +179,9 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
                 supportFragmentManager, lifecycle
             )
 
-        binding.tab.addTab(binding.tab.newTab().setText("Dietary Info"));
-        binding.tab.addTab(binding.tab.newTab().setText("Volume"));
-        binding.tab.addTab(binding.tab.newTab().setText("Meals"));
+        binding.tab.addTab(binding.tab.newTab().setText("Dietary Info"))
+        binding.tab.addTab(binding.tab.newTab().setText("Volume"))
+        binding.tab.addTab(binding.tab.newTab().setText("Meals"))
 
         dietaryListModel?.let {
             dietaryInfoFragment = DietryInfoFragment.newInstance(it)
@@ -191,10 +191,14 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
         }
 
         volumeListModel?.let {
-            volumeListFragment = VolumeFragment.newInstance(it)
-            volumeListFragment?.let { fragment ->
-                    pagerAdapter.addFragment(fragment)
-                }
+            try {
+                volumeListFragment = VolumeFragment.newInstance(it)
+                volumeListFragment?.let { fragment ->
+                        pagerAdapter.addFragment(fragment)
+                    }
+            } catch (e: Exception) {
+                Toast.makeText(this, ""+e.printStackTrace(), Toast.LENGTH_SHORT).show()
+            }
         }
 
         mealListModel?.let {
@@ -205,7 +209,7 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
         }
 
         binding.viewPager.adapter=pagerAdapter
-        TabLayoutMediator( binding.tab,   binding.viewPager) { tab, position ->
+        TabLayoutMediator( binding.tab,binding.viewPager) { tab, position ->
             tab.text = tabTitles[position]
             binding.viewPager.setCurrentItem(tab.position, true)
         }.attach()
@@ -261,7 +265,6 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
                         }
                     }
                     isNewChanges = false
-
                 }
                 else{
                     Utils.showToast(this, "Filter is already cleared!")
@@ -269,8 +272,6 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
             }
         }
     }
-
-
 
     override fun mealsInfoCount(pos: Int, id: Int, isItemAdd: Boolean) {
         mealListModel?.apply {

@@ -88,8 +88,6 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                 viewModel.getRecipeContent(RecipeContentRequestModel(recipeId))
             }
 
-
-
             recipeImage = it.getString(Constants.RECIPE_IMAGE, "")
             recipeImage.let {imageUrl ->
                 try {
@@ -227,15 +225,19 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
         binding.ivShare.setOnClickListener(this)
 
         recipeContentModel?.let {
-            infoFragment = InfoFragment.getInstance(it.info)
-            ingredientsFragment = IngredientsFragment.getInstance(it.ingredients)
-            directionsFragment = DirectionsFragment.getInstance(it.directions)
-            tipsFragment = TipsFragment.getInstance(it.tips)
+            try {
+                infoFragment = InfoFragment.getInstance(it.info)
+                ingredientsFragment = IngredientsFragment.getInstance(it.ingredients)
+                directionsFragment = DirectionsFragment.getInstance(it.directions)
+                tipsFragment = TipsFragment.getInstance(it.tips)
 
-            fragments.add(infoFragment)
-            fragments.add(ingredientsFragment)
-            fragments.add(directionsFragment)
-            fragments.add(tipsFragment)
+                fragments.add(infoFragment)
+                fragments.add(ingredientsFragment)
+                fragments.add(directionsFragment)
+                fragments.add(tipsFragment)
+            } catch (e: Exception) {
+                Toast.makeText(this, ""+e.printStackTrace(), Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.tab.addTab(binding.tab.newTab().setText("Info"))
@@ -245,7 +247,6 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
         updateRecipeNote()
         setupTabs()
         updateFavUI()
-
     }
 
     private fun updateRecipeNote() {

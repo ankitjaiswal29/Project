@@ -14,7 +14,7 @@ import com.fighterdiet.databinding.FragmentInfoBinding
 import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.getProtein
 
-class InfoFragment(val recipeInfoModel: List<RecipeContentResponseModel.Info>) : BaseFragment() {
+class InfoFragment constructor(val recipeInfoModel: List<RecipeContentResponseModel.Info>) : BaseFragment() {
     lateinit var binding: FragmentInfoBinding
 
     companion object {
