@@ -88,6 +88,8 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                 viewModel.getRecipeContent(RecipeContentRequestModel(recipeId))
             }
 
+
+
             recipeImage = it.getString(Constants.RECIPE_IMAGE, "")
             recipeImage.let {imageUrl ->
                 try {
