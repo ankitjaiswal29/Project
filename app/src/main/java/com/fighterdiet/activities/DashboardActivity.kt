@@ -22,7 +22,7 @@ import com.fighterdiet.utils.Utils
 import com.google.android.material.tabs.TabLayout
 import com.fighterdiet.utils.Utils.loginAlertDialog
 
-class DashboardActivity constructor() : BaseActivity() {
+class DashboardActivity : BaseActivity() {
     private var previousPos: Int = 0
     private lateinit var binding: ActivityDashboardWithCalaoriesBinding
     lateinit var tab6Titles: Array<String>
@@ -47,6 +47,7 @@ class DashboardActivity constructor() : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard_with_calaories)
+
         Constants.DashboardDetails.isApiRequestNeeded = true
         setupUI()
 

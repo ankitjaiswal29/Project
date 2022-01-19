@@ -27,7 +27,7 @@ import com.fighterdiet.interfaces.DashboardCallback
 import com.fighterdiet.utils.*
 import com.fighterdiet.viewModel.HomeViewModel
 
-class HomeFragment constructor(private val dashboardCallback: DashboardCallback) : BaseFragment() {
+class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragment() {
     private var currentPage: Int = 1
     private var totalCountOfData: Int = -1
     private var isFilterMode: Boolean = false
@@ -42,8 +42,10 @@ class HomeFragment constructor(private val dashboardCallback: DashboardCallback)
             return HomeFragment(dashboardCallback)
         }
     }
+
     var offset = 0
     var limit = 8
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -75,13 +75,12 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             val mCurrentVersion = pInfo.versionCode
             val mSharedPreferences = getSharedPreferences("app_name", MODE_PRIVATE)
             val mEditor = mSharedPreferences.edit()
-            mEditor.apply()
             val last_version = mSharedPreferences.getInt("last_version", -1)
             if (last_version != mCurrentVersion) {
                 PrefManager.clearPref()
             }
             mEditor.putInt("last_version", mCurrentVersion)
-            mEditor.commit()
+            mEditor.apply()
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
         }
