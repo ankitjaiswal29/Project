@@ -31,6 +31,7 @@ class DashboardActivity : BaseActivity() {
     lateinit var tabIcons4Selected: Array<Int>
     lateinit var tabIcons6UnSelected: Array<Int>
     lateinit var tabIcons6Selected: Array<Int>
+    lateinit var homeInstanceClone:HomeFragment
     var offset = 0
     var limit = 8
 
@@ -50,7 +51,7 @@ class DashboardActivity : BaseActivity() {
 
         Constants.DashboardDetails.isApiRequestNeeded = true
         setupUI()
-
+        homeInstanceClone=homeInstance()
         previousPos = 0
 
 //        if (Constants.isQuestonnaireCompleted) {
@@ -64,9 +65,15 @@ class DashboardActivity : BaseActivity() {
         super.onResume()
         if(Constants.DashboardDetails.isApiRequestNeeded){
             showDashboardPb(true)
-            showFragment(HomeFragment.initFragment(callbackDashboard), 0)
+            showFragment(homeInstanceClone, 0)
             Constants.DashboardDetails.isApiRequestNeeded = true
         }
+    }
+
+    private fun homeInstance(): HomeFragment {
+        val home = HomeFragment.initFragment()
+        home.passCallback(callbackDashboard)
+        return home
     }
 
     override fun setupViewModel() {
@@ -176,7 +183,7 @@ class DashboardActivity : BaseActivity() {
                 when (tab.position) {
                     0 ->{
                         showDashboardPb(true)
-                        showFragment(HomeFragment.initFragment(callbackDashboard), tab.position)
+                        showFragment(homeInstanceClone, tab.position)
                     }
                     1 -> {
                         startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
@@ -202,7 +209,7 @@ class DashboardActivity : BaseActivity() {
                     }
                     else -> {
                         showDashboardPb(true)
-                        showFragment(HomeFragment.initFragment(callbackDashboard), tab.position)
+                        showFragment(homeInstanceClone, tab.position)
                     }
                 }
                 setIcon(tab.position)
@@ -327,7 +334,7 @@ class DashboardActivity : BaseActivity() {
                         showDashboardPb(true)
                         binding.toolbar.ivTopImage.visibility = View.VISIBLE;
                         binding.toolbar.tvTitle.visibility = View.GONE;
-                        showFragment(HomeFragment.initFragment(callbackDashboard), tab.position)
+                        showFragment(homeInstanceClone, tab.position)
                     }
                     1 -> {
                         startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
@@ -365,7 +372,7 @@ class DashboardActivity : BaseActivity() {
                         showDashboardPb(true)
                         binding.toolbar.ivTopImage.visibility = View.VISIBLE;
                         binding.toolbar.tvTitle.visibility = View.GONE;
-                        showFragment(HomeFragment.initFragment(callbackDashboard), tab.position)
+                        showFragment(homeInstanceClone, tab.position)
                     }
                 }
                 setIcon4(tab.position)
@@ -446,7 +453,7 @@ class DashboardActivity : BaseActivity() {
                 binding.toolbar.ivTopImage.visibility = View.VISIBLE;
                 binding.toolbar.tvTitle.visibility = View.GONE;
                 showDashboardPb(true)
-                showFragment(HomeFragment.initFragment(callbackDashboard), 0)
+                showFragment(homeInstanceClone, 0)
                 setIcon4(0)
                 previousPos = 0
             }

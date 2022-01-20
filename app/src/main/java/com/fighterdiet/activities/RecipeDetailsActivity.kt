@@ -15,11 +15,13 @@ import com.bumptech.glide.Glide
 import com.fighterdiet.R
 import com.fighterdiet.adapters.ViewPagerRecipeInfoAdapter
 import com.fighterdiet.data.api.RetrofitBuilder
-import com.fighterdiet.data.model.requestModel.*
+import com.fighterdiet.data.model.requestModel.AddNotesRequestModel
+import com.fighterdiet.data.model.requestModel.AddToFavRequestModel
+import com.fighterdiet.data.model.requestModel.RecipeContentRequestModel
+import com.fighterdiet.data.model.requestModel.UpdateNotesRequestModel
 import com.fighterdiet.data.model.responseModel.CommentListResponseModel
 import com.fighterdiet.data.model.responseModel.RecipeContentResponseModel
 import com.fighterdiet.data.repository.RecipeInfoViewModelProvider
-import com.fighterdiet.databinding.ActivityRecipeInfo2Binding
 import com.fighterdiet.databinding.ActivityRecipeInfoBinding
 import com.fighterdiet.fragments.*
 import com.fighterdiet.utils.Constants
@@ -28,19 +30,15 @@ import com.fighterdiet.utils.ProgressDialog
 import com.fighterdiet.utils.Status
 import com.fighterdiet.viewModel.RecipeInfoViewModel
 import com.google.android.material.tabs.TabLayout
-import java.lang.Exception
-
 import com.google.gson.internal.LinkedTreeMap
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
     private lateinit var viewPagerAdapter: ViewPagerRecipeInfoAdapter
-    private lateinit var infoFragment: Fragment
-    private lateinit var ingredientsFragment: Fragment
-    private lateinit var directionsFragment: Fragment
-    private lateinit var tipsFragment: Fragment
+    private lateinit var infoFragment: InfoFragment
+    private lateinit var ingredientsFragment: IngredientsFragment
+    private lateinit var directionsFragment: DirectionsFragment
+    private lateinit var tipsFragment: TipsFragment
     private var recipeImage: String? = null
     private var recipeName: String? = null
     private var recipeNoteModel: RecipeContentResponseModel.RecipeNote? = null
@@ -141,7 +139,7 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                                     recipeNotesTree["updated_at"] as String
                                 )
                                 isNoteAvailable = true
-                                it.recipe_note = recipeNoteModel as RecipeContentResponseModel.RecipeNote
+                                it.recipe_note = (recipeNoteModel as RecipeContentResponseModel.RecipeNote).toString()
                             }
                             initialise()
                         }
@@ -226,10 +224,17 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
 
         recipeContentModel?.let {
             try {
-                infoFragment = InfoFragment.getInstance(it.info)
-                ingredientsFragment = IngredientsFragment.getInstance(it.ingredients)
-                directionsFragment = DirectionsFragment.getInstance(it.directions)
-                tipsFragment = TipsFragment.getInstance(it.tips)
+                infoFragment = InfoFragment.getInstance()
+                infoFragment.passData(it.info)
+
+                ingredientsFragment = IngredientsFragment.getInstance()
+                ingredientsFragment.passData(it.ingredients)
+
+                directionsFragment = DirectionsFragment.getInstance()
+                directionsFragment.passData(it.directions)
+
+                tipsFragment = TipsFragment.getInstance()
+                tipsFragment.passData(it.tips)
 
                 fragments.add(infoFragment)
                 fragments.add(ingredientsFragment)
@@ -352,19 +357,19 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
             val currentFragment: Fragment
             when(binding.vpInfoRecepie.currentItem){
                 0 -> {
-                    currentFragment = infoFragment as InfoFragment
+                    currentFragment = infoFragment
                     Constants.RecipeDetails.recipeNotesLive.value = currentFragment.binding.etNoteInfo.text.toString()
                 }
                 1 -> {
-                    currentFragment = ingredientsFragment as IngredientsFragment
+                    currentFragment = ingredientsFragment
                     Constants.RecipeDetails.recipeNotesLive.value = currentFragment.binding.etNoteIngred.text.toString()
                 }
                 2 -> {
-                    currentFragment = directionsFragment as DirectionsFragment
+                    currentFragment = directionsFragment
                     Constants.RecipeDetails.recipeNotesLive.value = currentFragment.binding.etNote.text.toString()
                 }
                 3 -> {
-                    currentFragment = tipsFragment as TipsFragment
+                    currentFragment = tipsFragment
                     Constants.RecipeDetails.recipeNotesLive.value = currentFragment.binding.etNote.text.toString()
                 }
             }

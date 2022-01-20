@@ -202,7 +202,8 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
         }
 
         mealListModel?.let {
-            mealListFragment = MealsFragment.newInstance(it)
+            mealListFragment = MealsFragment.newInstance()
+            mealListFragment!!.passData(it)
             mealListFragment?.let { fragment ->
                 pagerAdapter.addFragment(fragment)
             }
@@ -368,7 +369,6 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
             }
         }
 
-
         val totalSelection = dietaryCount+mealCount+volumeCount
         if(Constants.RecipeFilter.totalFilterCount != totalSelection){
             Constants.RecipeFilter.totalFilterCount = totalSelection
@@ -397,7 +397,6 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
                 }
             }
         }
-
     }
 
     fun isShowLoader(isShow: Boolean) {

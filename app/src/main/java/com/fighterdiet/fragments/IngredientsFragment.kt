@@ -15,20 +15,24 @@ import com.fighterdiet.data.model.responseModel.RecipeContentResponseModel
 import com.fighterdiet.databinding.FragmentIngredientsBinding
 import com.fighterdiet.utils.Constants
 
-class IngredientsFragment(val recipeIngredientModel: List<RecipeContentResponseModel.Ingredient>) : BaseFragment() {
+class IngredientsFragment : BaseFragment() {
     lateinit var binding: FragmentIngredientsBinding
     private lateinit var ingredientAdapter : IngredientsRecycleAdapter
-
+    var recipeIngredientModel: List<RecipeContentResponseModel.Ingredient>?=null
     companion object {
-        fun getInstance(recipeIngredientModel: List<RecipeContentResponseModel.Ingredient>): Fragment {
-            return IngredientsFragment(recipeIngredientModel)
+        fun getInstance(): IngredientsFragment {
+            return IngredientsFragment()
         }
+    }
+
+    fun passData(recipeIngredientModel: List<RecipeContentResponseModel.Ingredient>){
+        this.recipeIngredientModel=recipeIngredientModel
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+      ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_ingredients,container,false)
         setUpRecyclerView()
@@ -75,7 +79,7 @@ class IngredientsFragment(val recipeIngredientModel: List<RecipeContentResponseM
 
     private fun setUpRecyclerView() {
         binding.rvIngredientGroup.layoutManager = LinearLayoutManager(activity)
-        ingredientAdapter = IngredientsRecycleAdapter(recipeIngredientModel)
+        ingredientAdapter = IngredientsRecycleAdapter(recipeIngredientModel!!)
         binding.rvIngredientGroup.adapter = ingredientAdapter
     }
 }

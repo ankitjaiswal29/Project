@@ -1,9 +1,6 @@
 package com.fighterdiet.fragments
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,19 +13,24 @@ import com.fighterdiet.databinding.FragmentDirectionsBinding
 import com.fighterdiet.utils.Constants
 
 
-class DirectionsFragment(val recipeDirectionModel: List<RecipeContentResponseModel.Direction>) : BaseFragment() {
+class DirectionsFragment : BaseFragment() {
+    var recipeDirectionModel: List<RecipeContentResponseModel.Direction>?=null
     lateinit var binding: FragmentDirectionsBinding
     private lateinit var recipeDirectionAdapter : RecipeDirectionsRecycleAdapter
 
     companion object {
-        fun getInstance(recipeDirectionModel: List<RecipeContentResponseModel.Direction>): Fragment {
-            return DirectionsFragment(recipeDirectionModel)
+        fun getInstance(): DirectionsFragment {
+            return DirectionsFragment()
         }
+    }
+
+    fun passData(recipeDirectionModel: List<RecipeContentResponseModel.Direction>){
+        this.recipeDirectionModel=recipeDirectionModel
     }
 
     private fun initRv() {
         binding.rvDirections.layoutManager = LinearLayoutManager(activity)
-        recipeDirectionAdapter = RecipeDirectionsRecycleAdapter(recipeDirectionModel)
+        recipeDirectionAdapter = RecipeDirectionsRecycleAdapter(recipeDirectionModel!!)
         binding.rvDirections.adapter = recipeDirectionAdapter
     }
 

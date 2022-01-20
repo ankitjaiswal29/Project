@@ -27,7 +27,7 @@ import com.fighterdiet.interfaces.DashboardCallback
 import com.fighterdiet.utils.*
 import com.fighterdiet.viewModel.HomeViewModel
 
-class HomeFragment constructor(private val dashboardCallback: DashboardCallback) : BaseFragment() {
+class HomeFragment : BaseFragment() {
     private var currentPage: Int = 1
     private var totalCountOfData: Int = -1
     private var isFilterMode: Boolean = false
@@ -37,11 +37,17 @@ class HomeFragment constructor(private val dashboardCallback: DashboardCallback)
     lateinit var binding: FragmentHomeBinding
     lateinit var recipeListAdapter: HomeRecipeListRecyclerAdapter
     var recipeList: ArrayList<RecipeListResponseModel.Recipies> = ArrayList()
+    lateinit var dashboardCallback: DashboardCallback
 
     companion object{
-        fun initFragment(dashboardCallback: DashboardCallback):HomeFragment{
-            return HomeFragment(dashboardCallback)
+        fun initFragment():HomeFragment{
+           // dashboardCallback: DashboardCallback
+            return HomeFragment()
         }
+    }
+
+    fun passCallback(dashboardCallback: DashboardCallback){
+        this.dashboardCallback=dashboardCallback
     }
 
     var offset = 0
