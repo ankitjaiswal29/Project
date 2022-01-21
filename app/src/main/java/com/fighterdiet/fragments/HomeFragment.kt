@@ -147,8 +147,11 @@ class HomeFragment : BaseFragment() {
                     if(isFilterMode||isSearchMode)
                     {
                         if(!isSearchMode){
-                            binding.tvFilterCount.text = "${Constants.RecipeFilter.totalFilterCount} ${ getString(R.string.filters_selected_tap_to_clear) }"
-                            binding.tvFilterCount.visibility = View.VISIBLE
+                            if(Constants.RecipeFilter.totalFilterCount!=0) {
+                                binding.tvFilterCount.text =
+                                    "${Constants.RecipeFilter.totalFilterCount} ${getString(R.string.filters_selected_tap_to_clear)}"
+                                binding.tvFilterCount.visibility = View.VISIBLE
+                            }
                         }
                         if(!it.data?.data?.result.isNullOrEmpty())
                             recipeListAdapter.updateAll(it.data?.data?.result!!, isSearchMode, mSearchedKeyword)

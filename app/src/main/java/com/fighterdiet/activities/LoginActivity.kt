@@ -132,7 +132,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                     it.message?.let {
                         Utils.showSnackBar(binding.root, it)
                     }
-
                 }
                 Status.SUCCESS -> {
                     ProgressDialog.hideProgressDialog()
@@ -173,7 +172,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             }
 
         })
-        viewModel.getErrorMsg().observe(this, Observer {
+        viewModel.getErrorMsg().observe(this, {
             Utils.showSnackBar(binding.root, it)
         })
 
