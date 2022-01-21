@@ -153,7 +153,6 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                             Constants.RecipeFilter.selectedDietaryFilter.clear()
                             Constants.RecipeFilter.selectedVolumeFilter.clear()
                             Constants.DashboardDetails.isApiRequestNeeded = true
-                            Constants.RecipeFilter.isFilterCleared = false
 
                             Constants.RecipeFilter.isFilterCleared = true
                             Constants.RecipeFilter.isFilterApplied = false

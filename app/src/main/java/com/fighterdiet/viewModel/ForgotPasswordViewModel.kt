@@ -30,7 +30,7 @@ class ForgotPasswordViewModel(private val forgotPasswordRepository: ForgotPasswo
             viewModelScope.launch {
                 try {
                     resourcesForgotPass.postValue(Resource.loading(null))
-                    val apiResponse=forgotPasswordRepository.forgotpasswordApi(forgotPasswordRequestModel)
+                    val apiResponse=forgotPasswordRepository.forgotPasswordApi(forgotPasswordRequestModel)
                     resourcesForgotPass.postValue(Resource.success(data = apiResponse))
                 }catch (e: Exception) {
                     e.printStackTrace()
@@ -41,7 +41,8 @@ class ForgotPasswordViewModel(private val forgotPasswordRepository: ForgotPasswo
         }
 
     }
-    fun isValid() :Boolean{
+
+    private fun isValid() :Boolean{
         if (TextUtils.isEmpty(email)){
             errorMsg.value = "Please enter email"
             return false

@@ -91,7 +91,8 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
                 Status.SUCCESS -> {
                     dietaryListModel = it.data?.data
                     Constants.RecipeFilter.selectedDietaryFilter.forEach {
-                        dietaryCount++
+                        if(it.value.isChecked)
+                            dietaryCount++
                         dietaryListModel?.let { dietaryResponseModel ->
                             dietaryResponseModel.result[it.key].isChecked = it.value.isChecked
                         }
@@ -115,7 +116,8 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
                 Status.SUCCESS -> {
                     volumeListModel = it.data?.data
                     Constants.RecipeFilter.selectedVolumeFilter.forEach {
-                        volumeCount++
+                        if(it.value.isChecked)
+                            volumeCount++
                         volumeListModel?.let { volumeResponseModel ->
                             volumeResponseModel.result[it.key].isChecked = it.value.isChecked
                         }
@@ -141,7 +143,8 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
                     mealListModel = it.data?.data
 
                     Constants.RecipeFilter.selectedMealFilter.forEach {
-                        mealCount++
+                        if(it.value.isChecked)
+                            mealCount++
                         mealListModel?.let { mealResponseModel ->
                             mealResponseModel.result[it.key].isChecked = it.value.isChecked
                         }
@@ -225,70 +228,6 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
                     //dietaryCount+volumeCount+mealCount != 0
                 startActivity(DashboardActivity.getStartIntent(this))
                 Constants.DashboardDetails.isApiRequestNeeded = true
-                if(dietaryCount==0){
-                    Constants.RecipeFilter.selectedDietaryFilter.clear()
-                }else{
-                    if(newChangesInDietarySelection){
-                        Constants.RecipeFilter.selectedDietaryFilter.forEach {
-                            it.value.isChecked = false
-                        }
-//                Constants.RecipeFilter.isDietaryListCleared = false
-                        Constants.RecipeFilter.isFilterCleared = false
-                    }
-                }
-
-                if(mealCount==0){
-                    Constants.RecipeFilter.selectedMealFilter.clear()
-                }else{
-                    if(newChangesInMealSelection){
-                        Constants.RecipeFilter.selectedMealFilter.forEach {
-                            it.value.isChecked = false
-                        }
-//                Constants.RecipeFilter.isMealListCleared = false
-                        Constants.RecipeFilter.isFilterCleared = false
-                    }
-                }
-
-                if(volumeCount==0){
-                    Constants.RecipeFilter.selectedVolumeFilter.clear()
-                }else{
-                    if(newChangesInVolumeSelection){
-                        Constants.RecipeFilter.selectedVolumeFilter.forEach {
-                            it.value.isChecked = false
-                        }
-//                Constants.RecipeFilter.isVolumeListCleared = false
-                        Constants.RecipeFilter.isFilterCleared = false
-                    }
-                }
-
-                val totalSelection = dietaryCount+mealCount+volumeCount
-                if(Constants.RecipeFilter.totalFilterCount != totalSelection){
-                    Constants.RecipeFilter.totalFilterCount = totalSelection
-                }
-
-                dietaryListModel?.let { model ->
-                    model.result.forEachIndexed { index, result ->
-                        if(result.isChecked){
-                            Constants.RecipeFilter.selectedDietaryFilter[index] = result
-                        }
-                    }
-                }
-
-                volumeListModel?.let { model ->
-                    model.result.forEachIndexed { index, result ->
-                        if(result.isChecked){
-                            Constants.RecipeFilter.selectedVolumeFilter[index] = result
-                        }
-                    }
-                }
-
-                mealListModel?.let { model ->
-                    model.result.forEachIndexed { index, result ->
-                        if(result.isChecked){
-                            Constants.RecipeFilter.selectedMealFilter[index] = result
-                        }
-                    }
-                }
                 finishAffinity()
             }
 
@@ -342,10 +281,10 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
             this.result[pos].isChecked = isItemAdd
         }
         if(isItemAdd){
-            mealCount++
+            mealCount += 1
         }
         else{
-            mealCount--
+            mealCount -= 1
         }
         updateTotalFilterCountText()
         binding.clBottom.visibility = VISIBLE
@@ -357,10 +296,10 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
             this.result[pos].isChecked = isItemAdd
         }
         if(isItemAdd){
-            dietaryCount++
+            dietaryCount += 1
         }
         else{
-            dietaryCount--
+            dietaryCount -= 1
         }
         updateTotalFilterCountText()
         binding.clBottom.visibility = VISIBLE
@@ -372,10 +311,10 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
             this.result[pos].isChecked = isItemAdd
         }
         if(isItemAdd){
-            volumeCount++
+            volumeCount += 1
         }
         else{
-            volumeCount--
+            volumeCount -= 1
         }
         updateTotalFilterCountText()
         binding.clBottom.visibility = VISIBLE
@@ -396,70 +335,70 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
             return
         }
 
-//        if(dietaryCount==0){
-//            Constants.RecipeFilter.selectedDietaryFilter.clear()
-//        }else{
-//            if(newChangesInDietarySelection){
-//                Constants.RecipeFilter.selectedDietaryFilter.forEach {
-//                    it.value.isChecked = false
-//                }
-////                Constants.RecipeFilter.isDietaryListCleared = false
-//                Constants.RecipeFilter.isFilterCleared = false
-//            }
-//        }
-//
-//        if(mealCount==0){
-//            Constants.RecipeFilter.selectedMealFilter.clear()
-//        }else{
-//            if(newChangesInMealSelection){
-//                Constants.RecipeFilter.selectedMealFilter.forEach {
-//                    it.value.isChecked = false
-//                }
-////                Constants.RecipeFilter.isMealListCleared = false
-//                Constants.RecipeFilter.isFilterCleared = false
-//            }
-//        }
-//
-//        if(volumeCount==0){
-//            Constants.RecipeFilter.selectedVolumeFilter.clear()
-//        }else{
-//            if(newChangesInVolumeSelection){
-//                Constants.RecipeFilter.selectedVolumeFilter.forEach {
-//                    it.value.isChecked = false
-//                }
-////                Constants.RecipeFilter.isVolumeListCleared = false
-//                Constants.RecipeFilter.isFilterCleared = false
-//            }
-//        }
-//
-//        val totalSelection = dietaryCount+mealCount+volumeCount
-//        if(Constants.RecipeFilter.totalFilterCount != totalSelection){
-//            Constants.RecipeFilter.totalFilterCount = totalSelection
-//        }
-//
-//        dietaryListModel?.let { model ->
-//            model.result.forEachIndexed { index, result ->
-//                if(result.isChecked){
-//                     Constants.RecipeFilter.selectedDietaryFilter[index] = result
-//                }
-//            }
-//        }
-//
-//        volumeListModel?.let { model ->
-//            model.result.forEachIndexed { index, result ->
-//                if(result.isChecked){
-//                    Constants.RecipeFilter.selectedVolumeFilter[index] = result
-//                }
-//            }
-//        }
-//
-//        mealListModel?.let { model ->
-//            model.result.forEachIndexed { index, result ->
-//                if(result.isChecked){
-//                    Constants.RecipeFilter.selectedMealFilter[index] = result
-//                }
-//            }
-//        }
+        if(dietaryCount==0){
+            Constants.RecipeFilter.selectedDietaryFilter.clear()
+        }else{
+            if(newChangesInDietarySelection){
+                Constants.RecipeFilter.selectedDietaryFilter.forEach {
+                    it.value.isChecked = false
+                }
+//                Constants.RecipeFilter.isDietaryListCleared = false
+                Constants.RecipeFilter.isFilterCleared = false
+            }
+        }
+
+        if(mealCount==0){
+            Constants.RecipeFilter.selectedMealFilter.clear()
+        }else{
+            if(newChangesInMealSelection){
+                Constants.RecipeFilter.selectedMealFilter.forEach {
+                    it.value.isChecked = false
+                }
+//                Constants.RecipeFilter.isMealListCleared = false
+                Constants.RecipeFilter.isFilterCleared = false
+            }
+        }
+
+        if(volumeCount==0){
+            Constants.RecipeFilter.selectedVolumeFilter.clear()
+        }else{
+            if(newChangesInVolumeSelection){
+                Constants.RecipeFilter.selectedVolumeFilter.forEach {
+                    it.value.isChecked = false
+                }
+//                Constants.RecipeFilter.isVolumeListCleared = false
+                Constants.RecipeFilter.isFilterCleared = false
+            }
+        }
+
+        val totalSelection = dietaryCount+mealCount+volumeCount
+        if(Constants.RecipeFilter.totalFilterCount != totalSelection){
+            Constants.RecipeFilter.totalFilterCount = totalSelection
+        }
+
+        dietaryListModel?.let { model ->
+            model.result.forEachIndexed { index, result ->
+                if(result.isChecked){
+                     Constants.RecipeFilter.selectedDietaryFilter[index] = result
+                }
+            }
+        }
+
+        volumeListModel?.let { model ->
+            model.result.forEachIndexed { index, result ->
+                if(result.isChecked){
+                    Constants.RecipeFilter.selectedVolumeFilter[index] = result
+                }
+            }
+        }
+
+        mealListModel?.let { model ->
+            model.result.forEachIndexed { index, result ->
+                if(result.isChecked){
+                    Constants.RecipeFilter.selectedMealFilter[index] = result
+                }
+            }
+        }
     }
 
     fun isShowLoader(isShow: Boolean) {

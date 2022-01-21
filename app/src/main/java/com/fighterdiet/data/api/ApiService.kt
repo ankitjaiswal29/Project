@@ -18,7 +18,7 @@ interface ApiService {
     : ApiResponse<LoginResponseModel>
 
     @POST("forgot-password")
-    suspend fun forgotpasswordApi(@Body forgotPasswordRequestModel: ForgotPasswordRequestModel): ApiResponse<ForgotPasswordResponseModel>
+    suspend fun forgotPasswordApi(@Body forgotPasswordRequestModel: ForgotPasswordRequestModel): ApiResponse<ForgotPasswordResponseModel>
 
     @GET("recipe-list")
     suspend fun getRecipeListApi(
