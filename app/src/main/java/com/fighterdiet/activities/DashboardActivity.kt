@@ -1,5 +1,6 @@
 package com.fighterdiet.activities
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fighterdiet.R
@@ -32,6 +34,7 @@ class DashboardActivity : BaseActivity() {
     lateinit var tabIcons6UnSelected: Array<Int>
     lateinit var tabIcons6Selected: Array<Int>
     lateinit var homeInstanceClone:HomeFragment
+    lateinit var filterActivityIntentInstance:Intent
     var offset = 0
     var limit = 8
 
@@ -45,6 +48,14 @@ class DashboardActivity : BaseActivity() {
         }
     }
 
+    var filterActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            // There are no request codes
+            val data: Intent? = result.data
+
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard_with_calaories)
@@ -52,6 +63,7 @@ class DashboardActivity : BaseActivity() {
         Constants.DashboardDetails.isApiRequestNeeded = true
         setupUI()
         homeInstanceClone=homeInstance()
+        filterActivityIntentInstance = FilterActivity.getStartIntent(this@DashboardActivity)
         previousPos = 0
 
 //        if (Constants.isQuestonnaireCompleted) {
@@ -186,7 +198,7 @@ class DashboardActivity : BaseActivity() {
                         showFragment(homeInstanceClone, tab.position)
                     }
                     1 -> {
-                        startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
+                        filterActivityResultLauncher.launch(filterActivityIntentInstance)
                     }
                     2 -> {
                         showFragment(TrendingFragment.initFragment(callbackDashboard))
@@ -238,7 +250,7 @@ class DashboardActivity : BaseActivity() {
                         }
                     }
                     1 -> {
-                        startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
+                        filterActivityResultLauncher.launch(filterActivityIntentInstance)
                     }
 //                    3 -> {
 //                        if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
@@ -337,7 +349,7 @@ class DashboardActivity : BaseActivity() {
                         showFragment(homeInstanceClone, tab.position)
                     }
                     1 -> {
-                        startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
+                        filterActivityResultLauncher.launch(filterActivityIntentInstance)
                     }
                     2 -> {
                         if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
@@ -397,7 +409,7 @@ class DashboardActivity : BaseActivity() {
                     }
                     1 -> {
 
-                        startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
+                        filterActivityResultLauncher.launch(filterActivityIntentInstance)
                     }
 
                     3 -> {

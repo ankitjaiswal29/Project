@@ -50,9 +50,14 @@ object Constants {
     }
 
     object RecipeFilter{
+        /*var dietaryItemCount = 0
+        var volumeItemCount = 0
+        var mealItemCount = 0
+        */
         var isFilterCleared: Boolean = false
         var isFilterApplied: Boolean = false
         var totalFilterCount :Int = 0
+
         var selectedDietaryFilter: HashMap<Int, GetDietaryResponseModel.Result> = HashMap()
         var selectedVolumeFilter: HashMap<Int, GetVolumeResponseModel.Result> = HashMap()
         var selectedMealFilter: HashMap<Int, GetMealResponseModel.Result> = HashMap()
