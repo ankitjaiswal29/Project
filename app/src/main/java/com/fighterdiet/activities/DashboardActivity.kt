@@ -74,7 +74,7 @@ class DashboardActivity : BaseActivity() {
         if(Constants.DashboardDetails.isApiRequestNeeded){
            // showDashboardPb(true)
             showFragment(homeInstanceClone, 0)
-            Constants.DashboardDetails.isApiRequestNeeded = true
+            Constants.DashboardDetails.isApiRequestNeeded = false
         }
     }
 

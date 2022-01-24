@@ -148,14 +148,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                             apiResponse.data?.is_subscribed?.let { isSubscribed ->
                                 PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, isSubscribed=="1")
                             }
-                            Constants.RecipeFilter.totalFilterCount = 0
-                            Constants.RecipeFilter.selectedMealFilter.clear()
-                            Constants.RecipeFilter.selectedDietaryFilter.clear()
-                            Constants.RecipeFilter.selectedVolumeFilter.clear()
-                            Constants.DashboardDetails.isApiRequestNeeded = true
-
-                            Constants.RecipeFilter.isFilterCleared = true
-                            Constants.RecipeFilter.isFilterApplied = false
+                            clearRecipeLocalData()
 
                             startActivity(DashboardActivity.getStartIntent(this))
                             finish()
@@ -175,6 +168,16 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             Utils.showSnackBar(binding.root, it)
         })
 
+    }
+
+    private fun clearRecipeLocalData() {
+        Constants.RecipeFilter.totalFilterCount = 0
+        Constants.RecipeFilter.selectedMealFilter.clear()
+        Constants.RecipeFilter.selectedDietaryFilter.clear()
+        Constants.RecipeFilter.selectedVolumeFilter.clear()
+        Constants.DashboardDetails.isApiRequestNeeded = true
+        Constants.RecipeFilter.isFilterCleared = true
+        Constants.RecipeFilter.isFilterApplied = false
     }
 
     @SuppressLint("ClickableViewAccessibility")
