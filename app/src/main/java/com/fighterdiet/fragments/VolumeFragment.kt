@@ -15,7 +15,7 @@ import com.fighterdiet.utils.Constants
 
 class VolumeFragment constructor(val getVolumeResponseModel: GetVolumeResponseModel) : Fragment(), VolumeAdapter.VolumeCountListener {
     lateinit var binding: FragmentVolumeBinding
-    private lateinit var volumeAdapter: VolumeAdapter
+    private var volumeAdapter: VolumeAdapter?=null
     var list: ArrayList<GetVolumeResponseModel.Result> = ArrayList()
     private lateinit var volumeFragListener: VolumeFragInterface
 
@@ -46,7 +46,7 @@ class VolumeFragment constructor(val getVolumeResponseModel: GetVolumeResponseMo
             list.forEach {
                 it.isChecked = false
             }
-            volumeAdapter.notifyDataSetChanged()
+            volumeAdapter?.notifyDataSetChanged()
         }
     }
 
@@ -66,7 +66,7 @@ class VolumeFragment constructor(val getVolumeResponseModel: GetVolumeResponseMo
         list.forEach {
             it.isChecked = false
         }
-        volumeAdapter.notifyDataSetChanged()
+        volumeAdapter?.notifyDataSetChanged()
     }
 
 

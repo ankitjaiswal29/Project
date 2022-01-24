@@ -16,7 +16,7 @@ import com.fighterdiet.utils.Constants
 class MealsFragment : Fragment(), MealsAdapter.MealsCountListener {
     private var list: ArrayList<GetMealResponseModel.Result>  = ArrayList()
     lateinit var binding: FragmentMealsBinding
-    private lateinit var mealsAdapter : MealsAdapter
+    private var mealsAdapter : MealsAdapter?=null
     private lateinit var mealsListener: MealsInfoInterface
     var getMealResponseModel: GetMealResponseModel? =null
 
@@ -52,7 +52,7 @@ class MealsFragment : Fragment(), MealsAdapter.MealsCountListener {
             list.forEach {
                 it.isChecked = false
             }
-            mealsAdapter.notifyDataSetChanged()
+            mealsAdapter?.notifyDataSetChanged()
         }
     }
 
@@ -73,7 +73,7 @@ class MealsFragment : Fragment(), MealsAdapter.MealsCountListener {
         list.forEach {
             it.isChecked = false
         }
-        mealsAdapter.notifyDataSetChanged()
+        mealsAdapter?.notifyDataSetChanged()
     }
 
     override fun mealsInfoAdapterListener(position: Int, resultModel: GetMealResponseModel.Result) {

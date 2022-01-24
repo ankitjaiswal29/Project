@@ -4,10 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -21,8 +17,8 @@ import com.fighterdiet.interfaces.DashboardCallback
 import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.PrefManager
 import com.fighterdiet.utils.Utils
-import com.google.android.material.tabs.TabLayout
 import com.fighterdiet.utils.Utils.loginAlertDialog
+import com.google.android.material.tabs.TabLayout
 
 class DashboardActivity : BaseActivity() {
     private var previousPos: Int = 0
@@ -76,7 +72,7 @@ class DashboardActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         if(Constants.DashboardDetails.isApiRequestNeeded){
-            showDashboardPb(true)
+           // showDashboardPb(true)
             showFragment(homeInstanceClone, 0)
             Constants.DashboardDetails.isApiRequestNeeded = true
         }
@@ -344,8 +340,8 @@ class DashboardActivity : BaseActivity() {
                 when (tab.position) {
                     0 -> {
                         showDashboardPb(true)
-                        binding.toolbar.ivTopImage.visibility = View.VISIBLE;
-                        binding.toolbar.tvTitle.visibility = View.GONE;
+                        binding.toolbar.ivTopImage.visibility = View.VISIBLE
+                        binding.toolbar.tvTitle.visibility = View.GONE
                         showFragment(homeInstanceClone, tab.position)
                     }
                     1 -> {

@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment() {
     lateinit var binding: FragmentHomeBinding
     lateinit var recipeListAdapter: HomeRecipeListRecyclerAdapter
     var recipeList: ArrayList<RecipeListResponseModel.Recipies> = ArrayList()
-    lateinit var dashboardCallback: DashboardCallback
+    var dashboardCallback: DashboardCallback?=null
 
     companion object{
         fun initFragment():HomeFragment{
@@ -105,7 +105,7 @@ class HomeFragment : BaseFragment() {
                 selectedMealMap["meal_id[${it.key}]"] = it.value.meal_id
             }
         }
-        dashboardCallback.onStartLoader()
+        dashboardCallback?.onStartLoader()
         viewModel.getRecipeList(searchKeys, startFrom, endTo, selectedDietaryMap, selectedVolumeMap, selectedMealMap)
     }
 
@@ -118,7 +118,7 @@ class HomeFragment : BaseFragment() {
         viewModel.getRecipeListResource().observe(viewLifecycleOwner, {
             when(it.status){
                 Status.SUCCESS -> {
-                    dashboardCallback.onDataLoaded()
+                    dashboardCallback?.onDataLoaded()
                     binding.tvNoData.visibility = GONE
 
                     Constants.DashboardDetails.recipiesModel = it.data?.data
@@ -195,7 +195,7 @@ class HomeFragment : BaseFragment() {
             Constants.RecipeFilter.isFilterApplied = false
             binding.tvFilterCount.visibility = GONE
             recipeListAdapter.clearAll()
-            dashboardCallback.onStartLoader()
+            dashboardCallback?.onStartLoader()
             Handler(Looper.getMainLooper()).postDelayed({
                 getRecipes("", offset, limit)
             },50)
