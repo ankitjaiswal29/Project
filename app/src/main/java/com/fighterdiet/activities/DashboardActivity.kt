@@ -145,6 +145,7 @@ class DashboardActivity : BaseActivity() {
         tab6Titles = arrayOf(
             "", "", "", "", "", ""
         )
+
         tabIcons6UnSelected = arrayOf(
             R.mipmap.ic_search_blue,
             R.mipmap.filter,
@@ -154,6 +155,7 @@ class DashboardActivity : BaseActivity() {
             R.mipmap.ic_cb_blue,
             R.mipmap.ic_setting_blue
         )
+
         tabIcons6Selected = arrayOf(
             R.mipmap.ic_search_gray,
             R.mipmap.filter,

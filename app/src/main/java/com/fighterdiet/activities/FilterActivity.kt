@@ -244,8 +244,12 @@ class FilterActivity : BaseActivity(), View.OnClickListener,
             }
 
             R.id.tv_cancel -> {
-                Constants.RecipeFilter.isFilterApplied = false
-                finish()
+                if (Constants.RecipeFilter.isFilterCleared) {
+                    Constants.RecipeFilter.isFilterCleared = false
+                    launchDashboardActivity()
+                }else{
+                    super.onBackPressed()
+                }
             }
 
             R.id.tv_clear_all -> {
@@ -376,8 +380,6 @@ class FilterActivity : BaseActivity(), View.OnClickListener,
         }else{
             super.onBackPressed()
         }
-
-
     }
 
     fun isShowLoader(isShow: Boolean) {

@@ -62,25 +62,31 @@
 
             <TextView
                 android:id="@+id/tv_about"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/inter_regular"
                 android:text="@string/str_fighterdiet_by"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_20ssp" />
+                android:textSize="@dimen/_20ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.008"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_name"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_about"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/inter_semibold"
                 android:text="@string/str_pauline_nordin"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_25ssp" />
+                android:textSize="@dimen/_25ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tv_about"
+                app:layout_constraintTop_toBottomOf="@id/tv_about" />
 
             <View
                 android:id="@+id/view_separator2"
@@ -111,11 +117,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_10sdp"
                             android:fontFamily="@font/inter_medium"
                             android:text="@={aboutResponseModel.about}"
                             android:textAlignment="textStart"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_10ssp" />
+                            android:textSize="@dimen/_10ssp"
+                            android:layout_marginBottom="@dimen/_10sdp"/>
                     </ScrollView>
 
                     <ProgressBar
