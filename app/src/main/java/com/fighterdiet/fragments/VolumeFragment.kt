@@ -50,11 +50,11 @@ class VolumeFragment constructor(val getVolumeResponseModel: GetVolumeResponseMo
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        modifyListWhenSelectionCleared(list)
-        volumeFragListener.getCurrFragmentType(1)
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        modifyListWhenSelectionCleared(list)
+//        volumeFragListener.getCurrFragmentType(1)
+//    }
 
     private fun setUpRecyclerView() {
         binding.rvVolume.layoutManager = LinearLayoutManager(activity)

@@ -50,11 +50,11 @@ class DietryInfoFragment(val getDietaryResponseModel: GetDietaryResponseModel) :
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        modifyListWhenSelectionCleared(list)
-        dietaryListener.getCurrFragmentType(0)
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        modifyListWhenSelectionCleared(list)
+//        dietaryListener.getCurrFragmentType(0)
+//    }
 
     private fun setUpRecyclerView() {
         dietryInfoAdapter = DietryInfoAdapter(list, this)

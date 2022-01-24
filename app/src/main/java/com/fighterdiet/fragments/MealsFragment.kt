@@ -56,11 +56,11 @@ class MealsFragment : Fragment(), MealsAdapter.MealsCountListener {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        modifyListWhenSelectionCleared(list)
-        mealsListener.getCurrFragmentType(2)
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        modifyListWhenSelectionCleared(list)
+//        mealsListener.getCurrFragmentType(2)
+//    }
 
     private fun setUpRecyclerView() {
         binding.rvMeals.layoutManager = LinearLayoutManager(activity)

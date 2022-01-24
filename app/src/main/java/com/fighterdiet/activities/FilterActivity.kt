@@ -262,23 +262,10 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
 
                     updateTotalFilterCountText()
 
-                    when(currentScreenType){
-                        0-> {
-                            dietaryInfoFragment?.clearDietaryData()
-//                        Constants.RecipeFilter.isDietaryListCleared = true
-                        }
-
-                        1-> {
-                            volumeListFragment?.clearVolumeData()
-//                        Constants.RecipeFilter.isVolumeListCleared = true
-                        }
-
-                        2-> {
-                            mealListFragment?.clearMealData()
-//                        Constants.RecipeFilter.isMealListCleared = true
-                        }
-                    }
-                    isNewChanges = false
+                dietaryInfoFragment?.clearDietaryData()
+                volumeListFragment?.clearVolumeData()
+                mealListFragment?.clearMealData()
+                isNewChanges = false
 
                     filterOps()
 //                }
