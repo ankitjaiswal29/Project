@@ -373,6 +373,8 @@ class FilterActivity : BaseActivity(), View.OnClickListener,
         if (Constants.RecipeFilter.isFilterCleared) {
             Constants.RecipeFilter.isFilterCleared = false
             launchDashboardActivity()
+        }else{
+            super.onBackPressed()
         }
 
 
