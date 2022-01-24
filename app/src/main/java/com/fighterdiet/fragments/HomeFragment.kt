@@ -151,6 +151,8 @@ class HomeFragment : BaseFragment() {
                                 binding.tvFilterCount.text =
                                     "${Constants.RecipeFilter.totalFilterCount} ${getString(R.string.filters_selected_tap_to_clear)}"
                                 binding.tvFilterCount.visibility = View.VISIBLE
+                            }else{
+                                binding.tvFilterCount.visibility = View.GONE
                             }
                         }
                         if(!it.data?.data?.result.isNullOrEmpty())

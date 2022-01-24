@@ -19,10 +19,11 @@ import com.fighterdiet.data.model.responseModel.GetVolumeResponseModel
 import com.fighterdiet.data.repository.FilterRecipeModelProvider
 import com.fighterdiet.data.repository.FilterRecipeRepository
 import com.fighterdiet.databinding.ActivityFilterBinding
-import com.fighterdiet.fragments.*
+import com.fighterdiet.fragments.DietryInfoFragment
+import com.fighterdiet.fragments.MealsFragment
+import com.fighterdiet.fragments.VolumeFragment
 import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.Status
-import com.fighterdiet.utils.Utils
 import com.fighterdiet.viewModel.FilterRecipeViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -249,25 +250,29 @@ class FilterActivity : BaseActivity(), View.OnClickListener ,
 
             R.id.tv_clear_all ->{
 //                if(mealCount+volumeCount+dietaryCount > 0){
-                    mealCount = 0
-                    volumeCount = 0
-                    dietaryCount = 0
-                    Constants.RecipeFilter.totalFilterCount = 0
-                    Constants.RecipeFilter.isFilterCleared = true
-                    Constants.RecipeFilter.isFilterApplied = false
-                    Constants.RecipeFilter.selectedMealFilter.clear()
-                    Constants.RecipeFilter.selectedVolumeFilter.clear()
-                    Constants.RecipeFilter.selectedDietaryFilter.clear()
-                    Constants.DashboardDetails.isApiRequestNeeded = true
-
-                    updateTotalFilterCountText()
+                mealCount = 0
+                volumeCount = 0
+                dietaryCount = 0
+                Constants.RecipeFilter.totalFilterCount = 0
+                Constants.RecipeFilter.isFilterCleared = true
+                Constants.RecipeFilter.isFilterApplied = false
+                Constants.RecipeFilter.selectedMealFilter.clear()
+                Constants.RecipeFilter.selectedVolumeFilter.clear()
+                Constants.RecipeFilter.selectedDietaryFilter.clear()
+                Constants.DashboardDetails.isApiRequestNeeded = true
+                Constants.RecipeFilter.totalFilterCount = 0
+                updateTotalFilterCountText()
 
                 dietaryInfoFragment?.clearDietaryData()
                 volumeListFragment?.clearVolumeData()
                 mealListFragment?.clearMealData()
                 isNewChanges = false
 
-                    filterOps()
+                filterOps()
+
+                startActivity(DashboardActivity.getStartIntent(this))
+                Constants.DashboardDetails.isApiRequestNeeded = true
+                finishAffinity()
 //                }
 //                else{
 //                    Utils.showToast(this, "Filter is already cleared!")
