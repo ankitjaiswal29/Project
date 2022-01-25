@@ -108,11 +108,9 @@ class FilterActivity : BaseActivity(), View.OnClickListener,
                 }
 
                 Status.LOADING -> {
-
                 }
 
                 Status.ERROR -> {
-
                 }
             }
         })

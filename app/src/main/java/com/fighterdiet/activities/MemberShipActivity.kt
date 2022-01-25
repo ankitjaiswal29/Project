@@ -31,7 +31,6 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
     private lateinit var skuDetailsList: MutableList<SkuDetails>
     private lateinit var viewModel: MembershipViewModel
 
-
     private lateinit var binding: ActivityMemberShipBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +42,6 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
         skuDetailsList = mutableListOf()
         initialize()
         setupInAppBilling()
-
     }
 
     override fun setupUI() {
