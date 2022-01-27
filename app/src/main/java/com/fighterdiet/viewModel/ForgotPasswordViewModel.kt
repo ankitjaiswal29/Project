@@ -39,7 +39,6 @@ class ForgotPasswordViewModel(private val forgotPasswordRepository: ForgotPasswo
 
             }
         }
-
     }
 
     private fun isValid() :Boolean{

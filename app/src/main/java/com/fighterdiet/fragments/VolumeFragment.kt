@@ -13,7 +13,7 @@ import com.fighterdiet.data.model.responseModel.GetVolumeResponseModel
 import com.fighterdiet.databinding.FragmentVolumeBinding
 import com.fighterdiet.utils.Constants
 
-class VolumeFragment constructor(val getVolumeResponseModel: GetVolumeResponseModel) : Fragment(), VolumeAdapter.VolumeCountListener {
+class VolumeFragment constructor(private val getVolumeResponseModel: GetVolumeResponseModel) : Fragment(), VolumeAdapter.VolumeCountListener {
     lateinit var binding: FragmentVolumeBinding
     private var volumeAdapter: VolumeAdapter?=null
     var list: ArrayList<GetVolumeResponseModel.Result> = ArrayList()

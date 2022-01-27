@@ -22,10 +22,10 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     var email: String = ""
     var password: String = ""
 
-    private val resources =
-        MutableLiveData<Resource<ApiResponse<LoginResponseModel>>>()
+    private val resources = MutableLiveData<Resource<ApiResponse<LoginResponseModel>>>()
 
     fun getResources() = resources
+
     fun getErrorMsg(): LiveData<String> {
         return errorMsg
     }
@@ -41,7 +41,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
                     resources.postValue(Resource.success(data = apiResponse))
                 }catch (e: Exception) {
                     e.printStackTrace()
-                    resources.postValue(Resource.error(null, e.localizedMessage!!))
+                    resources.postValue(Resource.error(null, e.localizedMessage?:"error"))
                 }
             }
         }
@@ -51,7 +51,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     fun isValid() :Boolean{
         if (TextUtils.isEmpty(email)){
             errorMsg.value = "Please enter email"
-            return false 
+            return false
         }
         if (TextUtils.isEmpty(password)) {
             errorMsg.value = "Please enter password"

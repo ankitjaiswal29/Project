@@ -12,7 +12,7 @@ import com.fighterdiet.data.model.responseModel.GetDietaryResponseModel
 import com.fighterdiet.databinding.FragmentDietryInfoBinding
 import com.fighterdiet.utils.Constants
 
-class DietryInfoFragment(val getDietaryResponseModel: GetDietaryResponseModel) : Fragment(),
+class DietryInfoFragment(val getDietaryResponseModel: GetDietaryResponseModel) : BaseFragment(),
     DietryInfoAdapter.DietaryCountListener {
     lateinit var binding: FragmentDietryInfoBinding
     private lateinit var dietryInfoAdapter : DietryInfoAdapter

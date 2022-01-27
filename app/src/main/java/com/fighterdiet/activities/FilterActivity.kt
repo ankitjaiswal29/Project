@@ -182,7 +182,6 @@ class FilterActivity : BaseActivity(), View.OnClickListener,
         binding.tvClearAll.setOnClickListener(this)
     }
 
-
     private fun initialiseViewPager() {
 
         dietaryCount = Constants.RecipeFilter.selectedDietaryFilter.size
