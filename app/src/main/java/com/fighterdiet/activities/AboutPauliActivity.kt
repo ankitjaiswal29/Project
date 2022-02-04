@@ -1,29 +1,20 @@
 package com.fighterdiet.activities
+
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.view.View.GONE
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
 import com.fighterdiet.R
 import com.fighterdiet.data.api.RetrofitBuilder
 import com.fighterdiet.data.repository.AboutPaulinNordinRepository
-import com.fighterdiet.data.repository.LoginRepository
 import com.fighterdiet.databinding.ActivityAboutPauliBinding
-import com.fighterdiet.databinding.ActivityIntroAndDecisionBinding
-import com.fighterdiet.utils.PrefManager
-import com.fighterdiet.utils.ProgressDialog
 import com.fighterdiet.utils.Status
 import com.fighterdiet.utils.Utils
 import com.fighterdiet.viewModel.AboutPaulinNordinViewModel
 import com.fighterdiet.viewModel.AboutPaulinNordinViewModelProvider
-import com.fighterdiet.viewModel.LoginViewModel
-import com.fighterdiet.viewModel.LoginViewModelProvider
 import com.potyvideo.library.globalInterfaces.AndExoPlayerListener
 
 class AboutPauliActivity : BaseActivity(), View.OnClickListener,AndExoPlayerListener{
@@ -42,8 +33,6 @@ class AboutPauliActivity : BaseActivity(), View.OnClickListener,AndExoPlayerList
         setupViewModel()
         setupObserver()
     }
-
-
 
     override fun setupUI() {
 
@@ -84,13 +73,12 @@ class AboutPauliActivity : BaseActivity(), View.OnClickListener,AndExoPlayerList
                            // binding.ivAbout.text=apiResponse.data?.about
                             if(apiResponse.data?.extension.equals("mp4")){
                                 //mp4Url=apiResponse.data?.image.toString()
-                                    apiResponse.data?.about.toString();
+                                    apiResponse.data?.about.toString()
                                     showVideo(apiResponse.data?.image.toString())
                             }
                         }else{
                             Utils.showSnackBar(binding.root, apiResponse.message)
                         }
-
                     } else {
                         Utils.showSnackBar(binding.root, apiResponse.message)
                     }
@@ -99,7 +87,7 @@ class AboutPauliActivity : BaseActivity(), View.OnClickListener,AndExoPlayerList
             }
 
         })
-        viewModel.getErrorMsg().observe(this, Observer {
+        viewModel.getErrorMsg().observe(this, {
             Utils.showSnackBar(binding.root, it)
         })
 
@@ -110,22 +98,6 @@ class AboutPauliActivity : BaseActivity(), View.OnClickListener,AndExoPlayerList
         binding.exoPlayer.setShowControllers(true)
         binding.exoPlayer.setSource(mp4Url)
         binding.exoPlayer.setPlayWhenReady(true)
-//        binding.exoPlayer.setSource(mp4Url)
-//        binding.exoPlayer.startPlayer()
-
-
-//        binding.exoPlayer.setOnClickListener {
-//
-//            if (flag){
-//                flag=false
-//                binding.exoPlayer.stopPlayer()
-//
-//            }else{
-//                binding.exoPlayer.setSource(mp4Url)
-//                binding.exoPlayer.startPlayer()
-//                flag=true
-//            }
-//        }
     }
 
     private fun initialise() {
@@ -163,5 +135,4 @@ class AboutPauliActivity : BaseActivity(), View.OnClickListener,AndExoPlayerList
             it.releasePlayer()
         }
     }
-
 }

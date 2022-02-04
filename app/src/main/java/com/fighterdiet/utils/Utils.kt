@@ -16,9 +16,6 @@ import com.fighterdiet.utils.Constants.ZERO
 import com.google.android.material.snackbar.Snackbar
 import java.net.URI
 import java.net.URL
-import java.time.LocalDateTime
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -54,10 +51,6 @@ object Utils {
     }
 
     fun showToast(context: Context?, message: String?) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-    }
-
-    fun showToast(context: Context?, message: Int) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
@@ -110,5 +103,4 @@ object Utils {
         )
         return uri.toURL()
     }
-
 }

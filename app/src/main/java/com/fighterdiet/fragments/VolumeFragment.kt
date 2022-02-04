@@ -13,9 +13,9 @@ import com.fighterdiet.data.model.responseModel.GetVolumeResponseModel
 import com.fighterdiet.databinding.FragmentVolumeBinding
 import com.fighterdiet.utils.Constants
 
-class VolumeFragment(val getVolumeResponseModel: GetVolumeResponseModel) : Fragment(), VolumeAdapter.VolumeCountListener {
+class VolumeFragment constructor(private val getVolumeResponseModel: GetVolumeResponseModel) : Fragment(), VolumeAdapter.VolumeCountListener {
     lateinit var binding: FragmentVolumeBinding
-    private lateinit var volumeAdapter: VolumeAdapter
+    private var volumeAdapter: VolumeAdapter?=null
     var list: ArrayList<GetVolumeResponseModel.Result> = ArrayList()
     private lateinit var volumeFragListener: VolumeFragInterface
 
@@ -23,13 +23,12 @@ class VolumeFragment(val getVolumeResponseModel: GetVolumeResponseModel) : Fragm
         fun newInstance(getVolumeResponseModel: GetVolumeResponseModel): VolumeFragment{
             return VolumeFragment(getVolumeResponseModel)
         }
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_volume, container, false)
         return binding.root
@@ -47,15 +46,15 @@ class VolumeFragment(val getVolumeResponseModel: GetVolumeResponseModel) : Fragm
             list.forEach {
                 it.isChecked = false
             }
-            volumeAdapter.notifyDataSetChanged()
+            volumeAdapter?.notifyDataSetChanged()
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        modifyListWhenSelectionCleared(list)
-        volumeFragListener.getCurrFragmentType(1)
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        modifyListWhenSelectionCleared(list)
+//        volumeFragListener.getCurrFragmentType(1)
+//    }
 
     private fun setUpRecyclerView() {
         binding.rvVolume.layoutManager = LinearLayoutManager(activity)
@@ -67,7 +66,7 @@ class VolumeFragment(val getVolumeResponseModel: GetVolumeResponseModel) : Fragm
         list.forEach {
             it.isChecked = false
         }
-        volumeAdapter.notifyDataSetChanged()
+        volumeAdapter?.notifyDataSetChanged()
     }
 
 

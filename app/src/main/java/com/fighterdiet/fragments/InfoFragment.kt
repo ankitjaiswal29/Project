@@ -1,26 +1,28 @@
 package com.fighterdiet.fragments
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import com.fighterdiet.R
 import com.fighterdiet.data.model.responseModel.RecipeContentResponseModel
 import com.fighterdiet.databinding.FragmentInfoBinding
 import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.getProtein
 
-class InfoFragment(val recipeInfoModel: List<RecipeContentResponseModel.Info>) : BaseFragment() {
+class InfoFragment : BaseFragment() {
     lateinit var binding: FragmentInfoBinding
+    var recipeInfoModel: List<RecipeContentResponseModel.Info>?=null
 
     companion object {
-        fun getInstance(recipeInfoModel: List<RecipeContentResponseModel.Info>): Fragment {
-            return InfoFragment(recipeInfoModel)
+        fun getInstance(): InfoFragment {
+            return InfoFragment()
         }
+    }
+
+    fun passData(recipeInfoModel: List<RecipeContentResponseModel.Info>){
+        this.recipeInfoModel=recipeInfoModel
     }
 
     override fun onCreateView(
@@ -33,9 +35,14 @@ class InfoFragment(val recipeInfoModel: List<RecipeContentResponseModel.Info>) :
             binding.etNoteInfo.setText(it)
         })
 
+       // getArgument()
         initialise()
         setupUI()
         return binding.root
+    }
+
+    private fun getArgument() {
+       // recipeInfoModel = arguments?.getParcelableArrayList("recipemodel")
     }
 
     private fun initialise() {
@@ -67,7 +74,7 @@ class InfoFragment(val recipeInfoModel: List<RecipeContentResponseModel.Info>) :
         if(recipeInfoModel.isNullOrEmpty())
             return
 
-        recipeInfoModel[0].let {
+        recipeInfoModel!![0].let {
             binding.tvBigMeals.text = it.recipe_volume
             binding.tvPrepTime.text = "${it.prep_time} ${getString(R.string.min_prep_time)}"
             binding.tvCookTime.text = "${it.cook_time} ${getString(R.string.min_cook_time)}"

@@ -31,7 +31,6 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
     private lateinit var skuDetailsList: MutableList<SkuDetails>
     private lateinit var viewModel: MembershipViewModel
 
-
     private lateinit var binding: ActivityMemberShipBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +42,6 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
         skuDetailsList = mutableListOf()
         initialize()
         setupInAppBilling()
-
     }
 
     override fun setupUI() {
@@ -100,7 +98,9 @@ class MemberShipActivity : BaseActivity(), View.OnClickListener, PurchasesUpdate
                 R.id.clMemberShipYear -> {
                     if(skuDetailsList.isNotEmpty())
                         choosenMembership = 1
-                        launchPayment(skuDetailsList[1])
+                        if(skuDetailsList.size>0) {
+                            launchPayment(skuDetailsList[1])
+                        }
                 }
                 R.id.btnMembershipMonth -> {
                     choosenMembership = 0

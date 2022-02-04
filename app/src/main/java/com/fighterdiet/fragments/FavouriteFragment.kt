@@ -58,10 +58,10 @@ class FavouriteFragment(val dashboardCallback: DashboardCallback) : BaseFragment
         binding.rvFavouriteRecyclerSwipe.setOnRefreshListener {
             Handler(Looper.getMainLooper()).postDelayed({
                 viewModel.getFavouriteList(0,8)
-
             },50)
         }
     }
+
     fun setupViewModel() {
         viewModel = ViewModelProvider(this, FavouriteViewModeProvider(FavouriteRepository(RetrofitBuilder.apiService)))
             .get(FavouriteViewModel::class.java)
@@ -82,7 +82,6 @@ class FavouriteFragment(val dashboardCallback: DashboardCallback) : BaseFragment
             when(it.status){
                 Status.SUCCESS -> {
                     dashboardCallback.onDataLoaded()
-//                    binding.pbFav.visibility = View.GONE
                     binding.tvNoData.visibility = View.GONE
 
                     if(binding.rvFavouriteRecyclerSwipe.isRefreshing){
@@ -101,12 +100,9 @@ class FavouriteFragment(val dashboardCallback: DashboardCallback) : BaseFragment
                         }
                         if(favouriteList.isEmpty())
                             binding.tvNoData.visibility = View.VISIBLE
-
-
                     }
                     isLoadMore = false
                     favouriteAdapter.notifyDataSetChanged()
-
 
                 }
                 Status.LOADING -> {

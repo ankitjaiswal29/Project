@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -67,15 +66,15 @@ class ResetPasswordActivity : BaseActivity() {
 
                             Utils.showSnackBar(binding.root, apiResponse.message)
 
-                            val otpDialogFragement = OtpDialogFragement()
+                            val otpDialogFragment = OtpDialogFragement()
                             val userdata = Bundle()
                             userdata.putString("otp",apiResponse.data?.otp.toString())
                             userdata.putString("userid",apiResponse.data?.user_id.toString())
                             userdata.putString("email",apiResponse.data?.email.toString())
 //                            Toast.makeText(this,it.data.data?.otp.toString()+apiResponse.data?.user_id.toString(), Toast.LENGTH_LONG).show()
-                            otpDialogFragement.arguments=userdata
+                            otpDialogFragment.arguments=userdata
 
-                            otpDialogFragement.show(supportFragmentManager, "OtpDialogFragement")
+                            otpDialogFragment.show(supportFragmentManager, "OtpDialogFragement")
 //                              print("data"+apiResponse.data?.otp+apiResponse.data?.user_id)
 
                         }else{
@@ -107,10 +106,5 @@ class ResetPasswordActivity : BaseActivity() {
         fun getStartIntent(context: Context): Intent {
             return Intent(context, ResetPasswordActivity::class.java)
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        finish()
     }
 }

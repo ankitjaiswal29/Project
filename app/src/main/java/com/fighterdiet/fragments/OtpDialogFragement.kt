@@ -53,7 +53,6 @@ class OtpDialogFragement: DialogFragment() {
         setupViewModelResendOtp()
         setupObserverResendOtp()
         setDataBindingValue()
-
         return binding.root
         //return inflater.inflate(R.layout.otp_dialog_fragment, container, false)
     }
@@ -61,8 +60,8 @@ class OtpDialogFragement: DialogFragment() {
     private fun setDataBindingValue(){
         binding.userId= userId
         binding.emailid= email
-
     }
+
    private fun setupViewModel() {
         viewModel=ViewModelProvider(this,VerifyOtpViewModelProvider(VerifyOtpRepository(RetrofitBuilder.apiService))).get(VerifyOtpViewModel::class.java)
         binding.verifyOtpViewModel = viewModel

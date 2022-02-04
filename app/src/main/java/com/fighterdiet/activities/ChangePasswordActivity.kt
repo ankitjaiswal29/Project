@@ -60,7 +60,8 @@ class ChangePasswordActivity : BaseActivity() {
                     if (apiResponse.status) {
                         if (apiResponse.code==200){
                             PrefManager.clearPref()
-                            Utils.showToast(this, it.message)
+                            //  Handler().postDelayed(Runnable { this@YourActivity.finish() }, 2000)
+                            Utils.showToast(this, "Password is changed successfully") //sometimes we get empty strings so may be it was getting crash
                             PrefManager.putBoolean(PrefManager.IS_LOGGED_IN, false)
                             val loginIntent = Intent(this, LoginActivity::class.java)
                             startActivity(loginIntent)

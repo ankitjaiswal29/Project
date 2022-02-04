@@ -12,7 +12,7 @@ import com.fighterdiet.data.model.responseModel.GetDietaryResponseModel
 import com.fighterdiet.databinding.FragmentDietryInfoBinding
 import com.fighterdiet.utils.Constants
 
-class DietryInfoFragment(val getDietaryResponseModel: GetDietaryResponseModel) : Fragment(),
+class DietryInfoFragment(val getDietaryResponseModel: GetDietaryResponseModel) : BaseFragment(),
     DietryInfoAdapter.DietaryCountListener {
     lateinit var binding: FragmentDietryInfoBinding
     private lateinit var dietryInfoAdapter : DietryInfoAdapter
@@ -50,11 +50,11 @@ class DietryInfoFragment(val getDietaryResponseModel: GetDietaryResponseModel) :
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        modifyListWhenSelectionCleared(list)
-        dietaryListener.getCurrFragmentType(0)
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        modifyListWhenSelectionCleared(list)
+//        dietaryListener.getCurrFragmentType(0)
+//    }
 
     private fun setUpRecyclerView() {
         dietryInfoAdapter = DietryInfoAdapter(list, this)

@@ -1,15 +1,13 @@
 package com.fighterdiet.activities
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fighterdiet.R
@@ -19,8 +17,8 @@ import com.fighterdiet.interfaces.DashboardCallback
 import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.PrefManager
 import com.fighterdiet.utils.Utils
-import com.google.android.material.tabs.TabLayout
 import com.fighterdiet.utils.Utils.loginAlertDialog
+import com.google.android.material.tabs.TabLayout
 
 class DashboardActivity : BaseActivity() {
     private var previousPos: Int = 0
@@ -31,6 +29,8 @@ class DashboardActivity : BaseActivity() {
     lateinit var tabIcons4Selected: Array<Int>
     lateinit var tabIcons6UnSelected: Array<Int>
     lateinit var tabIcons6Selected: Array<Int>
+    lateinit var homeInstanceClone:HomeFragment
+    lateinit var filterActivityIntentInstance:Intent
     var offset = 0
     var limit = 8
 
@@ -44,13 +44,22 @@ class DashboardActivity : BaseActivity() {
         }
     }
 
+    var filterActivityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            // There are no request codes
+            val data: Intent? = result.data
+
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard_with_calaories)
 
         Constants.DashboardDetails.isApiRequestNeeded = true
         setupUI()
-
+        homeInstanceClone=homeInstance()
+        filterActivityIntentInstance = FilterActivity.getStartIntent(this@DashboardActivity)
         previousPos = 0
 
 //        if (Constants.isQuestonnaireCompleted) {
@@ -63,10 +72,16 @@ class DashboardActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         if(Constants.DashboardDetails.isApiRequestNeeded){
-            showDashboardPb(true)
-            showFragment(HomeFragment.initFragment(callbackDashboard), 0)
-            Constants.DashboardDetails.isApiRequestNeeded = true
+           // showDashboardPb(true)
+            showFragment(homeInstanceClone, 0)
+            Constants.DashboardDetails.isApiRequestNeeded = false
         }
+    }
+
+    private fun homeInstance(): HomeFragment {
+        val home = HomeFragment.initFragment()
+        home.passCallback(callbackDashboard)
+        return home
     }
 
     override fun setupViewModel() {
@@ -130,6 +145,7 @@ class DashboardActivity : BaseActivity() {
         tab6Titles = arrayOf(
             "", "", "", "", "", ""
         )
+
         tabIcons6UnSelected = arrayOf(
             R.mipmap.ic_search_blue,
             R.mipmap.filter,
@@ -139,6 +155,7 @@ class DashboardActivity : BaseActivity() {
             R.mipmap.ic_cb_blue,
             R.mipmap.ic_setting_blue
         )
+
         tabIcons6Selected = arrayOf(
             R.mipmap.ic_search_gray,
             R.mipmap.filter,
@@ -176,10 +193,10 @@ class DashboardActivity : BaseActivity() {
                 when (tab.position) {
                     0 ->{
                         showDashboardPb(true)
-                        showFragment(HomeFragment.initFragment(callbackDashboard), tab.position)
+                        showFragment(homeInstanceClone, tab.position)
                     }
                     1 -> {
-                        startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
+                        filterActivityResultLauncher.launch(filterActivityIntentInstance)
                     }
                     2 -> {
                         showFragment(TrendingFragment.initFragment(callbackDashboard))
@@ -202,7 +219,7 @@ class DashboardActivity : BaseActivity() {
                     }
                     else -> {
                         showDashboardPb(true)
-                        showFragment(HomeFragment.initFragment(callbackDashboard), tab.position)
+                        showFragment(homeInstanceClone, tab.position)
                     }
                 }
                 setIcon(tab.position)
@@ -231,7 +248,7 @@ class DashboardActivity : BaseActivity() {
                         }
                     }
                     1 -> {
-                        startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
+                        filterActivityResultLauncher.launch(filterActivityIntentInstance)
                     }
 //                    3 -> {
 //                        if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
@@ -325,12 +342,12 @@ class DashboardActivity : BaseActivity() {
                 when (tab.position) {
                     0 -> {
                         showDashboardPb(true)
-                        binding.toolbar.ivTopImage.visibility = View.VISIBLE;
-                        binding.toolbar.tvTitle.visibility = View.GONE;
-                        showFragment(HomeFragment.initFragment(callbackDashboard), tab.position)
+                        binding.toolbar.ivTopImage.visibility = View.VISIBLE
+                        binding.toolbar.tvTitle.visibility = View.GONE
+                        showFragment(homeInstanceClone, tab.position)
                     }
                     1 -> {
-                        startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
+                        filterActivityResultLauncher.launch(filterActivityIntentInstance)
                     }
                     2 -> {
                         if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
@@ -365,7 +382,7 @@ class DashboardActivity : BaseActivity() {
                         showDashboardPb(true)
                         binding.toolbar.ivTopImage.visibility = View.VISIBLE;
                         binding.toolbar.tvTitle.visibility = View.GONE;
-                        showFragment(HomeFragment.initFragment(callbackDashboard), tab.position)
+                        showFragment(homeInstanceClone, tab.position)
                     }
                 }
                 setIcon4(tab.position)
@@ -390,7 +407,7 @@ class DashboardActivity : BaseActivity() {
                     }
                     1 -> {
 
-                        startActivity(FilterActivity.getStartIntent(this@DashboardActivity))
+                        filterActivityResultLauncher.launch(filterActivityIntentInstance)
                     }
 
                     3 -> {
@@ -446,7 +463,7 @@ class DashboardActivity : BaseActivity() {
                 binding.toolbar.ivTopImage.visibility = View.VISIBLE;
                 binding.toolbar.tvTitle.visibility = View.GONE;
                 showDashboardPb(true)
-                showFragment(HomeFragment.initFragment(callbackDashboard), 0)
+                showFragment(homeInstanceClone, 0)
                 setIcon4(0)
                 previousPos = 0
             }

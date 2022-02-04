@@ -9,11 +9,9 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.fighterdiet.R
 import com.fighterdiet.activities.MemberShipActivity
 import com.fighterdiet.activities.RecipeDetailsActivity
@@ -27,7 +25,7 @@ import com.fighterdiet.interfaces.DashboardCallback
 import com.fighterdiet.utils.*
 import com.fighterdiet.viewModel.HomeViewModel
 
-class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragment() {
+class HomeFragment : BaseFragment() {
     private var currentPage: Int = 1
     private var totalCountOfData: Int = -1
     private var isFilterMode: Boolean = false
@@ -37,10 +35,17 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
     lateinit var binding: FragmentHomeBinding
     lateinit var recipeListAdapter: HomeRecipeListRecyclerAdapter
     var recipeList: ArrayList<RecipeListResponseModel.Recipies> = ArrayList()
+    var dashboardCallback: DashboardCallback?=null
+
     companion object{
-        fun initFragment(dashboardCallback: DashboardCallback):HomeFragment{
-            return HomeFragment(dashboardCallback)
+        fun initFragment():HomeFragment{
+           // dashboardCallback: DashboardCallback
+            return HomeFragment()
         }
+    }
+
+    fun passCallback(dashboardCallback: DashboardCallback){
+        this.dashboardCallback=dashboardCallback
     }
 
     var offset = 0
@@ -98,7 +103,7 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
                 selectedMealMap["meal_id[${it.key}]"] = it.value.meal_id
             }
         }
-        dashboardCallback.onStartLoader()
+        dashboardCallback?.onStartLoader()
         viewModel.getRecipeList(searchKeys, startFrom, endTo, selectedDietaryMap, selectedVolumeMap, selectedMealMap)
     }
 
@@ -111,7 +116,7 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
         viewModel.getRecipeListResource().observe(viewLifecycleOwner, {
             when(it.status){
                 Status.SUCCESS -> {
-                    dashboardCallback.onDataLoaded()
+                    dashboardCallback?.onDataLoaded()
                     binding.tvNoData.visibility = GONE
 
                     Constants.DashboardDetails.recipiesModel = it.data?.data
@@ -140,8 +145,13 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
                     if(isFilterMode||isSearchMode)
                     {
                         if(!isSearchMode){
-                            binding.tvFilterCount.text = "${Constants.RecipeFilter.totalFilterCount} ${ getString(R.string.filters_selected_tap_to_clear) }"
-                            binding.tvFilterCount.visibility = View.VISIBLE
+                            if(Constants.RecipeFilter.totalFilterCount!=0) {
+                                binding.tvFilterCount.text =
+                                    "${Constants.RecipeFilter.totalFilterCount} ${getString(R.string.filters_selected_tap_to_clear)}"
+                                binding.tvFilterCount.visibility = View.VISIBLE
+                            }else{
+                                binding.tvFilterCount.visibility = View.GONE
+                            }
                         }
                         if(!it.data?.data?.result.isNullOrEmpty())
                             recipeListAdapter.updateAll(it.data?.data?.result!!, isSearchMode, mSearchedKeyword)
@@ -176,6 +186,7 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
         }
     }
 
+
     private fun initClickListeners() {
         binding.tvFilterCount.setOnClickListener {
             Constants.RecipeFilter.selectedVolumeFilter.clear()
@@ -185,7 +196,7 @@ class HomeFragment(private val dashboardCallback: DashboardCallback) : BaseFragm
             Constants.RecipeFilter.isFilterApplied = false
             binding.tvFilterCount.visibility = GONE
             recipeListAdapter.clearAll()
-            dashboardCallback.onStartLoader()
+            dashboardCallback?.onStartLoader()
             Handler(Looper.getMainLooper()).postDelayed({
                 getRecipes("", offset, limit)
             },50)

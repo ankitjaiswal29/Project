@@ -1,9 +1,6 @@
 package com.fighterdiet.fragments
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,19 +13,25 @@ import com.fighterdiet.data.model.responseModel.RecipeContentResponseModel
 import com.fighterdiet.databinding.FragmentDirectionsBinding
 import com.fighterdiet.utils.Constants
 
-class TipsFragment(val recipeTipsModel: List<RecipeContentResponseModel.Tip>) : BaseFragment() {
+class TipsFragment : BaseFragment() {
+    var recipeTipsModel: List<RecipeContentResponseModel.Tip>?=null
     private lateinit var rvTips: RecyclerView
     lateinit var binding: FragmentDirectionsBinding
 
     companion object {
-        fun getInstance(recipeTipsModel: List<RecipeContentResponseModel.Tip>): Fragment {
-            return TipsFragment(recipeTipsModel)
+        fun getInstance(): TipsFragment {
+            return TipsFragment()
         }
     }
+
+    fun passData(recipeTipsModel: List<RecipeContentResponseModel.Tip>){
+        this.recipeTipsModel=recipeTipsModel
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_directions,container,false)
         rvTips = binding.rvDirections
@@ -47,7 +50,7 @@ class TipsFragment(val recipeTipsModel: List<RecipeContentResponseModel.Tip>) : 
 
     private fun initRv() {
         rvTips.layoutManager = LinearLayoutManager(activity)
-        val rvTipsAdapter = RecipeTipsRecycleAdapter(recipeTipsModel)
+        val rvTipsAdapter = RecipeTipsRecycleAdapter(recipeTipsModel!!)
         binding.rvDirections.adapter = rvTipsAdapter
     }
 

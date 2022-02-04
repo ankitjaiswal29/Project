@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -72,12 +73,10 @@ class UpdatePasswordActivity : BaseActivity() {
 
                     if (apiResponse.status) {
                         if (apiResponse.code==200){
-                            Utils.showToast(this, "Password is changed successfully")
-//                            val loginIntent = Intent(this, DashboardActivity::class.java)
-//                            startActivity(loginIntent)
-//                            finishAffinity()
                             PrefManager.clearPref()
                             PrefManager.putBoolean(PrefManager.IS_LOGGED_IN, false)
+                            Utils.showToast(this, "Password is changed successfully")
+                          //  Handler().postDelayed(Runnable { this@YourActivity.finish() }, 2000)
                             val loginIntent = Intent(this, LoginActivity::class.java)
                             startActivity(loginIntent)
                             finishAffinity()

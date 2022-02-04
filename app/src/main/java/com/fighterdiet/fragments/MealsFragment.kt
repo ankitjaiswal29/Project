@@ -13,23 +13,27 @@ import com.fighterdiet.data.model.responseModel.GetMealResponseModel
 import com.fighterdiet.databinding.FragmentMealsBinding
 import com.fighterdiet.utils.Constants
 
-
-class MealsFragment(val getMealResponseModel: GetMealResponseModel) : Fragment(), MealsAdapter.MealsCountListener {
+class MealsFragment : Fragment(), MealsAdapter.MealsCountListener {
     private var list: ArrayList<GetMealResponseModel.Result>  = ArrayList()
     lateinit var binding: FragmentMealsBinding
-    private lateinit var mealsAdapter : MealsAdapter
+    private var mealsAdapter : MealsAdapter?=null
     private lateinit var mealsListener: MealsInfoInterface
+    var getMealResponseModel: GetMealResponseModel? =null
 
     companion object{
-        fun newInstance(getMealResponseModel: GetMealResponseModel): MealsFragment{
-            return MealsFragment(getMealResponseModel)
+        fun newInstance(): MealsFragment{
+            return MealsFragment()
         }
+    }
+
+    fun passData(getMealResponseModel: GetMealResponseModel){
+        this.getMealResponseModel=getMealResponseModel
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_meals,container, false)
         return binding.root
@@ -39,7 +43,7 @@ class MealsFragment(val getMealResponseModel: GetMealResponseModel) : Fragment()
         super.onViewCreated(view, savedInstanceState)
 
         mealsListener = (activity as MealsInfoInterface?)!!
-        list = getMealResponseModel.result as ArrayList<GetMealResponseModel.Result>
+        list = getMealResponseModel!!.result as ArrayList<GetMealResponseModel.Result>
         setUpRecyclerView()
     }
 
@@ -48,15 +52,15 @@ class MealsFragment(val getMealResponseModel: GetMealResponseModel) : Fragment()
             list.forEach {
                 it.isChecked = false
             }
-            mealsAdapter.notifyDataSetChanged()
+            mealsAdapter?.notifyDataSetChanged()
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        modifyListWhenSelectionCleared(list)
-        mealsListener.getCurrFragmentType(2)
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        modifyListWhenSelectionCleared(list)
+//        mealsListener.getCurrFragmentType(2)
+//    }
 
     private fun setUpRecyclerView() {
         binding.rvMeals.layoutManager = LinearLayoutManager(activity)
@@ -69,7 +73,7 @@ class MealsFragment(val getMealResponseModel: GetMealResponseModel) : Fragment()
         list.forEach {
             it.isChecked = false
         }
-        mealsAdapter.notifyDataSetChanged()
+        mealsAdapter?.notifyDataSetChanged()
     }
 
     override fun mealsInfoAdapterListener(position: Int, resultModel: GetMealResponseModel.Result) {

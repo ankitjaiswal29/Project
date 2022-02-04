@@ -32,7 +32,7 @@
             android:fontFamily="@font/inter_regular"
             android:textColor="@color/black"
             android:textSize="@dimen/_16sdp"
-            android:text="Favourite list\nis empty"
+            android:text="@string/favorite_list_nis_empty"
             android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
