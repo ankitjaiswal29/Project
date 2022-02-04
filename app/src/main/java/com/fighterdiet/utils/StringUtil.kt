@@ -13,5 +13,5 @@ fun getProtein(protein:String): String{
         ".8" -> convertedString = "0.8"
         ".9" -> convertedString = "0.9"
     }
-    return convertedString
+    return convertedString+"g"
 }
