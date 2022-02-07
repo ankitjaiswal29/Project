@@ -279,7 +279,8 @@ class FilterActivity : BaseActivity(), View.OnClickListener,
     }
 
     private fun launchDashboardActivity() {
-        startActivity(DashboardActivity.getStartIntent(this))
+        val intent=Intent(this,DashboardActivity::class.java)
+        startActivity(intent)
         Constants.DashboardDetails.isApiRequestNeeded = true
         finishAffinity()
     }

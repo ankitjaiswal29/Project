@@ -97,7 +97,8 @@ class PicOneDayMealsActivity : BaseActivity(), View.OnClickListener, RecyclerVie
                         binding.etSearch.hint = "Pick Day "+count+" Meals"
                         pickDayAdapter.notifyDataSetChanged()
                     }else{
-                        startActivity(DashboardActivity.getStartIntent(this))
+                        val intent=Intent(this,DashboardActivity::class.java)
+                        startActivity(intent)
                     }
                 }
             }

@@ -15,11 +15,7 @@ class InfoFragment : BaseFragment() {
     lateinit var binding: FragmentInfoBinding
     var recipeInfoModel: List<RecipeContentResponseModel.Info>?=null
 
-    companion object {
-        fun getInstance(): InfoFragment {
-            return InfoFragment()
-        }
-    }
+
 
     fun passData(recipeInfoModel: List<RecipeContentResponseModel.Info>){
         this.recipeInfoModel=recipeInfoModel

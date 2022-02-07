@@ -78,7 +78,8 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                 }
 
                 else if(!PrefManager.getBoolean(PrefManager.IS_SUBSCRIBED)){
-                    startActivity(DashboardActivity.getStartIntent(this))
+                    val intent=Intent(this,DashboardActivity::class.java)
+                    startActivity(intent)
                     finish()
                 }
 
@@ -224,16 +225,16 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
 
         recipeContentModel?.let {
             try {
-                infoFragment = InfoFragment.getInstance()
+                infoFragment = InfoFragment()
                 infoFragment.passData(it.info)
 
-                ingredientsFragment = IngredientsFragment.getInstance()
+                ingredientsFragment = IngredientsFragment()
                 ingredientsFragment.passData(it.ingredients)
 
-                directionsFragment = DirectionsFragment.getInstance()
+                directionsFragment = DirectionsFragment()
                 directionsFragment.passData(it.directions)
 
-                tipsFragment = TipsFragment.getInstance()
+                tipsFragment = TipsFragment()
                 tipsFragment.passData(it.tips)
 
                 fragments.add(infoFragment)

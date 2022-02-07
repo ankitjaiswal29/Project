@@ -118,7 +118,8 @@ class AboutPauliActivity : BaseActivity(), View.OnClickListener,AndExoPlayerList
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tvIntroNext -> {
-                startActivity(DashboardActivity.getStartIntent(this))
+                val intent=Intent(this,DashboardActivity::class.java)
+                startActivity(intent)
                 finish()
             }
 

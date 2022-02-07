@@ -19,11 +19,7 @@ class IngredientsFragment : BaseFragment() {
     lateinit var binding: FragmentIngredientsBinding
     private lateinit var ingredientAdapter : IngredientsRecycleAdapter
     var recipeIngredientModel: List<RecipeContentResponseModel.Ingredient>?=null
-    companion object {
-        fun getInstance(): IngredientsFragment {
-            return IngredientsFragment()
-        }
-    }
+
 
     fun passData(recipeIngredientModel: List<RecipeContentResponseModel.Ingredient>){
         this.recipeIngredientModel=recipeIngredientModel
@@ -35,12 +31,17 @@ class IngredientsFragment : BaseFragment() {
       ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_ingredients,container,false)
-        setUpRecyclerView()
+
         Constants.RecipeDetails.recipeNotesLive.observe(viewLifecycleOwner,{
             binding.etNoteIngred.setText(it)
         })
-        initListener()
+
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setUpRecyclerView()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,29 +49,7 @@ class IngredientsFragment : BaseFragment() {
 
     }
 
-    private fun initListener() {
-//        binding.etNoteIngred.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//                if(p0.toString()!=binding.etNoteIngred.text.toString())
-//                    Constants.RecipeDetails.recipeNotesLive.postValue(p0.toString())
-//            }
-//
-//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//
-//            }
-//
-//            override fun afterTextChanged(p0: Editable?) {
-//
-//            }
-//
-//        })
-//        binding.etNoteIngred.setOnFocusChangeListener { view, isFocused ->
-//            if(!isFocused){
-//                Constants.RecipeDetails.recipeNotesLive.postValue(binding.etNoteIngred.text.toString())
-//            }
-//        }
 
-    }
 
     override fun onPause() {
         super.onPause()

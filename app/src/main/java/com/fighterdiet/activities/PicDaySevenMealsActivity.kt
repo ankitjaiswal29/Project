@@ -43,7 +43,8 @@ class PicDaySevenMealsActivity : BaseActivity() {
     private fun initialise() {
         binding.tvNext.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                startActivity(DashboardActivity.getStartIntent(this@PicDaySevenMealsActivity))
+                val intent=Intent(this@PicDaySevenMealsActivity,DashboardActivity::class.java)
+                startActivity(intent)
             }
         })
         setUpHomeList()

@@ -38,7 +38,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         clearDataIfVersionChange()
         if(PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
-            val intent =DashboardActivity.getStartIntent(this)
+            val intent=Intent(this,DashboardActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -134,7 +134,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                             }
                             clearRecipeLocalData()
 
-                            startActivity(DashboardActivity.getStartIntent(this))
+                            val intent=Intent(this,DashboardActivity::class.java)
+                            startActivity(intent)
                             finish()
                         }else{
                             Utils.showSnackBar(binding.root, apiResponse.message)
@@ -253,7 +254,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.tv_skip->{
                 PrefManager.putBoolean(PrefManager.IS_LOGGED_IN, false)
-                startActivity(DashboardActivity.getStartIntent(this))
+                val intent=Intent(this,DashboardActivity::class.java)
+                startActivity(intent)
                 finish()
             }
         }

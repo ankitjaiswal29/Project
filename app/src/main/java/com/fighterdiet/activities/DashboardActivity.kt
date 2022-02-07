@@ -133,13 +133,6 @@ class DashboardActivity : BaseActivity() {
     }
 
 
-    companion object {
-        const val TAG = "DashboardWithCalaoriesActivity"
-
-        fun getStartIntent(context: Context): Intent {
-            return Intent(context, DashboardActivity::class.java)
-        }
-    }
 
     private fun initialise6Tab() {
         tab6Titles = arrayOf(

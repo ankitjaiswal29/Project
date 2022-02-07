@@ -18,11 +18,7 @@ class DirectionsFragment : BaseFragment() {
     lateinit var binding: FragmentDirectionsBinding
     private lateinit var recipeDirectionAdapter : RecipeDirectionsRecycleAdapter
 
-    companion object {
-        fun getInstance(): DirectionsFragment {
-            return DirectionsFragment()
-        }
-    }
+
 
     fun passData(recipeDirectionModel: List<RecipeContentResponseModel.Direction>){
         this.recipeDirectionModel=recipeDirectionModel

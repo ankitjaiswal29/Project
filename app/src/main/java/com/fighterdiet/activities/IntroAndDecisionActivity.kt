@@ -132,8 +132,8 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener{
 //        }
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onPause() {
+        super.onPause()
         binding.exoPlayer.let {
             it.stopPlayer()
             it.releasePlayer()
@@ -157,7 +157,8 @@ class IntroAndDecisionActivity : BaseActivity(), View.OnClickListener{
         when (v?.id) {
 
             R.id.tvIntroNext -> {
-                startActivity(DashboardActivity.getStartIntent(this))
+                val intent=Intent(this,DashboardActivity::class.java)
+                startActivity(intent)
                 finish()
 
             }

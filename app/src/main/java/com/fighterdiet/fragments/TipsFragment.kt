@@ -18,11 +18,6 @@ class TipsFragment : BaseFragment() {
     private lateinit var rvTips: RecyclerView
     lateinit var binding: FragmentDirectionsBinding
 
-    companion object {
-        fun getInstance(): TipsFragment {
-            return TipsFragment()
-        }
-    }
 
     fun passData(recipeTipsModel: List<RecipeContentResponseModel.Tip>){
         this.recipeTipsModel=recipeTipsModel
