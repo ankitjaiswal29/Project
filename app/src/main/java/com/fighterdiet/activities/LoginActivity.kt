@@ -109,9 +109,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     override fun setupObserver() {
 
-        viewModel.getResources().observe(this,{
-            when(it.status){
-                Status.LOADING->{
+        viewModel.getResources().observe(this) {
+            when (it.status) {
+                Status.LOADING -> {
                     ProgressDialog.showProgressDialog(this)
                 }
                 Status.ERROR -> {
@@ -124,20 +124,29 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                     ProgressDialog.hideProgressDialog()
                     val apiResponse = it.data!!
                     if (apiResponse.status) {
-                        if (apiResponse.code==200){
+                        if (apiResponse.code == 200) {
                             //System.out.println("token"+apiResponse.data?.token.toString())
-                            PrefManager.putString(PrefManager.KEY_USER_ID,apiResponse.data?.user_id.toString())
-                            PrefManager.putString(PrefManager.KEY_AUTH_TOKEN, apiResponse.data?.token?:"")
+                            PrefManager.putString(
+                                PrefManager.KEY_USER_ID,
+                                apiResponse.data?.user_id.toString()
+                            )
+                            PrefManager.putString(
+                                PrefManager.KEY_AUTH_TOKEN,
+                                apiResponse.data?.token ?: ""
+                            )
                             PrefManager.putBoolean(PrefManager.IS_LOGGED_IN, true)
                             apiResponse.data?.is_subscribed?.let { isSubscribed ->
-                                PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, isSubscribed=="1")
+                                PrefManager.putBoolean(
+                                    PrefManager.IS_SUBSCRIBED,
+                                    isSubscribed == "1"
+                                )
                             }
                             clearRecipeLocalData()
 
                             val intent=Intent(this,DashboardActivity::class.java)
                             startActivity(intent)
                             finish()
-                        }else{
+                        } else {
                             Utils.showSnackBar(binding.root, apiResponse.message)
                         }
                     } else {
@@ -147,10 +156,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 }
             }
 
-        })
-        viewModel.getErrorMsg().observe(this, {
+        }
+        viewModel.getErrorMsg().observe(this) {
             Utils.showSnackBar(binding.root, it)
-        })
+        }
 
     }
 

@@ -113,15 +113,15 @@ class HomeFragment : BaseFragment() {
     }
 
     fun setupObserver() {
-        viewModel.getRecipeListResource().observe(viewLifecycleOwner, {
-            when(it.status){
+        viewModel.getRecipeListResource().observe(viewLifecycleOwner) {
+            when (it.status) {
                 Status.SUCCESS -> {
                     dashboardCallback?.onDataLoaded()
                     binding.tvNoData.visibility = GONE
 
                     Constants.DashboardDetails.recipiesModel = it.data?.data
 
-                    when(Constants.DashboardDetails.recipiesModel?.is_subscribed){
+                    when (Constants.DashboardDetails.recipiesModel?.is_subscribed) {
                         "0", "expired" -> {
                             PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, false)
                         }
@@ -130,33 +130,36 @@ class HomeFragment : BaseFragment() {
                         }
                     }
 
-                    totalCountOfData = it.data?.data?.totalRecord?:0
+                    totalCountOfData = it.data?.data?.totalRecord ?: 0
 
-                    if(totalCountOfData == 0){
+                    if (totalCountOfData == 0) {
                         binding.tvNoData.visibility = View.VISIBLE
                         return@observe
                     }
 
-                    if(binding.rvHomeRecyclerSwipe.isRefreshing){
+                    if (binding.rvHomeRecyclerSwipe.isRefreshing) {
                         recipeListAdapter.clearAll()
                         binding.rvHomeRecyclerSwipe.isRefreshing = false
                     }
 
-                    if(isFilterMode||isSearchMode)
-                    {
-                        if(!isSearchMode){
-                            if(Constants.RecipeFilter.totalFilterCount!=0) {
+                    if (isFilterMode || isSearchMode) {
+                        if (!isSearchMode) {
+                            if (Constants.RecipeFilter.totalFilterCount != 0) {
                                 binding.tvFilterCount.text =
                                     "${Constants.RecipeFilter.totalFilterCount} ${getString(R.string.filters_selected_tap_to_clear)}"
                                 binding.tvFilterCount.visibility = View.VISIBLE
-                            }else{
+                            } else {
                                 binding.tvFilterCount.visibility = View.GONE
                             }
                         }
-                        if(!it.data?.data?.result.isNullOrEmpty())
-                            recipeListAdapter.updateAll(it.data?.data?.result!!, isSearchMode, mSearchedKeyword)
-                        else{
-                            if(totalCountOfData == 0)
+                        if (!it.data?.data?.result.isNullOrEmpty())
+                            recipeListAdapter.updateAll(
+                                it.data?.data?.result!!,
+                                isSearchMode,
+                                mSearchedKeyword
+                            )
+                        else {
+                            if (totalCountOfData == 0)
                                 binding.tvNoData.visibility = View.VISIBLE
                         }
                         return@observe
@@ -164,7 +167,7 @@ class HomeFragment : BaseFragment() {
 
                     binding.tvFilterCount.visibility = GONE
 
-                    if(!it.data?.data?.result.isNullOrEmpty()){
+                    if (!it.data?.data?.result.isNullOrEmpty()) {
                         recipeListAdapter.addAll(it.data?.data?.result!!, mSearchedKeyword)
 
                     }
@@ -175,7 +178,7 @@ class HomeFragment : BaseFragment() {
                     binding.rvHomeRecyclerSwipe.isRefreshing = false
                 }
             }
-        })
+        }
     }
 
     private fun initialize() {
