@@ -108,6 +108,7 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                     e.printStackTrace()
                 }
             }
+
         }
     }
 
@@ -117,8 +118,8 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun setupObserver() {
-        viewModel.getRecipeInfoResource().observe(this, {
-            when(it.status){
+        viewModel.getRecipeInfoResource().observe(this) {
+            when (it.status) {
                 Status.SUCCESS -> {
                     ProgressDialog.hideProgressDialog()
                     it.data?.let { recipeContent ->
@@ -126,8 +127,9 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
 
                         recipeContent.data?.let {
 
-                            if(it.recipe_note !is String){
-                                val recipeNotesTree:LinkedTreeMap<String, Any> = recipeContentModel?.recipe_note as LinkedTreeMap<String, Any>
+                            if (it.recipe_note !is String) {
+                                val recipeNotesTree: LinkedTreeMap<String, Any> =
+                                    recipeContentModel?.recipe_note as LinkedTreeMap<String, Any>
 
                                 recipeNoteModel = RecipeContentResponseModel.RecipeNote(
                                     recipeNotesTree["id"] as Double,
@@ -139,7 +141,8 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                                     recipeNotesTree["updated_at"] as String
                                 )
                                 isNoteAvailable = true
-                                it.recipe_note = (recipeNoteModel as RecipeContentResponseModel.RecipeNote).toString()
+                                it.recipe_note =
+                                    (recipeNoteModel as RecipeContentResponseModel.RecipeNote).toString()
                             }
                             initialise()
                         }
@@ -153,10 +156,10 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
 
                 }
             }
-        })
+        }
 
-        viewModel.getAddToFavResource().observe(this, { response ->
-            when(response.status){
+        viewModel.getAddToFavResource().observe(this) { response ->
+            when (response.status) {
                 Status.SUCCESS -> {
                     ProgressDialog.hideProgressDialog()
                     recipeContentModel.apply {
@@ -168,7 +171,7 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                         }
                         Handler(Looper.getMainLooper()).postDelayed({
                             updateFavUI()
-                        },50)
+                        }, 50)
                     }
                 }
                 Status.LOADING -> {
@@ -176,10 +179,10 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                 Status.ERROR -> {
                 }
             }
-        })
+        }
 
-        viewModel.getAddNotesResource().observe(this, {
-            when(it.status){
+        viewModel.getAddNotesResource().observe(this) {
+            when (it.status) {
                 Status.SUCCESS -> {
                     super.onBackPressed()
                 }
@@ -190,10 +193,10 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
 
                 }
             }
-        })
+        }
 
-        viewModel.getUpdateNotesResource().observe(this, {
-            when(it.status){
+        viewModel.getUpdateNotesResource().observe(this) {
+            when (it.status) {
                 Status.SUCCESS -> {
                     super.onBackPressed()
                 }
@@ -204,7 +207,7 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
                     super.onBackPressed()
                 }
             }
-        })
+        }
 
     }
 

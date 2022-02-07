@@ -1,5 +1,6 @@
 package com.fighterdiet.data.api
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.fighterdiet.app.MyApplication
 import com.fighterdiet.utils.AuthInterceptor
@@ -11,6 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+@SuppressLint("StaticFieldLeak")
 object RetrofitBuilder {
 
 //    private const val BASE_URL: String = Constants.SERVER_URL

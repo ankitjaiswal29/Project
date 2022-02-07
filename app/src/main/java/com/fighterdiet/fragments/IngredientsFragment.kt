@@ -36,9 +36,9 @@ class IngredientsFragment : BaseFragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_ingredients,container,false)
         setUpRecyclerView()
-        Constants.RecipeDetails.recipeNotesLive.observe(viewLifecycleOwner,{
+        Constants.RecipeDetails.recipeNotesLive.observe(viewLifecycleOwner) {
             binding.etNoteIngred.setText(it)
-        })
+        }
         initListener()
         return binding.root
     }
