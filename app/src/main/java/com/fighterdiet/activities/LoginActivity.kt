@@ -4,19 +4,19 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.widget.ImageView
+import android.widget.Toast
 import android.widget.ViewFlipper
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.fighterdiet.R
 import com.fighterdiet.data.api.RetrofitBuilder
-import com.fighterdiet.data.model.ApiResponse
-import com.fighterdiet.data.model.responseModel.LoginResponseModel
+import com.fighterdiet.data.api.RetrofitBuilder.context
 import com.fighterdiet.data.repository.LoginRepository
 import com.fighterdiet.databinding.ActivityLoginBinding
 import com.fighterdiet.utils.*
@@ -38,9 +38,14 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         clearDataIfVersionChange()
         if(PrefManager.getBoolean(PrefManager.IS_LOGGED_IN)){
-            val intent=Intent(this,DashboardActivity::class.java)
+           // Toast.makeText(this,"dfdf",Toast.LENGTH_LONG).show()
+            val appLinkAction: String? = intent?.action
+            val appLinkData: Uri? = intent?.data
+            showDeepLinkOffer(appLinkAction, appLinkData)
+
+           /* val intent=Intent(this,DashboardActivity::class.java)
             startActivity(intent)
-            finish()
+            finish()*/
         }
         initialise()
         setupUI()
@@ -267,6 +272,45 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 startActivity(intent)
                 finish()
             }
+        }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        val appLinkAction: String? = intent?.action
+        val appLinkData: Uri? = intent?.data
+        showDeepLinkOffer(appLinkAction,appLinkData)
+    }
+    private fun showDeepLinkOffer(appLinkAction: String?, appLinkData: Uri?) {
+        // 1
+        if (Intent.ACTION_VIEW == appLinkAction && appLinkData != null) {
+            // 2
+                Toast.makeText(this,"through link",Toast.LENGTH_LONG).show()
+            val promotionCode = appLinkData.getQueryParameter("key")
+            if (promotionCode.isNullOrBlank().not()) {
+                val image = appLinkData.getQueryParameter("image")
+                val title = appLinkData.getQueryParameter("navigationTitle")
+                val intent=Intent(this,DashboardActivity::class.java)
+                intent.putExtra("DeepLink", "true");
+                /*intent.putExtra(Constants.RECIPE_ID, )
+                    intent.putExtra(Constants.RECIPE_IMAGE, )
+                    intent.putExtra(Constants.RECIPE_NAME, )*/
+                startActivity(intent)
+                finish()
+
+            } else {
+
+              //  Toast.makeText(this,"not through link",Toast.LENGTH_LONG).show()
+              //  activityPromoBinding.discountGroup.visibility = View.GONE
+            }
+        }else{
+
+                       Toast.makeText(this,"not through link",Toast.LENGTH_LONG).show()
+
+            val intent=Intent(this,DashboardActivity::class.java)
+                startActivity(intent)
+                finish()
+
         }
     }
 }

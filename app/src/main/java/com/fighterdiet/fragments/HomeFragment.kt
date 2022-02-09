@@ -9,6 +9,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,6 +37,7 @@ class HomeFragment : BaseFragment() {
     lateinit var recipeListAdapter: HomeRecipeListRecyclerAdapter
     var recipeList: ArrayList<RecipeListResponseModel.Recipies> = ArrayList()
     var dashboardCallback: DashboardCallback?=null
+    var Deeplink=false
 
     companion object{
         fun initFragment():HomeFragment{
@@ -46,6 +48,15 @@ class HomeFragment : BaseFragment() {
 
     fun passCallback(dashboardCallback: DashboardCallback){
         this.dashboardCallback=dashboardCallback
+    }
+    fun Deeplink(data:String){
+        if (data.equals("true")){
+            Deeplink=true
+               }
+        else{
+            Deeplink=false
+        }
+
     }
 
     var offset = 0
@@ -124,9 +135,17 @@ class HomeFragment : BaseFragment() {
                     when (Constants.DashboardDetails.recipiesModel?.is_subscribed) {
                         "0", "expired" -> {
                             PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, false)
+                            startActivity(MemberShipActivity.getStartIntent(requireContext()))
+                           /* if (Deeplink)
+                                Toast.makeText(requireContext(),"true",Toast.LENGTH_LONG).show()
+                           else
+                                Toast.makeText(requireContext(),"false",Toast.LENGTH_LONG).show()
+*/
+                            //membership
                         }
                         else -> {
                             PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, true)
+                            //recipedetaills
                         }
                     }
 

@@ -58,6 +58,16 @@ class DashboardActivity : BaseActivity() {
 
         Constants.DashboardDetails.isApiRequestNeeded = true
         setupUI()
+
+        val message = intent.getStringExtra("DeepLink")
+
+        if (message!=null) {
+            //homeInstance().Deeplink(message)
+            val bundle = Bundle()
+        } else {
+            //homeInstance().Deeplink("false")
+        }
+
         homeInstanceClone=homeInstance()
         filterActivityIntentInstance = FilterActivity.getStartIntent(this@DashboardActivity)
         previousPos = 0
