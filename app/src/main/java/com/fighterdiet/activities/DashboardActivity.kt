@@ -11,11 +11,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.fighterdiet.R
+import com.fighterdiet.data.model.requestModel.RecipeContentRequestModel
 import com.fighterdiet.databinding.ActivityDashboardWithCalaoriesBinding
 import com.fighterdiet.fragments.*
 import com.fighterdiet.interfaces.DashboardCallback
 import com.fighterdiet.utils.Constants
 import com.fighterdiet.utils.PrefManager
+import com.fighterdiet.utils.ProgressDialog
 import com.fighterdiet.utils.Utils
 import com.fighterdiet.utils.Utils.loginAlertDialog
 import com.google.android.material.tabs.TabLayout
@@ -59,15 +61,6 @@ class DashboardActivity : BaseActivity() {
         Constants.DashboardDetails.isApiRequestNeeded = true
         setupUI()
 
-        val message = intent.getStringExtra("DeepLink")
-
-        if (message!=null) {
-            //homeInstance().Deeplink(message)
-            val bundle = Bundle()
-        } else {
-            //homeInstance().Deeplink("false")
-        }
-
         homeInstanceClone=homeInstance()
         filterActivityIntentInstance = FilterActivity.getStartIntent(this@DashboardActivity)
         previousPos = 0
@@ -75,21 +68,28 @@ class DashboardActivity : BaseActivity() {
 //        if (Constants.isQuestonnaireCompleted) {
 //            initialise6Tab()
 //        } else {
-            initialise4Tab()
+        initialise4Tab()
 //        }
     }
+
 
     override fun onResume() {
         super.onResume()
         if(Constants.DashboardDetails.isApiRequestNeeded){
-           // showDashboardPb(true)
+            // showDashboardPb(true)
             showFragment(homeInstanceClone, 0)
             Constants.DashboardDetails.isApiRequestNeeded = false
         }
     }
 
     private fun homeInstance(): HomeFragment {
-        val home = HomeFragment.initFragment()
+        val home = HomeFragment()
+        intent.extras?.let {
+            val recipeId = it.getString(Constants.RECIPE_ID, "")
+            val recipeImage = it.getString(Constants.RECIPE_IMAGE, "")
+            val recipeTitle = it.getString(Constants.RECIPE_NAME, "")
+            home.passArgument(recipeId, recipeImage, recipeTitle)
+        }
         home.passCallback(callbackDashboard)
         return home
     }
@@ -101,21 +101,21 @@ class DashboardActivity : BaseActivity() {
     override fun setupUI() {
 
         binding.etSearchRecipe.setOnEditorActionListener { v, actionId, event ->
-                return@setOnEditorActionListener when (actionId) {
-                    EditorInfo.IME_ACTION_DONE -> {
-                        val currFragment = supportFragmentManager.findFragmentByTag("HOME") as HomeFragment
-                        if(currFragment.isVisible)
-                            currFragment.getRecipes(
-                                binding.etSearchRecipe.text.toString(),
-                                offset,
-                                limit
-                            )
-                        Utils.hideKeyboard(this@DashboardActivity, binding.coordinatorDashboard)
-                        true
-                    }
-                    else -> false
+            return@setOnEditorActionListener when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    val currFragment = supportFragmentManager.findFragmentByTag("HOME") as HomeFragment
+                    if(currFragment.isVisible)
+                        currFragment.getRecipes(
+                            binding.etSearchRecipe.text.toString(),
+                            offset,
+                            limit
+                        )
+                    Utils.hideKeyboard(this@DashboardActivity, binding.coordinatorDashboard)
+                    true
                 }
+                else -> false
             }
+        }
 
 
         binding.ivCloseSearch.setOnClickListener {
@@ -454,10 +454,10 @@ class DashboardActivity : BaseActivity() {
     }
 
     fun setToolBarVisibility(isToolBarVisible: Boolean) {
-       /* if (isToolBarVisible)
-            binding.toolbar.ivTopImage.visibility = View.VISIBLE;
-        else
-            binding.toolbar.ivTopImage.visibility = View.GONE;*/
+        /* if (isToolBarVisible)
+             binding.toolbar.ivTopImage.visibility = View.VISIBLE;
+         else
+             binding.toolbar.ivTopImage.visibility = View.GONE;*/
     }
 
     override fun onBackPressed() {

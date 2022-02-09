@@ -27,6 +27,10 @@ import com.fighterdiet.utils.*
 import com.fighterdiet.viewModel.HomeViewModel
 
 class HomeFragment : BaseFragment() {
+    private var fromDeepLink: Boolean = false
+    private var sharedRecipeId: String = ""
+    private var sharedRecipeImage: String = ""
+    private var sharedRecipeTitle: String = ""
     private var currentPage: Int = 1
     private var totalCountOfData: Int = -1
     private var isFilterMode: Boolean = false
@@ -37,28 +41,6 @@ class HomeFragment : BaseFragment() {
     lateinit var recipeListAdapter: HomeRecipeListRecyclerAdapter
     var recipeList: ArrayList<RecipeListResponseModel.Recipies> = ArrayList()
     var dashboardCallback: DashboardCallback?=null
-    var Deeplink=false
-
-    companion object{
-        fun initFragment():HomeFragment{
-           // dashboardCallback: DashboardCallback
-            return HomeFragment()
-        }
-    }
-
-    fun passCallback(dashboardCallback: DashboardCallback){
-        this.dashboardCallback=dashboardCallback
-    }
-    fun Deeplink(data:String){
-        if (data.equals("true")){
-            Deeplink=true
-               }
-        else{
-            Deeplink=false
-        }
-
-    }
-
     var offset = 0
     var limit = 8
 
@@ -76,6 +58,25 @@ class HomeFragment : BaseFragment() {
         getRecipes("",offset,limit)
         return binding.root
     }
+
+    fun passCallback(dashboardCallback: DashboardCallback){
+        this.dashboardCallback=dashboardCallback
+    }
+
+    fun passArgument(recipeId: String?, recipeImage: String?, recipeTitle: String?) {
+        recipeId?.let {
+            sharedRecipeId = it
+        }
+        recipeImage?.let {
+            sharedRecipeImage = it
+        }
+        recipeTitle?.let {
+            sharedRecipeTitle = it
+        }
+
+        fromDeepLink = true
+    }
+
 
     fun getRecipes(
         searchKeys: String,
@@ -119,7 +120,7 @@ class HomeFragment : BaseFragment() {
     }
 
     fun setupViewModel() {
-            viewModel = ViewModelProvider(this, HomeViewModelProvider(HomeRepository(RetrofitBuilder.apiService)))
+        viewModel = ViewModelProvider(this, HomeViewModelProvider(HomeRepository(RetrofitBuilder.apiService)))
             .get(HomeViewModel::class.java)
     }
 
@@ -135,17 +136,20 @@ class HomeFragment : BaseFragment() {
                     when (Constants.DashboardDetails.recipiesModel?.is_subscribed) {
                         "0", "expired" -> {
                             PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, false)
-                            startActivity(MemberShipActivity.getStartIntent(requireContext()))
-                           /* if (Deeplink)
-                                Toast.makeText(requireContext(),"true",Toast.LENGTH_LONG).show()
-                           else
-                                Toast.makeText(requireContext(),"false",Toast.LENGTH_LONG).show()
-*/
-                            //membership
+                            if(fromDeepLink)
+                                startActivity(MemberShipActivity.getStartIntent(requireContext()))
                         }
                         else -> {
                             PrefManager.putBoolean(PrefManager.IS_SUBSCRIBED, true)
                             //recipedetaills
+                            if(fromDeepLink)
+                            {
+                                val activityIntent = RecipeDetailsActivity.getStartIntent(requireContext())
+                                activityIntent.putExtra(Constants.RECIPE_ID, sharedRecipeId)
+                                activityIntent.putExtra(Constants.RECIPE_IMAGE, sharedRecipeImage)
+                                activityIntent.putExtra(Constants.RECIPE_NAME, sharedRecipeTitle)
+                                startActivity(activityIntent)
+                            }
                         }
                     }
 
@@ -232,7 +236,7 @@ class HomeFragment : BaseFragment() {
 
     }
 
-     fun setUpHomeRecyclerView() {
+    fun setUpHomeRecyclerView() {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvHomeRecycler.layoutManager = layoutManager
         recipeListAdapter = HomeRecipeListRecyclerAdapter(requireActivity(), recipeList) { position, recipe ->
@@ -270,4 +274,5 @@ class HomeFragment : BaseFragment() {
 
         })
     }
+
 }

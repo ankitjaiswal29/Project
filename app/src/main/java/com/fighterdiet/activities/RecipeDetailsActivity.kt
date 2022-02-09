@@ -2,9 +2,11 @@ package com.fighterdiet.activities
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -30,6 +32,8 @@ import com.fighterdiet.utils.ProgressDialog
 import com.fighterdiet.utils.Status
 import com.fighterdiet.viewModel.RecipeInfoViewModel
 import com.google.android.material.tabs.TabLayout
+
+import com.google.firebase.ktx.Firebase
 import com.google.gson.internal.LinkedTreeMap
 
 
@@ -72,15 +76,9 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
             recipeId = it.getString(Constants.RECIPE_ID, "")
             if(recipeId.isNotEmpty()){
 
-                if(!PrefManager.getBoolean(PrefManager.IS_LOGGED_IN) || PrefManager.getString(PrefManager.KEY_AUTH_TOKEN).isNullOrBlank()){
+                if(PrefManager.getString(PrefManager.KEY_AUTH_TOKEN).isNullOrBlank()){
                     startActivity(Intent(this, LoginActivity::class.java))
-                    finish()
-                }
-
-                else if(!PrefManager.getBoolean(PrefManager.IS_SUBSCRIBED)){
-                    val intent=Intent(this,DashboardActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    finishAffinity()
                 }
 
                 ProgressDialog.showProgressDialog(this)
@@ -103,7 +101,7 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
             recipeName = it.getString(Constants.RECIPE_NAME, "")
             recipeName.let {
                 try {
-                   binding.tvTitle.text = it
+                    binding.tvTitle.text = it
                 }
                 catch (e:Exception){
                     e.printStackTrace()
@@ -214,8 +212,8 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
 
     private fun updateFavUI() {
         recipeContentModel?.let {
-                binding.ivFav.setImageResource(if(it.favourite == 1) R.drawable.tb_favorite_icon_blue else R.mipmap.heart_holo)
-                binding.ivFav.setColorFilter(if(it.favourite == 1) resources.getColor(R.color.blue_main) else resources.getColor(R.color.white))
+            binding.ivFav.setImageResource(if(it.favourite == 1) R.drawable.tb_favorite_icon_blue else R.mipmap.heart_holo)
+            binding.ivFav.setColorFilter(if(it.favourite == 1) resources.getColor(R.color.blue_main) else resources.getColor(R.color.white))
         }
     }
 
@@ -261,11 +259,11 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
     private fun updateRecipeNote() {
         Constants.RecipeDetails.recipeNotes = ""
 //        if(isNoteAvailable){
-            recipeNoteModel?.let {
-                Constants.RecipeDetails.recipeNotes = it.description
-                Constants.RecipeDetails.recipeNotesLive.postValue(it.description)
-                return
-            }
+        recipeNoteModel?.let {
+            Constants.RecipeDetails.recipeNotes = it.description
+            Constants.RecipeDetails.recipeNotesLive.postValue(it.description)
+            return
+        }
         Constants.RecipeDetails.recipeNotesLive.postValue("")
 //        }
     }
@@ -342,18 +340,47 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
             }
 
             R.id.iv_share -> {
-                val link = "https://fighterdiet.page.link/1gGs"+"?key="+recipeId+"&"+"image="+recipeImage+"&"+"navigationTitle="+recipeName?.replace(" ","_")
+                //val sharedLink = "key="+recipeId+"&"+"image="+recipeImage+"&"+"recipeTitle="+recipeName?.replace(" ","_")
 
-                val intent = Intent(Intent.ACTION_SEND)
-                intent.type = "text/plain"
-                intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name))
-                intent.putExtra(Intent.EXTRA_TEXT, link)
-                startActivity(
-                    Intent.createChooser(intent, getString(R.string.share_to))
-                )
+                val sharedLink = "https://fighterdiet.page.link/1gGs?key="+recipeId+"&"+"image="+recipeImage+"&"+"recipeTitle="+recipeName?.replace(" ","_")
+//                val shortLinkTask = Firebase.dynamicLinks.shortLinkAsync {
+//                    link =
+//                        Uri.parse(sharedLink)
+//                    domainUriPrefix = "https://fighterdiet.page.link/1gGs"
+//
+//                    androidParameters {
+//                        // The versionCode of the minimum version of your app that can open the link.
+//                        // If the installed app is an older version, the user is taken to the Play Store to upgrade the app.
+//                        minimumVersion = 1
+//                    }
+//                    // Set parameters
+//                    // ...
+//                }.addOnSuccessListener { result ->
+//                    // Short link created
+//                    val link = result.shortLink
+//                    //val flowchartLink = result.previewLink
+//                    shareLink(link.toString())
+//                }.addOnFailureListener {
+//                    // Error
+//                    // ...
+//                    Log.d("log_tag", "==> ${it.localizedMessage}", it)
+//                }
+
+                shareLink(sharedLink)
+
             }
 
         }
+    }
+
+    private fun shareLink(link: String) {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name))
+        intent.putExtra(Intent.EXTRA_TEXT, link)
+        startActivity(
+            Intent.createChooser(intent, getString(R.string.share_to))
+        )
     }
 
     override fun onBackPressed() {
