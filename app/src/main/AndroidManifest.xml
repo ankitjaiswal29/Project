@@ -136,7 +136,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter android:label="FighterDiet">
+            <intent-filter android:label="FighterDiet"
+                android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -145,11 +146,11 @@
                 <data
                     android:host="fighterdiet.page.link"
                     android:pathPrefix="/1gGs"
-                    android:scheme="https" />
+                    android:scheme="https"/>
                 <data
                     android:host="fighterdiet.page.link"
                     android:pathPrefix="/1gGs"
-                    android:scheme="http" />
+                    android:scheme="http"/>
             </intent-filter>
         </activity>
     </application>

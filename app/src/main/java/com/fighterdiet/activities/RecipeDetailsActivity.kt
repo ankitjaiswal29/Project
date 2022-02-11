@@ -427,4 +427,5 @@ class RecipeDetailsActivity : BaseActivity(), View.OnClickListener {
             return
         }
     }
+
 }
