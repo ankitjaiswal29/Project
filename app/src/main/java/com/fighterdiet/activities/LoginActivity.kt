@@ -24,6 +24,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var viewModel: LoginViewModel
+
     var viewFlipper: ViewFlipper? = null
     var imageList = intArrayOf(
         R.mipmap.walkthrough_1, R.mipmap.walkthrough_2,
